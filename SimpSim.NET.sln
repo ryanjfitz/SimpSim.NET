@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.Tests", "SimpSim.NET.Tests\SimpSim.NET.Tests.csproj", "{B9AB26D9-0933-4D41-9423-6FB887E588C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET", "SimpSim.NET\SimpSim.NET.csproj", "{15EBE385-9BA9-49A5-8D81-52F6F307EC8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.Console", "SimpSim.NET.Console\SimpSim.NET.Console.csproj", "{172C0174-CE02-4069-AF19-68B01A35DE3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9AB26D9-0933-4D41-9423-6FB887E588C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9AB26D9-0933-4D41-9423-6FB887E588C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9AB26D9-0933-4D41-9423-6FB887E588C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9AB26D9-0933-4D41-9423-6FB887E588C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15EBE385-9BA9-49A5-8D81-52F6F307EC8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15EBE385-9BA9-49A5-8D81-52F6F307EC8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15EBE385-9BA9-49A5-8D81-52F6F307EC8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15EBE385-9BA9-49A5-8D81-52F6F307EC8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{172C0174-CE02-4069-AF19-68B01A35DE3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{172C0174-CE02-4069-AF19-68B01A35DE3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{172C0174-CE02-4069-AF19-68B01A35DE3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{172C0174-CE02-4069-AF19-68B01A35DE3C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
