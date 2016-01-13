@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -99,6 +100,9 @@ namespace SimpSim.NET
 
             for (int i = 0; i < _instructionBytes.Count; i += 2)
             {
+                if (_instructionBytes[i] == null)
+                    continue;
+
                 byte byte1 = _instructionBytes[i].GetValue();
                 byte byte2 = 0x00;
                 if (i + 1 < _instructionBytes.Count)
@@ -117,7 +121,7 @@ namespace SimpSim.NET
                 const char doubleQuote = '"';
 
                 byte number;
-                if (byte.TryParse(operand, out number))
+                if (NumberSyntax.TryParseNumber(operand, out number))
                     _instructionBytes.Add(new InstructionByte(number));
                 else if (operand.First() == doubleQuote && operand.Last() == doubleQuote)
                     foreach (char c in operand.TrimStart(doubleQuote).TrimEnd(doubleQuote))
@@ -317,10 +321,13 @@ namespace SimpSim.NET
             RegisterSyntax register;
             byte number;
 
-            if (RegisterSyntax.TryParseRegister(operands[0], out register) && byte.TryParse(operands[1], out number))
+            if (RegisterSyntax.TryParseRegister(operands[0], out register) && NumberSyntax.TryParseNumber(operands[1], out number))
             {
-                byte1 = new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.Ror, register.GetRegisterIndex()));
-                byte2 = new InstructionByte(ByteUtilities.GetByteFromNibbles(0x0, number));
+                if (number < 16)
+                {
+                    byte1 = new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.Ror, register.GetRegisterIndex()));
+                    byte2 = new InstructionByte(ByteUtilities.GetByteFromNibbles(0x0, number));
+                }
             }
 
             _instructionBytes.Add(byte1);
@@ -486,6 +493,49 @@ namespace SimpSim.NET
             }
         }
 
+        private static class NumberSyntax
+        {
+            public static bool TryParseNumber(string input, out byte number)
+            {
+                return TryParseDecimalLiteral(input, out number) || TryParseBinaryLiteral(input, out number) || TryParseHexLiteral(input, out number);
+            }
+
+            private static bool TryParseDecimalLiteral(string input, out byte number)
+            {
+                return byte.TryParse(input.TrimEnd('d'), out number);
+            }
+
+            private static bool TryParseBinaryLiteral(string input, out byte number)
+            {
+                bool success;
+
+                try
+                {
+                    number = Convert.ToByte(input.TrimEnd('b'), 2);
+                    success = true;
+                }
+                catch
+                {
+                    number = 0;
+                    success = false;
+                }
+
+                return success;
+            }
+
+            private static bool TryParseHexLiteral(string input, out byte number)
+            {
+                bool success = byte.TryParse(input.TrimStart("0x".ToCharArray()), NumberStyles.HexNumber, null, out number)
+                               || byte.TryParse(input.TrimStart('$'), NumberStyles.HexNumber, null, out number)
+                               || (byte.TryParse(input.TrimEnd('h'), NumberStyles.HexNumber, null, out number) && !char.IsLetter(input.FirstOrDefault()));
+
+                if (!success)
+                    number = 0;
+
+                return success;
+            }
+        }
+
         private class AddressSyntax
         {
             public byte Value { get; }
@@ -506,7 +556,7 @@ namespace SimpSim.NET
 
                 byte address;
                 string inputNoBrackets = input.Trim('[', ']');
-                bool isAddress = byte.TryParse(inputNoBrackets, out address);
+                bool isAddress = NumberSyntax.TryParseNumber(inputNoBrackets, out address);
 
                 string undefinedLabel = null;
 

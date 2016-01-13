@@ -184,6 +184,29 @@ namespace SimpSim.NET.Tests
         }
 
         [Test]
+        public void ShouldNotAssembleRorInstructionsWithNumberGreaterThan15()
+        {
+            const byte number = 16;
+
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R0,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R1,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R2,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R3,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R4,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R5,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R6,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R7,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R8,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R9,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RA,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RB,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RC,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RD,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RE,{number}"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RF,{number}"));
+        }
+
+        [Test]
         public void ShouldAssembleJumpEqualInstructions()
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
@@ -322,6 +345,45 @@ namespace SimpSim.NET.Tests
         public void ShouldAssembleProgramWithLabelUsageBeforeDeclaration()
         {
             CollectionAssert.AreEqual(new[] { new Instruction(0x21, 0x02), new Instruction(0x0A, 0x00) }, _assembler.Assemble("load    R1,Text\r\nText:    db      10"));
+        }
+
+        [Test]
+        public void ShouldAssembleDecimalLiterals()
+        {
+            CollectionAssert.AreEqual(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 1d"));
+            CollectionAssert.AreEqual(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 100d"));
+            CollectionAssert.AreEqual(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 255d"));
+        }
+
+        [Test]
+        public void ShouldAssembleBinaryLiterals()
+        {
+            CollectionAssert.AreEqual(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 00000001b"));
+            CollectionAssert.AreEqual(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 01100100b"));
+            CollectionAssert.AreEqual(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 11111111b"));
+        }
+
+        [Test]
+        public void ShouldAssembleHexLiterals()
+        {
+            CollectionAssert.AreEqual(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 0x01"));
+            CollectionAssert.AreEqual(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 0x64"));
+            CollectionAssert.AreEqual(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 0xFF"));
+
+            CollectionAssert.AreEqual(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db $01"));
+            CollectionAssert.AreEqual(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db $64"));
+            CollectionAssert.AreEqual(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db $FF"));
+
+            CollectionAssert.AreEqual(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 01h"));
+            CollectionAssert.AreEqual(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 64h"));
+            CollectionAssert.AreEqual(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 0FFh"));
+        }
+
+        [Test]
+        public void ShouldNotAssembleHexLiteralAssemblySyntaxThatStartsWithLetter()
+        {
+            CollectionAssert.AreEqual(new[] { new Instruction(0xCD, 0x00) }, _assembler.Assemble("db 0CDh"));
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble("db CDh"));
         }
     }
 }
