@@ -554,23 +554,12 @@ namespace SimpSim.NET
             {
                 bool isSuccess;
 
-                byte address;
-                string inputNoBrackets = input.Trim('[', ']');
-                bool isAddress = NumberSyntax.TryParseNumber(inputNoBrackets, out address);
-
-                string undefinedLabel = null;
-
-                if (!isAddress && !IsRegister(inputNoBrackets))
-                {
-                    if (_symbolTable.ContainsKey(inputNoBrackets))
-                        address = _symbolTable[inputNoBrackets];
-                    else
-                        undefinedLabel = inputNoBrackets;
-
-                    isAddress = true;
-                }
-
                 bool isSurroundedByBrackets = input.StartsWith("[") && input.EndsWith("]");
+
+                input = input.Trim('[', ']');
+                byte address;
+                string undefinedLabel;
+                bool isAddress = IsAddress(input, out address, out undefinedLabel);
 
                 if (bracketExpectation == BracketExpectation.Present)
                     isSuccess = isAddress && isSurroundedByBrackets;
@@ -583,6 +572,24 @@ namespace SimpSim.NET
                     addressSyntax = null;
 
                 return isSuccess;
+            }
+
+            private static bool IsAddress(string input, out byte address, out string undefinedLabel)
+            {
+                undefinedLabel = null;
+
+                if (NumberSyntax.TryParseNumber(input, out address))
+                    return true;
+
+                if (IsRegister(input))
+                    return false;
+
+                if (_symbolTable.ContainsKey(input))
+                    address = _symbolTable[input];
+                else
+                    undefinedLabel = input;
+
+                return true;
             }
 
             private static bool IsRegister(string input)
