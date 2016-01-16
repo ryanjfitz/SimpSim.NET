@@ -383,14 +383,16 @@ namespace SimpSim.NET
 
         private class InstructionSyntax
         {
+            public string Comment { get; }
             public string Label { get; }
             public string Mnemonic { get; }
             public string[] Operands { get; }
 
             public bool ContainsLabel => !string.IsNullOrWhiteSpace(Label);
 
-            private InstructionSyntax(string label, string mnemonic, string[] operands)
+            private InstructionSyntax(string comment, string label, string mnemonic, string[] operands)
             {
+                Comment = comment;
                 Label = label;
                 Mnemonic = mnemonic;
                 Operands = operands;
@@ -398,22 +400,39 @@ namespace SimpSim.NET
 
             public static bool TryParse(string line, out InstructionSyntax instructionSyntax)
             {
+                string comment = GetComment(ref line);
+
                 string label = GetLabel(ref line);
 
                 string mnemonic = GetMnemonic(line);
 
                 string[] operands = GetOperands(line);
 
-                instructionSyntax = new InstructionSyntax(label, mnemonic, operands);
+                instructionSyntax = new InstructionSyntax(comment, label, mnemonic, operands);
 
                 return true;
+            }
+
+            private static string GetComment(ref string line)
+            {
+                string comment = "";
+
+                string[] split = line.Split(new[] { ';' }, 2);
+
+                if (split.Length == 2)
+                {
+                    line = split[0];
+                    comment = split[1].Trim();
+                }
+
+                return comment;
             }
 
             private static string GetLabel(ref string line)
             {
                 string label = "";
 
-                string[] split = line.Split(':');
+                string[] split = line.Split(new[] { ':' }, 2);
 
                 if (split.Length == 2)
                 {
@@ -502,7 +521,16 @@ namespace SimpSim.NET
 
             private static bool TryParseDecimalLiteral(string input, out byte number)
             {
-                return byte.TryParse(input.TrimEnd('d'), out number);
+                sbyte signedNumber;
+
+                bool success = sbyte.TryParse(input.TrimEnd('d'), out signedNumber);
+
+                if (signedNumber < 0)
+                    number = (byte)signedNumber;
+                else
+                    success = byte.TryParse(input.TrimEnd('d'), out number);
+
+                return success;
             }
 
             private static bool TryParseBinaryLiteral(string input, out byte number)
@@ -554,12 +582,11 @@ namespace SimpSim.NET
             {
                 bool isSuccess;
 
-                bool isSurroundedByBrackets = input.StartsWith("[") && input.EndsWith("]");
-
-                input = input.Trim('[', ']');
                 byte address;
                 string undefinedLabel;
-                bool isAddress = IsAddress(input, out address, out undefinedLabel);
+                bool isAddress = IsAddress(input.Trim('[', ']'), out address, out undefinedLabel);
+
+                bool isSurroundedByBrackets = input.StartsWith("[") && input.EndsWith("]");
 
                 if (bracketExpectation == BracketExpectation.Present)
                     isSuccess = isAddress && isSurroundedByBrackets;

@@ -7,6 +7,7 @@ namespace SimpSim.NET.Console
         static void Main(string[] args)
         {
             RunProgram(SamplePrograms.HelloWorldCode);
+            RunProgram(SamplePrograms.TemplateCode);
             RunProgram(SamplePrograms.OutputTestCode);
         }
 

@@ -232,8 +232,7 @@ namespace SimpSim.NET.Tests
         [Test]
         public void ShouldAssembleDataByteInstructions()
         {
-            Instruction[] expected =
-            {
+            CollectionAssert.AreEqual(new[] {
                 new Instruction(0x01, 0x04),
                 new Instruction(0x09, 0x10),
                 new Instruction(0x19, 0x24),
@@ -243,10 +242,7 @@ namespace SimpSim.NET.Tests
                 new Instruction(0x57, 0x6F),
                 new Instruction(0x72, 0x6C),
                 new Instruction(0x64, 0x00)
-            };
-            Instruction[] actual = _assembler.Assemble("db 1,4,9,16,25,36,\"Hello World\"");
-
-            CollectionAssert.AreEqual(expected, actual);
+            }, _assembler.Assemble("db 1,4,9,16,25,36,\"Hello World\""));
         }
 
         [Test]
@@ -342,6 +338,12 @@ namespace SimpSim.NET.Tests
         }
 
         [Test]
+        public void ShouldAssembleTemplateSampleProgram()
+        {
+            CollectionAssert.AreEqual(SamplePrograms.TemplateInstructions, _assembler.Assemble(SamplePrograms.TemplateCode));
+        }
+
+        [Test]
         public void ShouldAssembleProgramWithLabelUsageBeforeDeclaration()
         {
             CollectionAssert.AreEqual(new[] { new Instruction(0x21, 0x02), new Instruction(0x0A, 0x00) }, _assembler.Assemble("load    R1,Text\r\nText:    db      10"));
@@ -353,6 +355,13 @@ namespace SimpSim.NET.Tests
             CollectionAssert.AreEqual(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 1d"));
             CollectionAssert.AreEqual(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 100d"));
             CollectionAssert.AreEqual(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 255d"));
+        }
+
+        [Test]
+        public void ShouldAssembleNegativeDecimalLiterals()
+        {
+            CollectionAssert.AreEqual(new[] { new Instruction(0x80, 0x00) }, _assembler.Assemble("db -128"));
+            CollectionAssert.AreEqual(new[] { new Instruction(0xAF, 0x00) }, _assembler.Assemble("db -81d"));
         }
 
         [Test]
@@ -384,6 +393,20 @@ namespace SimpSim.NET.Tests
         {
             CollectionAssert.AreEqual(new[] { new Instruction(0xCD, 0x00) }, _assembler.Assemble("db 0CDh"));
             CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble("db CDh"));
+        }
+
+        [Test]
+        public void ShouldIgnoreComments()
+        {
+            CollectionAssert.AreEqual(new[] { new Instruction(0x23, 0xAA) }, _assembler.Assemble("load R3, 0xAA; This is an immediate load instruction."));
+
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble(";load R3, 0xAA; This is a commented immediate load instruction."));
+
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble(";This is a comment with no instructions preceding it."));
+
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble(";This;comment;has;multiple;semicolons."));
+
+            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble(";"));
         }
     }
 }
