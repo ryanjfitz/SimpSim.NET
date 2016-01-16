@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -9,18 +10,18 @@ namespace SimpSim.NET
     public class Assembler
     {
         private static IDictionary<string, byte> _symbolTable;
-        private static IList<InstructionByte> _instructionBytes;
+        private static InstructionByteCollection _instructionBytes;
 
         public Assembler()
         {
             _symbolTable = new Dictionary<string, byte>();
-            _instructionBytes = new List<InstructionByte>();
+            _instructionBytes = new InstructionByteCollection();
         }
 
         public Instruction[] Assemble(string assemblyCode)
         {
             _symbolTable.Clear();
-            _instructionBytes.Clear();
+            _instructionBytes.Reset();
 
             foreach (string line in assemblyCode.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
             {
@@ -88,6 +89,9 @@ namespace SimpSim.NET
                 case "db":
                     DataByte(instructionSyntax.Operands);
                     break;
+                case "org":
+                    Org(instructionSyntax.Operands);
+                    break;
                 case "halt":
                     Halt(instructionSyntax.Operands);
                     break;
@@ -100,12 +104,17 @@ namespace SimpSim.NET
 
             for (int i = 0; i < _instructionBytes.Count; i += 2)
             {
-                if (_instructionBytes[i] == null)
-                    continue;
+                byte byte1;
+                byte byte2;
 
-                byte byte1 = _instructionBytes[i].GetValue();
-                byte byte2 = 0x00;
-                if (i + 1 < _instructionBytes.Count)
+                if (_instructionBytes[i] == null)
+                    byte1 = 0x00;
+                else
+                    byte1 = _instructionBytes[i].GetValue();
+
+                if (_instructionBytes[i + 1] == null)
+                    byte2 = 0x00;
+                else
                     byte2 = _instructionBytes[i + 1].GetValue();
 
                 instructions.Add(new Instruction(byte1, byte2));
@@ -119,14 +128,23 @@ namespace SimpSim.NET
             foreach (string operand in operands)
             {
                 const char doubleQuote = '"';
+                const char singleQuote = '\'';
 
                 byte number;
                 if (NumberSyntax.TryParseNumber(operand, out number))
                     _instructionBytes.Add(new InstructionByte(number));
-                else if (operand.First() == doubleQuote && operand.Last() == doubleQuote)
-                    foreach (char c in operand.TrimStart(doubleQuote).TrimEnd(doubleQuote))
+                else if ((operand.First() == doubleQuote || operand.First() == singleQuote) && (operand.Last() == doubleQuote || operand.Last() == singleQuote))
+                    foreach (char c in operand.TrimStart(doubleQuote).TrimEnd(doubleQuote).TrimStart(singleQuote).TrimEnd(singleQuote))
                         _instructionBytes.Add(new InstructionByte((byte)c));
             }
+        }
+
+        private void Org(string[] operands)
+        {
+            AddressSyntax address;
+
+            if (AddressSyntax.TryParseAddress(operands[0], out address))
+                _instructionBytes.OriginAddress = address.Value;
         }
 
         private void Jmp(string[] operands)
@@ -315,9 +333,6 @@ namespace SimpSim.NET
 
         private void Ror(string[] operands)
         {
-            InstructionByte byte1 = null;
-            InstructionByte byte2 = null;
-
             RegisterSyntax register;
             byte number;
 
@@ -325,13 +340,13 @@ namespace SimpSim.NET
             {
                 if (number < 16)
                 {
-                    byte1 = new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.Ror, register.GetRegisterIndex()));
-                    byte2 = new InstructionByte(ByteUtilities.GetByteFromNibbles(0x0, number));
+                    InstructionByte byte1 = new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.Ror, register.GetRegisterIndex()));
+                    InstructionByte byte2 = new InstructionByte(ByteUtilities.GetByteFromNibbles(0x0, number));
+
+                    _instructionBytes.Add(byte1);
+                    _instructionBytes.Add(byte2);
                 }
             }
-
-            _instructionBytes.Add(byte1);
-            _instructionBytes.Add(byte2);
         }
 
         private void Addi(string[] operands)
@@ -628,6 +643,54 @@ namespace SimpSim.NET
             public override string ToString()
             {
                 return Value.ToString();
+            }
+        }
+
+        private class InstructionByteCollection : IEnumerable<InstructionByte>
+        {
+            private readonly InstructionByte[] _bytes;
+
+            public InstructionByteCollection()
+            {
+                _bytes = new InstructionByte[0x100];
+            }
+
+            public InstructionByte this[int address]
+            {
+                get
+                {
+                    return _bytes[address];
+                }
+                set
+                {
+                    _bytes[address] = value;
+                }
+            }
+
+            public byte OriginAddress { get; set; }
+
+            public int Count => OriginAddress;
+
+            public void Add(InstructionByte instructionByte)
+            {
+                _bytes[OriginAddress] = instructionByte;
+                OriginAddress++;
+            }
+
+            public void Reset()
+            {
+                Array.Clear(_bytes, 0, _bytes.Length);
+                OriginAddress = 0;
+            }
+
+            public IEnumerator<InstructionByte> GetEnumerator()
+            {
+                return _bytes.Cast<InstructionByte>().GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
             }
         }
 

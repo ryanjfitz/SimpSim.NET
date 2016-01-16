@@ -232,7 +232,7 @@ namespace SimpSim.NET.Tests
         [Test]
         public void ShouldAssembleDataByteInstructions()
         {
-            CollectionAssert.AreEqual(new[] {
+            Instruction[] expected = {
                 new Instruction(0x01, 0x04),
                 new Instruction(0x09, 0x10),
                 new Instruction(0x19, 0x24),
@@ -242,7 +242,10 @@ namespace SimpSim.NET.Tests
                 new Instruction(0x57, 0x6F),
                 new Instruction(0x72, 0x6C),
                 new Instruction(0x64, 0x00)
-            }, _assembler.Assemble("db 1,4,9,16,25,36,\"Hello World\""));
+            };
+
+            CollectionAssert.AreEqual(expected, _assembler.Assemble("db 1,4,9,16,25,36,\"Hello World\""));
+            CollectionAssert.AreEqual(expected, _assembler.Assemble("db 1,4,9,16,25,36,'Hello World'"));
         }
 
         [Test]
@@ -407,6 +410,14 @@ namespace SimpSim.NET.Tests
             CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble(";This;comment;has;multiple;semicolons."));
 
             CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble(";"));
+        }
+
+        [Test]
+        public void ShouldAssembleOriginInstruction()
+        {
+            Instruction[] expected = { new Instruction(0x00, 0x00), new Instruction(0x00, 0x00), new Instruction(0x00, 0x00), new Instruction(0x20, 0x02) };
+            Instruction[] actual = _assembler.Assemble("org 06h\r\nload R0,2");
+            CollectionAssert.AreEqual(expected, actual);
         }
     }
 }
