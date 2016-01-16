@@ -74,7 +74,7 @@
                     }
                     break;
                 case Opcode.FloatingPointAdd:
-                    // Source: http://www.mscs.mu.edu/~glennb/simulators/Simulator.txt
+                    // Floating point addition implementation reproduced with permission. Refer to CREDITS text file in project root directory.
                     int mant2 = _registers[instruction.Nibble3] % 16;
                     int mant3 = _registers[instruction.Nibble4] % 16;
                     int exp2 = (_registers[instruction.Nibble3] & 0x70) / 16;
