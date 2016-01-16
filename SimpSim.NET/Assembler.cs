@@ -127,14 +127,13 @@ namespace SimpSim.NET
         {
             foreach (string operand in operands)
             {
-                const char doubleQuote = '"';
-                const char singleQuote = '\'';
-
                 byte number;
+                string stringLiteral;
+
                 if (NumberSyntax.TryParseNumber(operand, out number))
                     _instructionBytes.Add(new InstructionByte(number));
-                else if ((operand.First() == doubleQuote || operand.First() == singleQuote) && (operand.Last() == doubleQuote || operand.Last() == singleQuote))
-                    foreach (char c in operand.TrimStart(doubleQuote).TrimEnd(doubleQuote).TrimStart(singleQuote).TrimEnd(singleQuote))
+                else if (StringLiteralSyntax.TryParseStringLiteral(operand, out stringLiteral))
+                    foreach (char c in stringLiteral)
                         _instructionBytes.Add(new InstructionByte((byte)c));
             }
         }
@@ -643,6 +642,26 @@ namespace SimpSim.NET
             public override string ToString()
             {
                 return Value.ToString();
+            }
+        }
+
+        private static class StringLiteralSyntax
+        {
+            public static bool TryParseStringLiteral(string input, out string stringLiteral)
+            {
+                const char doubleQuote = '"';
+                const char singleQuote = '\'';
+
+                if ((input.First() == doubleQuote && input.Last() == doubleQuote) || (input.First() == singleQuote && input.Last() == singleQuote))
+                {
+                    stringLiteral = input.TrimStart(doubleQuote).TrimEnd(doubleQuote).TrimStart(singleQuote).TrimEnd(singleQuote);
+                    return true;
+                }
+                else
+                {
+                    stringLiteral = null;
+                    return false;
+                }
             }
         }
 

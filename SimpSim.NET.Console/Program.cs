@@ -26,7 +26,7 @@ namespace SimpSim.NET.Console
             Machine machine = new Machine(memory, registers);
             machine.Run();
 
-            System.Console.ReadKey();
+            System.Console.ReadLine();
         }
 
         private static void WriteOutput(char c)
