@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -665,7 +664,7 @@ namespace SimpSim.NET
             }
         }
 
-        private class InstructionByteCollection : IEnumerable<InstructionByte>
+        private class InstructionByteCollection
         {
             private readonly InstructionByte[] _bytes;
 
@@ -700,16 +699,6 @@ namespace SimpSim.NET
             {
                 Array.Clear(_bytes, 0, _bytes.Length);
                 OriginAddress = 0;
-            }
-
-            public IEnumerator<InstructionByte> GetEnumerator()
-            {
-                return _bytes.Cast<InstructionByte>().GetEnumerator();
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
             }
         }
 
