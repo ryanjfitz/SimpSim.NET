@@ -35,7 +35,7 @@ namespace SimpSim.NET
                 }
             }
 
-            Instruction[] instructions = GetInstructionsFromBytes();
+            Instruction[] instructions = _instructionBytes.GetInstructionsFromBytes();
 
             return instructions;
         }
@@ -95,31 +95,6 @@ namespace SimpSim.NET
                     Halt(instructionSyntax.Operands);
                     break;
             }
-        }
-
-        private Instruction[] GetInstructionsFromBytes()
-        {
-            IList<Instruction> instructions = new List<Instruction>();
-
-            for (int i = 0; i < _instructionBytes.Count; i += 2)
-            {
-                byte byte1;
-                byte byte2;
-
-                if (_instructionBytes[i] == null)
-                    byte1 = 0x00;
-                else
-                    byte1 = _instructionBytes[i].GetValue();
-
-                if (_instructionBytes[i + 1] == null)
-                    byte2 = 0x00;
-                else
-                    byte2 = _instructionBytes[i + 1].GetValue();
-
-                instructions.Add(new Instruction(byte1, byte2));
-            }
-
-            return instructions.ToArray();
         }
 
         private void DataByte(string[] operands)
@@ -673,19 +648,7 @@ namespace SimpSim.NET
                 _bytes = new InstructionByte[0x100];
             }
 
-            public InstructionByte this[int address]
-            {
-                get
-                {
-                    return _bytes[address];
-                }
-                set
-                {
-                    _bytes[address] = value;
-                }
-            }
-
-            public byte OriginAddress { get; set; }
+            public byte OriginAddress { private get; set; }
 
             public int Count => OriginAddress;
 
@@ -699,6 +662,27 @@ namespace SimpSim.NET
             {
                 Array.Clear(_bytes, 0, _bytes.Length);
                 OriginAddress = 0;
+            }
+
+            public Instruction[] GetInstructionsFromBytes()
+            {
+                IList<Instruction> instructions = new List<Instruction>();
+
+                for (int i = 0; i < Count; i += 2)
+                {
+                    byte byte1 = 0x00;
+                    byte byte2 = 0x00;
+
+                    if (_bytes[i] != null)
+                        byte1 = _bytes[i].GetValue();
+
+                    if (_bytes[i + 1] != null)
+                        byte2 = _bytes[i + 1].GetValue();
+
+                    instructions.Add(new Instruction(byte1, byte2));
+                }
+
+                return instructions.ToArray();
             }
         }
 
