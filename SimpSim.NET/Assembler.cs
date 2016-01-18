@@ -114,10 +114,10 @@ namespace SimpSim.NET
 
         private void Org(string[] operands)
         {
-            AddressSyntax address;
+            byte number;
 
-            if (AddressSyntax.TryParseAddress(operands[0], out address))
-                _instructionBytes.OriginAddress = address.Value;
+            if (NumberSyntax.TryParseNumber(operands[0], out number))
+                _instructionBytes.OriginAddress = number;
         }
 
         private void Jmp(string[] operands)
