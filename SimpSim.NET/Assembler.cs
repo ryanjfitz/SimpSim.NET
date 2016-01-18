@@ -626,9 +626,14 @@ namespace SimpSim.NET
                 const char doubleQuote = '"';
                 const char singleQuote = '\'';
 
-                if ((input.First() == doubleQuote && input.Last() == doubleQuote) || (input.First() == singleQuote && input.Last() == singleQuote))
+                if (input.First() == doubleQuote && input.Last() == doubleQuote)
                 {
-                    stringLiteral = input.TrimStart(doubleQuote).TrimEnd(doubleQuote).TrimStart(singleQuote).TrimEnd(singleQuote);
+                    stringLiteral = input.TrimStart(doubleQuote).TrimEnd(doubleQuote);
+                    return true;
+                }
+                else if (input.First() == singleQuote && input.Last() == singleQuote)
+                {
+                    stringLiteral = input.TrimStart(singleQuote).TrimEnd(singleQuote);
                     return true;
                 }
                 else
