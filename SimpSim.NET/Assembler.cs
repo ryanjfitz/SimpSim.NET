@@ -647,15 +647,29 @@ namespace SimpSim.NET
         private class InstructionByteCollection
         {
             private readonly InstructionByte[] _bytes;
+            private byte _originAddress;
 
             public InstructionByteCollection()
             {
                 _bytes = new InstructionByte[0x100];
             }
 
-            public byte OriginAddress { private get; set; }
+            public byte OriginAddress
+            {
+                private get
+                {
+                    return _originAddress;
+                }
+                set
+                {
+                    _originAddress = value;
 
-            public int Count => OriginAddress;
+                    if (_originAddress > Count)
+                        Count = _originAddress;
+                }
+            }
+
+            public int Count { get; private set; }
 
             public void Add(InstructionByte instructionByte)
             {
@@ -667,6 +681,7 @@ namespace SimpSim.NET
             {
                 Array.Clear(_bytes, 0, _bytes.Length);
                 OriginAddress = 0;
+                Count = 0;
             }
 
             public Instruction[] GetInstructionsFromBytes()

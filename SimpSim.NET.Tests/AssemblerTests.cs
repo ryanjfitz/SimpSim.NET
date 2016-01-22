@@ -413,11 +413,51 @@ namespace SimpSim.NET.Tests
         }
 
         [Test]
-        public void ShouldAssembleOriginInstruction()
+        public void ShouldAssembleOriginInstruction_WithOneOriginOnly()
         {
-            Instruction[] expected = { new Instruction(0x00, 0x00), new Instruction(0x00, 0x00), new Instruction(0x00, 0x00), new Instruction(0x20, 0x02) };
-            Instruction[] actual = _assembler.Assemble("org 06h\r\nload R0,2");
-            CollectionAssert.AreEqual(expected, actual);
+            CollectionAssert.AreEqual(new[]
+            {
+                new Instruction(0x00, 0x00),
+                new Instruction(0x00, 0x00),
+                new Instruction(0x00, 0x00),
+                new Instruction(0x20, 0x02)
+            },
+            _assembler.Assemble(@"org 6
+                                  load R0,2"));
+        }
+
+        [Test]
+        public void ShouldAssembleOriginInstruction_WithLowerOriginFollowingHigherOrigin()
+        {
+            CollectionAssert.AreEqual(new[]
+            {
+                new Instruction(0x00, 0x00),
+                new Instruction(0x25, 0x01),
+                new Instruction(0x00, 0x00),
+                new Instruction(0x00, 0x00),
+                new Instruction(0x00, 0x00),
+                new Instruction(0x20, 0x02)
+            },
+            _assembler.Assemble(@"org 10
+                                  load R0,2
+                                  org 2
+                                  load R5,1"));
+        }
+
+        [Test]
+        public void ShouldAssembleOriginInstruction_WithOriginPreceedingLabel()
+        {
+            CollectionAssert.AreEqual(new[]
+            {
+                new Instruction(0xB0, 0x0A),
+                new Instruction(0x00, 0x00),
+                new Instruction(0x00, 0x00),
+                new Instruction(0x00, 0x00),
+                new Instruction(0x00, 0x00),
+            },
+            _assembler.Assemble(@"jmp MyLabel
+                                      org 10
+                                      MyLabel:"));
         }
     }
 }
