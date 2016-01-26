@@ -109,6 +109,8 @@ namespace SimpSim.NET
                 else if (StringLiteralSyntax.TryParseStringLiteral(operand, out stringLiteral))
                     foreach (char c in stringLiteral)
                         _instructionBytes.Add(new InstructionByte((byte)c));
+                else
+                    throw new AssemblyException("Expected a number or string literal.");
             }
         }
 
@@ -319,6 +321,8 @@ namespace SimpSim.NET
                     _instructionBytes.Add(byte1);
                     _instructionBytes.Add(byte2);
                 }
+                else
+                    throw new AssemblyException("Number cannot be larger than 15.");
             }
         }
 
@@ -378,6 +382,9 @@ namespace SimpSim.NET
 
             public bool ContainsLabel => !string.IsNullOrWhiteSpace(Label);
 
+            private const char CommentDelimiter = ';';
+            private const char LabelDelimiter = ':';
+
             private InstructionSyntax(string comment, string label, string mnemonic, string[] operands)
             {
                 Comment = comment;
@@ -405,7 +412,7 @@ namespace SimpSim.NET
             {
                 string comment = "";
 
-                string[] split = line.Split(new[] { ';' }, 2);
+                string[] split = line.Split(new[] { CommentDelimiter }, 2);
 
                 if (split.Length == 2)
                 {
@@ -420,15 +427,41 @@ namespace SimpSim.NET
             {
                 string label = "";
 
-                string[] split = line.Split(new[] { ':' }, 2);
+                int colonIndex = line.IndexOf(LabelDelimiter);
 
-                if (split.Length == 2)
+                if (colonIndex > -1)
                 {
-                    label = split[0].Trim();
-                    line = split[1];
+                    label = line.Substring(0, colonIndex + 1).Trim();
+                    line = line.Substring(colonIndex + 1);
+
+                    if (!IsValidLabel(label))
+                        throw new LabelAssemblyException();
+
+                    label = label.TrimEnd(LabelDelimiter);
                 }
 
                 return label;
+            }
+
+            private static bool IsValidLabel(string input)
+            {
+                if (input.Length == 0)
+                    return true;
+
+                if (input.Length == 1 && input[0] == LabelDelimiter)
+                    return false;
+
+                if (input.Last() != LabelDelimiter)
+                    return false;
+
+                foreach (char c in input.TrimEnd(LabelDelimiter))
+                    if (!"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#_~".Contains(c))
+                        return false;
+
+                if (char.IsNumber(input[0]))
+                    return false;
+
+                return true;
             }
 
             private static string GetMnemonic(string line)

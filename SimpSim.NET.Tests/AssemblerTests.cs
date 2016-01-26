@@ -188,22 +188,22 @@ namespace SimpSim.NET.Tests
         {
             const byte number = 16;
 
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R0,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R1,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R2,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R3,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R4,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R5,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R6,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R7,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R8,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror R9,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RA,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RB,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RC,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RD,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RE,{number}"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble($"ror RF,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror R0,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror R1,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror R2,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror R3,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror R4,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror R5,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror R6,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror R7,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror R8,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror R9,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror RA,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror RB,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror RC,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror RD,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror RE,{number}"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror RF,{number}"));
         }
 
         [Test]
@@ -394,8 +394,7 @@ namespace SimpSim.NET.Tests
         [Test]
         public void ShouldNotAssembleHexLiteralAssemblySyntaxThatStartsWithLetter()
         {
-            CollectionAssert.AreEqual(new[] { new Instruction(0xCD, 0x00) }, _assembler.Assemble("db 0CDh"));
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble("db CDh"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("db FFh"));
         }
 
         [Test]

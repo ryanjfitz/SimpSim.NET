@@ -48,7 +48,7 @@
     <Compile Include="AssemblerTests.cs" />
     <Compile Include="InstructionExecutionTests.cs" />
     <Compile Include="InstructionTests.cs" />
-    <Compile Include="LabelValidatorTests.cs" />
+    <Compile Include="LabelAssemblyTests.cs" />
     <Compile Include="MachineTests.cs" />
     <Compile Include="MemoryTests.cs" />
     <Compile Include="ProgramTests.cs" />
