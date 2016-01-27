@@ -427,12 +427,12 @@ namespace SimpSim.NET
             {
                 string label = "";
 
-                int colonIndex = line.IndexOf(LabelDelimiter);
+                int delimiterIndex = line.IndexOf(LabelDelimiter);
 
-                if (colonIndex > -1)
+                if (delimiterIndex > -1)
                 {
-                    label = line.Substring(0, colonIndex + 1).Trim();
-                    line = line.Substring(colonIndex + 1);
+                    label = line.Substring(0, delimiterIndex + 1).Trim();
+                    line = line.Substring(delimiterIndex + 1);
 
                     if (!IsValidLabel(label))
                         throw new LabelAssemblyException();
@@ -445,9 +445,6 @@ namespace SimpSim.NET
 
             private static bool IsValidLabel(string input)
             {
-                if (input.Length == 0)
-                    return true;
-
                 if (input.Length == 1 && input[0] == LabelDelimiter)
                     return false;
 
@@ -466,7 +463,7 @@ namespace SimpSim.NET
 
             private static string GetMnemonic(string line)
             {
-                string[] split = line.Trim().Split(' ');
+                string[] split = line.Trim().Split();
 
                 string mnemonic = split[0];
 
@@ -477,14 +474,14 @@ namespace SimpSim.NET
             {
                 string[] split = line.Trim().Split(new[] { ' ' }, 2);
 
-                IEnumerable<string> operands;
+                string[] operands;
 
                 if (split.Length == 2)
-                    operands = split[1].Split(',').Select(o => o.Trim());
+                    operands = split[1].Split(',').Select(o => o.Trim()).ToArray();
                 else
-                    operands = Enumerable.Empty<string>();
+                    operands = new string[] { };
 
-                return operands.ToArray();
+                return operands;
             }
 
             public override string ToString()
