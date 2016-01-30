@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using NUnit.Framework;
 
 namespace SimpSim.NET.Tests
@@ -35,7 +34,6 @@ namespace SimpSim.NET.Tests
             var numericCharacters = "0123456789";
             var specialCharacters = "#_~";
             var commentCharacters = ";";
-            var newLineCharacters = Environment.NewLine;
 
             var invalidCharacters =
                 allCharacters
@@ -43,8 +41,7 @@ namespace SimpSim.NET.Tests
                 .Except(lowercaseLetters)
                 .Except(numericCharacters)
                 .Except(specialCharacters)
-                .Except(commentCharacters)
-                .Except(newLineCharacters);
+                .Except(commentCharacters);
 
             foreach (char c in invalidCharacters)
                 Assert.Throws<LabelAssemblyException>(() => _assembler.Assemble(c + ":"));

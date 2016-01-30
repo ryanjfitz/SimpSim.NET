@@ -47,7 +47,7 @@ namespace SimpSim.NET
 
         private void AssembleLine(InstructionSyntax instructionSyntax)
         {
-            switch (instructionSyntax.Mnemonic)
+            switch (instructionSyntax.Mnemonic.ToLowerInvariant())
             {
                 case "load":
                     Load(instructionSyntax.Operands);
@@ -64,10 +64,10 @@ namespace SimpSim.NET
                 case "addf":
                     Addf(instructionSyntax.Operands);
                     break;
-                case "jmpEQ":
+                case "jmpeq":
                     JmpEQ(instructionSyntax.Operands);
                     break;
-                case "jmpLE":
+                case "jmple":
                     JmpLE(instructionSyntax.Operands);
                     break;
                 case "jmp":
@@ -472,7 +472,7 @@ namespace SimpSim.NET
 
             private static string[] GetOperands(string line)
             {
-                string[] split = line.Trim().Split(new[] { ' ' }, 2);
+                string[] split = line.Trim().Split(null, 2);
 
                 string[] operands;
 
