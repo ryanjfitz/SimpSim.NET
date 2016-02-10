@@ -7,6 +7,28 @@
         mc:Ignorable="d"
         Title="SimpSim.NET" Height="350" Width="525">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <local:Memory Margin="5" Grid.Column="0" />
+        <local:GeneralPurposeRegisters Margin="5" Grid.Column="1"></local:GeneralPurposeRegisters>
+        <DockPanel Grid.Column="2" Margin="5">
+            <local:SystemRegisters Margin="0,0,0,10" DockPanel.Dock="Top" />
+            <Button DockPanel.Dock="Top">Open...</Button>
+            <Button DockPanel.Dock="Top">Save</Button>
+            <TextBlock DockPanel.Dock="Top"></TextBlock>
+            <Button DockPanel.Dock="Top">Run</Button>
+            <Button DockPanel.Dock="Top">Step</Button>
+            <Button DockPanel.Dock="Top">Break</Button>
+            <Button DockPanel.Dock="Top">Clear</Button>
+            <TextBlock DockPanel.Dock="Bottom" Margin="0,10,0,0" Background="Black" Foreground="Green" FontFamily="Courier New">Hello World!</TextBlock>
+        </DockPanel>
+
     </Grid>
 </Window>
+
+
+
