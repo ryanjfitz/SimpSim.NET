@@ -56,12 +56,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\DisassemblerWindow.xaml.cs">
+      <DependentUpon>DisassemblerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GeneralPurposeRegisters.xaml.cs">
       <DependentUpon>GeneralPurposeRegisters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MachineControls.xaml.cs">
+      <DependentUpon>MachineControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OutputWindow.xaml.cs">
+      <DependentUpon>OutputWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SystemRegisters.xaml.cs">
       <DependentUpon>SystemRegisters.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\DisassemblerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MachineControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +96,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GeneralPurposeRegisters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OutputWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

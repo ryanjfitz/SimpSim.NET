@@ -19,35 +19,11 @@
 
         <views:Memory Margin="5" Grid.Row="0" Grid.Column="0" />
         <views:GeneralPurposeRegisters Margin="5" Grid.Row="0" Grid.Column="1" />
-        <DockPanel Grid.Row="0" Grid.Column="2" Margin="5">
-            <DockPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Margin" Value="0,5,0,0"></Setter>
-                </Style>
-            </DockPanel.Resources>
-            <views:SystemRegisters DockPanel.Dock="Top" />
-            <TextBlock DockPanel.Dock="Top" />
-            <Button DockPanel.Dock="Top">Open...</Button>
-            <Button DockPanel.Dock="Top">Save</Button>
-            <Button DockPanel.Dock="Bottom">Clear</Button>
-            <Button DockPanel.Dock="Bottom">Break</Button>
-            <Button DockPanel.Dock="Bottom">Step</Button>
-            <Button DockPanel.Dock="Bottom">Run</Button>
-            <TextBlock />
+        <DockPanel Grid.Row="0" Grid.Column="2">
+            <views:SystemRegisters DockPanel.Dock="Top" Margin="5" />
+            <views:MachineControls DockPanel.Dock="Bottom" Margin="5" />
         </DockPanel>
-        <ListBox Grid.Row="1" Grid.Column="0" Margin="5" />
-        <Grid Grid.Row="1" Grid.Column="1" ColumnSpan="2" Margin="5">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Background="Black" Foreground="Green" FontFamily="Courier New" />
-            <Button Grid.Row="1" Grid.Column="0" DockPanel.Dock="Left">Asm</Button>
-            <Button Grid.Row="1" Grid.Column="1" DockPanel.Dock="Right">Disasm</Button>
-        </Grid>
+        <views:DisassemblerWindow Grid.Row="1" Grid.Column="0" Margin="5" />
+        <views:OutputWindow Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" />
     </Grid>
 </Window>
