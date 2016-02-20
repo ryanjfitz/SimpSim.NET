@@ -29,10 +29,10 @@
             <TextBlock DockPanel.Dock="Top" />
             <Button DockPanel.Dock="Top">Open...</Button>
             <Button DockPanel.Dock="Top">Save</Button>
-            <Button DockPanel.Dock="Bottom">Run</Button>
-            <Button DockPanel.Dock="Bottom">Step</Button>
-            <Button DockPanel.Dock="Bottom">Break</Button>
             <Button DockPanel.Dock="Bottom">Clear</Button>
+            <Button DockPanel.Dock="Bottom">Break</Button>
+            <Button DockPanel.Dock="Bottom">Step</Button>
+            <Button DockPanel.Dock="Bottom">Run</Button>
             <TextBlock />
         </DockPanel>
         <ListBox Grid.Row="1" Grid.Column="0" Margin="5" />
