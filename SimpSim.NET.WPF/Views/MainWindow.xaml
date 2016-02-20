@@ -12,27 +12,31 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="12*" />
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
         <views:Memory Margin="5" Grid.Row="0" Grid.Column="0" />
-        <views:GeneralPurposeRegisters Margin="5" Grid.Row="0" Grid.Column="1"></views:GeneralPurposeRegisters>
+        <views:GeneralPurposeRegisters Margin="5" Grid.Row="0" Grid.Column="1" />
         <DockPanel Grid.Row="0" Grid.Column="2" Margin="5">
+            <DockPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="0,5,0,0"></Setter>
+                </Style>
+            </DockPanel.Resources>
             <views:SystemRegisters DockPanel.Dock="Top" />
-            <TextBlock DockPanel.Dock="Top"></TextBlock>
+            <TextBlock DockPanel.Dock="Top" />
             <Button DockPanel.Dock="Top">Open...</Button>
             <Button DockPanel.Dock="Top">Save</Button>
-            <TextBlock DockPanel.Dock="Top"></TextBlock>
-            <Button DockPanel.Dock="Top">Run</Button>
-            <Button DockPanel.Dock="Top">Step</Button>
-            <Button DockPanel.Dock="Top">Break</Button>
-            <Button DockPanel.Dock="Top">Clear</Button>
-            <TextBlock></TextBlock>
+            <Button DockPanel.Dock="Bottom">Run</Button>
+            <Button DockPanel.Dock="Bottom">Step</Button>
+            <Button DockPanel.Dock="Bottom">Break</Button>
+            <Button DockPanel.Dock="Bottom">Clear</Button>
+            <TextBlock />
         </DockPanel>
-        <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" ></ListBox>
-        <Grid Grid.Row="1" Grid.Column="2" Margin="5">
+        <ListBox Grid.Row="1" Grid.Column="0" Margin="5" />
+        <Grid Grid.Row="1" Grid.Column="1" ColumnSpan="2" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto" />
@@ -41,12 +45,9 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Background="Black" Foreground="Green" FontFamily="Courier New"></TextBlock>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Background="Black" Foreground="Green" FontFamily="Courier New" />
             <Button Grid.Row="1" Grid.Column="0" DockPanel.Dock="Left">Asm</Button>
             <Button Grid.Row="1" Grid.Column="1" DockPanel.Dock="Right">Disasm</Button>
         </Grid>
     </Grid>
 </Window>
-
-
-

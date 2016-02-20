@@ -8,44 +8,43 @@
         <Grid.Resources>
             <Style TargetType="TextBox">
                 <Setter Property="MaxLength" Value="2" />
-                <Setter Property="Width" Value="20"></Setter>
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Name="Row0"/>
-            <RowDefinition Name="Row1"/>
-            <RowDefinition Name="Row2"/>
-            <RowDefinition Name="Row3"/>
-            <RowDefinition Name="Row4"/>
-            <RowDefinition Name="Row5"/>
-            <RowDefinition Name="Row6"/>
-            <RowDefinition Name="Row7"/>
-            <RowDefinition Name="Row8"/>
-            <RowDefinition Name="Row9"/>
-            <RowDefinition Name="RowA"/>
-            <RowDefinition Name="RowB"/>
-            <RowDefinition Name="RowC"/>
-            <RowDefinition Name="RowD"/>
-            <RowDefinition Name="RowE"/>
-            <RowDefinition Name="RowF"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Name="Column0" />
-            <ColumnDefinition Name="Column1"/>
-            <ColumnDefinition Name="Column2"/>
-            <ColumnDefinition Name="Column3"/>
-            <ColumnDefinition Name="Column4"/>
-            <ColumnDefinition Name="Column5"/>
-            <ColumnDefinition Name="Column6"/>
-            <ColumnDefinition Name="Column7"/>
-            <ColumnDefinition Name="Column8"/>
-            <ColumnDefinition Name="Column9"/>
-            <ColumnDefinition Name="ColumnA"/>
-            <ColumnDefinition Name="ColumnB"/>
-            <ColumnDefinition Name="ColumnC"/>
-            <ColumnDefinition Name="ColumnD"/>
-            <ColumnDefinition Name="ColumnE"/>
-            <ColumnDefinition Name="ColumnF"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBox Grid.Row="0" Grid.Column="0"></TextBox>
         <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
@@ -80,7 +79,6 @@
         <TextBox Grid.Row="1" Grid.Column="13"></TextBox>
         <TextBox Grid.Row="1" Grid.Column="14"></TextBox>
         <TextBox Grid.Row="1" Grid.Column="15"></TextBox>
-
 
         <TextBox Grid.Row="2" Grid.Column="0"></TextBox>
         <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
