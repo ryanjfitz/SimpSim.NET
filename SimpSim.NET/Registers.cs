@@ -23,8 +23,8 @@ namespace SimpSim.NET
             {
                 _array[register] = value;
 
-                if (register == 0x0f && ValueWrittenToOutputRegister != null)
-                    ValueWrittenToOutputRegister((char)value);
+                if (register == 0x0f)
+                    ValueWrittenToOutputRegister?.Invoke((char)value);
             }
         }
     }
