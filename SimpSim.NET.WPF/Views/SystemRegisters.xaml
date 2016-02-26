@@ -3,7 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:SimpSim.NET.WPF.ViewModels"
              mc:Ignorable="d">
+    <UserControl.DataContext>
+        <viewModels:SystemRegistersViewModel/>
+    </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -16,7 +20,7 @@
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" Grid.Column="0" MaxLength="2" />
         <TextBox Grid.Row="1" Grid.Column="0" IsReadOnly="True" MaxLength="4" />
-        <Button Grid.Row="0" Grid.Column="1" Margin="5,0,0,0">=0</Button>
+        <Button Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" Command="{Binding ResetProgramCounterCommand}">=0</Button>
     </Grid>
 </UserControl>
 

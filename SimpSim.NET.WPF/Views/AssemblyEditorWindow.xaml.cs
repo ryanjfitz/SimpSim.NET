@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SimpSim.NET.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for DisassemblerWindow.xaml
+    /// Interaction logic for AssemblyEditorWindow.xaml
     /// </summary>
-    public partial class DisassemblerWindow : UserControl
+    public partial class AssemblyEditorWindow : Window
     {
-        public DisassemblerWindow()
+        public AssemblyEditorWindow()
         {
             InitializeComponent();
         }

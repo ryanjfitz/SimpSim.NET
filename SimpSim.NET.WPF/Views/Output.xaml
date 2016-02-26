@@ -1,7 +1,7 @@
-﻿<UserControl x:Class="SimpSim.NET.WPF.Views.OutputWindow"
+﻿<UserControl x:Class="SimpSim.NET.WPF.Views.Output"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
     <Grid>
@@ -14,7 +14,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Background="Black" Foreground="Green" FontFamily="Courier New" />
-        <Button Grid.Row="1" Grid.Column="0" DockPanel.Dock="Left">Asm</Button>
+        <Button Grid.Row="1" Grid.Column="0" DockPanel.Dock="Left" Command="{Binding OpenAssemblyEditorWindow}">Asm</Button>
         <Button Grid.Row="1" Grid.Column="1" DockPanel.Dock="Right">Disasm</Button>
     </Grid>
 </UserControl>

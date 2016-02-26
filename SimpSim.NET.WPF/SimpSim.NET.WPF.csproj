@@ -57,12 +57,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command.cs" />
+    <Compile Include="IWindowService.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModels\AssemblyEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\MachineControlsViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\OutputViewModel.cs" />
+    <Compile Include="ViewModels\SystemRegistersViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\DisassemblerWindow.xaml.cs">
-      <DependentUpon>DisassemblerWindow.xaml</DependentUpon>
+    <Compile Include="Views\AssemblyEditorWindow.xaml.cs">
+      <DependentUpon>AssemblyEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Disassembler.xaml.cs">
+      <DependentUpon>Disassembler.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GeneralPurposeRegisters.xaml.cs">
       <DependentUpon>GeneralPurposeRegisters.xaml</DependentUpon>
@@ -70,13 +77,18 @@
     <Compile Include="Views\MachineControls.xaml.cs">
       <DependentUpon>MachineControls.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OutputWindow.xaml.cs">
-      <DependentUpon>OutputWindow.xaml</DependentUpon>
+    <Compile Include="Views\Output.xaml.cs">
+      <DependentUpon>Output.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SystemRegisters.xaml.cs">
       <DependentUpon>SystemRegisters.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\DisassemblerWindow.xaml">
+    <Compile Include="WindowService.cs" />
+    <Page Include="Views\AssemblyEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Disassembler.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -104,7 +116,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OutputWindow.xaml">
+    <Page Include="Views\Output.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

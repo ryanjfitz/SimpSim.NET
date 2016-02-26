@@ -27,7 +27,7 @@
             <views:SystemRegisters DockPanel.Dock="Top" Margin="5" />
             <views:MachineControls DockPanel.Dock="Bottom" Margin="5" />
         </DockPanel>
-        <views:DisassemblerWindow Grid.Row="1" Grid.Column="0" Margin="5" />
-        <views:OutputWindow Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" />
+        <views:Disassembler Grid.Row="1" Grid.Column="0" Margin="5" />
+        <views:Output Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" />
     </Grid>
 </Window>
