@@ -10,6 +10,7 @@ namespace SimpSim.NET.WPF
         {
             Window window = new AssemblyEditorWindow();
             window.DataContext = viewModel;
+            window.Owner = Application.Current.MainWindow;
             window.Show();
         }
     }

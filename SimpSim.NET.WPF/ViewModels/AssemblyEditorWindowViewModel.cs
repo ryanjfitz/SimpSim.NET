@@ -6,7 +6,7 @@ namespace SimpSim.NET.WPF.ViewModels
     {
         private string _assemblyEditorText;
 
-        public AssemblyEditorWindowViewModel()
+        public AssemblyEditorWindowViewModel(OutputViewModel outputViewModel)
         {
             AssembleCommand = new Command(() =>
             {
@@ -14,7 +14,7 @@ namespace SimpSim.NET.WPF.ViewModels
 
                 Memory.LoadInstructions(instructions);
 
-                //Registers.ValueWrittenToOutputRegister += c => { };
+                Registers.ValueWrittenToOutputRegister += c => outputViewModel.OutputWindowText += c;
             }, () => true);
         }
 

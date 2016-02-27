@@ -13,7 +13,7 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Background="Black" Foreground="Green" FontFamily="Courier New" />
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Background="Black" Foreground="Green" FontFamily="Courier New" Text="{Binding OutputWindowText, UpdateSourceTrigger=PropertyChanged}" />
         <Button Grid.Row="1" Grid.Column="0" DockPanel.Dock="Left" Command="{Binding OpenAssemblyEditorWindow}">Asm</Button>
         <Button Grid.Row="1" Grid.Column="1" DockPanel.Dock="Right">Disasm</Button>
     </Grid>
