@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Threading;
 
 namespace SimpSim.NET.Console
 {
@@ -64,18 +63,12 @@ namespace SimpSim.NET.Console
             memory.LoadInstructions(instructions);
 
             Registers registers = new Registers();
-            registers.ValueWrittenToOutputRegister += WriteOutput;
+            registers.ValueWrittenToOutputRegister += System.Console.Write;
 
             Machine machine = new Machine(memory, registers);
-            machine.Run();
+            machine.Run(25);
 
             System.Console.ReadLine();
-        }
-
-        private static void WriteOutput(char c)
-        {
-            System.Console.Write(c);
-            Thread.Sleep(100);
         }
     }
 }

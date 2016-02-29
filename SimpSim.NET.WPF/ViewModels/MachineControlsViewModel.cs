@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SimpSim.NET.WPF.ViewModels
 {
@@ -6,7 +7,7 @@ namespace SimpSim.NET.WPF.ViewModels
     {
         public MachineControlsViewModel()
         {
-            RunCommand = new Command(() => Machine.Run(), () => true);
+            RunCommand = new Command(() => Task.Run(() => Machine.Run(25)), () => true);
 
             StepCommand = new Command(() => Machine.Step(), () => true);
         }

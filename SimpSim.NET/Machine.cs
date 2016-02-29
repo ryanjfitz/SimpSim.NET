@@ -1,4 +1,6 @@
-﻿namespace SimpSim.NET
+﻿using System.Threading;
+
+namespace SimpSim.NET
 {
     public class Machine
     {
@@ -16,10 +18,13 @@
         public Instruction InstructionRegister { get; private set; }
         public MachineState State { get; private set; }
 
-        public void Run()
+        public void Run(int millisecondsBetweenSteps = 0)
         {
             while (State == MachineState.Ready)
+            {
                 Step();
+                Thread.Sleep(millisecondsBetweenSteps);
+            }
         }
 
         public void Step()
