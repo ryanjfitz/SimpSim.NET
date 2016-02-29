@@ -17,7 +17,7 @@
         <Button DockPanel.Dock="Top">Open...</Button>
         <Button DockPanel.Dock="Top">Save</Button>
         <Button DockPanel.Dock="Bottom">Clear</Button>
-        <Button DockPanel.Dock="Bottom">Break</Button>
+        <Button DockPanel.Dock="Bottom" Command="{Binding BreakCommand}">Break</Button>
         <Button DockPanel.Dock="Bottom" Command="{Binding StepCommand}">Step</Button>
         <Button DockPanel.Dock="Bottom" Command="{Binding RunCommand}">Run</Button>
         <TextBlock/>
