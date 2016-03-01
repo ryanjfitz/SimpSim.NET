@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace SimpSim.NET
 {
@@ -53,6 +54,9 @@ namespace SimpSim.NET
 
         public void Break()
         {
+            if (!_running)
+                throw new InvalidOperationException("A break operation may only be performed while the machine is running.");
+
             _breakPending = true;
         }
 

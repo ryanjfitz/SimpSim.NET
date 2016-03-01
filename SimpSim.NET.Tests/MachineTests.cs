@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
@@ -60,7 +61,7 @@ namespace SimpSim.NET.Tests
         }
 
         [Test]
-        public void ShouldBeAbleToStopRunningProgram()
+        public void ShouldBeAbleToBreakIfRunning()
         {
             Task task = LaunchNonTerminatingProgram();
 
@@ -72,6 +73,12 @@ namespace SimpSim.NET.Tests
             task.Wait();
 
             Assert.AreEqual(Machine.MachineState.Ready, _machine.State);
+        }
+
+        [Test]
+        public void ShouldNotBeAbleToBreakIfNotRunning()
+        {
+            Assert.Throws<InvalidOperationException>(() => _machine.Break());
         }
 
         private Task LaunchNonTerminatingProgram()
