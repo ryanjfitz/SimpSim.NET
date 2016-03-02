@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using SimpSim.NET.WPF.Annotations;
 
 namespace SimpSim.NET.WPF.ViewModels
 {
@@ -16,7 +15,11 @@ namespace SimpSim.NET.WPF.ViewModels
 
         protected static readonly Assembler Assembler = new Assembler();
 
-        [NotifyPropertyChangedInvocator]
+        protected ViewModelBase()
+        {
+            Machine.PropertyChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+        }
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

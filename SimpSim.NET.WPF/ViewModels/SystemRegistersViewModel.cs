@@ -10,5 +10,20 @@ namespace SimpSim.NET.WPF.ViewModels
         }
 
         public ICommand ResetProgramCounterCommand { get; }
+
+        public byte ProgramCounter
+        {
+            get
+            {
+                return Machine.ProgramCounter;
+            }
+            set
+            {
+                Machine.ProgramCounter = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Instruction InstructionRegister => Machine.InstructionRegister;
     }
 }

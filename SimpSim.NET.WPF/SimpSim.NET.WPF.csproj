@@ -53,7 +53,6 @@
     </ApplicationDefinition>
     <Compile Include="Command.cs" />
     <Compile Include="IWindowService.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\AssemblyEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\MachineControlsViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

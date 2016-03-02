@@ -1,14 +1,19 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace SimpSim.NET
 {
-    public class Machine
+    public class Machine : INotifyPropertyChanged
     {
         private readonly Memory _memory;
         private readonly Registers _registers;
         private bool _running;
         private bool _breakPending;
+        private byte _programCounter;
+        private Instruction _instructionRegister;
+        private MachineState _state;
 
         public Machine(Memory memory, Registers registers)
         {
@@ -17,9 +22,44 @@ namespace SimpSim.NET
             State = MachineState.Ready;
         }
 
-        public byte ProgramCounter { get; set; }
-        public Instruction InstructionRegister { get; private set; }
-        public MachineState State { get; private set; }
+        public byte ProgramCounter
+        {
+            get
+            {
+                return _programCounter;
+            }
+            set
+            {
+                _programCounter = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Instruction InstructionRegister
+        {
+            get
+            {
+                return _instructionRegister;
+            }
+            private set
+            {
+                _instructionRegister = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public MachineState State
+        {
+            get
+            {
+                return _state;
+            }
+            private set
+            {
+                _state = value;
+                OnPropertyChanged();
+            }
+        }
 
         public void Run(int millisecondsBetweenSteps = 0)
         {
@@ -170,6 +210,13 @@ namespace SimpSim.NET
             InvalidInstruction,
             Ready,
             Running
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

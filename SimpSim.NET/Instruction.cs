@@ -2,7 +2,7 @@
 
 namespace SimpSim.NET
 {
-    public struct Instruction : IEquatable<Instruction>
+    public class Instruction : IEquatable<Instruction>
     {
         public Instruction(byte byte1, byte byte2)
         {
