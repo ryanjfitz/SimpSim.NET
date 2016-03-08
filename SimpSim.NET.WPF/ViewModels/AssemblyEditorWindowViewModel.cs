@@ -5,7 +5,7 @@ namespace SimpSim.NET.WPF.ViewModels
     internal class AssemblyEditorWindowViewModel : ViewModelBase
     {
         private string _assemblyEditorText;
-        private string _assemblyErrorMessage;
+        private string _assemblyResult;
 
         public AssemblyEditorWindowViewModel(OutputViewModel outputViewModel)
         {
@@ -15,11 +15,12 @@ namespace SimpSim.NET.WPF.ViewModels
 
                 try
                 {
-                    instructions = Assembler.Assemble(AssemblyEditorText);
+                    instructions = Assembler.Assemble(AssemblyEditorText ?? "");
+                    AssemblyResult = "Assembly Successful";
                 }
                 catch (AssemblyException ex)
                 {
-                    AssemblyErrorMessage = ex.Message;
+                    AssemblyResult = ex.Message;
                 }
 
                 if (instructions != null)
@@ -44,15 +45,15 @@ namespace SimpSim.NET.WPF.ViewModels
             }
         }
 
-        public string AssemblyErrorMessage
+        public string AssemblyResult
         {
             get
             {
-                return _assemblyErrorMessage;
+                return _assemblyResult;
             }
             set
             {
-                _assemblyErrorMessage = value;
+                _assemblyResult = value;
                 OnPropertyChanged();
             }
         }
