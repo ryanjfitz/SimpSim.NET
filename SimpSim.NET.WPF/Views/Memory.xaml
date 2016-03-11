@@ -3,7 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:SimpSim.NET.WPF.ViewModels"
              mc:Ignorable="d">
+    <UserControl.DataContext>
+        <viewModels:MemoryViewModel />
+    </UserControl.DataContext>
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBox">
@@ -46,277 +50,277 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="0" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Addresses[0]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Addresses[1]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Addresses[2]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Addresses[3]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="4" Text="{Binding Addresses[4]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Addresses[5]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="6" Text="{Binding Addresses[6]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="7" Text="{Binding Addresses[7]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="8" Text="{Binding Addresses[8]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="9" Text="{Binding Addresses[9]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="10" Text="{Binding Addresses[10]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="11" Text="{Binding Addresses[11]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="12" Text="{Binding Addresses[12]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="13" Text="{Binding Addresses[13]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="14" Text="{Binding Addresses[14]}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="15" Text="{Binding Addresses[15]}"></TextBox>
 
-        <TextBox Grid.Row="1" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="1" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Addresses[16]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Addresses[17]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Addresses[18]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Addresses[19]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding Addresses[20]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="5" Text="{Binding Addresses[21]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="6" Text="{Binding Addresses[22]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="7" Text="{Binding Addresses[23]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="8" Text="{Binding Addresses[24]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="9" Text="{Binding Addresses[25]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="10" Text="{Binding Addresses[26]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="11" Text="{Binding Addresses[27]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="12" Text="{Binding Addresses[28]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="13" Text="{Binding Addresses[29]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="14" Text="{Binding Addresses[30]}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="15" Text="{Binding Addresses[31]}"></TextBox>
 
-        <TextBox Grid.Row="2" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Addresses[32]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Addresses[33]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Addresses[34]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Addresses[35]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="4" Text="{Binding Addresses[36]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="5" Text="{Binding Addresses[37]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="6" Text="{Binding Addresses[38]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="7" Text="{Binding Addresses[39]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="8" Text="{Binding Addresses[40]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="9" Text="{Binding Addresses[41]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="10" Text="{Binding Addresses[42]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="11" Text="{Binding Addresses[43]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="12" Text="{Binding Addresses[44]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="13" Text="{Binding Addresses[45]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="14" Text="{Binding Addresses[46]}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="15" Text="{Binding Addresses[47]}"></TextBox>
 
-        <TextBox Grid.Row="3" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="3" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Addresses[48]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Addresses[49]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Addresses[50]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Addresses[51]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="4" Text="{Binding Addresses[52]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="5" Text="{Binding Addresses[53]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="6" Text="{Binding Addresses[54]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="7" Text="{Binding Addresses[55]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="8" Text="{Binding Addresses[56]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="9" Text="{Binding Addresses[57]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="10" Text="{Binding Addresses[58]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="11" Text="{Binding Addresses[59]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="12" Text="{Binding Addresses[60]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="13" Text="{Binding Addresses[61]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="14" Text="{Binding Addresses[62]}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="15" Text="{Binding Addresses[63]}"></TextBox>
 
-        <TextBox Grid.Row="4" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="4" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding Addresses[64]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Addresses[65]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Addresses[66]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="3" Text="{Binding Addresses[67]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="4" Text="{Binding Addresses[68]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="5" Text="{Binding Addresses[69]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="6" Text="{Binding Addresses[70]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="7" Text="{Binding Addresses[71]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="8" Text="{Binding Addresses[72]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="9" Text="{Binding Addresses[73]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="10" Text="{Binding Addresses[74]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="11" Text="{Binding Addresses[75]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="12" Text="{Binding Addresses[76]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="13" Text="{Binding Addresses[77]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="14" Text="{Binding Addresses[78]}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="15" Text="{Binding Addresses[79]}"></TextBox>
 
-        <TextBox Grid.Row="5" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="5" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Addresses[80]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Addresses[81]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Addresses[82]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="3" Text="{Binding Addresses[83]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="4" Text="{Binding Addresses[84]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="5" Text="{Binding Addresses[85]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="6" Text="{Binding Addresses[86]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="7" Text="{Binding Addresses[87]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="8" Text="{Binding Addresses[88]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="9" Text="{Binding Addresses[89]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="10" Text="{Binding Addresses[90]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="11" Text="{Binding Addresses[91]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="12" Text="{Binding Addresses[92]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="13" Text="{Binding Addresses[93]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="14" Text="{Binding Addresses[94]}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="15" Text="{Binding Addresses[95]}"></TextBox>
 
-        <TextBox Grid.Row="6" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="6" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Addresses[96]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Addresses[97]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Addresses[98]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="3" Text="{Binding Addresses[99]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Addresses[100]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="5" Text="{Binding Addresses[101]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="6" Text="{Binding Addresses[102]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="7" Text="{Binding Addresses[103]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="8" Text="{Binding Addresses[104]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="9" Text="{Binding Addresses[105]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="10" Text="{Binding Addresses[106]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="11" Text="{Binding Addresses[107]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="12" Text="{Binding Addresses[108]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="13" Text="{Binding Addresses[109]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="14" Text="{Binding Addresses[110]}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="15" Text="{Binding Addresses[111]}"></TextBox>
 
-        <TextBox Grid.Row="7" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="7" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding Addresses[112]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Addresses[113]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Addresses[114]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding Addresses[115]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding Addresses[116]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="5" Text="{Binding Addresses[117]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="6" Text="{Binding Addresses[118]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="7" Text="{Binding Addresses[119]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="8" Text="{Binding Addresses[120]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="9" Text="{Binding Addresses[121]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="10" Text="{Binding Addresses[122]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="11" Text="{Binding Addresses[123]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="12" Text="{Binding Addresses[124]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="13" Text="{Binding Addresses[125]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="14" Text="{Binding Addresses[126]}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="15" Text="{Binding Addresses[127]}"></TextBox>
 
-        <TextBox Grid.Row="8" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="8" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="0" Text="{Binding Addresses[128]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Addresses[129]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding Addresses[130]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="3" Text="{Binding Addresses[131]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="4" Text="{Binding Addresses[132]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="5" Text="{Binding Addresses[133]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="6" Text="{Binding Addresses[134]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="7" Text="{Binding Addresses[135]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="8" Text="{Binding Addresses[136]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="9" Text="{Binding Addresses[137]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="10" Text="{Binding Addresses[138]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="11" Text="{Binding Addresses[139]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="12" Text="{Binding Addresses[140]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="13" Text="{Binding Addresses[141]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="14" Text="{Binding Addresses[142]}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="15" Text="{Binding Addresses[143]}"></TextBox>
 
-        <TextBox Grid.Row="9" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="9" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="0" Text="{Binding Addresses[144]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Addresses[145]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="2" Text="{Binding Addresses[146]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="3" Text="{Binding Addresses[147]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="4" Text="{Binding Addresses[148]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="5" Text="{Binding Addresses[149]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="6" Text="{Binding Addresses[150]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="7" Text="{Binding Addresses[151]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="8" Text="{Binding Addresses[152]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="9" Text="{Binding Addresses[153]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="10" Text="{Binding Addresses[154]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="11" Text="{Binding Addresses[155]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="12" Text="{Binding Addresses[156]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="13" Text="{Binding Addresses[157]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="14" Text="{Binding Addresses[158]}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="15" Text="{Binding Addresses[159]}"></TextBox>
 
-        <TextBox Grid.Row="10" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="10" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="0" Text="{Binding Addresses[160]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Addresses[161]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="2" Text="{Binding Addresses[162]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="3" Text="{Binding Addresses[163]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="4" Text="{Binding Addresses[164]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="5" Text="{Binding Addresses[165]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="6" Text="{Binding Addresses[166]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="7" Text="{Binding Addresses[167]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="8" Text="{Binding Addresses[168]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="9" Text="{Binding Addresses[169]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="10" Text="{Binding Addresses[170]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="11" Text="{Binding Addresses[171]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="12" Text="{Binding Addresses[172]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="13" Text="{Binding Addresses[173]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="14" Text="{Binding Addresses[174]}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="15" Text="{Binding Addresses[175]}"></TextBox>
 
-        <TextBox Grid.Row="11" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="11" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="0" Text="{Binding Addresses[176]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding Addresses[177]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="2" Text="{Binding Addresses[178]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="3" Text="{Binding Addresses[179]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="4" Text="{Binding Addresses[180]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="5" Text="{Binding Addresses[181]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="6" Text="{Binding Addresses[182]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="7" Text="{Binding Addresses[183]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="8" Text="{Binding Addresses[184]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="9" Text="{Binding Addresses[185]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="10" Text="{Binding Addresses[186]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="11" Text="{Binding Addresses[187]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="12" Text="{Binding Addresses[188]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="13" Text="{Binding Addresses[189]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="14" Text="{Binding Addresses[190]}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="15" Text="{Binding Addresses[191]}"></TextBox>
 
-        <TextBox Grid.Row="12" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="12" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="0" Text="{Binding Addresses[192]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding Addresses[193]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="2" Text="{Binding Addresses[194]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="3" Text="{Binding Addresses[195]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="4" Text="{Binding Addresses[196]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="5" Text="{Binding Addresses[197]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="6" Text="{Binding Addresses[198]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="7" Text="{Binding Addresses[199]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="8" Text="{Binding Addresses[200]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="9" Text="{Binding Addresses[201]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="10" Text="{Binding Addresses[202]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="11" Text="{Binding Addresses[203]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="12" Text="{Binding Addresses[204]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="13" Text="{Binding Addresses[205]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="14" Text="{Binding Addresses[206]}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="15" Text="{Binding Addresses[207]}"></TextBox>
 
-        <TextBox Grid.Row="13" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="13" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="0" Text="{Binding Addresses[208]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding Addresses[209]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="2" Text="{Binding Addresses[210]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="3" Text="{Binding Addresses[211]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="4" Text="{Binding Addresses[212]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="5" Text="{Binding Addresses[213]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="6" Text="{Binding Addresses[214]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="7" Text="{Binding Addresses[215]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="8" Text="{Binding Addresses[216]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="9" Text="{Binding Addresses[217]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="10" Text="{Binding Addresses[218]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="11" Text="{Binding Addresses[219]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="12" Text="{Binding Addresses[220]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="13" Text="{Binding Addresses[221]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="14" Text="{Binding Addresses[222]}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="15" Text="{Binding Addresses[223]}"></TextBox>
 
-        <TextBox Grid.Row="14" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="14" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="0" Text="{Binding Addresses[224]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="1" Text="{Binding Addresses[225]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="2" Text="{Binding Addresses[226]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="3" Text="{Binding Addresses[227]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="4" Text="{Binding Addresses[228]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="5" Text="{Binding Addresses[229]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="6" Text="{Binding Addresses[230]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="7" Text="{Binding Addresses[231]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="8" Text="{Binding Addresses[232]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="9" Text="{Binding Addresses[233]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="10" Text="{Binding Addresses[234]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="11" Text="{Binding Addresses[235]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="12" Text="{Binding Addresses[236]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="13" Text="{Binding Addresses[237]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="14" Text="{Binding Addresses[238]}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="15" Text="{Binding Addresses[239]}"></TextBox>
 
-        <TextBox Grid.Row="15" Grid.Column="0"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="1"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="2"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="3"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="4"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="5"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="6"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="7"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="8"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="9"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="10"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="11"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="12"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="13"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="14"></TextBox>
-        <TextBox Grid.Row="15" Grid.Column="15"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="0" Text="{Binding Addresses[240]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="1" Text="{Binding Addresses[241]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="2" Text="{Binding Addresses[242]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="3" Text="{Binding Addresses[243]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="4" Text="{Binding Addresses[244]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="5" Text="{Binding Addresses[245]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="6" Text="{Binding Addresses[246]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="7" Text="{Binding Addresses[247]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="8" Text="{Binding Addresses[248]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="9" Text="{Binding Addresses[249]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="10" Text="{Binding Addresses[250]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="11" Text="{Binding Addresses[251]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="12" Text="{Binding Addresses[252]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="13" Text="{Binding Addresses[253]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="14" Text="{Binding Addresses[254]}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="15" Text="{Binding Addresses[255]}"></TextBox>
 
     </Grid>
 

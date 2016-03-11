@@ -56,6 +56,7 @@
     <Compile Include="ViewModels\AssemblyEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\MachineControlsViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MemoryViewModel.cs" />
     <Compile Include="ViewModels\OutputViewModel.cs" />
     <Compile Include="ViewModels\SystemRegistersViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
