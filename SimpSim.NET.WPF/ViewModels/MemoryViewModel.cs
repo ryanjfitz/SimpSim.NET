@@ -18,7 +18,12 @@ namespace SimpSim.NET.WPF.ViewModels
             }
             set
             {
-                Memory[address] = value;
+                byte newValue = value;
+                byte oldValue = Memory[address];
+
+                if (newValue != oldValue)
+                    Memory[address] = newValue;
+
                 OnPropertyChanged();
             }
         }

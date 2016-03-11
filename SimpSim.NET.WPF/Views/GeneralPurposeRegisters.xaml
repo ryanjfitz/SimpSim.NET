@@ -3,7 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:SimpSim.NET.WPF.ViewModels"
              mc:Ignorable="d">
+    <UserControl.DataContext>
+        <viewModels:GeneralPurposeRegistersViewModel />
+    </UserControl.DataContext>
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBox">
@@ -28,21 +32,21 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" ></TextBox>
-        <TextBox Grid.Row="1" ></TextBox>
-        <TextBox Grid.Row="2" ></TextBox>
-        <TextBox Grid.Row="3" ></TextBox>
-        <TextBox Grid.Row="4" ></TextBox>
-        <TextBox Grid.Row="5" ></TextBox>
-        <TextBox Grid.Row="6" ></TextBox>
-        <TextBox Grid.Row="7" ></TextBox>
-        <TextBox Grid.Row="8" ></TextBox>
-        <TextBox Grid.Row="9" ></TextBox>
-        <TextBox Grid.Row="10" ></TextBox>
-        <TextBox Grid.Row="11" ></TextBox>
-        <TextBox Grid.Row="12" ></TextBox>
-        <TextBox Grid.Row="13" ></TextBox>
-        <TextBox Grid.Row="14" ></TextBox>
-        <TextBox Grid.Row="15" ></TextBox>
+        <TextBox Grid.Row="0" Text="{Binding Registers[0]}"></TextBox>
+        <TextBox Grid.Row="1" Text="{Binding Registers[1]}"></TextBox>
+        <TextBox Grid.Row="2" Text="{Binding Registers[2]}"></TextBox>
+        <TextBox Grid.Row="3" Text="{Binding Registers[3]}"></TextBox>
+        <TextBox Grid.Row="4" Text="{Binding Registers[4]}"></TextBox>
+        <TextBox Grid.Row="5" Text="{Binding Registers[5]}"></TextBox>
+        <TextBox Grid.Row="6" Text="{Binding Registers[6]}"></TextBox>
+        <TextBox Grid.Row="7" Text="{Binding Registers[7]}"></TextBox>
+        <TextBox Grid.Row="8" Text="{Binding Registers[8]}"></TextBox>
+        <TextBox Grid.Row="9" Text="{Binding Registers[9]}"></TextBox>
+        <TextBox Grid.Row="10" Text="{Binding Registers[10]}"></TextBox>
+        <TextBox Grid.Row="11" Text="{Binding Registers[11]}"></TextBox>
+        <TextBox Grid.Row="12" Text="{Binding Registers[12]}"></TextBox>
+        <TextBox Grid.Row="13" Text="{Binding Registers[13]}"></TextBox>
+        <TextBox Grid.Row="14" Text="{Binding Registers[14]}"></TextBox>
+        <TextBox Grid.Row="15" Text="{Binding Registers[15]}"></TextBox>
     </Grid>
 </UserControl>

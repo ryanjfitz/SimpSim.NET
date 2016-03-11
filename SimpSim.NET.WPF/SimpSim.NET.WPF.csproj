@@ -54,6 +54,7 @@
     <Compile Include="Command.cs" />
     <Compile Include="IWindowService.cs" />
     <Compile Include="ViewModels\AssemblyEditorWindowViewModel.cs" />
+    <Compile Include="ViewModels\GeneralPurposeRegistersViewModel.cs" />
     <Compile Include="ViewModels\MachineControlsViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MemoryViewModel.cs" />
