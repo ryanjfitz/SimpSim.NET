@@ -7,11 +7,11 @@ namespace SimpSim.NET.WPF.ViewModels
     {
         public MachineControlsViewModel()
         {
-            RunCommand = new Command(() => Task.Run(() => Machine.Run(25)), () => true);
+            RunCommand = new Command(() => Task.Run(() => Globals.Machine.Run(25)), () => Globals.Machine.State != Machine.MachineState.Running);
 
-            StepCommand = new Command(() => Machine.Step(), () => true);
+            StepCommand = new Command(() => Globals.Machine.Step(), () => true);
 
-            BreakCommand = new Command(() => Machine.Break(), () => Machine.State == Machine.MachineState.Running);
+            BreakCommand = new Command(() => Globals.Machine.Break(), () => Globals.Machine.State == Machine.MachineState.Running);
         }
 
         public ICommand RunCommand { get; }

@@ -6,7 +6,7 @@ namespace SimpSim.NET.WPF.ViewModels
     {
         public SystemRegistersViewModel()
         {
-            ResetProgramCounterCommand = new Command(() => Machine.ProgramCounter = 0x00, () => true);
+            ResetProgramCounterCommand = new Command(() => Globals.Machine.ProgramCounter = 0x00, () => true);
         }
 
         public ICommand ResetProgramCounterCommand { get; }
@@ -15,15 +15,15 @@ namespace SimpSim.NET.WPF.ViewModels
         {
             get
             {
-                return Machine.ProgramCounter;
+                return Globals.Machine.ProgramCounter;
             }
             set
             {
-                Machine.ProgramCounter = value;
+                Globals.Machine.ProgramCounter = value;
                 OnPropertyChanged();
             }
         }
 
-        public Instruction InstructionRegister => Machine.InstructionRegister;
+        public Instruction InstructionRegister => Globals.Machine.InstructionRegister;
     }
 }

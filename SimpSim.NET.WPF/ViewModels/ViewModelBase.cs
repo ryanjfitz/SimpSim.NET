@@ -7,17 +7,9 @@ namespace SimpSim.NET.WPF.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected static readonly Memory Memory = new Memory();
-
-        protected static readonly Registers Registers = new Registers();
-
-        protected static readonly Machine Machine = new Machine(Memory, Registers);
-
-        protected static readonly Assembler Assembler = new Assembler();
-
         protected ViewModelBase()
         {
-            Machine.PropertyChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            Globals.Machine.PropertyChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

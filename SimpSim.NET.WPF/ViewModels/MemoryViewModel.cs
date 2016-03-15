@@ -6,7 +6,7 @@ namespace SimpSim.NET.WPF.ViewModels
     {
         public MemoryViewModel()
         {
-            Memory.CollectionChanged += (sender, e) => this[(byte)e.NewStartingIndex] = (byte)e.NewItems[0];
+            Globals.Memory.CollectionChanged += (sender, e) => this[(byte)e.NewStartingIndex] = (byte)e.NewItems[0];
         }
 
         [IndexerName("Addresses")]
@@ -14,15 +14,15 @@ namespace SimpSim.NET.WPF.ViewModels
         {
             get
             {
-                return Memory[address];
+                return Globals.Memory[address];
             }
             set
             {
                 byte newValue = value;
-                byte oldValue = Memory[address];
+                byte oldValue = Globals.Memory[address];
 
                 if (newValue != oldValue)
-                    Memory[address] = newValue;
+                    Globals.Memory[address] = newValue;
 
                 OnPropertyChanged();
             }

@@ -54,6 +54,7 @@
     <Compile Include="Command.cs" />
     <Compile Include="DecimalToHexConverter.cs" />
     <Compile Include="IWindowService.cs" />
+    <Compile Include="Globals.cs" />
     <Compile Include="ViewModels\AssemblyEditorWindowViewModel.cs" />
     <Compile Include="ViewModels\GeneralPurposeRegistersViewModel.cs" />
     <Compile Include="ViewModels\MachineControlsViewModel.cs" />

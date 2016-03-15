@@ -6,7 +6,7 @@ namespace SimpSim.NET.WPF.ViewModels
     {
         public GeneralPurposeRegistersViewModel()
         {
-            Registers.CollectionChanged += (sender, e) => this[(byte)e.NewStartingIndex] = (byte)e.NewItems[0];
+            Globals.Registers.CollectionChanged += (sender, e) => this[(byte)e.NewStartingIndex] = (byte)e.NewItems[0];
         }
 
         [IndexerName("GPR")]
@@ -14,15 +14,15 @@ namespace SimpSim.NET.WPF.ViewModels
         {
             get
             {
-                return Registers[register];
+                return Globals.Registers[register];
             }
             set
             {
                 byte newValue = value;
-                byte oldValue = Registers[register];
+                byte oldValue = Globals.Registers[register];
 
                 if (newValue != oldValue)
-                    Registers[register] = newValue;
+                    Globals.Registers[register] = newValue;
 
                 OnPropertyChanged();
             }

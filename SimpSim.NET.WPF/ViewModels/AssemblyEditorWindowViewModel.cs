@@ -15,7 +15,7 @@ namespace SimpSim.NET.WPF.ViewModels
 
                 try
                 {
-                    instructions = Assembler.Assemble(AssemblyEditorText ?? "");
+                    instructions = Globals.Assembler.Assemble(AssemblyEditorText ?? "");
                     AssemblyResult = "Assembly Successful";
                 }
                 catch (AssemblyException ex)
@@ -25,9 +25,9 @@ namespace SimpSim.NET.WPF.ViewModels
 
                 if (instructions != null)
                 {
-                    Memory.LoadInstructions(instructions);
+                    Globals.Memory.LoadInstructions(instructions);
 
-                    Registers.ValueWrittenToOutputRegister += c => outputViewModel.OutputWindowText += c;
+                    Globals.Registers.ValueWrittenToOutputRegister += c => outputViewModel.OutputWindowText += c;
                 }
             }, () => true);
         }

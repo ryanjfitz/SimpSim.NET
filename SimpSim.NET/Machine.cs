@@ -30,8 +30,11 @@ namespace SimpSim.NET
             }
             set
             {
-                _programCounter = value;
-                OnPropertyChanged();
+                if (_programCounter != value)
+                {
+                    _programCounter = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -43,8 +46,11 @@ namespace SimpSim.NET
             }
             private set
             {
-                _instructionRegister = value;
-                OnPropertyChanged();
+                if (_instructionRegister != value)
+                {
+                    _instructionRegister = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -56,8 +62,11 @@ namespace SimpSim.NET
             }
             private set
             {
-                _state = value;
-                OnPropertyChanged();
+                if (_state != value)
+                {
+                    _state = value;
+                    OnPropertyChanged();
+                }
             }
         }
 

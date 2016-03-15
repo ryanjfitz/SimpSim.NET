@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace SimpSim.NET.WPF
@@ -12,6 +13,12 @@ namespace SimpSim.NET.WPF
         {
             _executeAction = executeAction;
             _canExecuteFunc = canExecuteFunc;
+
+            Globals.Machine.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == "State")
+                    OnCanExecuteChanged();
+            };
         }
 
         public bool CanExecute(object parameter)
@@ -24,10 +31,11 @@ namespace SimpSim.NET.WPF
             _executeAction.Invoke();
         }
 
-        event EventHandler ICommand.CanExecuteChanged
+        public event EventHandler CanExecuteChanged;
+
+        private void OnCanExecuteChanged()
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            Application.Current.Dispatcher.Invoke(() => CanExecuteChanged?.Invoke(this, EventArgs.Empty));
         }
     }
 }
