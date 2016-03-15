@@ -18,7 +18,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0" MaxLength="2" Text="{Binding ProgramCounter}" />
+        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding ProgramCounter, Converter={StaticResource DecimalToHexConverter}}" />
         <TextBox Grid.Row="1" Grid.Column="0" IsReadOnly="True" Text="{Binding InstructionRegister, Mode=OneWay}" />
         <Button Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" Command="{Binding ResetProgramCounterCommand}">=0</Button>
     </Grid>

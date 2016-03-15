@@ -30,7 +30,7 @@ namespace SimpSim.NET
 
         public override string ToString()
         {
-            return $"0x{Byte1.ToString("X2")} , 0x{Byte2.ToString("X2")}";
+            return ByteUtilities.ConvertByteToHexString(Byte1, 2) + ByteUtilities.ConvertByteToHexString(Byte2, 2);
         }
     }
 }

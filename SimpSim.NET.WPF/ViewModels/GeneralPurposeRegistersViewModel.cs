@@ -9,7 +9,7 @@ namespace SimpSim.NET.WPF.ViewModels
             Registers.CollectionChanged += (sender, e) => this[(byte)e.NewStartingIndex] = (byte)e.NewItems[0];
         }
 
-        [IndexerName("Registers")]
+        [IndexerName("GPR")]
         public byte this[byte register]
         {
             get

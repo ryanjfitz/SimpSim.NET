@@ -32,21 +32,21 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Text="{Binding Registers[0]}"></TextBox>
-        <TextBox Grid.Row="1" Text="{Binding Registers[1]}"></TextBox>
-        <TextBox Grid.Row="2" Text="{Binding Registers[2]}"></TextBox>
-        <TextBox Grid.Row="3" Text="{Binding Registers[3]}"></TextBox>
-        <TextBox Grid.Row="4" Text="{Binding Registers[4]}"></TextBox>
-        <TextBox Grid.Row="5" Text="{Binding Registers[5]}"></TextBox>
-        <TextBox Grid.Row="6" Text="{Binding Registers[6]}"></TextBox>
-        <TextBox Grid.Row="7" Text="{Binding Registers[7]}"></TextBox>
-        <TextBox Grid.Row="8" Text="{Binding Registers[8]}"></TextBox>
-        <TextBox Grid.Row="9" Text="{Binding Registers[9]}"></TextBox>
-        <TextBox Grid.Row="10" Text="{Binding Registers[10]}"></TextBox>
-        <TextBox Grid.Row="11" Text="{Binding Registers[11]}"></TextBox>
-        <TextBox Grid.Row="12" Text="{Binding Registers[12]}"></TextBox>
-        <TextBox Grid.Row="13" Text="{Binding Registers[13]}"></TextBox>
-        <TextBox Grid.Row="14" Text="{Binding Registers[14]}"></TextBox>
-        <TextBox Grid.Row="15" Text="{Binding Registers[15]}"></TextBox>
+        <TextBox Grid.Row="0" Text="{Binding GPR[0], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Text="{Binding GPR[1], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Text="{Binding GPR[2], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Text="{Binding GPR[3], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Text="{Binding GPR[4], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Text="{Binding GPR[5], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Text="{Binding GPR[6], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Text="{Binding GPR[7], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Text="{Binding GPR[8], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Text="{Binding GPR[9], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Text="{Binding GPR[10], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Text="{Binding GPR[11], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Text="{Binding GPR[12], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Text="{Binding GPR[13], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Text="{Binding GPR[14], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Text="{Binding GPR[15], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
     </Grid>
 </UserControl>
