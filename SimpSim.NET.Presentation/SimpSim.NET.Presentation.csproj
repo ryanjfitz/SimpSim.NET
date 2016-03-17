@@ -38,7 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command.cs" />
-    <Compile Include="Globals.cs" />
+    <Compile Include="ModelSingletons.cs" />
     <Compile Include="IWindowService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AssemblyEditorWindowViewModel.cs" />

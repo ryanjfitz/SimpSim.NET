@@ -1,6 +1,6 @@
 ﻿namespace SimpSim.NET.Presentation
 {
-    internal static class Globals
+    internal static class ModelSingletons
     {
         public static readonly Memory Memory = new Memory();
 

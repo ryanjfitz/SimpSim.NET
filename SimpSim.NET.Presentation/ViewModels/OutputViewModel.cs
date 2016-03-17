@@ -4,14 +4,11 @@ namespace SimpSim.NET.Presentation.ViewModels
 {
     public class OutputViewModel : ViewModelBase
     {
-        private readonly IWindowService _windowService;
         private string _outputWindowText;
 
         public OutputViewModel(IWindowService windowService)
         {
-            _windowService = windowService;
-
-            OpenAssemblyEditorWindow = new Command(() => _windowService.ShowAssemblyEditorWindow(new AssemblyEditorWindowViewModel(this)), () => true);
+            OpenAssemblyEditorWindow = new Command(() => windowService.ShowAssemblyEditorWindow(new AssemblyEditorWindowViewModel(this)), () => true);
         }
 
         public string OutputWindowText

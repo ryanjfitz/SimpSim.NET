@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace SimpSim.NET.WPF
@@ -8,14 +9,7 @@ namespace SimpSim.NET.WPF
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            try
-            {
-                return ByteUtilities.ConvertByteToHexString((byte)value, 2);
-            }
-            catch
-            {
-                return ByteUtilities.ConvertByteToHexString(0x00, 2);
-            }
+            return ByteUtilities.ConvertByteToHexString((byte)value, 2);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -26,7 +20,7 @@ namespace SimpSim.NET.WPF
             }
             catch
             {
-                return 0x00;
+                return new ValidationResult(false, "Input must be a hexadecimal number between 00 and FF.");
             }
         }
     }

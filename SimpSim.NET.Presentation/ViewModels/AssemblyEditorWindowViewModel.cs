@@ -15,7 +15,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 
                 try
                 {
-                    instructions = Globals.Assembler.Assemble(AssemblyEditorText ?? "");
+                    instructions = ModelSingletons.Assembler.Assemble(AssemblyEditorText ?? "");
                     AssemblyResult = "Assembly Successful";
                 }
                 catch (AssemblyException ex)
@@ -25,9 +25,9 @@ namespace SimpSim.NET.Presentation.ViewModels
 
                 if (instructions != null)
                 {
-                    Globals.Memory.LoadInstructions(instructions);
+                    ModelSingletons.Memory.LoadInstructions(instructions);
 
-                    Globals.Registers.ValueWrittenToOutputRegister += c => outputViewModel.OutputWindowText += c;
+                    ModelSingletons.Registers.ValueWrittenToOutputRegister += c => outputViewModel.OutputWindowText += c;
                 }
             }, () => true);
         }

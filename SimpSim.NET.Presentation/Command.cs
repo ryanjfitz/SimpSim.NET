@@ -14,7 +14,7 @@ namespace SimpSim.NET.Presentation
             _executeAction = executeAction;
             _canExecuteFunc = canExecuteFunc;
 
-            Globals.Machine.PropertyChanged += (sender, e) =>
+            ModelSingletons.Machine.PropertyChanged += (sender, e) =>
             {
                 if (e.PropertyName == "State")
                     OnCanExecuteChanged();

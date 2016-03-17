@@ -7,11 +7,11 @@ namespace SimpSim.NET.Presentation.ViewModels
     {
         public MachineControlsViewModel()
         {
-            RunCommand = new Command(() => Task.Run(() => Globals.Machine.Run(25)), () => Globals.Machine.State != Machine.MachineState.Running);
+            RunCommand = new Command(() => Task.Run(() => ModelSingletons.Machine.Run(25)), () => ModelSingletons.Machine.State != Machine.MachineState.Running);
 
-            StepCommand = new Command(() => Globals.Machine.Step(), () => true);
+            StepCommand = new Command(() => ModelSingletons.Machine.Step(), () => true);
 
-            BreakCommand = new Command(() => Globals.Machine.Break(), () => Globals.Machine.State == Machine.MachineState.Running);
+            BreakCommand = new Command(() => ModelSingletons.Machine.Break(), () => ModelSingletons.Machine.State == Machine.MachineState.Running);
         }
 
         public ICommand RunCommand { get; }
