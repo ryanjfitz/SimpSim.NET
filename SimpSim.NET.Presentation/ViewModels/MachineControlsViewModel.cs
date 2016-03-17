@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace SimpSim.NET.WPF.ViewModels
+namespace SimpSim.NET.Presentation.ViewModels
 {
-    internal class MachineControlsViewModel : ViewModelBase
+    public class MachineControlsViewModel : ViewModelBase
     {
         public MachineControlsViewModel()
         {

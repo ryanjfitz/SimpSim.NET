@@ -1,5 +1,6 @@
 ﻿using System.Windows;
-using SimpSim.NET.WPF.ViewModels;
+using SimpSim.NET.Presentation;
+using SimpSim.NET.Presentation.ViewModels;
 using SimpSim.NET.WPF.Views;
 
 namespace SimpSim.NET.WPF

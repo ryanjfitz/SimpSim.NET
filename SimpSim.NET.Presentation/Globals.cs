@@ -1,6 +1,6 @@
-﻿namespace SimpSim.NET.WPF
+﻿namespace SimpSim.NET.Presentation
 {
-    public static class Globals
+    internal static class Globals
     {
         public static readonly Memory Memory = new Memory();
 

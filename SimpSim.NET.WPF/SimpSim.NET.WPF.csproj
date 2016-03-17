@@ -51,18 +51,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Command.cs" />
     <Compile Include="DecimalToHexConverter.cs" />
-    <Compile Include="IWindowService.cs" />
-    <Compile Include="Globals.cs" />
-    <Compile Include="ViewModels\AssemblyEditorWindowViewModel.cs" />
-    <Compile Include="ViewModels\GeneralPurposeRegistersViewModel.cs" />
-    <Compile Include="ViewModels\MachineControlsViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\MemoryViewModel.cs" />
-    <Compile Include="ViewModels\OutputViewModel.cs" />
-    <Compile Include="ViewModels\SystemRegistersViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\AssemblyEditorWindow.xaml.cs">
       <DependentUpon>AssemblyEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -156,6 +145,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SimpSim.NET.Presentation\SimpSim.NET.Presentation.csproj">
+      <Project>{6E5E9D0A-412B-4960-BE9A-E75B5349E08F}</Project>
+      <Name>SimpSim.NET.Presentation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SimpSim.NET\SimpSim.NET.csproj">
       <Project>{15ebe385-9ba9-49a5-8d81-52f6f307ec8a}</Project>
       <Name>SimpSim.NET</Name>

@@ -1,8 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace SimpSim.NET.WPF.ViewModels
+namespace SimpSim.NET.Presentation.ViewModels
 {
-    internal class MemoryViewModel : ViewModelBase
+    public class MemoryViewModel : ViewModelBase
     {
         public MemoryViewModel()
         {

@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
 
-namespace SimpSim.NET.WPF.ViewModels
+namespace SimpSim.NET.Presentation.ViewModels
 {
-    internal class SystemRegistersViewModel : ViewModelBase
+    public class SystemRegistersViewModel : ViewModelBase
     {
         public SystemRegistersViewModel()
         {

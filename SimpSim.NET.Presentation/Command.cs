@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace SimpSim.NET.WPF
+namespace SimpSim.NET.Presentation
 {
     internal class Command : ICommand
     {

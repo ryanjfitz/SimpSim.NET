@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
 
-namespace SimpSim.NET.WPF.ViewModels
+namespace SimpSim.NET.Presentation.ViewModels
 {
-    internal class AssemblyEditorWindowViewModel : ViewModelBase
+    public class AssemblyEditorWindowViewModel : ViewModelBase
     {
         private string _assemblyEditorText;
         private string _assemblyResult;

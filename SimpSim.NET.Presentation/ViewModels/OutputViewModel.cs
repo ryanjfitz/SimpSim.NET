@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
 
-namespace SimpSim.NET.WPF.ViewModels
+namespace SimpSim.NET.Presentation.ViewModels
 {
-    internal class OutputViewModel : ViewModelBase
+    public class OutputViewModel : ViewModelBase
     {
         private readonly IWindowService _windowService;
         private string _outputWindowText;

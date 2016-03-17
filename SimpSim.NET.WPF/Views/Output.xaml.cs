@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using SimpSim.NET.WPF.ViewModels;
+using SimpSim.NET.Presentation.ViewModels;
 
 namespace SimpSim.NET.WPF.Views
 {
