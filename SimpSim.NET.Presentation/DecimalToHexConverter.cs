@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace SimpSim.NET.WPF
+namespace SimpSim.NET.Presentation
 {
     public class DecimalToHexConverter : IValueConverter
     {

@@ -51,7 +51,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DecimalToHexConverter.cs" />
     <Compile Include="Views\AssemblyEditorWindow.xaml.cs">
       <DependentUpon>AssemblyEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -148,10 +147,6 @@
     <ProjectReference Include="..\SimpSim.NET.Presentation\SimpSim.NET.Presentation.csproj">
       <Project>{6E5E9D0A-412B-4960-BE9A-E75B5349E08F}</Project>
       <Name>SimpSim.NET.Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SimpSim.NET\SimpSim.NET.csproj">
-      <Project>{15ebe385-9ba9-49a5-8d81-52f6f307ec8a}</Project>
-      <Name>SimpSim.NET</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
