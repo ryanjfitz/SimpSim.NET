@@ -5,17 +5,17 @@ namespace SimpSim.NET.Presentation.ViewModels
 {
     public class MachineControlsViewModel : ViewModelBase
     {
-        public MachineControlsViewModel()
+        public MachineControlsViewModel(SimpleSimulator simulator) : base(simulator)
         {
-            RunCommand = new Command(() => Task.Run(() => ModelSingletons.Machine.Run(25)), () => ModelSingletons.Machine.State != Machine.MachineState.Running);
+            RunCommand = new Command(() => Task.Run(() => simulator.Machine.Run(25)), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 
-            StepCommand = new Command(() => ModelSingletons.Machine.Step(), () => true);
+            StepCommand = new Command(() => simulator.Machine.Step(), () => true, simulator);
 
-            BreakCommand = new Command(() => ModelSingletons.Machine.Break(), () => ModelSingletons.Machine.State == Machine.MachineState.Running);
+            BreakCommand = new Command(() => simulator.Machine.Break(), () => simulator.Machine.State == Machine.MachineState.Running, simulator);
 
-            ClearMemoryCommand = new Command(() => ModelSingletons.Memory.Clear(), () => true);
+            ClearMemoryCommand = new Command(() => simulator.Memory.Clear(), () => true, simulator);
 
-            ClearRegistersCommand = new Command(() => ModelSingletons.Registers.Clear(), () => true);
+            ClearRegistersCommand = new Command(() => simulator.Registers.Clear(), () => true, simulator);
         }
 
         public ICommand RunCommand { get; }

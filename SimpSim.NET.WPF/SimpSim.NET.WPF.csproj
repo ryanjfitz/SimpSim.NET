@@ -51,6 +51,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Globals.cs" />
     <Compile Include="Views\AssemblyEditorWindow.xaml.cs">
       <DependentUpon>AssemblyEditorWindow.xaml</DependentUpon>
     </Compile>

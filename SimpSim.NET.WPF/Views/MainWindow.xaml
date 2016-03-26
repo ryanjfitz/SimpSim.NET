@@ -4,12 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:SimpSim.NET.WPF.Views"
-        xmlns:viewModels="clr-namespace:SimpSim.NET.Presentation.ViewModels;assembly=SimpSim.NET.Presentation"
         mc:Ignorable="d"
         Title="SimpSim.NET" Height="500" Width="650">
-    <Window.DataContext>
-        <viewModels:MainWindowViewModel/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using SimpSim.NET.Presentation;
 using SimpSim.NET.Presentation.ViewModels;
 
 namespace SimpSim.NET.WPF.Views
@@ -11,7 +12,7 @@ namespace SimpSim.NET.WPF.Views
         public Output()
         {
             InitializeComponent();
-            DataContext = new OutputViewModel(new WindowService());
+            DataContext = new OutputViewModel(new WindowService(), Globals.SimpleSimulator);
         }
     }
 }

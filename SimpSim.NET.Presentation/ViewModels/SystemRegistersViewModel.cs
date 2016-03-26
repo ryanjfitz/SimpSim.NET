@@ -4,9 +4,13 @@ namespace SimpSim.NET.Presentation.ViewModels
 {
     public class SystemRegistersViewModel : ViewModelBase
     {
-        public SystemRegistersViewModel()
+        private readonly SimpleSimulator _simulator;
+
+        public SystemRegistersViewModel(SimpleSimulator simulator) : base(simulator)
         {
-            ResetProgramCounterCommand = new Command(() => ModelSingletons.Machine.ProgramCounter = 0x00, () => true);
+            _simulator = simulator;
+
+            ResetProgramCounterCommand = new Command(() => _simulator.Machine.ProgramCounter = 0x00, () => true, simulator);
         }
 
         public ICommand ResetProgramCounterCommand { get; }
@@ -15,15 +19,15 @@ namespace SimpSim.NET.Presentation.ViewModels
         {
             get
             {
-                return ModelSingletons.Machine.ProgramCounter;
+                return _simulator.Machine.ProgramCounter;
             }
             set
             {
-                ModelSingletons.Machine.ProgramCounter = value;
+                _simulator.Machine.ProgramCounter = value;
                 OnPropertyChanged();
             }
         }
 
-        public Instruction InstructionRegister => ModelSingletons.Machine.InstructionRegister;
+        public Instruction InstructionRegister => _simulator.Machine.InstructionRegister;
     }
 }

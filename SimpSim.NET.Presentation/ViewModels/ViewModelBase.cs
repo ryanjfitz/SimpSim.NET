@@ -7,9 +7,9 @@ namespace SimpSim.NET.Presentation.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected ViewModelBase()
+        protected ViewModelBase(SimpleSimulator simulator)
         {
-            ModelSingletons.Machine.PropertyChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
+            simulator.Machine.PropertyChanged += (sender, e) => OnPropertyChanged(e.PropertyName);
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

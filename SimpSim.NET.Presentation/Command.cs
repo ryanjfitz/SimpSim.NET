@@ -9,12 +9,12 @@ namespace SimpSim.NET.Presentation
         private readonly Action _executeAction;
         private readonly Func<bool> _canExecuteFunc;
 
-        public Command(Action executeAction, Func<bool> canExecuteFunc)
+        public Command(Action executeAction, Func<bool> canExecuteFunc, SimpleSimulator simulator)
         {
             _executeAction = executeAction;
             _canExecuteFunc = canExecuteFunc;
 
-            ModelSingletons.Machine.PropertyChanged += (sender, e) =>
+            simulator.Machine.PropertyChanged += (sender, e) =>
             {
                 if (e.PropertyName == "State")
                     OnCanExecuteChanged();

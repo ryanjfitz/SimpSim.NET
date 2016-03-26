@@ -9,12 +9,14 @@ namespace SimpSim.NET.Presentation.Tests
         [Test]
         public void ShouldBeAbleToResetProgramCounter()
         {
-            ModelSingletons.Machine.ProgramCounter = 0xFF;
+            SimpleSimulator simulator = new SimpleSimulator();
 
-            SystemRegistersViewModel viewModel = new SystemRegistersViewModel();
+            simulator.Machine.ProgramCounter = 0xFF;
+
+            SystemRegistersViewModel viewModel = new SystemRegistersViewModel(simulator);
             viewModel.ResetProgramCounterCommand.Execute(null);
 
-            Assert.AreEqual(0x00, ModelSingletons.Machine.ProgramCounter);
+            Assert.AreEqual(0x00, simulator.Machine.ProgramCounter);
         }
     }
 }

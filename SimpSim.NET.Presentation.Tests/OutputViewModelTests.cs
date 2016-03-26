@@ -13,7 +13,7 @@ namespace SimpSim.NET.Presentation.Tests
             var mockWindowService = new Mock<IWindowService>();
             mockWindowService.Setup(m => m.ShowAssemblyEditorWindow(It.IsAny<AssemblyEditorWindowViewModel>())).Verifiable();
 
-            OutputViewModel viewModel = new OutputViewModel(mockWindowService.Object);
+            OutputViewModel viewModel = new OutputViewModel(mockWindowService.Object, new SimpleSimulator());
 
             viewModel.OpenAssemblyEditorWindow.Execute(null);
 

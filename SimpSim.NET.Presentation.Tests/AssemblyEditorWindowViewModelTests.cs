@@ -11,7 +11,9 @@ namespace SimpSim.NET.Presentation.Tests
         [Test]
         public void AssembleCommandShouldAssembleInstructionsToMemory()
         {
-            AssemblyEditorWindowViewModel assemblyEditorWindowViewModel = new AssemblyEditorWindowViewModel(null);
+            SimpleSimulator simulator = new SimpleSimulator();
+
+            AssemblyEditorWindowViewModel assemblyEditorWindowViewModel = new AssemblyEditorWindowViewModel(null, simulator);
 
             assemblyEditorWindowViewModel.AssemblyEditorText = SamplePrograms.HelloWorldCode;
 
@@ -22,7 +24,7 @@ namespace SimpSim.NET.Presentation.Tests
             var actualBytes = new List<byte>();
 
             for (byte address = 0; address < expectedBytes.Count; address++)
-                actualBytes.Add(ModelSingletons.Memory[address]);
+                actualBytes.Add(simulator.Memory[address]);
 
             CollectionAssert.AreEqual(expectedBytes, actualBytes);
         }

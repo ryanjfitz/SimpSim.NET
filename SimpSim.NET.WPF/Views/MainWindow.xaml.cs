@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using SimpSim.NET.Presentation.ViewModels;
 
 namespace SimpSim.NET.WPF.Views
 {
@@ -10,6 +11,7 @@ namespace SimpSim.NET.WPF.Views
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel(Globals.SimpleSimulator);
         }
     }
 }

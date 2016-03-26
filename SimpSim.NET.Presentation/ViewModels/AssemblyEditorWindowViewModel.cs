@@ -7,7 +7,7 @@ namespace SimpSim.NET.Presentation.ViewModels
         private string _assemblyEditorText;
         private string _assemblyResult;
 
-        public AssemblyEditorWindowViewModel(OutputViewModel outputViewModel)
+        public AssemblyEditorWindowViewModel(OutputViewModel outputViewModel, SimpleSimulator simulator) : base(simulator)
         {
             AssembleCommand = new Command(() =>
             {
@@ -15,7 +15,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 
                 try
                 {
-                    instructions = ModelSingletons.Assembler.Assemble(AssemblyEditorText ?? "");
+                    instructions = simulator.Assembler.Assemble(AssemblyEditorText ?? "");
                     AssemblyResult = "Assembly Successful";
                 }
                 catch (AssemblyException ex)
@@ -25,11 +25,11 @@ namespace SimpSim.NET.Presentation.ViewModels
 
                 if (instructions != null)
                 {
-                    ModelSingletons.Memory.LoadInstructions(instructions);
+                    simulator.Memory.LoadInstructions(instructions);
 
-                    ModelSingletons.Registers.ValueWrittenToOutputRegister += c => outputViewModel.OutputWindowText += c;
+                    simulator.Registers.ValueWrittenToOutputRegister += c => outputViewModel.OutputWindowText += c;
                 }
-            }, () => true);
+            }, () => true, simulator);
         }
 
         public string AssemblyEditorText
