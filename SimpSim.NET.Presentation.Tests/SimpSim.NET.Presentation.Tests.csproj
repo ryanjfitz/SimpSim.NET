@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B9AB26D9-0933-4D41-9423-6FB887E588C4}</ProjectGuid>
+    <ProjectGuid>{7531DFD2-52DC-4181-9ACC-0F87ACA330BE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpSim.NET.Tests</RootNamespace>
-    <AssemblyName>SimpSim.NET.Tests</AssemblyName>
+    <RootNamespace>SimpSim.NET.Presentation.Tests</RootNamespace>
+    <AssemblyName>SimpSim.NET.Presentation.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.2.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -39,26 +42,24 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblerTests.cs" />
-    <Compile Include="InstructionExecutionTests.cs" />
-    <Compile Include="InstructionTests.cs" />
-    <Compile Include="LabelAssemblyTests.cs" />
-    <Compile Include="MachineTests.cs" />
-    <Compile Include="MemoryTests.cs" />
-    <Compile Include="ProgramTests.cs" />
+    <Compile Include="AssemblyEditorWindowViewModelTests.cs" />
+    <Compile Include="MachineControlsViewModelTests.cs" />
+    <Compile Include="OutputViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegisterTests.cs" />
+    <Compile Include="SystemRegistersViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpSim.NET.Presentation\SimpSim.NET.Presentation.csproj">
+      <Project>{6e5e9d0a-412b-4960-be9a-e75b5349e08f}</Project>
+      <Name>SimpSim.NET.Presentation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SimpSim.NET\SimpSim.NET.csproj">
       <Project>{15ebe385-9ba9-49a5-8d81-52f6f307ec8a}</Project>
       <Name>SimpSim.NET</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

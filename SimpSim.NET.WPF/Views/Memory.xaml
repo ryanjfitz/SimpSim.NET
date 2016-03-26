@@ -1,0 +1,323 @@
+﻿<UserControl x:Class="SimpSim.NET.WPF.Views.Memory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="MaxLength" Value="2" />
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Addresses[0], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Addresses[1], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Addresses[2], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Addresses[3], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="4" Text="{Binding Addresses[4], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Addresses[5], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="6" Text="{Binding Addresses[6], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="7" Text="{Binding Addresses[7], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="8" Text="{Binding Addresses[8], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="9" Text="{Binding Addresses[9], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="10" Text="{Binding Addresses[10], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="11" Text="{Binding Addresses[11], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="12" Text="{Binding Addresses[12], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="13" Text="{Binding Addresses[13], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="14" Text="{Binding Addresses[14], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="15" Text="{Binding Addresses[15], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Addresses[16], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Addresses[17], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Addresses[18], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Addresses[19], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding Addresses[20], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="5" Text="{Binding Addresses[21], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="6" Text="{Binding Addresses[22], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="7" Text="{Binding Addresses[23], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="8" Text="{Binding Addresses[24], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="9" Text="{Binding Addresses[25], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="10" Text="{Binding Addresses[26], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="11" Text="{Binding Addresses[27], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="12" Text="{Binding Addresses[28], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="13" Text="{Binding Addresses[29], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="14" Text="{Binding Addresses[30], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="1" Grid.Column="15" Text="{Binding Addresses[31], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Addresses[32], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Addresses[33], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Addresses[34], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Addresses[35], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="4" Text="{Binding Addresses[36], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="5" Text="{Binding Addresses[37], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="6" Text="{Binding Addresses[38], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="7" Text="{Binding Addresses[39], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="8" Text="{Binding Addresses[40], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="9" Text="{Binding Addresses[41], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="10" Text="{Binding Addresses[42], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="11" Text="{Binding Addresses[43], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="12" Text="{Binding Addresses[44], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="13" Text="{Binding Addresses[45], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="14" Text="{Binding Addresses[46], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="15" Text="{Binding Addresses[47], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Addresses[48], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Addresses[49], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Addresses[50], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Addresses[51], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="4" Text="{Binding Addresses[52], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="5" Text="{Binding Addresses[53], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="6" Text="{Binding Addresses[54], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="7" Text="{Binding Addresses[55], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="8" Text="{Binding Addresses[56], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="9" Text="{Binding Addresses[57], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="10" Text="{Binding Addresses[58], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="11" Text="{Binding Addresses[59], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="12" Text="{Binding Addresses[60], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="13" Text="{Binding Addresses[61], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="14" Text="{Binding Addresses[62], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="15" Text="{Binding Addresses[63], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding Addresses[64], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Addresses[65], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Addresses[66], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="3" Text="{Binding Addresses[67], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="4" Text="{Binding Addresses[68], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="5" Text="{Binding Addresses[69], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="6" Text="{Binding Addresses[70], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="7" Text="{Binding Addresses[71], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="8" Text="{Binding Addresses[72], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="9" Text="{Binding Addresses[73], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="10" Text="{Binding Addresses[74], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="11" Text="{Binding Addresses[75], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="12" Text="{Binding Addresses[76], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="13" Text="{Binding Addresses[77], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="14" Text="{Binding Addresses[78], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="15" Text="{Binding Addresses[79], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Addresses[80], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Addresses[81], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Addresses[82], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="3" Text="{Binding Addresses[83], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="4" Text="{Binding Addresses[84], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="5" Text="{Binding Addresses[85], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="6" Text="{Binding Addresses[86], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="7" Text="{Binding Addresses[87], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="8" Text="{Binding Addresses[88], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="9" Text="{Binding Addresses[89], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="10" Text="{Binding Addresses[90], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="11" Text="{Binding Addresses[91], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="12" Text="{Binding Addresses[92], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="13" Text="{Binding Addresses[93], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="14" Text="{Binding Addresses[94], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="15" Text="{Binding Addresses[95], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Addresses[96], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Addresses[97], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Addresses[98], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="3" Text="{Binding Addresses[99], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="4" Text="{Binding Addresses[100], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="5" Text="{Binding Addresses[101], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="6" Text="{Binding Addresses[102], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="7" Text="{Binding Addresses[103], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="8" Text="{Binding Addresses[104], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="9" Text="{Binding Addresses[105], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="10" Text="{Binding Addresses[106], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="11" Text="{Binding Addresses[107], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="12" Text="{Binding Addresses[108], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="13" Text="{Binding Addresses[109], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="14" Text="{Binding Addresses[110], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="15" Text="{Binding Addresses[111], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="7" Grid.Column="0" Text="{Binding Addresses[112], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Addresses[113], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding Addresses[114], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding Addresses[115], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding Addresses[116], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="5" Text="{Binding Addresses[117], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="6" Text="{Binding Addresses[118], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="7" Text="{Binding Addresses[119], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="8" Text="{Binding Addresses[120], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="9" Text="{Binding Addresses[121], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="10" Text="{Binding Addresses[122], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="11" Text="{Binding Addresses[123], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="12" Text="{Binding Addresses[124], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="13" Text="{Binding Addresses[125], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="14" Text="{Binding Addresses[126], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="7" Grid.Column="15" Text="{Binding Addresses[127], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="8" Grid.Column="0" Text="{Binding Addresses[128], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Addresses[129], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding Addresses[130], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="3" Text="{Binding Addresses[131], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="4" Text="{Binding Addresses[132], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="5" Text="{Binding Addresses[133], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="6" Text="{Binding Addresses[134], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="7" Text="{Binding Addresses[135], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="8" Text="{Binding Addresses[136], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="9" Text="{Binding Addresses[137], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="10" Text="{Binding Addresses[138], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="11" Text="{Binding Addresses[139], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="12" Text="{Binding Addresses[140], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="13" Text="{Binding Addresses[141], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="14" Text="{Binding Addresses[142], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="8" Grid.Column="15" Text="{Binding Addresses[143], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="9" Grid.Column="0" Text="{Binding Addresses[144], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Addresses[145], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="2" Text="{Binding Addresses[146], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="3" Text="{Binding Addresses[147], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="4" Text="{Binding Addresses[148], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="5" Text="{Binding Addresses[149], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="6" Text="{Binding Addresses[150], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="7" Text="{Binding Addresses[151], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="8" Text="{Binding Addresses[152], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="9" Text="{Binding Addresses[153], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="10" Text="{Binding Addresses[154], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="11" Text="{Binding Addresses[155], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="12" Text="{Binding Addresses[156], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="13" Text="{Binding Addresses[157], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="14" Text="{Binding Addresses[158], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="15" Text="{Binding Addresses[159], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="10" Grid.Column="0" Text="{Binding Addresses[160], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Addresses[161], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="2" Text="{Binding Addresses[162], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="3" Text="{Binding Addresses[163], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="4" Text="{Binding Addresses[164], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="5" Text="{Binding Addresses[165], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="6" Text="{Binding Addresses[166], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="7" Text="{Binding Addresses[167], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="8" Text="{Binding Addresses[168], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="9" Text="{Binding Addresses[169], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="10" Text="{Binding Addresses[170], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="11" Text="{Binding Addresses[171], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="12" Text="{Binding Addresses[172], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="13" Text="{Binding Addresses[173], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="14" Text="{Binding Addresses[174], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="15" Text="{Binding Addresses[175], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="11" Grid.Column="0" Text="{Binding Addresses[176], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding Addresses[177], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="2" Text="{Binding Addresses[178], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="3" Text="{Binding Addresses[179], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="4" Text="{Binding Addresses[180], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="5" Text="{Binding Addresses[181], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="6" Text="{Binding Addresses[182], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="7" Text="{Binding Addresses[183], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="8" Text="{Binding Addresses[184], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="9" Text="{Binding Addresses[185], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="10" Text="{Binding Addresses[186], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="11" Text="{Binding Addresses[187], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="12" Text="{Binding Addresses[188], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="13" Text="{Binding Addresses[189], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="14" Text="{Binding Addresses[190], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="11" Grid.Column="15" Text="{Binding Addresses[191], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="12" Grid.Column="0" Text="{Binding Addresses[192], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding Addresses[193], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="2" Text="{Binding Addresses[194], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="3" Text="{Binding Addresses[195], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="4" Text="{Binding Addresses[196], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="5" Text="{Binding Addresses[197], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="6" Text="{Binding Addresses[198], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="7" Text="{Binding Addresses[199], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="8" Text="{Binding Addresses[200], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="9" Text="{Binding Addresses[201], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="10" Text="{Binding Addresses[202], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="11" Text="{Binding Addresses[203], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="12" Text="{Binding Addresses[204], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="13" Text="{Binding Addresses[205], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="14" Text="{Binding Addresses[206], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="12" Grid.Column="15" Text="{Binding Addresses[207], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="13" Grid.Column="0" Text="{Binding Addresses[208], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding Addresses[209], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="2" Text="{Binding Addresses[210], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="3" Text="{Binding Addresses[211], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="4" Text="{Binding Addresses[212], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="5" Text="{Binding Addresses[213], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="6" Text="{Binding Addresses[214], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="7" Text="{Binding Addresses[215], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="8" Text="{Binding Addresses[216], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="9" Text="{Binding Addresses[217], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="10" Text="{Binding Addresses[218], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="11" Text="{Binding Addresses[219], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="12" Text="{Binding Addresses[220], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="13" Text="{Binding Addresses[221], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="14" Text="{Binding Addresses[222], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="13" Grid.Column="15" Text="{Binding Addresses[223], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="14" Grid.Column="0" Text="{Binding Addresses[224], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="1" Text="{Binding Addresses[225], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="2" Text="{Binding Addresses[226], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="3" Text="{Binding Addresses[227], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="4" Text="{Binding Addresses[228], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="5" Text="{Binding Addresses[229], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="6" Text="{Binding Addresses[230], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="7" Text="{Binding Addresses[231], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="8" Text="{Binding Addresses[232], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="9" Text="{Binding Addresses[233], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="10" Text="{Binding Addresses[234], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="11" Text="{Binding Addresses[235], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="12" Text="{Binding Addresses[236], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="13" Text="{Binding Addresses[237], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="14" Text="{Binding Addresses[238], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="14" Grid.Column="15" Text="{Binding Addresses[239], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+        <TextBox Grid.Row="15" Grid.Column="0" Text="{Binding Addresses[240], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="1" Text="{Binding Addresses[241], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="2" Text="{Binding Addresses[242], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="3" Text="{Binding Addresses[243], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="4" Text="{Binding Addresses[244], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="5" Text="{Binding Addresses[245], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="6" Text="{Binding Addresses[246], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="7" Text="{Binding Addresses[247], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="8" Text="{Binding Addresses[248], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="9" Text="{Binding Addresses[249], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="10" Text="{Binding Addresses[250], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="11" Text="{Binding Addresses[251], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="12" Text="{Binding Addresses[252], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="13" Text="{Binding Addresses[253], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="14" Text="{Binding Addresses[254], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+        <TextBox Grid.Row="15" Grid.Column="15" Text="{Binding Addresses[255], Converter={StaticResource DecimalToHexConverter}}"></TextBox>
+
+    </Grid>
+
+</UserControl>

@@ -1,9 +1,19 @@
-﻿namespace SimpSim.NET
+﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Threading;
+
+namespace SimpSim.NET
 {
-    public class Machine
+    public class Machine : INotifyPropertyChanged
     {
         private readonly Memory _memory;
         private readonly Registers _registers;
+        private bool _running;
+        private bool _breakPending;
+        private byte _programCounter;
+        private Instruction _instructionRegister;
+        private MachineState _state;
 
         public Machine(Memory memory, Registers registers)
         {
@@ -12,14 +22,74 @@
             State = MachineState.Ready;
         }
 
-        public byte ProgramCounter { get; set; }
-        public Instruction InstructionRegister { get; private set; }
-        public MachineState State { get; private set; }
-
-        public void Run()
+        public byte ProgramCounter
         {
-            while (State == MachineState.Ready)
-                Step();
+            get
+            {
+                return _programCounter;
+            }
+            set
+            {
+                if (_programCounter != value)
+                {
+                    _programCounter = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public Instruction InstructionRegister
+        {
+            get
+            {
+                return _instructionRegister;
+            }
+            private set
+            {
+                if (_instructionRegister != value)
+                {
+                    _instructionRegister = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public MachineState State
+        {
+            get
+            {
+                return _state;
+            }
+            private set
+            {
+                if (_state != value)
+                {
+                    _state = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public void Run(int millisecondsBetweenSteps = 0)
+        {
+            _running = true;
+
+            while (_running && State != MachineState.Halted && State != MachineState.InvalidInstruction)
+            {
+                if (_breakPending)
+                {
+                    State = MachineState.Ready;
+                    _running = false;
+                    _breakPending = false;
+                }
+                else
+                {
+                    Step();
+                    Thread.Sleep(millisecondsBetweenSteps);
+                }
+            }
+
+            _running = false;
         }
 
         public void Step()
@@ -31,11 +101,19 @@
             InstructionRegister = instruction;
         }
 
+        public void Break()
+        {
+            if (!_running)
+                throw new InvalidOperationException("A break operation may only be performed while the machine is running.");
+
+            _breakPending = true;
+        }
+
         private void ExecuteInstruction(Instruction instruction)
         {
             bool incrementProgramCounter = true;
 
-            MachineState newState = MachineState.Ready;
+            MachineState newState = _running ? MachineState.Running : MachineState.Ready;
 
             Opcode opcode = (Opcode)instruction.Nibble1;
 
@@ -139,7 +217,15 @@
         {
             Halted,
             InvalidInstruction,
-            Ready
+            Ready,
+            Running
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,6 +1,8 @@
+using System.Collections.Specialized;
+
 namespace SimpSim.NET
 {
-    public class Registers
+    public class Registers : INotifyCollectionChanged
     {
         public delegate void ValueWrittenToOutputRegisterHandler(char output);
 
@@ -21,11 +23,27 @@ namespace SimpSim.NET
             }
             set
             {
-                _array[register] = value;
+                byte newValue = value;
+                byte oldValue = _array[register];
+
+                if (newValue != oldValue)
+                {
+                    _array[register] = newValue;
+
+                    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, newItem: newValue, oldItem: oldValue, index: register));
+                }
 
                 if (register == 0x0f)
-                    ValueWrittenToOutputRegister?.Invoke((char)value);
+                    ValueWrittenToOutputRegister?.Invoke((char)newValue);
             }
         }
+
+        public void Clear()
+        {
+            for (byte b = 0; b < _array.Length; b++)
+                this[b] = 0x00;
+        }
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }

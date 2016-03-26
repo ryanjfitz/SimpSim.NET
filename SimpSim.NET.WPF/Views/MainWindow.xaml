@@ -1,0 +1,29 @@
+﻿<Window x:Class="SimpSim.NET.WPF.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:SimpSim.NET.WPF.Views"
+        mc:Ignorable="d"
+        Title="SimpSim.NET" Height="500" Width="650">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12*" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <views:Memory Margin="5" Grid.Row="0" Grid.Column="0" />
+        <views:GeneralPurposeRegisters Margin="5" Grid.Row="0" Grid.Column="1" />
+        <DockPanel Grid.Row="0" Grid.Column="2">
+            <views:SystemRegisters DockPanel.Dock="Top" Margin="5" />
+            <views:MachineControls DockPanel.Dock="Bottom" Margin="5" />
+        </DockPanel>
+        <views:Disassembler Grid.Row="1" Grid.Column="0" Margin="5" />
+        <views:Output Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" />
+    </Grid>
+</Window>

@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="SimpSim.NET.WPF.Views.MachineControls"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d">
+    <DockPanel>
+        <DockPanel.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0,5,0,0" />
+            </Style>
+        </DockPanel.Resources>
+        <Button DockPanel.Dock="Top">Open...</Button>
+        <Button DockPanel.Dock="Top">Save</Button>
+        <Button DockPanel.Dock="Bottom" Command="{Binding ClearRegistersCommand}">Clear Registers</Button>
+        <Button DockPanel.Dock="Bottom" Command="{Binding ClearMemoryCommand}">Clear Memory</Button>
+        <Button DockPanel.Dock="Bottom" Command="{Binding BreakCommand}">Break</Button>
+        <Button DockPanel.Dock="Bottom" Command="{Binding StepCommand}">Step</Button>
+        <Button DockPanel.Dock="Bottom" Command="{Binding RunCommand}">Run</Button>
+        <TextBlock/>
+    </DockPanel>
+</UserControl>

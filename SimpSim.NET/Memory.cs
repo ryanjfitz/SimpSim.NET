@@ -1,6 +1,8 @@
-﻿namespace SimpSim.NET
+﻿using System.Collections.Specialized;
+
+namespace SimpSim.NET
 {
-    public class Memory
+    public class Memory : INotifyCollectionChanged
     {
         private readonly byte[] _array;
 
@@ -17,7 +19,15 @@
             }
             set
             {
-                _array[address] = value;
+                byte newValue = value;
+                byte oldValue = _array[address];
+
+                if (newValue != oldValue)
+                {
+                    _array[address] = newValue;
+
+                    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, newItem: newValue, oldItem: oldValue, index: address));
+                }
             }
         }
 
@@ -41,5 +51,13 @@
         {
             return new Instruction(this[address], this[++address]);
         }
+
+        public void Clear()
+        {
+            for (int i = 0; i < _array.Length; i++)
+                this[(byte)i] = 0x00;
+        }
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }

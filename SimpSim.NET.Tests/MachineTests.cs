@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace SimpSim.NET.Tests
 {
@@ -47,6 +50,53 @@ namespace SimpSim.NET.Tests
             _machine.Step();
 
             Assert.AreEqual(instruction3, _machine.InstructionRegister);
+        }
+
+        [Test]
+        public void StateShouldChangeToRunningWhileRunning()
+        {
+            LaunchNonTerminatingProgram();
+
+            Assert.AreEqual(Machine.MachineState.Running, _machine.State);
+        }
+
+        [Test]
+        public void ShouldBeAbleToBreakIfRunning()
+        {
+            Task task = LaunchNonTerminatingProgram();
+
+            Assert.AreEqual(Machine.MachineState.Running, _machine.State);
+
+            _machine.Break();
+
+            // Wait for pending machine steps to execute.
+            task.Wait();
+
+            Assert.AreEqual(Machine.MachineState.Ready, _machine.State);
+        }
+
+        [Test]
+        public void ShouldNotBeAbleToBreakIfNotRunning()
+        {
+            Assert.Throws<InvalidOperationException>(() => _machine.Break());
+        }
+
+        private Task LaunchNonTerminatingProgram()
+        {
+            // Load a program that runs forever.
+            _memory.LoadInstructions(SamplePrograms.OutputTestInstructions);
+
+            Task task = Task.Run(() => _machine.Run());
+
+            while (task.Status != TaskStatus.Running)
+            {
+                // Wait until the task is runnning.
+            }
+
+            // Give the program time to begin executing.
+            Thread.Sleep(100);
+
+            return task;
         }
     }
 }

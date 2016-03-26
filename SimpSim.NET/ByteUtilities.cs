@@ -9,9 +9,9 @@ namespace SimpSim.NET
             return byte.Parse(hexString, NumberStyles.HexNumber);
         }
 
-        public static string ConvertByteToHexString(byte b)
+        public static string ConvertByteToHexString(byte b, int numberOfDigits = 1)
         {
-            return b.ToString("X");
+            return b.ToString("X" + numberOfDigits);
         }
 
         public static byte GetByteFromNibbles(byte highNibble, byte lowNibble)
