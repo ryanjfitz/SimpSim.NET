@@ -11,7 +11,7 @@ namespace SimpSim.NET.WPF.Views
         public SystemRegisters()
         {
             InitializeComponent();
-            DataContext = new SystemRegistersViewModel(Globals.SimpleSimulator);
+            DataContext = new SystemRegistersViewModel(App.SimpleSimulator);
         }
     }
 }

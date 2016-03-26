@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using SimpSim.NET.Presentation;
 
 namespace SimpSim.NET.WPF
 {
@@ -7,5 +8,6 @@ namespace SimpSim.NET.WPF
     /// </summary>
     public partial class App : Application
     {
+        public static readonly SimpleSimulator SimpleSimulator = new SimpleSimulator();
     }
 }

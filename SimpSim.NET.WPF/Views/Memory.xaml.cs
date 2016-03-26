@@ -11,7 +11,7 @@ namespace SimpSim.NET.WPF.Views
         public Memory()
         {
             InitializeComponent();
-            DataContext = new MemoryViewModel(Globals.SimpleSimulator);
+            DataContext = new MemoryViewModel(App.SimpleSimulator);
         }
     }
 }
