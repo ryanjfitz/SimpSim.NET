@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Specialized;
 
 namespace SimpSim.NET
@@ -41,7 +40,8 @@ namespace SimpSim.NET
 
         public void Clear()
         {
-            Array.Clear(_array, 0, _array.Length);
+            for (byte b = 0; b < _array.Length; b++)
+                this[b] = 0x00;
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;

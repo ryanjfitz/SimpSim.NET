@@ -16,7 +16,8 @@
         </DockPanel.Resources>
         <Button DockPanel.Dock="Top">Open...</Button>
         <Button DockPanel.Dock="Top">Save</Button>
-        <Button DockPanel.Dock="Bottom">Clear</Button>
+        <Button DockPanel.Dock="Bottom" Command="{Binding ClearRegistersCommand}">Clear Registers</Button>
+        <Button DockPanel.Dock="Bottom" Command="{Binding ClearMemoryCommand}">Clear Memory</Button>
         <Button DockPanel.Dock="Bottom" Command="{Binding BreakCommand}">Break</Button>
         <Button DockPanel.Dock="Bottom" Command="{Binding StepCommand}">Step</Button>
         <Button DockPanel.Dock="Bottom" Command="{Binding RunCommand}">Run</Button>
