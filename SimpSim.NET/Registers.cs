@@ -1,12 +1,11 @@
+using System;
 using System.Collections.Specialized;
 
 namespace SimpSim.NET
 {
     public class Registers : INotifyCollectionChanged
     {
-        public delegate void ValueWrittenToOutputRegisterHandler(char output);
-
-        public event ValueWrittenToOutputRegisterHandler ValueWrittenToOutputRegister;
+        public event Action<char> ValueWrittenToOutputRegister;
 
         private readonly byte[] _array;
 

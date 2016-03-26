@@ -17,10 +17,10 @@ namespace SimpSim.NET.Presentation.Tests
         [Test]
         public void ClearMemoryCommandShouldClearMemory()
         {
-            MachineControlsViewModel viewModel = new MachineControlsViewModel(_simulator);
-
             for (int i = 0; i <= byte.MaxValue; i++)
                 _simulator.Memory[(byte)i] = 0xFF;
+
+            MachineControlsViewModel viewModel = new MachineControlsViewModel(_simulator);
 
             viewModel.ClearMemoryCommand.Execute(null);
 
@@ -31,10 +31,10 @@ namespace SimpSim.NET.Presentation.Tests
         [Test]
         public void ClearRegistersCommandShouldClearRegisters()
         {
-            MachineControlsViewModel viewModel = new MachineControlsViewModel(_simulator);
-
             for (byte b = 0; b <= 0x0F; b++)
                 _simulator.Registers[b] = 0xFF;
+
+            MachineControlsViewModel viewModel = new MachineControlsViewModel(_simulator);
 
             viewModel.ClearRegistersCommand.Execute(null);
 

@@ -10,7 +10,7 @@ namespace SimpSim.NET.Presentation.ViewModels
         {
             _simulator = simulator;
 
-            ResetProgramCounterCommand = new Command(() => _simulator.Machine.ProgramCounter = 0x00, () => true, simulator);
+            ResetProgramCounterCommand = new Command(() => _simulator.Machine.ProgramCounter = 0x00, () => true, _simulator);
         }
 
         public ICommand ResetProgramCounterCommand { get; }
