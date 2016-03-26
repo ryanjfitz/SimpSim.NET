@@ -66,5 +66,17 @@ namespace SimpSim.NET.Tests
 
             Assert.AreEqual(instruction, actual);
         }
+
+        [Test]
+        public void ShouldBeAbleToClearMemory()
+        {
+            for (int i = 0; i <= byte.MaxValue; i++)
+                _memory[(byte)i] = 0xFF;
+
+            _memory.Clear();
+
+            for (int i = 0; i <= byte.MaxValue; i++)
+                Assert.AreEqual(0x00, _memory[(byte)i]);
+        }
     }
 }

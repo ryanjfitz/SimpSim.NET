@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Specialized;
 
 namespace SimpSim.NET
@@ -36,6 +37,11 @@ namespace SimpSim.NET
                 if (register == 0x0f)
                     ValueWrittenToOutputRegister?.Invoke((char)newValue);
             }
+        }
+
+        public void Clear()
+        {
+            Array.Clear(_array, 0, _array.Length);
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;

@@ -2,7 +2,6 @@
 
 namespace SimpSim.NET.Tests
 {
-
     [TestFixture]
     public class RegisterTests
     {
@@ -45,6 +44,18 @@ namespace SimpSim.NET.Tests
             _registers[0x0f] = 0x21;
 
             Assert.AreEqual("Hello world!", appendedOutput);
+        }
+
+        [Test]
+        public void ShouldBeAbleToClearRegisters()
+        {
+            for (byte b = 0; b <= 0x0f; b++)
+                _registers[b] = 0xFF;
+
+            _registers.Clear();
+
+            for (byte b = 0; b <= 0x0f; b++)
+                Assert.AreEqual(0x00, _registers[b]);
         }
     }
 }
