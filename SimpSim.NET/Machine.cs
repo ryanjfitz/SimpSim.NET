@@ -71,6 +71,9 @@ namespace SimpSim.NET
 
         public void Run(int millisecondsBetweenSteps = 0)
         {
+            if (State == MachineState.Running)
+                throw new InvalidOperationException("A run operation may not be performed while the machine is already running.");
+
             State = MachineState.Running;
 
             while (State == MachineState.Running)

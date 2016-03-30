@@ -76,6 +76,16 @@ namespace SimpSim.NET.Tests
         }
 
         [Test]
+        public void ShouldNotBeAbleToRunWhileAlreadyRunning()
+        {
+            LaunchNonTerminatingProgram();
+
+            Assert.AreEqual(Machine.MachineState.Running, _machine.State);
+
+            Assert.Throws<InvalidOperationException>(() => _machine.Run());
+        }
+
+        [Test]
         public void ShouldNotBeAbleToBreakIfNotRunning()
         {
             Assert.Throws<InvalidOperationException>(() => _machine.Break());
