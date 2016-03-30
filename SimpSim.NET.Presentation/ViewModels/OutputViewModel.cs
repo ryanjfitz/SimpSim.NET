@@ -8,7 +8,9 @@ namespace SimpSim.NET.Presentation.ViewModels
 
         public OutputViewModel(IWindowService windowService, SimpleSimulator simulator) : base(simulator)
         {
-            OpenAssemblyEditorWindow = new Command(() => windowService.ShowAssemblyEditorWindow(new AssemblyEditorWindowViewModel(this, simulator)), () => true, simulator);
+            OpenAssemblyEditorWindow = new Command(() => windowService.ShowAssemblyEditorWindow(new AssemblyEditorWindowViewModel(simulator)), () => true, simulator);
+
+            simulator.Registers.ValueWrittenToOutputRegister += c => OutputWindowText += c;
         }
 
         public string OutputWindowText

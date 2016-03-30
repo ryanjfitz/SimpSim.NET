@@ -13,7 +13,7 @@ namespace SimpSim.NET.Presentation.Tests
         {
             SimpleSimulator simulator = new SimpleSimulator();
 
-            AssemblyEditorWindowViewModel assemblyEditorWindowViewModel = new AssemblyEditorWindowViewModel(null, simulator);
+            AssemblyEditorWindowViewModel assemblyEditorWindowViewModel = new AssemblyEditorWindowViewModel(simulator);
 
             assemblyEditorWindowViewModel.AssemblyEditorText = SamplePrograms.HelloWorldCode;
 
