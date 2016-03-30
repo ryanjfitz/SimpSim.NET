@@ -9,7 +9,6 @@ namespace SimpSim.NET
     {
         private readonly Memory _memory;
         private readonly Registers _registers;
-        private bool _running;
         private bool _breakPending;
         private byte _programCounter;
         private Instruction _instructionRegister;
@@ -72,14 +71,12 @@ namespace SimpSim.NET
 
         public void Run(int millisecondsBetweenSteps = 0)
         {
-            _running = true;
+            State = MachineState.Running;
 
-            while (_running && State != MachineState.Halted && State != MachineState.InvalidInstruction)
-            {
+            while (State == MachineState.Running)
                 if (_breakPending)
                 {
                     State = MachineState.Ready;
-                    _running = false;
                     _breakPending = false;
                 }
                 else
@@ -87,9 +84,6 @@ namespace SimpSim.NET
                     Step();
                     Thread.Sleep(millisecondsBetweenSteps);
                 }
-            }
-
-            _running = false;
         }
 
         public void Step()
@@ -103,7 +97,7 @@ namespace SimpSim.NET
 
         public void Break()
         {
-            if (!_running)
+            if (State != MachineState.Running)
                 throw new InvalidOperationException("A break operation may only be performed while the machine is running.");
 
             _breakPending = true;
@@ -113,7 +107,7 @@ namespace SimpSim.NET
         {
             bool incrementProgramCounter = true;
 
-            MachineState newState = _running ? MachineState.Running : MachineState.Ready;
+            MachineState newState = State;
 
             Opcode opcode = (Opcode)instruction.Nibble1;
 
