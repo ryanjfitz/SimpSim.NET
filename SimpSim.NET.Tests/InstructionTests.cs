@@ -88,7 +88,8 @@ namespace SimpSim.NET.Tests
             Instruction instruction1 = new Instruction(0x77, 0x89);
             Instruction instruction2 = new Instruction(0x77, 0x89);
 
-            Assert.AreEqual(instruction1, instruction2);
+            Assert.That(instruction1.Equals(instruction2));
+            Assert.That(instruction2.Equals(instruction1));
         }
 
         [Test]
@@ -97,7 +98,7 @@ namespace SimpSim.NET.Tests
             Instruction instruction1 = new Instruction(0x77, 0x89);
             Instruction instruction2 = new Instruction(0x77, 0x89);
 
-            Assert.AreEqual(instruction1.GetHashCode(), instruction2.GetHashCode());
+            Assert.That(instruction1.GetHashCode() == instruction2.GetHashCode());
         }
 
         [Test]
