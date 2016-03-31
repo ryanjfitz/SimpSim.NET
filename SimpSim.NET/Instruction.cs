@@ -25,7 +25,17 @@ namespace SimpSim.NET
 
         public bool Equals(Instruction other)
         {
-            return Byte1 == other.Byte1 && Byte2 == other.Byte2;
+            return other != null && Byte1 == other.Byte1 && Byte2 == other.Byte2;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Instruction);
+        }
+
+        public override int GetHashCode()
+        {
+            return Bytes.GetHashCode();
         }
 
         public override string ToString()

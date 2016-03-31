@@ -45,7 +45,7 @@ namespace SimpSim.NET
             }
             private set
             {
-                if (_instructionRegister != value)
+                if (!Equals(_instructionRegister, value))
                 {
                     _instructionRegister = value;
                     OnPropertyChanged();
