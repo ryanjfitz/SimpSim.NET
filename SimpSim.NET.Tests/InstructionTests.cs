@@ -92,6 +92,15 @@ namespace SimpSim.NET.Tests
         }
 
         [Test]
+        public void InstructionObjectsWithEqualBytesShouldHaveEqualHashCodes()
+        {
+            Instruction instruction1 = new Instruction(0x77, 0x89);
+            Instruction instruction2 = new Instruction(0x77, 0x89);
+
+            Assert.AreEqual(instruction1.GetHashCode(), instruction2.GetHashCode());
+        }
+
+        [Test]
         public void ToStringShouldDisplayHexRepresentation()
         {
             Assert.AreEqual("10FF", new Instruction(0x10, 0xFF).ToString());

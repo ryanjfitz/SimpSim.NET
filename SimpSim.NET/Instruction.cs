@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SimpSim.NET
 {
@@ -9,7 +10,7 @@ namespace SimpSim.NET
             Bytes = new[] { byte1, byte2 };
         }
 
-        public byte[] Bytes { get; }
+        public IReadOnlyList<byte> Bytes { get; }
 
         public byte Byte1 => Bytes[0];
 
@@ -35,7 +36,15 @@ namespace SimpSim.NET
 
         public override int GetHashCode()
         {
-            return Bytes.GetHashCode();
+            unchecked
+            {
+                int hashCode = 17;
+
+                hashCode = 31 * hashCode + Byte1.GetHashCode();
+                hashCode = 31 * hashCode + Byte2.GetHashCode();
+
+                return hashCode;
+            }
         }
 
         public override string ToString()

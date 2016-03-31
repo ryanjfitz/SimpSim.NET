@@ -207,7 +207,7 @@ namespace SimpSim.NET
 
         private void IncrementProgramCounter(Instruction instruction)
         {
-            ProgramCounter += (byte)instruction.Bytes.Length;
+            ProgramCounter += (byte)instruction.Bytes.Count;
         }
 
         public enum MachineState

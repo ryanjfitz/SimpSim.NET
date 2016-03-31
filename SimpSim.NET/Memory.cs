@@ -37,7 +37,7 @@ namespace SimpSim.NET
             foreach (Instruction instruction in instructions)
             {
                 LoadInstruction(instruction, address);
-                address += (byte)instruction.Bytes.Length;
+                address += (byte)instruction.Bytes.Count;
             }
         }
 
