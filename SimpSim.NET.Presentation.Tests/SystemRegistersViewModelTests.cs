@@ -14,6 +14,7 @@ namespace SimpSim.NET.Presentation.Tests
             simulator.Machine.ProgramCounter = 0xFF;
 
             SystemRegistersViewModel viewModel = new SystemRegistersViewModel(simulator);
+
             viewModel.ResetProgramCounterCommand.Execute(null);
 
             Assert.AreEqual(0x00, simulator.Machine.ProgramCounter);

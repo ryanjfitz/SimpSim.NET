@@ -13,11 +13,11 @@ namespace SimpSim.NET.Presentation.Tests
         {
             SimpleSimulator simulator = new SimpleSimulator();
 
-            AssemblyEditorWindowViewModel assemblyEditorWindowViewModel = new AssemblyEditorWindowViewModel(simulator);
+            AssemblyEditorWindowViewModel viewModel = new AssemblyEditorWindowViewModel(simulator);
 
-            assemblyEditorWindowViewModel.AssemblyEditorText = SamplePrograms.HelloWorldCode;
+            viewModel.AssemblyEditorText = SamplePrograms.HelloWorldCode;
 
-            assemblyEditorWindowViewModel.AssembleCommand.Execute(null);
+            viewModel.AssembleCommand.Execute(null);
 
             var expectedBytes = SamplePrograms.HelloWorldInstructions.SelectMany(instruction => instruction.Bytes).ToList();
 
