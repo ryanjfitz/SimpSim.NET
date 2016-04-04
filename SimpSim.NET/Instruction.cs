@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace SimpSim.NET
 {
+    [Serializable]
     public class Instruction : IEquatable<Instruction>
     {
         public Instruction(byte byte1, byte byte2)

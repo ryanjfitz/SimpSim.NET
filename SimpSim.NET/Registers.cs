@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 
 namespace SimpSim.NET
 {
+    [Serializable]
     public class Registers : INotifyCollectionChanged
     {
         public event Action<char> ValueWrittenToOutputRegister;

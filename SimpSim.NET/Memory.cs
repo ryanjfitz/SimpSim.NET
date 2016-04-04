@@ -1,7 +1,9 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 
 namespace SimpSim.NET
 {
+    [Serializable]
     public class Memory : INotifyCollectionChanged
     {
         private readonly byte[] _array;

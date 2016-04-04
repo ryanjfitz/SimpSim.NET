@@ -5,6 +5,7 @@ using System.Threading;
 
 namespace SimpSim.NET
 {
+    [Serializable]
     public class Machine : INotifyPropertyChanged
     {
         private readonly Memory _memory;
