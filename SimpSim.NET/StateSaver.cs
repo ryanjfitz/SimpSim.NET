@@ -5,48 +5,48 @@ namespace SimpSim.NET
 {
     public class StateSaver
     {
-        public void SaveMemory(Memory memory, string fileName)
+        public virtual void SaveMemory(Memory memory, FileInfo file)
         {
-            Save(memory, fileName);
+            Save(memory, file);
         }
 
-        public Memory LoadMemory(string saveFile)
+        public virtual Memory LoadMemory(FileInfo file)
         {
-            return Load<Memory>(saveFile);
+            return Load<Memory>(file);
         }
 
-        public void SaveRegisters(Registers registers, string fileName)
+        public virtual void SaveRegisters(Registers registers, FileInfo file)
         {
-            Save(registers, fileName);
+            Save(registers, file);
         }
 
-        public Registers LoadRegisters(string saveFile)
+        public virtual Registers LoadRegisters(FileInfo file)
         {
-            return Load<Registers>(saveFile);
+            return Load<Registers>(file);
         }
 
-        public void SaveMachine(Machine machine, string fileName)
+        public virtual void SaveMachine(Machine machine, FileInfo file)
         {
-            Save(machine, fileName);
+            Save(machine, file);
         }
 
-        public Machine LoadMachine(string saveFile)
+        public virtual Machine LoadMachine(FileInfo file)
         {
-            return Load<Machine>(saveFile);
+            return Load<Machine>(file);
         }
 
-        private void Save(object @object, string fileName)
+        private void Save(object @object, FileInfo file)
         {
-            using (var fileStream = File.Create(fileName))
+            using (var fileStream = file.Create())
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
                 binaryFormatter.Serialize(fileStream, @object);
             }
         }
 
-        private T Load<T>(string saveFile)
+        private T Load<T>(FileInfo file)
         {
-            using (var fileStream = File.OpenRead(saveFile))
+            using (var fileStream = file.OpenRead())
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
                 return (T)binaryFormatter.Deserialize(fileStream);

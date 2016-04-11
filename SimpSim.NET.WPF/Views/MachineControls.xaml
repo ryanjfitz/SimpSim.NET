@@ -10,8 +10,8 @@
                 <Setter Property="Margin" Value="0,5,0,0" />
             </Style>
         </DockPanel.Resources>
-        <Button DockPanel.Dock="Top">Open...</Button>
-        <Button DockPanel.Dock="Top">Save</Button>
+        <Button DockPanel.Dock="Top" Command="{Binding OpenCommand}">Open...</Button>
+        <Button DockPanel.Dock="Top" Command="{Binding SaveCommand}">Save</Button>
         <Button DockPanel.Dock="Bottom" Command="{Binding ClearRegistersCommand}">Clear Registers</Button>
         <Button DockPanel.Dock="Bottom" Command="{Binding ClearMemoryCommand}">Clear Memory</Button>
         <Button DockPanel.Dock="Bottom" Command="{Binding BreakCommand}">Break</Button>

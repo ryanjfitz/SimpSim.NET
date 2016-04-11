@@ -6,6 +6,7 @@ namespace SimpSim.NET
     [Serializable]
     public class Registers : INotifyCollectionChanged
     {
+        [field: NonSerialized]
         public event Action<char> ValueWrittenToOutputRegister;
 
         private readonly byte[] _array;
@@ -44,6 +45,7 @@ namespace SimpSim.NET
                 this[b] = 0x00;
         }
 
+        [field: NonSerialized]
         public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }

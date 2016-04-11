@@ -219,6 +219,7 @@ namespace SimpSim.NET
             Running
         }
 
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)

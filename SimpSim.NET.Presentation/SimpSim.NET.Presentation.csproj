@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Command.cs" />
     <Compile Include="DecimalToHexConverter.cs" />
+    <Compile Include="IDialogService.cs" />
     <Compile Include="IWindowService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleSimulator.cs" />

@@ -1,12 +1,29 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SimpSim.NET.Presentation.ViewModels
 {
     public class MachineControlsViewModel : ViewModelBase
     {
-        public MachineControlsViewModel(SimpleSimulator simulator) : base(simulator)
+        public MachineControlsViewModel(SimpleSimulator simulator, IDialogService dialogService, StateSaver stateSaver) : base(simulator)
         {
+            OpenCommand = new Command(() =>
+            {
+                FileInfo file = dialogService.GetOpenFileName();
+
+                if (file != null)
+                    stateSaver.LoadMachine(file);
+            }, () => true, simulator);
+
+            SaveCommand = new Command(() =>
+            {
+                FileInfo file = dialogService.GetSaveFileName();
+
+                if (file != null)
+                    stateSaver.SaveMachine(simulator.Machine, file);
+            }, () => true, simulator);
+
             RunCommand = new Command(() => Task.Run(() => simulator.Machine.Run(25)), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 
             StepCommand = new Command(() => simulator.Machine.Step(), () => true, simulator);
@@ -17,6 +34,10 @@ namespace SimpSim.NET.Presentation.ViewModels
 
             ClearRegistersCommand = new Command(() => simulator.Registers.Clear(), () => true, simulator);
         }
+
+        public ICommand OpenCommand { get; }
+
+        public ICommand SaveCommand { get; }
 
         public ICommand RunCommand { get; }
 

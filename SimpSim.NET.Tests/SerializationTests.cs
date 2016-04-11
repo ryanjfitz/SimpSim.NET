@@ -7,9 +7,9 @@ namespace SimpSim.NET.Tests
     [TestFixture]
     public class SerializationTests
     {
-        private readonly string _memorySaveFile = Path.Combine(Path.GetTempPath(), "MemorySaveFile.bin");
-        private readonly string _registersSaveFile = Path.Combine(Path.GetTempPath(), "RegistersSaveFile.bin");
-        private readonly string _machineSaveFile = Path.Combine(Path.GetTempPath(), "MachineSaveFile.bin");
+        private readonly FileInfo _memorySaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.bin"));
+        private readonly FileInfo _registersSaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "RegistersSaveFile.bin"));
+        private readonly FileInfo _machineSaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MachineSaveFile.bin"));
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -80,9 +80,9 @@ namespace SimpSim.NET.Tests
 
         private void DeleteSaveFiles()
         {
-            File.Delete(_memorySaveFile);
-            File.Delete(_registersSaveFile);
-            File.Delete(_machineSaveFile);
+            _memorySaveFile.Delete();
+            _registersSaveFile.Delete();
+            _machineSaveFile.Delete();
         }
 
         [OneTimeTearDown]

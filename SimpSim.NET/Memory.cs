@@ -60,6 +60,7 @@ namespace SimpSim.NET
                 this[(byte)i] = 0x00;
         }
 
+        [field: NonSerialized]
         public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }

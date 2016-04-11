@@ -51,6 +51,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DialogService.cs" />
     <Compile Include="Views\AssemblyEditorWindow.xaml.cs">
       <DependentUpon>AssemblyEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -147,6 +148,10 @@
     <ProjectReference Include="..\SimpSim.NET.Presentation\SimpSim.NET.Presentation.csproj">
       <Project>{6E5E9D0A-412B-4960-BE9A-E75B5349E08F}</Project>
       <Name>SimpSim.NET.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpSim.NET\SimpSim.NET.csproj">
+      <Project>{15EBE385-9BA9-49A5-8D81-52F6F307EC8A}</Project>
+      <Name>SimpSim.NET</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
