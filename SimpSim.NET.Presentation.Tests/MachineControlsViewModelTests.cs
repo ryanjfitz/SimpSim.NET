@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Moq;
 using NUnit.Framework;
 using SimpSim.NET.Presentation.ViewModels;
@@ -12,6 +13,14 @@ namespace SimpSim.NET.Presentation.Tests
         private Mock<IUserInputService> _userInputService;
         private Mock<StateSaver> _stateSaver;
         private MachineControlsViewModel _viewModel;
+
+        private readonly FileInfo _memorySaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.bin"));
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            DeleteSaveFiles();
+        }
 
         [SetUp]
         public void SetUp()
@@ -47,13 +56,11 @@ namespace SimpSim.NET.Presentation.Tests
         }
 
         [Test]
-        public void SaveCommandShouldSaveMachineStateToFile()
+        public void SaveCommandShouldSaveMemoryStateToFile()
         {
-            FileInfo file = new FileInfo("machine_save.bin");
+            _userInputService.Setup(s => s.GetSaveFileName()).Returns(_memorySaveFile).Verifiable();
 
-            _userInputService.Setup(s => s.GetSaveFileName()).Returns(file).Verifiable();
-
-            _stateSaver.Setup(s => s.SaveMachine(_simulator.Machine, file)).Verifiable();
+            _stateSaver.Setup(s => s.SaveMemory(_simulator.Memory, _memorySaveFile)).Verifiable();
 
             _viewModel.SaveCommand.Execute(null);
 
@@ -63,47 +70,63 @@ namespace SimpSim.NET.Presentation.Tests
         }
 
         [Test]
-        public void SaveCommandShouldNotSaveMachineStateToFileIfFileIsNull()
+        public void SaveCommandShouldNotSaveMemoryStateToFileIfFileIsNull()
         {
-            FileInfo file = null;
-
-            _userInputService.Setup(s => s.GetSaveFileName()).Returns(file).Verifiable();
+            _userInputService.Setup(s => s.GetSaveFileName()).Returns<FileInfo>(null).Verifiable();
 
             _viewModel.SaveCommand.Execute(null);
 
             _userInputService.Verify();
 
-            _stateSaver.Verify(s => s.SaveMachine(_simulator.Machine, file), Times.Never);
+            _stateSaver.Verify(s => s.SaveMemory(It.IsAny<Memory>(), It.IsAny<FileInfo>()), Times.Never);
         }
 
         [Test]
-        public void OpenCommandShouldLoadMachineStateFromFile()
+        public void OpenCommandShouldLoadMemoryStateFromFile()
         {
-            FileInfo file = new FileInfo("machine_save.bin");
+            Memory expectedMemory = new Memory();
 
-            _userInputService.Setup(s => s.GetOpenFileName()).Returns(file).Verifiable();
+            Random random = new Random();
+            for (int address = 0; address <= byte.MaxValue; address++)
+                expectedMemory[(byte)address] = (byte)random.Next(0x00, byte.MaxValue);
 
-            _stateSaver.Setup(s => s.LoadMachine(file)).Verifiable();
+            new StateSaver().SaveMemory(expectedMemory, _memorySaveFile);
+
+            _userInputService.Setup(s => s.GetOpenFileName()).Returns(_memorySaveFile).Verifiable();
+
+            _stateSaver.Setup(s => s.LoadMemory(_memorySaveFile)).CallBase().Verifiable();
 
             _viewModel.OpenCommand.Execute(null);
 
             _userInputService.Verify();
 
             _stateSaver.Verify();
+
+            for (int i = 0; i < byte.MaxValue; i++)
+                Assert.AreEqual(expectedMemory[(byte)i], _simulator.Memory[(byte)i]);
         }
 
         [Test]
-        public void OpenCommandShouldNotLoadMachineStateFromFileIfFileIsNull()
+        public void OpenCommandShouldNotLoadMemoryStateFromFileIfFileIsNull()
         {
-            FileInfo file = null;
-
-            _userInputService.Setup(s => s.GetOpenFileName()).Returns(file).Verifiable();
+            _userInputService.Setup(s => s.GetOpenFileName()).Returns<FileInfo>(null).Verifiable();
 
             _viewModel.OpenCommand.Execute(null);
 
             _userInputService.Verify();
 
-            _stateSaver.Verify(s => s.LoadMachine(file), Times.Never);
+            _stateSaver.Verify(s => s.LoadMemory(It.IsAny<FileInfo>()), Times.Never);
+        }
+
+        private void DeleteSaveFiles()
+        {
+            _memorySaveFile.Delete();
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            DeleteSaveFiles();
         }
     }
 }

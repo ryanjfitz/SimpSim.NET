@@ -13,7 +13,11 @@ namespace SimpSim.NET.Presentation.ViewModels
                 FileInfo file = userInputService.GetOpenFileName();
 
                 if (file != null)
-                    stateSaver.LoadMachine(file);
+                {
+                    Memory memory = stateSaver.LoadMemory(file);
+                    for (int i = 0; i <= byte.MaxValue; i++)
+                        simulator.Memory[(byte)i] = memory[(byte)i];
+                }
             }, () => true, simulator);
 
             SaveCommand = new Command(() =>
@@ -21,7 +25,7 @@ namespace SimpSim.NET.Presentation.ViewModels
                 FileInfo file = userInputService.GetSaveFileName();
 
                 if (file != null)
-                    stateSaver.SaveMachine(simulator.Machine, file);
+                    stateSaver.SaveMemory(simulator.Memory, file);
             }, () => true, simulator);
 
             RunCommand = new Command(() => Task.Run(() => simulator.Machine.Run(25)), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
