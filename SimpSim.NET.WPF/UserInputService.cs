@@ -4,7 +4,7 @@ using SimpSim.NET.Presentation;
 
 namespace SimpSim.NET.WPF
 {
-    internal class DialogService : IDialogService
+    internal class UserInputService : IUserInputService
     {
         public FileInfo GetOpenFileName()
         {

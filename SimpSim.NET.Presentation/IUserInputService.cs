@@ -2,7 +2,7 @@
 
 namespace SimpSim.NET.Presentation
 {
-    public interface IDialogService
+    public interface IUserInputService
     {
         FileInfo GetOpenFileName();
         FileInfo GetSaveFileName();

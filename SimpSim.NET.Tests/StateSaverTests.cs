@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace SimpSim.NET.Tests
 {
     [TestFixture]
-    public class SerializationTests
+    public class StateSaverTests
     {
         private readonly FileInfo _memorySaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.bin"));
         private readonly FileInfo _registersSaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "RegistersSaveFile.bin"));
@@ -18,7 +18,7 @@ namespace SimpSim.NET.Tests
         }
 
         [Test]
-        public void ShouldBeAbleToSerializeMemory()
+        public void ShouldBeAbleToSaveMemoryState()
         {
             Memory expectedMemory = new Memory();
 
@@ -38,7 +38,7 @@ namespace SimpSim.NET.Tests
         }
 
         [Test]
-        public void ShouldBeAbleToSerializeRegisters()
+        public void ShouldBeAbleToSaveRegistersState()
         {
             Registers expectedRegisters = new Registers();
 
@@ -58,7 +58,7 @@ namespace SimpSim.NET.Tests
         }
 
         [Test]
-        public void ShouldBeAbleToSerializeMachine()
+        public void ShouldBeAbleToSaveMachineState()
         {
             Memory memory = new Memory();
             memory.LoadInstructions(SamplePrograms.HelloWorldInstructions);

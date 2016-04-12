@@ -6,11 +6,11 @@ namespace SimpSim.NET.Presentation.ViewModels
 {
     public class MachineControlsViewModel : ViewModelBase
     {
-        public MachineControlsViewModel(SimpleSimulator simulator, IDialogService dialogService, StateSaver stateSaver) : base(simulator)
+        public MachineControlsViewModel(SimpleSimulator simulator, IUserInputService userInputService, StateSaver stateSaver) : base(simulator)
         {
             OpenCommand = new Command(() =>
             {
-                FileInfo file = dialogService.GetOpenFileName();
+                FileInfo file = userInputService.GetOpenFileName();
 
                 if (file != null)
                     stateSaver.LoadMachine(file);
@@ -18,7 +18,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 
             SaveCommand = new Command(() =>
             {
-                FileInfo file = dialogService.GetSaveFileName();
+                FileInfo file = userInputService.GetSaveFileName();
 
                 if (file != null)
                     stateSaver.SaveMachine(simulator.Machine, file);

@@ -9,7 +9,7 @@ namespace SimpSim.NET.Presentation.Tests
     public class MachineControlsViewModelTests
     {
         private SimpleSimulator _simulator;
-        private Mock<IDialogService> _dialogService;
+        private Mock<IUserInputService> _userInputService;
         private Mock<StateSaver> _stateSaver;
         private MachineControlsViewModel _viewModel;
 
@@ -17,9 +17,9 @@ namespace SimpSim.NET.Presentation.Tests
         public void SetUp()
         {
             _simulator = new SimpleSimulator();
-            _dialogService = new Mock<IDialogService>();
+            _userInputService = new Mock<IUserInputService>();
             _stateSaver = new Mock<StateSaver>();
-            _viewModel = new MachineControlsViewModel(_simulator, _dialogService.Object, _stateSaver.Object);
+            _viewModel = new MachineControlsViewModel(_simulator, _userInputService.Object, _stateSaver.Object);
         }
 
         [Test]
@@ -47,61 +47,61 @@ namespace SimpSim.NET.Presentation.Tests
         }
 
         [Test]
-        public void SaveCommandShouldSerializeMachineToSaveFile()
+        public void SaveCommandShouldSaveMachineStateToFile()
         {
-            FileInfo saveFile = new FileInfo("machine_save.bin");
+            FileInfo file = new FileInfo("machine_save.bin");
 
-            _dialogService.Setup(s => s.GetSaveFileName()).Returns(saveFile).Verifiable();
+            _userInputService.Setup(s => s.GetSaveFileName()).Returns(file).Verifiable();
 
-            _stateSaver.Setup(s => s.SaveMachine(_simulator.Machine, saveFile)).Verifiable();
+            _stateSaver.Setup(s => s.SaveMachine(_simulator.Machine, file)).Verifiable();
 
             _viewModel.SaveCommand.Execute(null);
 
-            _dialogService.Verify();
+            _userInputService.Verify();
 
             _stateSaver.Verify();
         }
 
         [Test]
-        public void SaveCommandShouldNotSerializeMachineIfSaveFileIsNull()
+        public void SaveCommandShouldNotSaveMachineStateToFileIfFileIsNull()
         {
-            FileInfo saveFile = null;
+            FileInfo file = null;
 
-            _dialogService.Setup(s => s.GetSaveFileName()).Returns(saveFile).Verifiable();
+            _userInputService.Setup(s => s.GetSaveFileName()).Returns(file).Verifiable();
 
             _viewModel.SaveCommand.Execute(null);
 
-            _dialogService.Verify();
+            _userInputService.Verify();
 
-            _stateSaver.Verify(s => s.SaveMachine(_simulator.Machine, saveFile), Times.Never);
+            _stateSaver.Verify(s => s.SaveMachine(_simulator.Machine, file), Times.Never);
         }
 
         [Test]
-        public void OpenCommandShouldDeserializeMachineFromFile()
+        public void OpenCommandShouldLoadMachineStateFromFile()
         {
             FileInfo file = new FileInfo("machine_save.bin");
 
-            _dialogService.Setup(s => s.GetOpenFileName()).Returns(file).Verifiable();
+            _userInputService.Setup(s => s.GetOpenFileName()).Returns(file).Verifiable();
 
             _stateSaver.Setup(s => s.LoadMachine(file)).Verifiable();
 
             _viewModel.OpenCommand.Execute(null);
 
-            _dialogService.Verify();
+            _userInputService.Verify();
 
             _stateSaver.Verify();
         }
 
         [Test]
-        public void OpenCommandShouldNotDeserializeMachineIfFileIsNull()
+        public void OpenCommandShouldNotLoadMachineStateFromFileIfFileIsNull()
         {
             FileInfo file = null;
 
-            _dialogService.Setup(s => s.GetOpenFileName()).Returns(file).Verifiable();
+            _userInputService.Setup(s => s.GetOpenFileName()).Returns(file).Verifiable();
 
             _viewModel.OpenCommand.Execute(null);
 
-            _dialogService.Verify();
+            _userInputService.Verify();
 
             _stateSaver.Verify(s => s.LoadMachine(file), Times.Never);
         }

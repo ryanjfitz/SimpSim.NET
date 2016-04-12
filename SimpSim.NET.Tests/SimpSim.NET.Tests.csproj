@@ -48,7 +48,7 @@
     <Compile Include="ProgramTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterTests.cs" />
-    <Compile Include="SerializationTests.cs" />
+    <Compile Include="StateSaverTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpSim.NET\SimpSim.NET.csproj">

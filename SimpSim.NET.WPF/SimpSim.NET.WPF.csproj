@@ -51,7 +51,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DialogService.cs" />
+    <Compile Include="UserInputService.cs" />
     <Compile Include="Views\AssemblyEditorWindow.xaml.cs">
       <DependentUpon>AssemblyEditorWindow.xaml</DependentUpon>
     </Compile>
