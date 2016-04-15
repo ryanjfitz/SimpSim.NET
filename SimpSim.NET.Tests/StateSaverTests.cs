@@ -7,9 +7,9 @@ namespace SimpSim.NET.Tests
     [TestFixture]
     public class StateSaverTests
     {
-        private readonly FileInfo _memorySaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.bin"));
-        private readonly FileInfo _registersSaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "RegistersSaveFile.bin"));
-        private readonly FileInfo _machineSaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MachineSaveFile.bin"));
+        private readonly FileInfo _memorySaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.prg"));
+        private readonly FileInfo _registersSaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "RegistersSaveFile.prg"));
+        private readonly FileInfo _machineSaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MachineSaveFile.prg"));
 
         [OneTimeSetUp]
         public void OneTimeSetUp()

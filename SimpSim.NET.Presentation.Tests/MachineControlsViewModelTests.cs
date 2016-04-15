@@ -14,7 +14,7 @@ namespace SimpSim.NET.Presentation.Tests
         private Mock<StateSaver> _stateSaver;
         private MachineControlsViewModel _viewModel;
 
-        private readonly FileInfo _memorySaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.bin"));
+        private readonly FileInfo _memorySaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.prg"));
 
         [OneTimeSetUp]
         public void OneTimeSetUp()

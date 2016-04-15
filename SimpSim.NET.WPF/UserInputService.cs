@@ -18,6 +18,7 @@ namespace SimpSim.NET.WPF
 
         private FileInfo GetFileFromDialog(FileDialog fileDialog)
         {
+            fileDialog.Filter = "Program Files|*.prg";
             fileDialog.ShowDialog();
 
             if (string.IsNullOrWhiteSpace(fileDialog.FileName))
