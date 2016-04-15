@@ -458,5 +458,11 @@ namespace SimpSim.NET.Tests
                                       org 10
                                       MyLabel:"));
         }
+
+        [Test]
+        public void ShouldNotAssembleUnrecognizedMnemonic()
+        {
+            Assert.Throws<UnrecognizedMnemonicException>(() => _assembler.Assemble("abc R0,0"));
+        }
     }
 }

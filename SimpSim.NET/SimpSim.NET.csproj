@@ -39,7 +39,6 @@
     <Compile Include="AssemblyException.cs" />
     <Compile Include="ByteUtilities.cs" />
     <Compile Include="Instruction.cs" />
-    <Compile Include="LabelAssemblyException.cs" />
     <Compile Include="Machine.cs" />
     <Compile Include="Memory.cs" />
     <Compile Include="Opcode.cs" />

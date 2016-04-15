@@ -28,10 +28,11 @@ namespace SimpSim.NET
 
                 if (InstructionSyntax.TryParse(line, out instructionSyntax))
                 {
-                    if (instructionSyntax.ContainsLabel)
+                    if (!string.IsNullOrWhiteSpace(instructionSyntax.Label))
                         AddLabelToSymbolTable(instructionSyntax.Label);
 
-                    AssembleLine(instructionSyntax);
+                    if (!string.IsNullOrWhiteSpace(instructionSyntax.Mnemonic))
+                        AssembleLine(instructionSyntax);
                 }
             }
 
@@ -94,6 +95,8 @@ namespace SimpSim.NET
                 case "halt":
                     Halt(instructionSyntax.Operands);
                     break;
+                default:
+                    throw new UnrecognizedMnemonicException();
             }
         }
 
@@ -379,8 +382,6 @@ namespace SimpSim.NET
             public string Label { get; }
             public string Mnemonic { get; }
             public string[] Operands { get; }
-
-            public bool ContainsLabel => !string.IsNullOrWhiteSpace(Label);
 
             private const char CommentDelimiter = ';';
             private const char LabelDelimiter = ':';

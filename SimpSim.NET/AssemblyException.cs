@@ -11,4 +11,18 @@ namespace SimpSim.NET
             Message = message;
         }
     }
+
+    public class LabelAssemblyException : AssemblyException
+    {
+        public LabelAssemblyException() : base("Invalid label.")
+        {
+        }
+    }
+
+    public class UnrecognizedMnemonicException : AssemblyException
+    {
+        public UnrecognizedMnemonicException() : base("Unrecognized mnemonic.")
+        {
+        }
+    }
 }
