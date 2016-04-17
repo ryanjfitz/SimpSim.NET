@@ -24,16 +24,13 @@ namespace SimpSim.NET
 
             foreach (string line in assemblyCode.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
             {
-                InstructionSyntax instructionSyntax;
+                InstructionSyntax instructionSyntax = InstructionSyntax.Parse(line);
 
-                if (InstructionSyntax.TryParse(line, out instructionSyntax))
-                {
-                    if (!string.IsNullOrWhiteSpace(instructionSyntax.Label))
-                        AddLabelToSymbolTable(instructionSyntax.Label);
+                if (!string.IsNullOrWhiteSpace(instructionSyntax.Label))
+                    AddLabelToSymbolTable(instructionSyntax.Label);
 
-                    if (!string.IsNullOrWhiteSpace(instructionSyntax.Mnemonic))
-                        AssembleLine(instructionSyntax);
-                }
+                if (!string.IsNullOrWhiteSpace(instructionSyntax.Mnemonic))
+                    AssembleLine(instructionSyntax);
             }
 
             Instruction[] instructions = _instructionBytes.GetInstructionsFromBytes();
@@ -315,7 +312,6 @@ namespace SimpSim.NET
             byte number;
 
             if (RegisterSyntax.TryParseRegister(operands[0], out register) && NumberSyntax.TryParseNumber(operands[1], out number))
-            {
                 if (number < 16)
                 {
                     InstructionByte byte1 = new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.Ror, register.GetRegisterIndex()));
@@ -326,7 +322,6 @@ namespace SimpSim.NET
                 }
                 else
                     throw new AssemblyException("Number cannot be larger than 15.");
-            }
         }
 
         private void Addi(string[] operands)
@@ -394,7 +389,7 @@ namespace SimpSim.NET
                 Operands = operands;
             }
 
-            public static bool TryParse(string line, out InstructionSyntax instructionSyntax)
+            public static InstructionSyntax Parse(string line)
             {
                 string comment = GetComment(ref line);
 
@@ -404,9 +399,7 @@ namespace SimpSim.NET
 
                 string[] operands = GetOperands(line);
 
-                instructionSyntax = new InstructionSyntax(comment, label, mnemonic, operands);
-
-                return true;
+                return new InstructionSyntax(comment, label, mnemonic, operands);
             }
 
             private static string GetComment(ref string line)
