@@ -99,6 +99,8 @@ namespace SimpSim.NET
 
         private void DataByte(string[] operands)
         {
+            bool invalidSyntax = operands.Length == 0;
+
             foreach (string operand in operands)
             {
                 byte number;
@@ -110,29 +112,39 @@ namespace SimpSim.NET
                     foreach (char c in stringLiteral)
                         _instructionBytes.Add(new InstructionByte((byte)c));
                 else
-                    throw new AssemblyException("Expected a number or string literal.");
+                {
+                    invalidSyntax = true;
+                    break;
+                }
             }
+
+            if (invalidSyntax)
+                throw new AssemblyException("Expected a number or string literal.");
         }
 
         private void Org(string[] operands)
         {
             byte number;
 
-            if (NumberSyntax.TryParseNumber(operands[0], out number))
+            if (operands.Length == 1 && NumberSyntax.TryParseNumber(operands[0], out number))
                 _instructionBytes.OriginAddress = number;
+            else
+                throw new AssemblyException("Expected a single number.");
         }
 
         private void Jmp(string[] operands)
         {
-            InstructionByte byte1 = null;
-            InstructionByte byte2 = null;
+            InstructionByte byte1;
+            InstructionByte byte2;
 
             AddressSyntax address;
-            if (AddressSyntax.TryParseAddress(operands[0], out address))
+            if (operands.Length == 1 && AddressSyntax.TryParseAddress(operands[0], out address))
             {
                 byte1 = new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.JumpEqual, 0x0));
                 byte2 = new InstructionByte(address);
             }
+            else
+                throw new AssemblyException("Expected a single address.");
 
             _instructionBytes.Add(byte1);
             _instructionBytes.Add(byte2);

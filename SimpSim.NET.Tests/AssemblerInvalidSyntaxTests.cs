@@ -46,5 +46,30 @@ namespace SimpSim.NET.Tests
         {
             Assert.Throws<UnrecognizedMnemonicException>(() => _assembler.Assemble("abc R0,0"));
         }
+
+        [Test]
+        public void ShouldNotAssembleDataByteInstructionWithRegisterOrNoOperands()
+        {
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("db R0"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("db R1,R2"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("db"));
+        }
+
+        [Test]
+        public void ShouldNotAssembleOriginInstructionWithoutSingleNumberOperand()
+        {
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("org R0"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("org 'Hello World!'"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("org 10,12"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("org"));
+        }
+
+        [Test]
+        public void ShouldNotAssembleJumpInstructionWithoutSingleAddress()
+        {
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("jmp R0"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("jmp 10,12"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("jmp"));
+        }
     }
 }
