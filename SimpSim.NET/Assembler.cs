@@ -196,29 +196,23 @@ namespace SimpSim.NET
             RegisterSyntax register1;
             RegisterSyntax register2;
 
-            InstructionByte byte1 = null;
-            InstructionByte byte2 = null;
-
             AddressSyntax address;
 
             if (RegisterSyntax.TryParseRegister(operands[0], out register) && AddressSyntax.TryParseAddress(operands[1], out address))
             {
-                byte1 = new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.ImmediateLoad, register.GetRegisterIndex()));
-                byte2 = new InstructionByte(address);
+                _instructionBytes.Add(new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.ImmediateLoad, register.GetRegisterIndex())));
+                _instructionBytes.Add(new InstructionByte(address));
             }
             else if (RegisterSyntax.TryParseRegister(operands[0], out register) && AddressSyntax.TryParseAddress(operands[1], out address, BracketExpectation.Present))
             {
-                byte1 = new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.DirectLoad, register.GetRegisterIndex()));
-                byte2 = new InstructionByte(address);
+                _instructionBytes.Add(new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.DirectLoad, register.GetRegisterIndex())));
+                _instructionBytes.Add(new InstructionByte(address));
             }
             else if (RegisterSyntax.TryParseRegister(operands[0], out register1) && RegisterSyntax.TryParseRegister(operands[1], out register2, BracketExpectation.Present))
             {
-                byte1 = new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.IndirectLoad, 0x0));
-                byte2 = new InstructionByte(ByteUtilities.GetByteFromNibbles(register1.GetRegisterIndex(), register2.GetRegisterIndex()));
+                _instructionBytes.Add(new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.IndirectLoad, 0x0)));
+                _instructionBytes.Add(new InstructionByte(ByteUtilities.GetByteFromNibbles(register1.GetRegisterIndex(), register2.GetRegisterIndex())));
             }
-
-            _instructionBytes.Add(byte1);
-            _instructionBytes.Add(byte2);
         }
 
         private void Store(string[] operands)
@@ -227,24 +221,18 @@ namespace SimpSim.NET
             RegisterSyntax register1;
             RegisterSyntax register2;
 
-            InstructionByte byte1 = null;
-            InstructionByte byte2 = null;
-
             AddressSyntax address;
 
             if (RegisterSyntax.TryParseRegister(operands[0], out register) && AddressSyntax.TryParseAddress(operands[1], out address, BracketExpectation.Present))
             {
-                byte1 = new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.DirectStore, register.GetRegisterIndex()));
-                byte2 = new InstructionByte(address);
+                _instructionBytes.Add(new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.DirectStore, register.GetRegisterIndex())));
+                _instructionBytes.Add(new InstructionByte(address));
             }
             else if (RegisterSyntax.TryParseRegister(operands[0], out register1) && RegisterSyntax.TryParseRegister(operands[1], out register2, BracketExpectation.Present))
             {
-                byte1 = new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.IndirectStore, 0x0));
-                byte2 = new InstructionByte(ByteUtilities.GetByteFromNibbles(register1.GetRegisterIndex(), register2.GetRegisterIndex()));
+                _instructionBytes.Add(new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.IndirectStore, 0x0)));
+                _instructionBytes.Add(new InstructionByte(ByteUtilities.GetByteFromNibbles(register1.GetRegisterIndex(), register2.GetRegisterIndex())));
             }
-
-            _instructionBytes.Add(byte1);
-            _instructionBytes.Add(byte2);
         }
 
         private void Move(string[] operands)
