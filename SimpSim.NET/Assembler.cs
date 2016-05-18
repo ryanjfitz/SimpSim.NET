@@ -9,7 +9,7 @@ namespace SimpSim.NET
     public class Assembler
     {
         private static IDictionary<string, byte> _symbolTable;
-        private static InstructionByteCollection _instructionBytes;
+        private readonly InstructionByteCollection _instructionBytes;
 
         public Assembler()
         {
@@ -38,7 +38,7 @@ namespace SimpSim.NET
             return instructions;
         }
 
-        private static void AddLabelToSymbolTable(string label)
+        private void AddLabelToSymbolTable(string label)
         {
             _symbolTable[label] = (byte)_instructionBytes.Count;
         }
@@ -168,12 +168,18 @@ namespace SimpSim.NET
 
         private void JmpEQ(string[] operands)
         {
-            RegisterSyntax register;
+            string[] registers = operands[0].Split('=');
+
+            RegisterSyntax leftRegister;
+            RegisterSyntax rightRegister;
             AddressSyntax address;
 
-            if (RegisterSyntax.TryParseRegister(operands[0].Split('=')[0], out register) && AddressSyntax.TryParseAddress(operands[1], out address))
+            if (!RegisterSyntax.TryParseRegister(registers[1], out rightRegister) || rightRegister.GetRegisterIndex() != 0)
+                throw new AssemblyException("Expected a comparison with R0.");
+
+            if (RegisterSyntax.TryParseRegister(registers[0], out leftRegister) && AddressSyntax.TryParseAddress(operands[1], out address))
             {
-                _instructionBytes.Add(new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.JumpEqual, register.GetRegisterIndex())));
+                _instructionBytes.Add(new InstructionByte(ByteUtilities.GetByteFromNibbles((byte)Opcode.JumpEqual, leftRegister.GetRegisterIndex())));
                 _instructionBytes.Add(new InstructionByte(address));
             }
         }

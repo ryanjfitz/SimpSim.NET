@@ -71,5 +71,14 @@ namespace SimpSim.NET.Tests
             Assert.Throws<AssemblyException>(() => _assembler.Assemble("jmp 10,12"));
             Assert.Throws<AssemblyException>(() => _assembler.Assemble("jmp"));
         }
+
+        [Test]
+        public void ShouldNotAssembleJumpEqualInstructionThatDoesNotCompareWithR0()
+        {
+            for (byte leftRegisterIndex = 0; leftRegisterIndex < 16; leftRegisterIndex++)
+                for (byte rightRegisterIndex = 1; rightRegisterIndex < 16; rightRegisterIndex++)
+                    for (int number = 0; number <= byte.MaxValue; number++)
+                        Assert.Throws<AssemblyException>(() => _assembler.Assemble($"jmpEQ R{ByteUtilities.ConvertByteToHexString(leftRegisterIndex)}=R{ByteUtilities.ConvertByteToHexString(rightRegisterIndex)},{number}"));
+        }
     }
 }
