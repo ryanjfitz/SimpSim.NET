@@ -150,32 +150,7 @@ namespace SimpSim.NET
                     }
                     break;
                 case Opcode.FloatingPointAdd:
-                    // Floating point addition implementation reproduced with permission. Refer to CREDITS text file in project root directory.
-                    int mant2 = _registers[instruction.Nibble3] % 16;
-                    int mant3 = _registers[instruction.Nibble4] % 16;
-                    int exp2 = (_registers[instruction.Nibble3] & 0x70) / 16;
-                    int exp3 = (_registers[instruction.Nibble4] & 0x70) / 16;
-                    int[] sign = new int[2];
-                    sign[0] = 1;
-                    sign[1] = -1;
-                    int sign1 = 0;
-                    int sign2 = _registers[instruction.Nibble3] / 128;
-                    int sign3 = _registers[instruction.Nibble4] / 128;
-                    mant2 = (mant2 << exp2) * sign[sign2];
-                    mant3 = (mant3 << exp3) * sign[sign3];
-                    int mant1 = mant2 + mant3;
-                    if (mant1 < 0)
-                    {
-                        sign1 = 0x8;
-                        mant1 = -mant1;
-                    }
-                    int exp1 = 0;
-                    while (mant1 > 15)
-                    {
-                        mant1 = mant1 / 2;
-                        exp1++;
-                    }
-                    _registers[instruction.Nibble2] = (byte)((sign1 | exp1) * 16 + mant1);
+                    _registers[instruction.Nibble2] = FloatingPointAdd(_registers[instruction.Nibble3], _registers[instruction.Nibble4]);
                     break;
                 case Opcode.Or:
                     _registers[instruction.Nibble2] = (byte)(_registers[instruction.Nibble3] | _registers[instruction.Nibble4]);
@@ -204,6 +179,42 @@ namespace SimpSim.NET
 
             if (incrementProgramCounter)
                 IncrementProgramCounter(instruction);
+        }
+
+        /// <remarks>Reproduced with permission. Refer to CREDITS text file in project root directory.</remarks>
+        private byte FloatingPointAdd(byte operand1, byte operand2)
+        {
+            int[] sign = new int[2];
+            sign[0] = 1;
+            sign[1] = -1;
+
+            int sign1 = operand1 / 128;
+            int sign2 = operand2 / 128;
+            int exponent1 = (operand1 & 0x70) / 16;
+            int exponent2 = (operand2 & 0x70) / 16;
+            int mantissa1 = (operand1 % 16 << exponent1) * sign[sign1];
+            int mantissa2 = (operand2 % 16 << exponent2) * sign[sign2];
+
+            int resultSign = 0;
+            int resultMantissa = mantissa1 + mantissa2;
+
+            if (resultMantissa < 0)
+            {
+                resultSign = 0x8;
+                resultMantissa = -resultMantissa;
+            }
+
+            int resultExponent = 0;
+
+            while (resultMantissa > 15)
+            {
+                resultMantissa = resultMantissa / 2;
+                resultExponent++;
+            }
+
+            int result = (resultSign | resultExponent) * 16 + resultMantissa;
+
+            return (byte)result;
         }
 
         private void IncrementProgramCounter(Instruction instruction)
