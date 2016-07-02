@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Moq;
 using NUnit.Framework;
 using SimpSim.NET.Presentation.ViewModels;
@@ -14,13 +13,7 @@ namespace SimpSim.NET.Presentation.Tests
         private Mock<StateSaver> _stateSaver;
         private MachineControlsViewModel _viewModel;
 
-        private readonly FileInfo _memorySaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.prg"));
-
-        [OneTimeSetUp]
-        public void OneTimeSetUp()
-        {
-            DeleteSaveFiles();
-        }
+        private readonly FileInfo _memorySaveFile = new FileInfo("MemorySaveFile.prg");
 
         [SetUp]
         public void SetUp()
@@ -84,26 +77,15 @@ namespace SimpSim.NET.Presentation.Tests
         [Test]
         public void OpenCommandShouldLoadMemoryStateFromFile()
         {
-            Memory expectedMemory = new Memory();
-
-            Random random = new Random();
-            for (int address = 0; address <= byte.MaxValue; address++)
-                expectedMemory[(byte)address] = (byte)random.Next(0x00, byte.MaxValue);
-
-            new StateSaver().SaveMemory(expectedMemory, _memorySaveFile);
-
             _userInputService.Setup(s => s.GetOpenFileName()).Returns(_memorySaveFile).Verifiable();
 
-            _stateSaver.Setup(s => s.LoadMemory(_memorySaveFile)).CallBase().Verifiable();
+            _stateSaver.Setup(s => s.LoadMemory(_memorySaveFile)).Returns(new Memory()).Verifiable();
 
             _viewModel.OpenCommand.Execute(null);
 
             _userInputService.Verify();
 
             _stateSaver.Verify();
-
-            for (int i = 0; i < byte.MaxValue; i++)
-                Assert.AreEqual(expectedMemory[(byte)i], _simulator.Memory[(byte)i]);
         }
 
         [Test]
@@ -116,17 +98,6 @@ namespace SimpSim.NET.Presentation.Tests
             _userInputService.Verify();
 
             _stateSaver.Verify(s => s.LoadMemory(It.IsAny<FileInfo>()), Times.Never);
-        }
-
-        private void DeleteSaveFiles()
-        {
-            _memorySaveFile.Delete();
-        }
-
-        [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
-            DeleteSaveFiles();
         }
     }
 }

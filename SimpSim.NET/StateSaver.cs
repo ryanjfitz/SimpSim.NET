@@ -38,19 +38,13 @@ namespace SimpSim.NET
         private void Save(object @object, FileInfo file)
         {
             using (var fileStream = file.Create())
-            {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(fileStream, @object);
-            }
+                new BinaryFormatter().Serialize(fileStream, @object);
         }
 
         private T Load<T>(FileInfo file)
         {
             using (var fileStream = file.OpenRead())
-            {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                return (T)binaryFormatter.Deserialize(fileStream);
-            }
+                return (T)new BinaryFormatter().Deserialize(fileStream);
         }
     }
 }
