@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace SimpSim.NET.Console
 {
@@ -41,7 +42,15 @@ namespace SimpSim.NET.Console
                     } while (!isValidSelection);
                     break;
                 case 1:
-                    assemblyCode = File.ReadAllText(args[0]);
+                    string file = args[0];
+                    try
+                    {
+                        assemblyCode = File.ReadAllText(file);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Console.WriteLine($"Unable to read file \"{file}\": {ex.Message}");
+                    }
                     break;
                 default:
                     System.Console.WriteLine("Usage:");
