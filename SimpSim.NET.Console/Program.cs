@@ -22,23 +22,26 @@ namespace SimpSim.NET.Console
                         System.Console.WriteLine("3) Template");
 
                         int selection;
-                        isValidSelection = int.TryParse(System.Console.ReadLine(), out selection) && selection >= 1 && selection <= 3;
+                        isValidSelection = int.TryParse(System.Console.ReadLine(), out selection);
+
+                        switch (selection)
+                        {
+                            case 1:
+                                assemblyCode = SamplePrograms.HelloWorldCode;
+                                break;
+                            case 2:
+                                assemblyCode = SamplePrograms.OutputTestCode;
+                                break;
+                            case 3:
+                                assemblyCode = SamplePrograms.TemplateCode;
+                                break;
+                            default:
+                                isValidSelection = false;
+                                break;
+                        }
 
                         if (!isValidSelection)
                             System.Console.WriteLine("Invalid selection. Please choose again.\n");
-                        else
-                            switch (selection)
-                            {
-                                case 1:
-                                    assemblyCode = SamplePrograms.HelloWorldCode;
-                                    break;
-                                case 2:
-                                    assemblyCode = SamplePrograms.OutputTestCode;
-                                    break;
-                                case 3:
-                                    assemblyCode = SamplePrograms.TemplateCode;
-                                    break;
-                            }
                     } while (!isValidSelection);
                     break;
                 case 1:
