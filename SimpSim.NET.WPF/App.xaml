@@ -5,5 +5,7 @@
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
         <presentation:DecimalToHexConverter x:Key="DecimalToHexConverter" />
+        <presentation:InstructionToStringConverter x:Key="InstructionToStringConverter" />
     </Application.Resources>
 </Application>
+

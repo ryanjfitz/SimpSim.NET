@@ -47,10 +47,5 @@ namespace SimpSim.NET
                 return hashCode;
             }
         }
-
-        public override string ToString()
-        {
-            return ByteUtilities.ConvertByteToHexString(Byte1, 2) + ByteUtilities.ConvertByteToHexString(Byte2, 2);
-        }
     }
 }

@@ -100,16 +100,5 @@ namespace SimpSim.NET.Tests
 
             Assert.That(instruction1.GetHashCode() == instruction2.GetHashCode());
         }
-
-        [Test]
-        public void ToStringShouldDisplayHexRepresentation()
-        {
-            Assert.AreEqual("10FF", new Instruction(0x10, 0xFF).ToString());
-
-            Assert.AreEqual("AA7E", new Instruction(0xAA, 0x7E).ToString());
-
-            Assert.AreEqual("00FF", new Instruction(0x00, 0xFF).ToString());
-        }
-
     }
 }
