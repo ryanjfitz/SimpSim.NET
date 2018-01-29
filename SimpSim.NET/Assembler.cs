@@ -601,8 +601,7 @@ namespace SimpSim.NET
 
             private static bool IsRegister(string input)
             {
-                RegisterSyntax register;
-                return RegisterSyntax.TryParse(input, out register);
+                return RegisterSyntax.TryParse(input, out _);
             }
 
             public override string ToString()
@@ -623,16 +622,15 @@ namespace SimpSim.NET
                     stringLiteral = input.TrimStart(doubleQuote).TrimEnd(doubleQuote);
                     return true;
                 }
-                else if (input.First() == singleQuote && input.Last() == singleQuote)
+
+                if (input.First() == singleQuote && input.Last() == singleQuote)
                 {
                     stringLiteral = input.TrimStart(singleQuote).TrimEnd(singleQuote);
                     return true;
                 }
-                else
-                {
-                    stringLiteral = null;
-                    return false;
-                }
+
+                stringLiteral = null;
+                return false;
             }
         }
 
