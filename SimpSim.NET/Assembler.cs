@@ -397,7 +397,7 @@ namespace SimpSim.NET
                     line = line.Substring(delimiterIndex + 1);
 
                     if (!IsValidLabel(label))
-                        throw new LabelAssemblyException();
+                        throw new LabelAssemblyException(label);
 
                     label = label.TrimEnd(LabelDelimiter);
                 }
@@ -732,6 +732,9 @@ namespace SimpSim.NET
                         case AddressType.DirectValue:
                             return _byte;
                         case AddressType.Label:
+                            if (!_symbolTable.ContainsKey(_address.UndefinedLabel))
+                                throw new LabelAssemblyException(_address.UndefinedLabel);
+
                             return _symbolTable[_address.UndefinedLabel];
                         default:
                             return 0x00;

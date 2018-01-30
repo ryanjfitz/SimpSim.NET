@@ -70,5 +70,11 @@ namespace SimpSim.NET.Tests
             Assert.Throws<LabelAssemblyException>(() => _assembler.Assemble("::"));
             Assert.Throws<LabelAssemblyException>(() => _assembler.Assemble(":::"));
         }
+
+        [Test]
+        public void ShouldNotAssembleUndefinedLabel()
+        {
+            Assert.Throws<LabelAssemblyException>(() => _assembler.Assemble("load R1,UndefinedLabel"));
+        }
     }
 }

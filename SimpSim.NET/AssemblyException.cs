@@ -14,7 +14,7 @@ namespace SimpSim.NET
 
     public class LabelAssemblyException : AssemblyException
     {
-        public LabelAssemblyException() : base("Invalid label.")
+        public LabelAssemblyException(string label) : base("Invalid or undefined label: " + label)
         {
         }
     }
