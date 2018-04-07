@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.Tests", "SimpSim.NET.Tests\SimpSim.NET.Tests.csproj", "{B9AB26D9-0933-4D41-9423-6FB887E588C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET", "SimpSim.NET\SimpSim.NET.csproj", "{15EBE385-9BA9-49A5-8D81-52F6F307EC8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpSim.NET", "SimpSim.NET\SimpSim.NET.csproj", "{15EBE385-9BA9-49A5-8D81-52F6F307EC8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.Console", "SimpSim.NET.Console\SimpSim.NET.Console.csproj", "{172C0174-CE02-4069-AF19-68B01A35DE3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpSim.NET.Console", "SimpSim.NET.Console\SimpSim.NET.Console.csproj", "{172C0174-CE02-4069-AF19-68B01A35DE3C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.WPF", "SimpSim.NET.WPF\SimpSim.NET.WPF.csproj", "{D5CDBA5B-16BC-49CE-8E95-6350851773A4}"
 EndProject
@@ -48,5 +48,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A53B3BE-0F10-4AAD-8AAD-867928DDB93B}
 	EndGlobalSection
 EndGlobal
