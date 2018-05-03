@@ -21,8 +21,7 @@ namespace SimpSim.NET.Console
                         System.Console.WriteLine("2) Output Test");
                         System.Console.WriteLine("3) Template");
 
-                        int selection;
-                        isValidSelection = int.TryParse(System.Console.ReadLine(), out selection);
+                        isValidSelection = int.TryParse(System.Console.ReadLine(), out int selection);
 
                         switch (selection)
                         {
