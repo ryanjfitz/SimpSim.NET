@@ -9,7 +9,7 @@ namespace SimpSim.NET.Presentation
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ByteUtilities.ConvertByteToHexString(System.Convert.ToByte(value), 2);
+            return System.Convert.ToByte(value).ToHexString(2);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

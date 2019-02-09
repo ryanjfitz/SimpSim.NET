@@ -13,7 +13,7 @@ namespace SimpSim.NET.Presentation
 
             Instruction instruction = (Instruction)value;
 
-            return ByteUtilities.ConvertByteToHexString(instruction.Byte1, 2) + ByteUtilities.ConvertByteToHexString(instruction.Byte2, 2);
+            return instruction.Byte1.ToHexString(2) + instruction.Byte2.ToHexString(2);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

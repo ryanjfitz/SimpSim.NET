@@ -17,13 +17,13 @@ namespace SimpSim.NET
 
         public byte Byte2 => Bytes[1];
 
-        public byte Nibble1 => ByteUtilities.GetHighNibbleFromByte(Byte1);
+        public byte Nibble1 => Byte1.HighNibble();
 
-        public byte Nibble2 => ByteUtilities.GetLowNibbleFromByte(Byte1);
+        public byte Nibble2 => Byte1.LowNibble();
 
-        public byte Nibble3 => ByteUtilities.GetHighNibbleFromByte(Byte2);
+        public byte Nibble3 => Byte2.HighNibble();
 
-        public byte Nibble4 => ByteUtilities.GetLowNibbleFromByte(Byte2);
+        public byte Nibble4 => Byte2.LowNibble();
 
         public bool Equals(Instruction other)
         {
