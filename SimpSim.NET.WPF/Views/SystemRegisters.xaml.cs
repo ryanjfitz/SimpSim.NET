@@ -1,12 +1,11 @@
-﻿using System.Windows.Controls;
-using SimpSim.NET.Presentation.ViewModels;
+﻿using SimpSim.NET.Presentation.ViewModels;
 
 namespace SimpSim.NET.WPF.Views
 {
     /// <summary>
     /// Interaction logic for SystemRegisters.xaml
     /// </summary>
-    public partial class SystemRegisters : UserControl
+    public partial class SystemRegisters
     {
         public SystemRegisters()
         {

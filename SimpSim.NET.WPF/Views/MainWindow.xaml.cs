@@ -1,12 +1,11 @@
-﻿using System.Windows;
-using SimpSim.NET.Presentation.ViewModels;
+﻿using SimpSim.NET.Presentation.ViewModels;
 
 namespace SimpSim.NET.WPF.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {

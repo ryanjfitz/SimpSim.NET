@@ -1,12 +1,11 @@
-﻿using System.Windows.Controls;
-using SimpSim.NET.Presentation.ViewModels;
+﻿using SimpSim.NET.Presentation.ViewModels;
 
 namespace SimpSim.NET.WPF.Views
 {
     /// <summary>
     /// Interaction logic for Output.xaml
     /// </summary>
-    public partial class Output : UserControl
+    public partial class Output
     {
         public Output()
         {
