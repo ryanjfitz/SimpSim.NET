@@ -3,9 +3,9 @@ using System.Globalization;
 
 namespace SimpSim.NET
 {
-    public static class ByteUtilities
+    public static class ByteExtensions
     {
-        public static byte ConvertHexStringToByte(string hexString)
+        public static byte ToByteFromHex(this string hexString)
         {
             return byte.Parse(hexString, NumberStyles.HexNumber);
         }

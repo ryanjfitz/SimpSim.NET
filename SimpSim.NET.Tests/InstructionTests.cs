@@ -41,7 +41,7 @@ namespace SimpSim.NET.Tests
             {
                 Instruction instruction = new Instruction((byte)i, 0x00);
                 string hexNibble1 = i.ToString("X2")[0].ToString();
-                byte expected = ByteUtilities.ConvertHexStringToByte(hexNibble1);
+                byte expected = hexNibble1.ToByteFromHex();
                 Assert.AreEqual(expected, instruction.Nibble1);
             }
         }
@@ -53,7 +53,7 @@ namespace SimpSim.NET.Tests
             {
                 Instruction instruction = new Instruction((byte)i, 0x00);
                 string hexNibble2 = i.ToString("X2")[1].ToString();
-                byte expected = ByteUtilities.ConvertHexStringToByte(hexNibble2);
+                byte expected = hexNibble2.ToByteFromHex();
                 Assert.AreEqual(expected, instruction.Nibble2);
             }
         }
@@ -65,7 +65,7 @@ namespace SimpSim.NET.Tests
             {
                 Instruction instruction = new Instruction(0x00, (byte)i);
                 string hexNibble3 = i.ToString("X2")[0].ToString();
-                byte expected = ByteUtilities.ConvertHexStringToByte(hexNibble3);
+                byte expected = hexNibble3.ToByteFromHex();
                 Assert.AreEqual(expected, instruction.Nibble3);
             }
         }
@@ -77,7 +77,7 @@ namespace SimpSim.NET.Tests
             {
                 Instruction instruction = new Instruction(0x00, (byte)i);
                 string hexNibble4 = i.ToString("X2")[1].ToString();
-                byte expected = ByteUtilities.ConvertHexStringToByte(hexNibble4);
+                byte expected = hexNibble4.ToByteFromHex();
                 Assert.AreEqual(expected, instruction.Nibble4);
             }
         }

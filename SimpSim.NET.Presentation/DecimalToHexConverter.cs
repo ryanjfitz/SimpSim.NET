@@ -16,7 +16,7 @@ namespace SimpSim.NET.Presentation
         {
             try
             {
-                return ByteUtilities.ConvertHexStringToByte(System.Convert.ToString(value));
+                return System.Convert.ToString(value).ToByteFromHex();
             }
             catch
             {

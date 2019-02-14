@@ -405,7 +405,7 @@ namespace SimpSim.NET
 
             public byte GetRegisterIndex()
             {
-                return ByteUtilities.ConvertHexStringToByte(Value[1].ToString());
+                return Value[1].ToString().ToByteFromHex();
             }
 
             public static bool TryParse(string input, out RegisterSyntax registerSyntax, BracketExpectation bracketExpectation = BracketExpectation.NotPresent)
