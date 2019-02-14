@@ -27,7 +27,7 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-	DotNetCoreTest("./SimpSim.NET.Tests/SimpSim.NET.Tests.csproj");
+    DotNetCoreTest("./SimpSim.NET.Tests/SimpSim.NET.Tests.csproj");
     NUnit3("./**/bin/" + configuration + "/SimpSim.NET.Presentation.Tests.dll", new NUnit3Settings { NoResults = true });
 });
 
