@@ -18,7 +18,7 @@ namespace SimpSim.NET.Tests
             _actualOutput = null;
 
             _registers = new Registers();
-            _registers.ValueWrittenToOutputRegister += (c => _actualOutput += c);
+            _registers.ValueWrittenToOutputRegister += c => _actualOutput += c;
 
             _machine = new Machine(_memory, _registers);
         }

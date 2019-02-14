@@ -476,7 +476,7 @@ namespace SimpSim.NET
             {
                 bool success = byte.TryParse(input.TrimStart("0x".ToCharArray()), NumberStyles.HexNumber, null, out number)
                                || byte.TryParse(input.TrimStart('$'), NumberStyles.HexNumber, null, out number)
-                               || (byte.TryParse(input.TrimEnd('h'), NumberStyles.HexNumber, null, out number) && !char.IsLetter(input.FirstOrDefault()));
+                               || byte.TryParse(input.TrimEnd('h'), NumberStyles.HexNumber, null, out number) && !char.IsLetter(input.FirstOrDefault());
 
                 if (!success)
                     number = 0;

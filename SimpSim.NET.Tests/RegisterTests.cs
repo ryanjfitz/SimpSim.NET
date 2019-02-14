@@ -28,7 +28,7 @@ namespace SimpSim.NET.Tests
         {
             string appendedOutput = null;
 
-            _registers.ValueWrittenToOutputRegister += (c => appendedOutput += c);
+            _registers.ValueWrittenToOutputRegister += c => appendedOutput += c;
 
             _registers[0x0f] = 0x48;
             _registers[0x0f] = 0x65;
