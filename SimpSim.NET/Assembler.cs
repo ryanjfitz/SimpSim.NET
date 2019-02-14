@@ -101,18 +101,18 @@ namespace SimpSim.NET
         {
             if (RegisterSyntax.TryParse(operands[0], out var register) && AddressSyntax.TryParse(operands[1], out var address))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.ImmediateLoad, register.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.ImmediateLoad, register.GetRegisterIndex()).Combine());
                 _instructionBytes.Add(address);
             }
             else if (RegisterSyntax.TryParse(operands[0], out register) && AddressSyntax.TryParse(operands[1], out address, BracketExpectation.Present))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.DirectLoad, register.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.DirectLoad, register.GetRegisterIndex()).Combine());
                 _instructionBytes.Add(address);
             }
             else if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2, BracketExpectation.Present))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.IndirectLoad, 0x0));
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles(register1.GetRegisterIndex(), register2.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.IndirectLoad, 0x0).Combine());
+                _instructionBytes.Add((register1.GetRegisterIndex(), register2.GetRegisterIndex()).Combine());
             }
         }
 
@@ -120,13 +120,13 @@ namespace SimpSim.NET
         {
             if (RegisterSyntax.TryParse(operands[0], out var register) && AddressSyntax.TryParse(operands[1], out var address, BracketExpectation.Present))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.DirectStore, register.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.DirectStore, register.GetRegisterIndex()).Combine());
                 _instructionBytes.Add(address);
             }
             else if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2, BracketExpectation.Present))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.IndirectStore, 0x0));
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles(register1.GetRegisterIndex(), register2.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.IndirectStore, 0x0).Combine());
+                _instructionBytes.Add((register1.GetRegisterIndex(), register2.GetRegisterIndex()).Combine());
             }
         }
 
@@ -134,8 +134,8 @@ namespace SimpSim.NET
         {
             if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.Move, 0x0));
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles(register1.GetRegisterIndex(), register2.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.Move, 0x0).Combine());
+                _instructionBytes.Add((register1.GetRegisterIndex(), register2.GetRegisterIndex()).Combine());
             }
         }
 
@@ -143,8 +143,8 @@ namespace SimpSim.NET
         {
             if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.IntegerAdd, register1.GetRegisterIndex()));
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles(register2.GetRegisterIndex(), register3.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.IntegerAdd, register1.GetRegisterIndex()).Combine());
+                _instructionBytes.Add((register2.GetRegisterIndex(), register3.GetRegisterIndex()).Combine());
             }
         }
 
@@ -152,8 +152,8 @@ namespace SimpSim.NET
         {
             if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.FloatingPointAdd, register1.GetRegisterIndex()));
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles(register2.GetRegisterIndex(), register3.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.FloatingPointAdd, register1.GetRegisterIndex()).Combine());
+                _instructionBytes.Add((register2.GetRegisterIndex(), register3.GetRegisterIndex()).Combine());
             }
         }
 
@@ -166,7 +166,7 @@ namespace SimpSim.NET
 
             if (RegisterSyntax.TryParse(registers[0], out var leftRegister) && AddressSyntax.TryParse(operands[1], out var address))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.JumpEqual, leftRegister.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.JumpEqual, leftRegister.GetRegisterIndex()).Combine());
                 _instructionBytes.Add(address);
             }
         }
@@ -175,7 +175,7 @@ namespace SimpSim.NET
         {
             if (RegisterSyntax.TryParse(operands[0].Split('<', '=')[0], out var register) && AddressSyntax.TryParse(operands[1], out var address))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.JumpLessEqual, register.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.JumpLessEqual, register.GetRegisterIndex()).Combine());
                 _instructionBytes.Add(address);
             }
         }
@@ -188,7 +188,7 @@ namespace SimpSim.NET
                 invalidSyntax = true;
             else if (AddressSyntax.TryParse(operands[0], out var address))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.JumpEqual, 0x0));
+                _instructionBytes.Add((Opcode.JumpEqual, 0x0).Combine());
                 _instructionBytes.Add(address);
             }
             else
@@ -202,8 +202,8 @@ namespace SimpSim.NET
         {
             if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.And, register1.GetRegisterIndex()));
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles(register2.GetRegisterIndex(), register3.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.And, register1.GetRegisterIndex()).Combine());
+                _instructionBytes.Add((register2.GetRegisterIndex(), register3.GetRegisterIndex()).Combine());
             }
         }
 
@@ -211,8 +211,8 @@ namespace SimpSim.NET
         {
             if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.Or, register1.GetRegisterIndex()));
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles(register2.GetRegisterIndex(), register3.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.Or, register1.GetRegisterIndex()).Combine());
+                _instructionBytes.Add((register2.GetRegisterIndex(), register3.GetRegisterIndex()).Combine());
             }
         }
 
@@ -220,8 +220,8 @@ namespace SimpSim.NET
         {
             if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
             {
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.Xor, register1.GetRegisterIndex()));
-                _instructionBytes.Add(ByteUtilities.GetByteFromNibbles(register2.GetRegisterIndex(), register3.GetRegisterIndex()));
+                _instructionBytes.Add((Opcode.Xor, register1.GetRegisterIndex()).Combine());
+                _instructionBytes.Add((register2.GetRegisterIndex(), register3.GetRegisterIndex()).Combine());
             }
         }
 
@@ -230,8 +230,8 @@ namespace SimpSim.NET
             if (RegisterSyntax.TryParse(operands[0], out var register) && NumberSyntax.TryParse(operands[1], out byte number))
                 if (number < 16)
                 {
-                    _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.Ror, register.GetRegisterIndex()));
-                    _instructionBytes.Add(ByteUtilities.GetByteFromNibbles(0x0, number));
+                    _instructionBytes.Add((Opcode.Ror, register.GetRegisterIndex()).Combine());
+                    _instructionBytes.Add((0x0, number).Combine());
                 }
                 else
                     throw new AssemblyException("Number cannot be larger than 15.");
@@ -277,7 +277,7 @@ namespace SimpSim.NET
 
         private void Halt()
         {
-            _instructionBytes.Add(ByteUtilities.GetByteFromNibbles((byte)Opcode.Halt, 0x0));
+            _instructionBytes.Add((Opcode.Halt, 0x0).Combine());
             _instructionBytes.Add(0x00);
         }
 

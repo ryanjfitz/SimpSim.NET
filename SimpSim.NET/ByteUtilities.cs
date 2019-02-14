@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace SimpSim.NET
 {
@@ -9,9 +10,14 @@ namespace SimpSim.NET
             return byte.Parse(hexString, NumberStyles.HexNumber);
         }
 
-        public static byte GetByteFromNibbles(byte highNibble, byte lowNibble)
+        public static byte Combine(this (object highNibble, object lowNibble) nibbles)
         {
-            return (byte)(((highNibble << 4) & 0xF0) | (lowNibble & 0x0F));
+            byte h = Convert.ToByte(nibbles.highNibble);
+            byte l = Convert.ToByte(nibbles.lowNibble);
+
+            int result = ((h << 4) & 0xF0) | (l & 0x0F);
+
+            return (byte)result;
         }
 
         public static string ToHexString(this byte b, int numberOfDigits = 1)

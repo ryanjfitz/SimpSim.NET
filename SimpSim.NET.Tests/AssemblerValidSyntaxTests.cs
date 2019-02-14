@@ -70,22 +70,22 @@ namespace SimpSim.NET.Tests
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
             {
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0x0, registerIndex)) }, _assembler.Assemble($"load R0,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0x1, registerIndex)) }, _assembler.Assemble($"load R1,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0x2, registerIndex)) }, _assembler.Assemble($"load R2,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0x3, registerIndex)) }, _assembler.Assemble($"load R3,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0x4, registerIndex)) }, _assembler.Assemble($"load R4,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0x5, registerIndex)) }, _assembler.Assemble($"load R5,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0x6, registerIndex)) }, _assembler.Assemble($"load R6,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0x7, registerIndex)) }, _assembler.Assemble($"load R7,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0x8, registerIndex)) }, _assembler.Assemble($"load R8,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0x9, registerIndex)) }, _assembler.Assemble($"load R9,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0xA, registerIndex)) }, _assembler.Assemble($"load RA,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0xB, registerIndex)) }, _assembler.Assemble($"load RB,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0xC, registerIndex)) }, _assembler.Assemble($"load RC,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0xD, registerIndex)) }, _assembler.Assemble($"load RD,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0xE, registerIndex)) }, _assembler.Assemble($"load RE,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, ByteUtilities.GetByteFromNibbles(0xF, registerIndex)) }, _assembler.Assemble($"load RF,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x0, registerIndex).Combine()) }, _assembler.Assemble($"load R0,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x1, registerIndex).Combine()) }, _assembler.Assemble($"load R1,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x2, registerIndex).Combine()) }, _assembler.Assemble($"load R2,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x3, registerIndex).Combine()) }, _assembler.Assemble($"load R3,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x4, registerIndex).Combine()) }, _assembler.Assemble($"load R4,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x5, registerIndex).Combine()) }, _assembler.Assemble($"load R5,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x6, registerIndex).Combine()) }, _assembler.Assemble($"load R6,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x7, registerIndex).Combine()) }, _assembler.Assemble($"load R7,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x8, registerIndex).Combine()) }, _assembler.Assemble($"load R8,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x9, registerIndex).Combine()) }, _assembler.Assemble($"load R9,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xA, registerIndex).Combine()) }, _assembler.Assemble($"load RA,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xB, registerIndex).Combine()) }, _assembler.Assemble($"load RB,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xC, registerIndex).Combine()) }, _assembler.Assemble($"load RC,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xD, registerIndex).Combine()) }, _assembler.Assemble($"load RD,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xE, registerIndex).Combine()) }, _assembler.Assemble($"load RE,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xF, registerIndex).Combine()) }, _assembler.Assemble($"load RF,[R{registerIndex.ToHexString()}]"));
             }
         }
 
@@ -96,7 +96,7 @@ namespace SimpSim.NET.Tests
                 for (byte j = 0; j < 16; j++)
                     for (byte k = 0; k < 16; k++)
                     {
-                        Instruction[] expected = { new Instruction(ByteUtilities.GetByteFromNibbles(0x5, i), ByteUtilities.GetByteFromNibbles(j, k)) };
+                        Instruction[] expected = { new Instruction((0x5, i).Combine(), (j, k).Combine()) };
                         Instruction[] actual = _assembler.Assemble($"addi R{i.ToHexString()},R{j.ToHexString()},R{k.ToHexString()}");
 
                         CollectionAssert.AreEqual(expected, actual);
@@ -110,7 +110,7 @@ namespace SimpSim.NET.Tests
                 for (byte j = 0; j < 16; j++)
                     for (byte k = 0; k < 16; k++)
                     {
-                        Instruction[] expected = { new Instruction(ByteUtilities.GetByteFromNibbles(0x6, i), ByteUtilities.GetByteFromNibbles(j, k)) };
+                        Instruction[] expected = { new Instruction((0x6, i).Combine(), (j, k).Combine()) };
                         Instruction[] actual = _assembler.Assemble($"addf R{i.ToHexString()},R{j.ToHexString()},R{k.ToHexString()}");
 
                         CollectionAssert.AreEqual(expected, actual);
@@ -124,7 +124,7 @@ namespace SimpSim.NET.Tests
                 for (byte j = 0; j < 16; j++)
                     for (byte k = 0; k < 16; k++)
                     {
-                        Instruction[] expected = { new Instruction(ByteUtilities.GetByteFromNibbles(0x8, i), ByteUtilities.GetByteFromNibbles(j, k)) };
+                        Instruction[] expected = { new Instruction((0x8, i).Combine(), (j, k).Combine()) };
                         Instruction[] actual = _assembler.Assemble($"and R{i.ToHexString()},R{j.ToHexString()},R{k.ToHexString()}");
 
                         CollectionAssert.AreEqual(expected, actual);
@@ -138,7 +138,7 @@ namespace SimpSim.NET.Tests
                 for (byte j = 0; j < 16; j++)
                     for (byte k = 0; k < 16; k++)
                     {
-                        Instruction[] expected = { new Instruction(ByteUtilities.GetByteFromNibbles(0x7, i), ByteUtilities.GetByteFromNibbles(j, k)) };
+                        Instruction[] expected = { new Instruction((0x7, i).Combine(), (j, k).Combine()) };
                         Instruction[] actual = _assembler.Assemble($"or R{i.ToHexString()},R{j.ToHexString()},R{k.ToHexString()}");
 
                         CollectionAssert.AreEqual(expected, actual);
@@ -152,7 +152,7 @@ namespace SimpSim.NET.Tests
                 for (byte j = 0; j < 16; j++)
                     for (byte k = 0; k < 16; k++)
                     {
-                        Instruction[] expected = { new Instruction(ByteUtilities.GetByteFromNibbles(0x9, i), ByteUtilities.GetByteFromNibbles(j, k)) };
+                        Instruction[] expected = { new Instruction((0x9, i).Combine(), (j, k).Combine()) };
                         Instruction[] actual = _assembler.Assemble($"xor R{i.ToHexString()},R{j.ToHexString()},R{k.ToHexString()}");
 
                         CollectionAssert.AreEqual(expected, actual);
@@ -164,22 +164,22 @@ namespace SimpSim.NET.Tests
         {
             for (byte number = 0; number < 16; number++)
             {
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0x0), number) }, _assembler.Assemble($"ror R0,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0x1), number) }, _assembler.Assemble($"ror R1,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0x2), number) }, _assembler.Assemble($"ror R2,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0x3), number) }, _assembler.Assemble($"ror R3,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0x4), number) }, _assembler.Assemble($"ror R4,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0x5), number) }, _assembler.Assemble($"ror R5,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0x6), number) }, _assembler.Assemble($"ror R6,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0x7), number) }, _assembler.Assemble($"ror R7,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0x8), number) }, _assembler.Assemble($"ror R8,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0x9), number) }, _assembler.Assemble($"ror R9,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0xA), number) }, _assembler.Assemble($"ror RA,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0xB), number) }, _assembler.Assemble($"ror RB,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0xC), number) }, _assembler.Assemble($"ror RC,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0xD), number) }, _assembler.Assemble($"ror RD,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0xE), number) }, _assembler.Assemble($"ror RE,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xA, 0xF), number) }, _assembler.Assemble($"ror RF,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x0).Combine(), number) }, _assembler.Assemble($"ror R0,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x1).Combine(), number) }, _assembler.Assemble($"ror R1,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x2).Combine(), number) }, _assembler.Assemble($"ror R2,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x3).Combine(), number) }, _assembler.Assemble($"ror R3,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x4).Combine(), number) }, _assembler.Assemble($"ror R4,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x5).Combine(), number) }, _assembler.Assemble($"ror R5,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x6).Combine(), number) }, _assembler.Assemble($"ror R6,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x7).Combine(), number) }, _assembler.Assemble($"ror R7,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x8).Combine(), number) }, _assembler.Assemble($"ror R8,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x9).Combine(), number) }, _assembler.Assemble($"ror R9,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xA).Combine(), number) }, _assembler.Assemble($"ror RA,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xB).Combine(), number) }, _assembler.Assemble($"ror RB,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xC).Combine(), number) }, _assembler.Assemble($"ror RC,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xD).Combine(), number) }, _assembler.Assemble($"ror RD,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xE).Combine(), number) }, _assembler.Assemble($"ror RE,{number}"));
+                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xF).Combine(), number) }, _assembler.Assemble($"ror RF,{number}"));
             }
         }
 
@@ -188,7 +188,7 @@ namespace SimpSim.NET.Tests
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
                 for (int number = 0; number <= byte.MaxValue; number++)
-                    CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xB, registerIndex), (byte)number) }, _assembler.Assemble($"jmpEQ R{registerIndex.ToHexString()}=R0,{number}"));
+                    CollectionAssert.AreEqual(new[] { new Instruction((0xB, registerIndex).Combine(), (byte)number) }, _assembler.Assemble($"jmpEQ R{registerIndex.ToHexString()}=R0,{number}"));
         }
 
         [Test]
@@ -196,7 +196,7 @@ namespace SimpSim.NET.Tests
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
                 for (int number = 0; number <= byte.MaxValue; number++)
-                    CollectionAssert.AreEqual(new[] { new Instruction(ByteUtilities.GetByteFromNibbles(0xF, registerIndex), (byte)number) }, _assembler.Assemble($"jmpLE R{registerIndex.ToHexString()}<=R0,{number}"));
+                    CollectionAssert.AreEqual(new[] { new Instruction((0xF, registerIndex).Combine(), (byte)number) }, _assembler.Assemble($"jmpLE R{registerIndex.ToHexString()}<=R0,{number}"));
         }
 
         [Test]
@@ -262,22 +262,22 @@ namespace SimpSim.NET.Tests
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
             {
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0x0, registerIndex)) }, _assembler.Assemble($"store R0,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0x1, registerIndex)) }, _assembler.Assemble($"store R1,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0x2, registerIndex)) }, _assembler.Assemble($"store R2,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0x3, registerIndex)) }, _assembler.Assemble($"store R3,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0x4, registerIndex)) }, _assembler.Assemble($"store R4,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0x5, registerIndex)) }, _assembler.Assemble($"store R5,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0x6, registerIndex)) }, _assembler.Assemble($"store R6,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0x7, registerIndex)) }, _assembler.Assemble($"store R7,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0x8, registerIndex)) }, _assembler.Assemble($"store R8,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0x9, registerIndex)) }, _assembler.Assemble($"store R9,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0xA, registerIndex)) }, _assembler.Assemble($"store RA,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0xB, registerIndex)) }, _assembler.Assemble($"store RB,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0xC, registerIndex)) }, _assembler.Assemble($"store RC,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0xD, registerIndex)) }, _assembler.Assemble($"store RD,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0xE, registerIndex)) }, _assembler.Assemble($"store RE,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, ByteUtilities.GetByteFromNibbles(0xF, registerIndex)) }, _assembler.Assemble($"store RF,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x0, registerIndex).Combine()) }, _assembler.Assemble($"store R0,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x1, registerIndex).Combine()) }, _assembler.Assemble($"store R1,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x2, registerIndex).Combine()) }, _assembler.Assemble($"store R2,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x3, registerIndex).Combine()) }, _assembler.Assemble($"store R3,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x4, registerIndex).Combine()) }, _assembler.Assemble($"store R4,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x5, registerIndex).Combine()) }, _assembler.Assemble($"store R5,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x6, registerIndex).Combine()) }, _assembler.Assemble($"store R6,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x7, registerIndex).Combine()) }, _assembler.Assemble($"store R7,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x8, registerIndex).Combine()) }, _assembler.Assemble($"store R8,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x9, registerIndex).Combine()) }, _assembler.Assemble($"store R9,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xA, registerIndex).Combine()) }, _assembler.Assemble($"store RA,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xB, registerIndex).Combine()) }, _assembler.Assemble($"store RB,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xC, registerIndex).Combine()) }, _assembler.Assemble($"store RC,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xD, registerIndex).Combine()) }, _assembler.Assemble($"store RD,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xE, registerIndex).Combine()) }, _assembler.Assemble($"store RE,[R{registerIndex.ToHexString()}]"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xF, registerIndex).Combine()) }, _assembler.Assemble($"store RF,[R{registerIndex.ToHexString()}]"));
             }
         }
 
@@ -286,22 +286,22 @@ namespace SimpSim.NET.Tests
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
             {
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0x0, registerIndex)) }, _assembler.Assemble($"move R0,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0x1, registerIndex)) }, _assembler.Assemble($"move R1,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0x2, registerIndex)) }, _assembler.Assemble($"move R2,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0x3, registerIndex)) }, _assembler.Assemble($"move R3,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0x4, registerIndex)) }, _assembler.Assemble($"move R4,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0x5, registerIndex)) }, _assembler.Assemble($"move R5,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0x6, registerIndex)) }, _assembler.Assemble($"move R6,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0x7, registerIndex)) }, _assembler.Assemble($"move R7,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0x8, registerIndex)) }, _assembler.Assemble($"move R8,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0x9, registerIndex)) }, _assembler.Assemble($"move R9,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0xA, registerIndex)) }, _assembler.Assemble($"move RA,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0xB, registerIndex)) }, _assembler.Assemble($"move RB,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0xC, registerIndex)) }, _assembler.Assemble($"move RC,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0xD, registerIndex)) }, _assembler.Assemble($"move RD,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0xE, registerIndex)) }, _assembler.Assemble($"move RE,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, ByteUtilities.GetByteFromNibbles(0xF, registerIndex)) }, _assembler.Assemble($"move RF,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x0, registerIndex).Combine()) }, _assembler.Assemble($"move R0,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x1, registerIndex).Combine()) }, _assembler.Assemble($"move R1,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x2, registerIndex).Combine()) }, _assembler.Assemble($"move R2,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x3, registerIndex).Combine()) }, _assembler.Assemble($"move R3,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x4, registerIndex).Combine()) }, _assembler.Assemble($"move R4,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x5, registerIndex).Combine()) }, _assembler.Assemble($"move R5,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x6, registerIndex).Combine()) }, _assembler.Assemble($"move R6,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x7, registerIndex).Combine()) }, _assembler.Assemble($"move R7,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x8, registerIndex).Combine()) }, _assembler.Assemble($"move R8,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x9, registerIndex).Combine()) }, _assembler.Assemble($"move R9,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xA, registerIndex).Combine()) }, _assembler.Assemble($"move RA,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xB, registerIndex).Combine()) }, _assembler.Assemble($"move RB,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xC, registerIndex).Combine()) }, _assembler.Assemble($"move RC,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xD, registerIndex).Combine()) }, _assembler.Assemble($"move RD,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xE, registerIndex).Combine()) }, _assembler.Assemble($"move RE,R{registerIndex.ToHexString()}"));
+                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xF, registerIndex).Combine()) }, _assembler.Assemble($"move RF,R{registerIndex.ToHexString()}"));
             }
         }
 
