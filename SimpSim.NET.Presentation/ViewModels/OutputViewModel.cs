@@ -15,10 +15,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 
         public string OutputWindowText
         {
-            get
-            {
-                return _outputWindowText;
-            }
+            get => _outputWindowText;
             set
             {
                 _outputWindowText = value;

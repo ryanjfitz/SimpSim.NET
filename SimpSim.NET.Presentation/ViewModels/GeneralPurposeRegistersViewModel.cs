@@ -16,10 +16,7 @@ namespace SimpSim.NET.Presentation.ViewModels
         [IndexerName("GPR")]
         public byte this[byte register]
         {
-            get
-            {
-                return _simulator.Registers[register];
-            }
+            get => _simulator.Registers[register];
             set
             {
                 byte newValue = value;

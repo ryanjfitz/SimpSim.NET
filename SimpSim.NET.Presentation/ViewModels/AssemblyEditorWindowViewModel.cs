@@ -30,10 +30,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 
         public string AssemblyEditorText
         {
-            get
-            {
-                return _assemblyEditorText;
-            }
+            get => _assemblyEditorText;
             set
             {
                 _assemblyEditorText = value;
@@ -43,10 +40,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 
         public string AssemblyResult
         {
-            get
-            {
-                return _assemblyResult;
-            }
+            get => _assemblyResult;
             set
             {
                 _assemblyResult = value;

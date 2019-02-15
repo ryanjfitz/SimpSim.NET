@@ -18,10 +18,7 @@ namespace SimpSim.NET
 
         public byte this[byte register]
         {
-            get
-            {
-                return _array[register];
-            }
+            get => _array[register];
             set
             {
                 byte newValue = value;

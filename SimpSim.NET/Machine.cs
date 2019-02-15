@@ -24,10 +24,7 @@ namespace SimpSim.NET
 
         public byte ProgramCounter
         {
-            get
-            {
-                return _programCounter;
-            }
+            get => _programCounter;
             set
             {
                 if (_programCounter != value)
@@ -40,10 +37,7 @@ namespace SimpSim.NET
 
         public Instruction InstructionRegister
         {
-            get
-            {
-                return _instructionRegister;
-            }
+            get => _instructionRegister;
             private set
             {
                 if (!Equals(_instructionRegister, value))
@@ -56,10 +50,7 @@ namespace SimpSim.NET
 
         public MachineState State
         {
-            get
-            {
-                return _state;
-            }
+            get => _state;
             private set
             {
                 if (_state != value)

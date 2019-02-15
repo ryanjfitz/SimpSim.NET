@@ -15,10 +15,7 @@ namespace SimpSim.NET
 
         public byte this[byte address]
         {
-            get
-            {
-                return _array[address];
-            }
+            get => _array[address];
             set
             {
                 byte newValue = value;

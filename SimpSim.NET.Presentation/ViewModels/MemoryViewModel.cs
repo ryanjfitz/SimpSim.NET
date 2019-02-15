@@ -16,10 +16,7 @@ namespace SimpSim.NET.Presentation.ViewModels
         [IndexerName("Addresses")]
         public byte this[byte address]
         {
-            get
-            {
-                return _simulator.Memory[address];
-            }
+            get => _simulator.Memory[address];
             set
             {
                 byte newValue = value;

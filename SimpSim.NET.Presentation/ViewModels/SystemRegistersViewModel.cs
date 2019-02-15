@@ -17,10 +17,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 
         public byte ProgramCounter
         {
-            get
-            {
-                return _simulator.Machine.ProgramCounter;
-            }
+            get => _simulator.Machine.ProgramCounter;
             set
             {
                 _simulator.Machine.ProgramCounter = value;
