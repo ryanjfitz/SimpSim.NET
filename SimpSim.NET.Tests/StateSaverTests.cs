@@ -7,88 +7,95 @@ namespace SimpSim.NET.Tests
     [TestFixture]
     public class StateSaverTests
     {
-        private readonly FileInfo _memorySaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.prg"));
-        private readonly FileInfo _registersSaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "RegistersSaveFile.prg"));
-        private readonly FileInfo _machineSaveFile = new FileInfo(Path.Combine(Path.GetTempPath(), "MachineSaveFile.prg"));
+        private StateSaver _stateSaver;
 
-        [OneTimeSetUp]
-        public void OneTimeSetUp()
+        [SetUp]
+        public void SetUp()
         {
-            DeleteSaveFiles();
+            _stateSaver = new StateSaver();
         }
 
         [Test]
         public void ShouldBeAbleToSaveMemoryState()
         {
-            Memory expectedMemory = new Memory();
+            RunFileTest("MemorySaveFile.prg", file =>
+            {
+                Memory expectedMemory = new Memory();
 
-            Random random = new Random();
-            for (int address = 0; address <= byte.MaxValue; address++)
-                expectedMemory[(byte)address] = (byte)random.Next(0x00, byte.MaxValue);
+                Random random = new Random();
+                for (int address = 0; address <= byte.MaxValue; address++)
+                    expectedMemory[(byte)address] = (byte)random.Next(0x00, byte.MaxValue);
 
-            StateSaver stateSaver = new StateSaver();
-            stateSaver.SaveMemory(expectedMemory, _memorySaveFile);
+                _stateSaver.SaveMemory(expectedMemory, file);
 
-            FileAssert.Exists(_memorySaveFile);
+                FileAssert.Exists(file);
 
-            Memory actualMemory = stateSaver.LoadMemory(_memorySaveFile);
+                Memory actualMemory = _stateSaver.LoadMemory(file);
 
-            for (int address = 0; address <= byte.MaxValue; address++)
-                Assert.AreEqual(expectedMemory[(byte)address], actualMemory[(byte)address]);
+                for (int address = 0; address <= byte.MaxValue; address++)
+                    Assert.AreEqual(expectedMemory[(byte)address], actualMemory[(byte)address]);
+            });
         }
 
         [Test]
         public void ShouldBeAbleToSaveRegistersState()
         {
-            Registers expectedRegisters = new Registers();
+            RunFileTest("RegistersSaveFile.prg", file =>
+            {
+                Registers expectedRegisters = new Registers();
 
-            Random random = new Random();
-            for (byte register = 0; register <= 0x0F; register++)
-                expectedRegisters[register] = (byte)random.Next(0x00, byte.MaxValue);
+                Random random = new Random();
+                for (byte register = 0; register <= 0x0F; register++)
+                    expectedRegisters[register] = (byte)random.Next(0x00, byte.MaxValue);
 
-            StateSaver stateSaver = new StateSaver();
-            stateSaver.SaveRegisters(expectedRegisters, _registersSaveFile);
+                _stateSaver.SaveRegisters(expectedRegisters, file);
 
-            FileAssert.Exists(_registersSaveFile);
+                FileAssert.Exists(file);
 
-            Registers actualRegisters = stateSaver.LoadRegisters(_registersSaveFile);
+                Registers actualRegisters = _stateSaver.LoadRegisters(file);
 
-            for (byte register = 0; register < 0x0F; register++)
-                Assert.AreEqual(expectedRegisters[register], actualRegisters[register]);
+                for (byte register = 0; register < 0x0F; register++)
+                    Assert.AreEqual(expectedRegisters[register], actualRegisters[register]);
+            });
         }
 
         [Test]
         public void ShouldBeAbleToSaveMachineState()
         {
-            Memory memory = new Memory();
-            memory.LoadInstructions(SamplePrograms.HelloWorldInstructions);
+            RunFileTest("MachineSaveFile.prg", file =>
+            {
+                Memory memory = new Memory();
+                memory.LoadInstructions(SamplePrograms.HelloWorldInstructions);
 
-            Machine expectedMachine = new Machine(memory, new Registers());
-            expectedMachine.Run();
+                Machine expectedMachine = new Machine(memory, new Registers());
+                expectedMachine.Run();
 
-            StateSaver stateSaver = new StateSaver();
-            stateSaver.SaveMachine(expectedMachine, _machineSaveFile);
+                _stateSaver.SaveMachine(expectedMachine, file);
 
-            FileAssert.Exists(_machineSaveFile);
+                FileAssert.Exists(file);
 
-            Machine actualMachine = stateSaver.LoadMachine(_machineSaveFile);
+                Machine actualMachine = _stateSaver.LoadMachine(file);
 
-            Assert.AreEqual(expectedMachine.State, actualMachine.State);
-            Assert.AreEqual(expectedMachine.InstructionRegister, actualMachine.InstructionRegister);
-            Assert.AreEqual(expectedMachine.ProgramCounter, actualMachine.ProgramCounter);
+                Assert.AreEqual(expectedMachine.State, actualMachine.State);
+                Assert.AreEqual(expectedMachine.InstructionRegister, actualMachine.InstructionRegister);
+                Assert.AreEqual(expectedMachine.ProgramCounter, actualMachine.ProgramCounter);
+            });
         }
 
-        private void DeleteSaveFiles()
+        private void RunFileTest(string fileName, Action<FileInfo> testAction)
         {
-            _memorySaveFile.Delete();
-            _registersSaveFile.Delete();
-            _machineSaveFile.Delete();
-        }
+            FileInfo file = null;
 
-        [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
-            DeleteSaveFiles();
+            try
+            {
+                file = new FileInfo(Path.Combine(Path.GetTempPath(), fileName));
+
+                testAction(file);
+            }
+            finally
+            {
+                file?.Delete();
+            }
         }
     }
 }
