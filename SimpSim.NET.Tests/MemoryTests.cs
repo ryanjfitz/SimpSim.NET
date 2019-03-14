@@ -1,29 +1,27 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace SimpSim.NET.Tests
 {
-    [TestFixture]
     public class MemoryTests
     {
-        private Memory _memory;
+        private readonly Memory _memory;
 
-        [SetUp]
-        public void SetUp()
+        public MemoryTests()
         {
             _memory = new Memory();
         }
 
-        [Test]
+        [Fact]
         public void ShouldBeAbleToWriteToAllMemoryBytes()
         {
             for (int i = 0; i <= byte.MaxValue; i++)
                 _memory[(byte)i] = 0xFF;
 
             for (int i = 0; i <= byte.MaxValue; i++)
-                Assert.AreEqual(0xFF, _memory[(byte)i]);
+                Assert.Equal(0xFF, _memory[(byte)i]);
         }
 
-        [Test]
+        [Fact]
         public void ShouldWriteInstructionToMemoryAddress()
         {
             Instruction instruction = new Instruction(0x03, 0x04);
@@ -32,11 +30,11 @@ namespace SimpSim.NET.Tests
 
             _memory.LoadInstruction(instruction, address);
 
-            Assert.AreEqual(instruction.Byte1, _memory[address]);
-            Assert.AreEqual(instruction.Byte2, _memory[++address]);
+            Assert.Equal(instruction.Byte1, _memory[address]);
+            Assert.Equal(instruction.Byte2, _memory[++address]);
         }
 
-        [Test]
+        [Fact]
         public void ShouldWriteInstructionsToMemory()
         {
             Instruction[] instructions =
@@ -47,13 +45,13 @@ namespace SimpSim.NET.Tests
 
             _memory.LoadInstructions(instructions);
 
-            Assert.AreEqual(0x21, _memory[0x00]);
-            Assert.AreEqual(0x10, _memory[0x01]);
-            Assert.AreEqual(0x22, _memory[0x02]);
-            Assert.AreEqual(0x01, _memory[0x03]);
+            Assert.Equal(0x21, _memory[0x00]);
+            Assert.Equal(0x10, _memory[0x01]);
+            Assert.Equal(0x22, _memory[0x02]);
+            Assert.Equal(0x01, _memory[0x03]);
         }
 
-        [Test]
+        [Fact]
         public void ShouldBeAbleToRetrieveInstructionAtAddress()
         {
             Instruction instruction = new Instruction(0xAA, 0xBB);
@@ -64,10 +62,10 @@ namespace SimpSim.NET.Tests
 
             Instruction actual = _memory.GetInstruction(address);
 
-            Assert.AreEqual(instruction, actual);
+            Assert.Equal(instruction, actual);
         }
 
-        [Test]
+        [Fact]
         public void ShouldBeAbleToClearMemory()
         {
             for (int i = 0; i <= byte.MaxValue; i++)
@@ -76,7 +74,7 @@ namespace SimpSim.NET.Tests
             _memory.Clear();
 
             for (int i = 0; i <= byte.MaxValue; i++)
-                Assert.AreEqual(0x00, _memory[(byte)i]);
+                Assert.Equal(0x00, _memory[(byte)i]);
         }
     }
 }

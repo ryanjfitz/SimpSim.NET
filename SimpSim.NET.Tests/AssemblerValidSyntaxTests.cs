@@ -1,95 +1,93 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace SimpSim.NET.Tests
 {
-    [TestFixture]
     public class AssemblerValidSyntaxTests
     {
-        private Assembler _assembler;
+        private readonly Assembler _assembler;
 
-        [SetUp]
-        public void SetUp()
+        public AssemblerValidSyntaxTests()
         {
             _assembler = new Assembler();
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleImmediateLoadInstructions()
         {
             for (int number = 0; number <= byte.MaxValue; number++)
             {
                 byte b = (byte)number;
 
-                CollectionAssert.AreEqual(new[] { new Instruction(0x20, b) }, _assembler.Assemble($"load R0,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x21, b) }, _assembler.Assemble($"load R1,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x22, b) }, _assembler.Assemble($"load R2,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x23, b) }, _assembler.Assemble($"load R3,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x24, b) }, _assembler.Assemble($"load R4,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x25, b) }, _assembler.Assemble($"load R5,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x26, b) }, _assembler.Assemble($"load R6,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x27, b) }, _assembler.Assemble($"load R7,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x28, b) }, _assembler.Assemble($"load R8,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x29, b) }, _assembler.Assemble($"load R9,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x2A, b) }, _assembler.Assemble($"load RA,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x2B, b) }, _assembler.Assemble($"load RB,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x2C, b) }, _assembler.Assemble($"load RC,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x2D, b) }, _assembler.Assemble($"load RD,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x2E, b) }, _assembler.Assemble($"load RE,{b}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x2F, b) }, _assembler.Assemble($"load RF,{b}"));
+                Assert.Equal(new[] { new Instruction(0x20, b) }, _assembler.Assemble($"load R0,{b}"));
+                Assert.Equal(new[] { new Instruction(0x21, b) }, _assembler.Assemble($"load R1,{b}"));
+                Assert.Equal(new[] { new Instruction(0x22, b) }, _assembler.Assemble($"load R2,{b}"));
+                Assert.Equal(new[] { new Instruction(0x23, b) }, _assembler.Assemble($"load R3,{b}"));
+                Assert.Equal(new[] { new Instruction(0x24, b) }, _assembler.Assemble($"load R4,{b}"));
+                Assert.Equal(new[] { new Instruction(0x25, b) }, _assembler.Assemble($"load R5,{b}"));
+                Assert.Equal(new[] { new Instruction(0x26, b) }, _assembler.Assemble($"load R6,{b}"));
+                Assert.Equal(new[] { new Instruction(0x27, b) }, _assembler.Assemble($"load R7,{b}"));
+                Assert.Equal(new[] { new Instruction(0x28, b) }, _assembler.Assemble($"load R8,{b}"));
+                Assert.Equal(new[] { new Instruction(0x29, b) }, _assembler.Assemble($"load R9,{b}"));
+                Assert.Equal(new[] { new Instruction(0x2A, b) }, _assembler.Assemble($"load RA,{b}"));
+                Assert.Equal(new[] { new Instruction(0x2B, b) }, _assembler.Assemble($"load RB,{b}"));
+                Assert.Equal(new[] { new Instruction(0x2C, b) }, _assembler.Assemble($"load RC,{b}"));
+                Assert.Equal(new[] { new Instruction(0x2D, b) }, _assembler.Assemble($"load RD,{b}"));
+                Assert.Equal(new[] { new Instruction(0x2E, b) }, _assembler.Assemble($"load RE,{b}"));
+                Assert.Equal(new[] { new Instruction(0x2F, b) }, _assembler.Assemble($"load RF,{b}"));
             }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleDirectLoadInstructions()
         {
             for (int number = 0; number <= byte.MaxValue; number++)
             {
                 byte b = (byte)number;
 
-                CollectionAssert.AreEqual(new[] { new Instruction(0x10, b) }, _assembler.Assemble($"load R0,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x11, b) }, _assembler.Assemble($"load R1,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x12, b) }, _assembler.Assemble($"load R2,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x13, b) }, _assembler.Assemble($"load R3,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x14, b) }, _assembler.Assemble($"load R4,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x15, b) }, _assembler.Assemble($"load R5,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x16, b) }, _assembler.Assemble($"load R6,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x17, b) }, _assembler.Assemble($"load R7,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x18, b) }, _assembler.Assemble($"load R8,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x19, b) }, _assembler.Assemble($"load R9,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x1A, b) }, _assembler.Assemble($"load RA,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x1B, b) }, _assembler.Assemble($"load RB,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x1C, b) }, _assembler.Assemble($"load RC,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x1D, b) }, _assembler.Assemble($"load RD,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x1E, b) }, _assembler.Assemble($"load RE,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x1F, b) }, _assembler.Assemble($"load RF,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x10, b) }, _assembler.Assemble($"load R0,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x11, b) }, _assembler.Assemble($"load R1,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x12, b) }, _assembler.Assemble($"load R2,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x13, b) }, _assembler.Assemble($"load R3,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x14, b) }, _assembler.Assemble($"load R4,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x15, b) }, _assembler.Assemble($"load R5,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x16, b) }, _assembler.Assemble($"load R6,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x17, b) }, _assembler.Assemble($"load R7,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x18, b) }, _assembler.Assemble($"load R8,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x19, b) }, _assembler.Assemble($"load R9,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x1A, b) }, _assembler.Assemble($"load RA,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x1B, b) }, _assembler.Assemble($"load RB,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x1C, b) }, _assembler.Assemble($"load RC,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x1D, b) }, _assembler.Assemble($"load RD,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x1E, b) }, _assembler.Assemble($"load RE,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x1F, b) }, _assembler.Assemble($"load RF,[{b}]"));
             }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleIndirectLoadInstructions()
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
             {
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x0, registerIndex).Combine()) }, _assembler.Assemble($"load R0,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x1, registerIndex).Combine()) }, _assembler.Assemble($"load R1,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x2, registerIndex).Combine()) }, _assembler.Assemble($"load R2,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x3, registerIndex).Combine()) }, _assembler.Assemble($"load R3,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x4, registerIndex).Combine()) }, _assembler.Assemble($"load R4,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x5, registerIndex).Combine()) }, _assembler.Assemble($"load R5,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x6, registerIndex).Combine()) }, _assembler.Assemble($"load R6,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x7, registerIndex).Combine()) }, _assembler.Assemble($"load R7,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x8, registerIndex).Combine()) }, _assembler.Assemble($"load R8,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0x9, registerIndex).Combine()) }, _assembler.Assemble($"load R9,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xA, registerIndex).Combine()) }, _assembler.Assemble($"load RA,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xB, registerIndex).Combine()) }, _assembler.Assemble($"load RB,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xC, registerIndex).Combine()) }, _assembler.Assemble($"load RC,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xD, registerIndex).Combine()) }, _assembler.Assemble($"load RD,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xE, registerIndex).Combine()) }, _assembler.Assemble($"load RE,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xD0, (0xF, registerIndex).Combine()) }, _assembler.Assemble($"load RF,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0x0, registerIndex).Combine()) }, _assembler.Assemble($"load R0,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0x1, registerIndex).Combine()) }, _assembler.Assemble($"load R1,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0x2, registerIndex).Combine()) }, _assembler.Assemble($"load R2,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0x3, registerIndex).Combine()) }, _assembler.Assemble($"load R3,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0x4, registerIndex).Combine()) }, _assembler.Assemble($"load R4,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0x5, registerIndex).Combine()) }, _assembler.Assemble($"load R5,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0x6, registerIndex).Combine()) }, _assembler.Assemble($"load R6,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0x7, registerIndex).Combine()) }, _assembler.Assemble($"load R7,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0x8, registerIndex).Combine()) }, _assembler.Assemble($"load R8,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0x9, registerIndex).Combine()) }, _assembler.Assemble($"load R9,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0xA, registerIndex).Combine()) }, _assembler.Assemble($"load RA,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0xB, registerIndex).Combine()) }, _assembler.Assemble($"load RB,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0xC, registerIndex).Combine()) }, _assembler.Assemble($"load RC,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0xD, registerIndex).Combine()) }, _assembler.Assemble($"load RD,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0xE, registerIndex).Combine()) }, _assembler.Assemble($"load RE,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xD0, (0xF, registerIndex).Combine()) }, _assembler.Assemble($"load RF,[R{registerIndex.ToHexString()}]"));
             }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleAddIntegerInstructions()
         {
             for (byte i = 0; i < 16; i++)
@@ -99,11 +97,11 @@ namespace SimpSim.NET.Tests
                         Instruction[] expected = { new Instruction((0x5, i).Combine(), (j, k).Combine()) };
                         Instruction[] actual = _assembler.Assemble($"addi R{i.ToHexString()},R{j.ToHexString()},R{k.ToHexString()}");
 
-                        CollectionAssert.AreEqual(expected, actual);
+                        Assert.Equal(expected, actual);
                     }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleAddFloatInstructions()
         {
             for (byte i = 0; i < 16; i++)
@@ -113,11 +111,11 @@ namespace SimpSim.NET.Tests
                         Instruction[] expected = { new Instruction((0x6, i).Combine(), (j, k).Combine()) };
                         Instruction[] actual = _assembler.Assemble($"addf R{i.ToHexString()},R{j.ToHexString()},R{k.ToHexString()}");
 
-                        CollectionAssert.AreEqual(expected, actual);
+                        Assert.Equal(expected, actual);
                     }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleBitwiseAndInstructions()
         {
             for (byte i = 0; i < 16; i++)
@@ -127,11 +125,11 @@ namespace SimpSim.NET.Tests
                         Instruction[] expected = { new Instruction((0x8, i).Combine(), (j, k).Combine()) };
                         Instruction[] actual = _assembler.Assemble($"and R{i.ToHexString()},R{j.ToHexString()},R{k.ToHexString()}");
 
-                        CollectionAssert.AreEqual(expected, actual);
+                        Assert.Equal(expected, actual);
                     }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleBitwiseOrInstructions()
         {
             for (byte i = 0; i < 16; i++)
@@ -141,11 +139,11 @@ namespace SimpSim.NET.Tests
                         Instruction[] expected = { new Instruction((0x7, i).Combine(), (j, k).Combine()) };
                         Instruction[] actual = _assembler.Assemble($"or R{i.ToHexString()},R{j.ToHexString()},R{k.ToHexString()}");
 
-                        CollectionAssert.AreEqual(expected, actual);
+                        Assert.Equal(expected, actual);
                     }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleBitwiseExclusiveOrInstructions()
         {
             for (byte i = 0; i < 16; i++)
@@ -155,58 +153,58 @@ namespace SimpSim.NET.Tests
                         Instruction[] expected = { new Instruction((0x9, i).Combine(), (j, k).Combine()) };
                         Instruction[] actual = _assembler.Assemble($"xor R{i.ToHexString()},R{j.ToHexString()},R{k.ToHexString()}");
 
-                        CollectionAssert.AreEqual(expected, actual);
+                        Assert.Equal(expected, actual);
                     }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleRorInstructions()
         {
             for (byte number = 0; number < 16; number++)
             {
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x0).Combine(), number) }, _assembler.Assemble($"ror R0,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x1).Combine(), number) }, _assembler.Assemble($"ror R1,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x2).Combine(), number) }, _assembler.Assemble($"ror R2,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x3).Combine(), number) }, _assembler.Assemble($"ror R3,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x4).Combine(), number) }, _assembler.Assemble($"ror R4,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x5).Combine(), number) }, _assembler.Assemble($"ror R5,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x6).Combine(), number) }, _assembler.Assemble($"ror R6,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x7).Combine(), number) }, _assembler.Assemble($"ror R7,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x8).Combine(), number) }, _assembler.Assemble($"ror R8,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0x9).Combine(), number) }, _assembler.Assemble($"ror R9,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xA).Combine(), number) }, _assembler.Assemble($"ror RA,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xB).Combine(), number) }, _assembler.Assemble($"ror RB,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xC).Combine(), number) }, _assembler.Assemble($"ror RC,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xD).Combine(), number) }, _assembler.Assemble($"ror RD,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xE).Combine(), number) }, _assembler.Assemble($"ror RE,{number}"));
-                CollectionAssert.AreEqual(new[] { new Instruction((0xA, 0xF).Combine(), number) }, _assembler.Assemble($"ror RF,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0x0).Combine(), number) }, _assembler.Assemble($"ror R0,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0x1).Combine(), number) }, _assembler.Assemble($"ror R1,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0x2).Combine(), number) }, _assembler.Assemble($"ror R2,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0x3).Combine(), number) }, _assembler.Assemble($"ror R3,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0x4).Combine(), number) }, _assembler.Assemble($"ror R4,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0x5).Combine(), number) }, _assembler.Assemble($"ror R5,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0x6).Combine(), number) }, _assembler.Assemble($"ror R6,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0x7).Combine(), number) }, _assembler.Assemble($"ror R7,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0x8).Combine(), number) }, _assembler.Assemble($"ror R8,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0x9).Combine(), number) }, _assembler.Assemble($"ror R9,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0xA).Combine(), number) }, _assembler.Assemble($"ror RA,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0xB).Combine(), number) }, _assembler.Assemble($"ror RB,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0xC).Combine(), number) }, _assembler.Assemble($"ror RC,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0xD).Combine(), number) }, _assembler.Assemble($"ror RD,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0xE).Combine(), number) }, _assembler.Assemble($"ror RE,{number}"));
+                Assert.Equal(new[] { new Instruction((0xA, 0xF).Combine(), number) }, _assembler.Assemble($"ror RF,{number}"));
             }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleJumpEqualInstructions()
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
                 for (int number = 0; number <= byte.MaxValue; number++)
-                    CollectionAssert.AreEqual(new[] { new Instruction((0xB, registerIndex).Combine(), (byte)number) }, _assembler.Assemble($"jmpEQ R{registerIndex.ToHexString()}=R0,{number}"));
+                    Assert.Equal(new[] { new Instruction((0xB, registerIndex).Combine(), (byte)number) }, _assembler.Assemble($"jmpEQ R{registerIndex.ToHexString()}=R0,{number}"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleJumpLessEqualInstructions()
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
                 for (int number = 0; number <= byte.MaxValue; number++)
-                    CollectionAssert.AreEqual(new[] { new Instruction((0xF, registerIndex).Combine(), (byte)number) }, _assembler.Assemble($"jmpLE R{registerIndex.ToHexString()}<=R0,{number}"));
+                    Assert.Equal(new[] { new Instruction((0xF, registerIndex).Combine(), (byte)number) }, _assembler.Assemble($"jmpLE R{registerIndex.ToHexString()}<=R0,{number}"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleJumpInstructions()
         {
             for (int number = 0; number <= byte.MaxValue; number++)
-                CollectionAssert.AreEqual(new[] { new Instruction(0xB0, (byte)number) }, _assembler.Assemble($"jmp {number}"));
+                Assert.Equal(new[] { new Instruction(0xB0, (byte)number) }, _assembler.Assemble($"jmp {number}"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleDataByteInstructions()
         {
             Instruction[] expected = {
@@ -221,171 +219,171 @@ namespace SimpSim.NET.Tests
                 new Instruction(0x64, 0x00)
             };
 
-            CollectionAssert.AreEqual(expected, _assembler.Assemble("db 1,4,9,16,25,36,\"Hello World\""));
-            CollectionAssert.AreEqual(expected, _assembler.Assemble("db 1,4,9,16,25,36,'Hello World'"));
+            Assert.Equal(expected, _assembler.Assemble("db 1,4,9,16,25,36,\"Hello World\""));
+            Assert.Equal(expected, _assembler.Assemble("db 1,4,9,16,25,36,'Hello World'"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleHaltInstruction()
         {
-            CollectionAssert.AreEqual(new[] { new Instruction(0xC0, 0x00) }, _assembler.Assemble("halt"));
+            Assert.Equal(new[] { new Instruction(0xC0, 0x00) }, _assembler.Assemble("halt"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleDirectStoreInstructions()
         {
             for (int number = 0; number <= byte.MaxValue; number++)
             {
                 byte b = (byte)number;
 
-                CollectionAssert.AreEqual(new[] { new Instruction(0x30, b) }, _assembler.Assemble($"store R0,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x31, b) }, _assembler.Assemble($"store R1,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x32, b) }, _assembler.Assemble($"store R2,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x33, b) }, _assembler.Assemble($"store R3,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x34, b) }, _assembler.Assemble($"store R4,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x35, b) }, _assembler.Assemble($"store R5,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x36, b) }, _assembler.Assemble($"store R6,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x37, b) }, _assembler.Assemble($"store R7,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x38, b) }, _assembler.Assemble($"store R8,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x39, b) }, _assembler.Assemble($"store R9,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x3A, b) }, _assembler.Assemble($"store RA,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x3B, b) }, _assembler.Assemble($"store RB,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x3C, b) }, _assembler.Assemble($"store RC,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x3D, b) }, _assembler.Assemble($"store RD,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x3E, b) }, _assembler.Assemble($"store RE,[{b}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x3F, b) }, _assembler.Assemble($"store RF,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x30, b) }, _assembler.Assemble($"store R0,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x31, b) }, _assembler.Assemble($"store R1,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x32, b) }, _assembler.Assemble($"store R2,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x33, b) }, _assembler.Assemble($"store R3,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x34, b) }, _assembler.Assemble($"store R4,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x35, b) }, _assembler.Assemble($"store R5,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x36, b) }, _assembler.Assemble($"store R6,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x37, b) }, _assembler.Assemble($"store R7,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x38, b) }, _assembler.Assemble($"store R8,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x39, b) }, _assembler.Assemble($"store R9,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x3A, b) }, _assembler.Assemble($"store RA,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x3B, b) }, _assembler.Assemble($"store RB,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x3C, b) }, _assembler.Assemble($"store RC,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x3D, b) }, _assembler.Assemble($"store RD,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x3E, b) }, _assembler.Assemble($"store RE,[{b}]"));
+                Assert.Equal(new[] { new Instruction(0x3F, b) }, _assembler.Assemble($"store RF,[{b}]"));
             }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleIndirectStoreInstructions()
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
             {
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x0, registerIndex).Combine()) }, _assembler.Assemble($"store R0,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x1, registerIndex).Combine()) }, _assembler.Assemble($"store R1,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x2, registerIndex).Combine()) }, _assembler.Assemble($"store R2,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x3, registerIndex).Combine()) }, _assembler.Assemble($"store R3,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x4, registerIndex).Combine()) }, _assembler.Assemble($"store R4,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x5, registerIndex).Combine()) }, _assembler.Assemble($"store R5,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x6, registerIndex).Combine()) }, _assembler.Assemble($"store R6,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x7, registerIndex).Combine()) }, _assembler.Assemble($"store R7,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x8, registerIndex).Combine()) }, _assembler.Assemble($"store R8,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0x9, registerIndex).Combine()) }, _assembler.Assemble($"store R9,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xA, registerIndex).Combine()) }, _assembler.Assemble($"store RA,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xB, registerIndex).Combine()) }, _assembler.Assemble($"store RB,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xC, registerIndex).Combine()) }, _assembler.Assemble($"store RC,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xD, registerIndex).Combine()) }, _assembler.Assemble($"store RD,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xE, registerIndex).Combine()) }, _assembler.Assemble($"store RE,[R{registerIndex.ToHexString()}]"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0xE0, (0xF, registerIndex).Combine()) }, _assembler.Assemble($"store RF,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0x0, registerIndex).Combine()) }, _assembler.Assemble($"store R0,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0x1, registerIndex).Combine()) }, _assembler.Assemble($"store R1,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0x2, registerIndex).Combine()) }, _assembler.Assemble($"store R2,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0x3, registerIndex).Combine()) }, _assembler.Assemble($"store R3,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0x4, registerIndex).Combine()) }, _assembler.Assemble($"store R4,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0x5, registerIndex).Combine()) }, _assembler.Assemble($"store R5,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0x6, registerIndex).Combine()) }, _assembler.Assemble($"store R6,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0x7, registerIndex).Combine()) }, _assembler.Assemble($"store R7,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0x8, registerIndex).Combine()) }, _assembler.Assemble($"store R8,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0x9, registerIndex).Combine()) }, _assembler.Assemble($"store R9,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0xA, registerIndex).Combine()) }, _assembler.Assemble($"store RA,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0xB, registerIndex).Combine()) }, _assembler.Assemble($"store RB,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0xC, registerIndex).Combine()) }, _assembler.Assemble($"store RC,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0xD, registerIndex).Combine()) }, _assembler.Assemble($"store RD,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0xE, registerIndex).Combine()) }, _assembler.Assemble($"store RE,[R{registerIndex.ToHexString()}]"));
+                Assert.Equal(new[] { new Instruction(0xE0, (0xF, registerIndex).Combine()) }, _assembler.Assemble($"store RF,[R{registerIndex.ToHexString()}]"));
             }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleMoveInstructions()
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
             {
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x0, registerIndex).Combine()) }, _assembler.Assemble($"move R0,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x1, registerIndex).Combine()) }, _assembler.Assemble($"move R1,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x2, registerIndex).Combine()) }, _assembler.Assemble($"move R2,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x3, registerIndex).Combine()) }, _assembler.Assemble($"move R3,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x4, registerIndex).Combine()) }, _assembler.Assemble($"move R4,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x5, registerIndex).Combine()) }, _assembler.Assemble($"move R5,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x6, registerIndex).Combine()) }, _assembler.Assemble($"move R6,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x7, registerIndex).Combine()) }, _assembler.Assemble($"move R7,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x8, registerIndex).Combine()) }, _assembler.Assemble($"move R8,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0x9, registerIndex).Combine()) }, _assembler.Assemble($"move R9,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xA, registerIndex).Combine()) }, _assembler.Assemble($"move RA,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xB, registerIndex).Combine()) }, _assembler.Assemble($"move RB,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xC, registerIndex).Combine()) }, _assembler.Assemble($"move RC,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xD, registerIndex).Combine()) }, _assembler.Assemble($"move RD,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xE, registerIndex).Combine()) }, _assembler.Assemble($"move RE,R{registerIndex.ToHexString()}"));
-                CollectionAssert.AreEqual(new[] { new Instruction(0x40, (0xF, registerIndex).Combine()) }, _assembler.Assemble($"move RF,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0x0, registerIndex).Combine()) }, _assembler.Assemble($"move R0,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0x1, registerIndex).Combine()) }, _assembler.Assemble($"move R1,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0x2, registerIndex).Combine()) }, _assembler.Assemble($"move R2,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0x3, registerIndex).Combine()) }, _assembler.Assemble($"move R3,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0x4, registerIndex).Combine()) }, _assembler.Assemble($"move R4,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0x5, registerIndex).Combine()) }, _assembler.Assemble($"move R5,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0x6, registerIndex).Combine()) }, _assembler.Assemble($"move R6,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0x7, registerIndex).Combine()) }, _assembler.Assemble($"move R7,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0x8, registerIndex).Combine()) }, _assembler.Assemble($"move R8,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0x9, registerIndex).Combine()) }, _assembler.Assemble($"move R9,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0xA, registerIndex).Combine()) }, _assembler.Assemble($"move RA,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0xB, registerIndex).Combine()) }, _assembler.Assemble($"move RB,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0xC, registerIndex).Combine()) }, _assembler.Assemble($"move RC,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0xD, registerIndex).Combine()) }, _assembler.Assemble($"move RD,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0xE, registerIndex).Combine()) }, _assembler.Assemble($"move RE,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (0xF, registerIndex).Combine()) }, _assembler.Assemble($"move RF,R{registerIndex.ToHexString()}"));
             }
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleHelloWorldSampleProgram()
         {
-            CollectionAssert.AreEqual(SamplePrograms.HelloWorldInstructions, _assembler.Assemble(SamplePrograms.HelloWorldCode));
+            Assert.Equal(SamplePrograms.HelloWorldInstructions, _assembler.Assemble(SamplePrograms.HelloWorldCode));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleOutputTestSampleProgram()
         {
-            CollectionAssert.AreEqual(SamplePrograms.OutputTestInstructions, _assembler.Assemble(SamplePrograms.OutputTestCode));
+            Assert.Equal(SamplePrograms.OutputTestInstructions, _assembler.Assemble(SamplePrograms.OutputTestCode));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleTemplateSampleProgram()
         {
-            CollectionAssert.AreEqual(SamplePrograms.TemplateInstructions, _assembler.Assemble(SamplePrograms.TemplateCode));
+            Assert.Equal(SamplePrograms.TemplateInstructions, _assembler.Assemble(SamplePrograms.TemplateCode));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleProgramWithLabelUsageBeforeDeclaration()
         {
-            CollectionAssert.AreEqual(new[] { new Instruction(0x21, 0x02), new Instruction(0x0A, 0x00) }, _assembler.Assemble("load    R1,Text\r\nText:    db      10"));
+            Assert.Equal(new[] { new Instruction(0x21, 0x02), new Instruction(0x0A, 0x00) }, _assembler.Assemble("load    R1,Text\r\nText:    db      10"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleDecimalLiterals()
         {
-            CollectionAssert.AreEqual(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 1d"));
-            CollectionAssert.AreEqual(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 100d"));
-            CollectionAssert.AreEqual(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 255d"));
+            Assert.Equal(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 1d"));
+            Assert.Equal(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 100d"));
+            Assert.Equal(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 255d"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleNegativeDecimalLiterals()
         {
-            CollectionAssert.AreEqual(new[] { new Instruction(0x80, 0x00) }, _assembler.Assemble("db -128"));
-            CollectionAssert.AreEqual(new[] { new Instruction(0xAF, 0x00) }, _assembler.Assemble("db -81d"));
+            Assert.Equal(new[] { new Instruction(0x80, 0x00) }, _assembler.Assemble("db -128"));
+            Assert.Equal(new[] { new Instruction(0xAF, 0x00) }, _assembler.Assemble("db -81d"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleBinaryLiterals()
         {
-            CollectionAssert.AreEqual(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 00000001b"));
-            CollectionAssert.AreEqual(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 01100100b"));
-            CollectionAssert.AreEqual(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 11111111b"));
+            Assert.Equal(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 00000001b"));
+            Assert.Equal(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 01100100b"));
+            Assert.Equal(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 11111111b"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleHexLiterals()
         {
-            CollectionAssert.AreEqual(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 0x01"));
-            CollectionAssert.AreEqual(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 0x64"));
-            CollectionAssert.AreEqual(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 0xFF"));
+            Assert.Equal(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 0x01"));
+            Assert.Equal(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 0x64"));
+            Assert.Equal(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 0xFF"));
 
-            CollectionAssert.AreEqual(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db $01"));
-            CollectionAssert.AreEqual(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db $64"));
-            CollectionAssert.AreEqual(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db $FF"));
+            Assert.Equal(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db $01"));
+            Assert.Equal(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db $64"));
+            Assert.Equal(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db $FF"));
 
-            CollectionAssert.AreEqual(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 01h"));
-            CollectionAssert.AreEqual(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 64h"));
-            CollectionAssert.AreEqual(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 0FFh"));
+            Assert.Equal(new[] { new Instruction(0x01, 0x00) }, _assembler.Assemble("db 01h"));
+            Assert.Equal(new[] { new Instruction(0x64, 0x00) }, _assembler.Assemble("db 64h"));
+            Assert.Equal(new[] { new Instruction(0xFF, 0x00) }, _assembler.Assemble("db 0FFh"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldIgnoreComments()
         {
-            CollectionAssert.AreEqual(new[] { new Instruction(0x23, 0xAA) }, _assembler.Assemble("load R3, 0xAA; This is an immediate load instruction."));
+            Assert.Equal(new[] { new Instruction(0x23, 0xAA) }, _assembler.Assemble("load R3, 0xAA; This is an immediate load instruction."));
 
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble(";load R3, 0xAA; This is a commented immediate load instruction."));
+            Assert.Equal(new Instruction[] { }, _assembler.Assemble(";load R3, 0xAA; This is a commented immediate load instruction."));
 
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble(";This is a comment with no instructions preceding it."));
+            Assert.Equal(new Instruction[] { }, _assembler.Assemble(";This is a comment with no instructions preceding it."));
 
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble(";This;comment;has;multiple;semicolons."));
+            Assert.Equal(new Instruction[] { }, _assembler.Assemble(";This;comment;has;multiple;semicolons."));
 
-            CollectionAssert.AreEqual(new Instruction[] { }, _assembler.Assemble(";"));
+            Assert.Equal(new Instruction[] { }, _assembler.Assemble(";"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleOriginInstruction_WithOneOriginOnly()
         {
-            CollectionAssert.AreEqual(new[]
+            Assert.Equal(new[]
             {
                 new Instruction(0x00, 0x00),
                 new Instruction(0x00, 0x00),
@@ -396,10 +394,10 @@ namespace SimpSim.NET.Tests
                                   load R0,2"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleOriginInstruction_WithLowerOriginFollowingHigherOrigin()
         {
-            CollectionAssert.AreEqual(new[]
+            Assert.Equal(new[]
             {
                 new Instruction(0x00, 0x00),
                 new Instruction(0x25, 0x01),
@@ -414,10 +412,10 @@ namespace SimpSim.NET.Tests
                                   load R5,1"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldAssembleOriginInstruction_WithOriginPreceedingLabel()
         {
-            CollectionAssert.AreEqual(new[]
+            Assert.Equal(new[]
             {
                 new Instruction(0xB0, 0x0A),
                 new Instruction(0x00, 0x00),

@@ -1,17 +1,15 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace SimpSim.NET.Tests
 {
-    [TestFixture]
     public class ProgramTests
     {
-        private Memory _memory;
+        private readonly Memory _memory;
         private string _actualOutput;
-        private Registers _registers;
-        private Machine _machine;
+        private readonly Registers _registers;
+        private readonly Machine _machine;
 
-        [SetUp]
-        public void SetUp()
+        public ProgramTests()
         {
             _memory = new Memory();
 
@@ -23,7 +21,7 @@ namespace SimpSim.NET.Tests
             _machine = new Machine(_memory, _registers);
         }
 
-        [Test]
+        [Fact]
         public void TestHelloWorldOutput()
         {
             _memory.LoadInstructions(SamplePrograms.HelloWorldInstructions);
@@ -32,10 +30,10 @@ namespace SimpSim.NET.Tests
 
             const string expectedOutput = "\nHello world !!\n    from the\n  Simple Simulator\n\0";
 
-            Assert.AreEqual(expectedOutput, _actualOutput);
+            Assert.Equal(expectedOutput, _actualOutput);
         }
 
-        [Test]
+        [Fact]
         public void TestAsciiOutput()
         {
             _memory.LoadInstructions(SamplePrograms.OutputTestNonInfiniteInstructions);
@@ -46,10 +44,10 @@ namespace SimpSim.NET.Tests
             for (int i = 0; i <= byte.MaxValue; i++)
                 expectedOutput += (char)i;
 
-            Assert.AreEqual(expectedOutput, _actualOutput);
+            Assert.Equal(expectedOutput, _actualOutput);
         }
 
-        [Test]
+        [Fact]
         public void TestTemplateOutput()
         {
             _memory.LoadInstructions(SamplePrograms.TemplateInstructions);
@@ -58,7 +56,7 @@ namespace SimpSim.NET.Tests
 
             const string expectedOutput = "\nAnswer : $00\0";
 
-            Assert.AreEqual(expectedOutput, _actualOutput);
+            Assert.Equal(expectedOutput, _actualOutput);
         }
     }
 }

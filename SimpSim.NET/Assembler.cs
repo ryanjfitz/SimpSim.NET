@@ -8,6 +8,7 @@ namespace SimpSim.NET
 {
     public class Assembler
     {
+        [ThreadStatic]
         private static IDictionary<string, byte> _symbolTable;
         private readonly InstructionByteCollection _instructionBytes;
 

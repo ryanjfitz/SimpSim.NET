@@ -1,18 +1,17 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace SimpSim.NET.Tests
 {
     public class AssemblerInvalidSyntaxTests
     {
-        private Assembler _assembler;
+        private readonly Assembler _assembler;
 
-        [SetUp]
-        public void SetUp()
+        public AssemblerInvalidSyntaxTests()
         {
             _assembler = new Assembler();
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotAssembleRorInstructionsWithNumberGreaterThan15()
         {
             const byte number = 16;
@@ -35,19 +34,19 @@ namespace SimpSim.NET.Tests
             Assert.Throws<AssemblyException>(() => _assembler.Assemble($"ror RF,{number}"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotAssembleHexLiteralAssemblySyntaxThatStartsWithLetter()
         {
             Assert.Throws<AssemblyException>(() => _assembler.Assemble("db FFh"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotAssembleUnrecognizedMnemonic()
         {
             Assert.Throws<UnrecognizedMnemonicException>(() => _assembler.Assemble("abc R0,0"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotAssembleDataByteInstructionWithRegisterOrNoOperands()
         {
             Assert.Throws<AssemblyException>(() => _assembler.Assemble("db R0"));
@@ -55,7 +54,7 @@ namespace SimpSim.NET.Tests
             Assert.Throws<AssemblyException>(() => _assembler.Assemble("db"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotAssembleOriginInstructionWithoutSingleNumberOperand()
         {
             Assert.Throws<AssemblyException>(() => _assembler.Assemble("org R0"));
@@ -64,7 +63,7 @@ namespace SimpSim.NET.Tests
             Assert.Throws<AssemblyException>(() => _assembler.Assemble("org"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotAssembleJumpInstructionWithoutSingleAddress()
         {
             Assert.Throws<AssemblyException>(() => _assembler.Assemble("jmp R0"));
@@ -72,7 +71,7 @@ namespace SimpSim.NET.Tests
             Assert.Throws<AssemblyException>(() => _assembler.Assemble("jmp"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotAssembleJumpEqualInstructionThatDoesNotCompareWithR0()
         {
             for (byte leftRegisterIndex = 0; leftRegisterIndex < 16; leftRegisterIndex++)

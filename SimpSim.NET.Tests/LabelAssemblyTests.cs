@@ -1,30 +1,28 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace SimpSim.NET.Tests
 {
-    [TestFixture]
     public class LabelAssemblyTests
     {
-        private Assembler _assembler;
+        private readonly Assembler _assembler;
 
-        [SetUp]
-        public void SetUp()
+        public LabelAssemblyTests()
         {
             _assembler = new Assembler();
         }
 
-        [Test]
+        [Fact]
         public void ShouldValidateValidLabels()
         {
-            Assert.DoesNotThrow(() => _assembler.Assemble("Label:"));
+            _assembler.Assemble("Label:");
 
-            Assert.DoesNotThrow(() => _assembler.Assemble("NextChar2:"));
+            _assembler.Assemble("NextChar2:");
 
-            Assert.DoesNotThrow(() => _assembler.Assemble("~MyLabel~:"));
+            _assembler.Assemble("~MyLabel~:");
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotValidateLabelsThatContainInvalidCharacters()
         {
             var allCharacters = Enumerable.Range(0, 256).Select(i => (char)i);
@@ -47,7 +45,7 @@ namespace SimpSim.NET.Tests
                 Assert.Throws<LabelAssemblyException>(() => _assembler.Assemble(c + ":"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotValidateLabelsThatStartWithNumber()
         {
             Assert.Throws<LabelAssemblyException>(() => _assembler.Assemble("1Label:"));
@@ -57,13 +55,13 @@ namespace SimpSim.NET.Tests
             Assert.Throws<LabelAssemblyException>(() => _assembler.Assemble("31~MyLabel~:"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldValidateIfNoLabel()
         {
-            Assert.DoesNotThrow(() => _assembler.Assemble(""));
+            _assembler.Assemble("");
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotValidateIfColonOnly()
         {
             Assert.Throws<LabelAssemblyException>(() => _assembler.Assemble(":"));
@@ -71,7 +69,7 @@ namespace SimpSim.NET.Tests
             Assert.Throws<LabelAssemblyException>(() => _assembler.Assemble(":::"));
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotAssembleUndefinedLabel()
         {
             Assert.Throws<LabelAssemblyException>(() => _assembler.Assemble("load R1,UndefinedLabel"));

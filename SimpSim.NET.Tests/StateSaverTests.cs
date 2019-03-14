@@ -1,21 +1,19 @@
 ﻿using System;
 using System.IO;
-using NUnit.Framework;
+using Xunit;
 
 namespace SimpSim.NET.Tests
 {
-    [TestFixture]
     public class StateSaverTests
     {
-        private StateSaver _stateSaver;
+        private readonly StateSaver _stateSaver;
 
-        [SetUp]
-        public void SetUp()
+        public StateSaverTests()
         {
             _stateSaver = new StateSaver();
         }
 
-        [Test]
+        [Fact]
         public void ShouldBeAbleToSaveMemoryState()
         {
             RunFileTest("MemorySaveFile.prg", file =>
@@ -28,16 +26,16 @@ namespace SimpSim.NET.Tests
 
                 _stateSaver.SaveMemory(expectedMemory, file);
 
-                FileAssert.Exists(file);
+                Assert.True(file.Exists);
 
                 Memory actualMemory = _stateSaver.LoadMemory(file);
 
                 for (int address = 0; address <= byte.MaxValue; address++)
-                    Assert.AreEqual(expectedMemory[(byte)address], actualMemory[(byte)address]);
+                    Assert.Equal(expectedMemory[(byte)address], actualMemory[(byte)address]);
             });
         }
 
-        [Test]
+        [Fact]
         public void ShouldBeAbleToSaveRegistersState()
         {
             RunFileTest("RegistersSaveFile.prg", file =>
@@ -50,16 +48,16 @@ namespace SimpSim.NET.Tests
 
                 _stateSaver.SaveRegisters(expectedRegisters, file);
 
-                FileAssert.Exists(file);
+                Assert.True(file.Exists);
 
                 Registers actualRegisters = _stateSaver.LoadRegisters(file);
 
                 for (byte register = 0; register < 0x0F; register++)
-                    Assert.AreEqual(expectedRegisters[register], actualRegisters[register]);
+                    Assert.Equal(expectedRegisters[register], actualRegisters[register]);
             });
         }
 
-        [Test]
+        [Fact]
         public void ShouldBeAbleToSaveMachineState()
         {
             RunFileTest("MachineSaveFile.prg", file =>
@@ -72,13 +70,13 @@ namespace SimpSim.NET.Tests
 
                 _stateSaver.SaveMachine(expectedMachine, file);
 
-                FileAssert.Exists(file);
+                Assert.True(file.Exists);
 
                 Machine actualMachine = _stateSaver.LoadMachine(file);
 
-                Assert.AreEqual(expectedMachine.State, actualMachine.State);
-                Assert.AreEqual(expectedMachine.InstructionRegister, actualMachine.InstructionRegister);
-                Assert.AreEqual(expectedMachine.ProgramCounter, actualMachine.ProgramCounter);
+                Assert.Equal(expectedMachine.State, actualMachine.State);
+                Assert.Equal(expectedMachine.InstructionRegister, actualMachine.InstructionRegister);
+                Assert.Equal(expectedMachine.ProgramCounter, actualMachine.ProgramCounter);
             });
         }
 

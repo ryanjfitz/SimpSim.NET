@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 
 namespace SimpSim.NET.Tests
 {
-    [TestFixture]
     public class MachineTests
     {
-        private Memory _memory;
-        private Registers _registers;
-        private Machine _machine;
+        private readonly Memory _memory;
+        private readonly Registers _registers;
+        private readonly Machine _machine;
 
-        [SetUp]
-        public void SetUp()
+        public MachineTests()
         {
             _memory = new Memory();
             _registers = new Registers();
             _machine = new Machine(_memory, _registers);
         }
 
-        [Test]
+        [Fact]
         public void ProgramCounterShouldIncrementAfterStep()
         {
             _machine.ProgramCounter = 0x00;
@@ -29,11 +27,11 @@ namespace SimpSim.NET.Tests
             {
                 byte expected = (byte)(_machine.ProgramCounter + 0x02);
                 _machine.Step();
-                Assert.AreEqual(expected, _machine.ProgramCounter);
+                Assert.Equal(expected, _machine.ProgramCounter);
             }
         }
 
-        [Test]
+        [Fact]
         public void ShouldExecuteInstructionAtProgramCounterAddress()
         {
             Instruction instruction1 = new Instruction(0x93, 0x37);
@@ -49,43 +47,43 @@ namespace SimpSim.NET.Tests
             _machine.ProgramCounter = 0x04;
             _machine.Step();
 
-            Assert.AreEqual(instruction3, _machine.InstructionRegister);
+            Assert.Equal(instruction3, _machine.InstructionRegister);
         }
 
-        [Test]
+        [Fact]
         public void StateShouldChangeToRunningWhileRunning()
         {
             LaunchNonTerminatingProgram();
 
-            Assert.AreEqual(Machine.MachineState.Running, _machine.State);
+            Assert.Equal(Machine.MachineState.Running, _machine.State);
         }
 
-        [Test]
+        [Fact]
         public void ShouldBeAbleToBreakIfRunning()
         {
             Task task = LaunchNonTerminatingProgram();
 
-            Assert.AreEqual(Machine.MachineState.Running, _machine.State);
+            Assert.Equal(Machine.MachineState.Running, _machine.State);
 
             _machine.Break();
 
             // Wait for pending machine steps to execute.
             task.Wait();
 
-            Assert.AreEqual(Machine.MachineState.Ready, _machine.State);
+            Assert.Equal(Machine.MachineState.Ready, _machine.State);
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotBeAbleToRunWhileAlreadyRunning()
         {
             LaunchNonTerminatingProgram();
 
-            Assert.AreEqual(Machine.MachineState.Running, _machine.State);
+            Assert.Equal(Machine.MachineState.Running, _machine.State);
 
             Assert.Throws<InvalidOperationException>(() => _machine.Run());
         }
 
-        [Test]
+        [Fact]
         public void ShouldNotBeAbleToBreakIfNotRunning()
         {
             Assert.Throws<InvalidOperationException>(() => _machine.Break());
