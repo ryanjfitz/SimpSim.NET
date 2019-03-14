@@ -5,7 +5,6 @@ namespace SimpSim.NET.Tests
     [TestFixture]
     public class InstructionExecutionTests
     {
-
         private Memory _memory;
         private Registers _registers;
         private Machine _machine;

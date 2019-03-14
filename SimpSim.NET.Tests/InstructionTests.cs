@@ -5,7 +5,6 @@ namespace SimpSim.NET.Tests
     [TestFixture]
     public class InstructionTests
     {
-
         [Test]
         public void ShouldBeAbleToGetBytes()
         {
