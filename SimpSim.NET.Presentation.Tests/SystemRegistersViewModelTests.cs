@@ -1,12 +1,11 @@
-﻿using NUnit.Framework;
-using SimpSim.NET.Presentation.ViewModels;
+﻿using SimpSim.NET.Presentation.ViewModels;
+using Xunit;
 
 namespace SimpSim.NET.Presentation.Tests
 {
-    [TestFixture]
     public class SystemRegistersViewModelTests
     {
-        [Test]
+        [Fact]
         public void ShouldBeAbleToResetProgramCounter()
         {
             SimpleSimulator simulator = new SimpleSimulator();
@@ -17,7 +16,7 @@ namespace SimpSim.NET.Presentation.Tests
 
             viewModel.ResetProgramCounterCommand.Execute(null);
 
-            Assert.AreEqual(0x00, simulator.Machine.ProgramCounter);
+            Assert.Equal(0x00, simulator.Machine.ProgramCounter);
         }
     }
 }

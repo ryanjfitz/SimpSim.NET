@@ -1,13 +1,12 @@
 ﻿using Moq;
-using NUnit.Framework;
 using SimpSim.NET.Presentation.ViewModels;
+using Xunit;
 
 namespace SimpSim.NET.Presentation.Tests
 {
-    [TestFixture]
     public class OutputViewModelTests
     {
-        [Test]
+        [Fact]
         public void ShouldUseWindowServiceToOpenAssemblyEditorWindow()
         {
             var mockWindowService = new Mock<IWindowService>();

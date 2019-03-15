@@ -1,22 +1,18 @@
 ﻿using System.IO;
 using Moq;
-using NUnit.Framework;
 using SimpSim.NET.Presentation.ViewModels;
+using Xunit;
 
 namespace SimpSim.NET.Presentation.Tests
 {
-    [TestFixture]
     public class MachineControlsViewModelTests
     {
-        private SimpleSimulator _simulator;
-        private Mock<IUserInputService> _userInputService;
-        private Mock<StateSaver> _stateSaver;
-        private MachineControlsViewModel _viewModel;
+        private readonly SimpleSimulator _simulator;
+        private readonly Mock<IUserInputService> _userInputService;
+        private readonly Mock<StateSaver> _stateSaver;
+        private readonly MachineControlsViewModel _viewModel;
 
-        private readonly FileInfo _memorySaveFile = new FileInfo("MemorySaveFile.prg");
-
-        [SetUp]
-        public void SetUp()
+        public MachineControlsViewModelTests()
         {
             _simulator = new SimpleSimulator();
             _userInputService = new Mock<IUserInputService>();
@@ -24,7 +20,7 @@ namespace SimpSim.NET.Presentation.Tests
             _viewModel = new MachineControlsViewModel(_simulator, _userInputService.Object, _stateSaver.Object);
         }
 
-        [Test]
+        [Fact]
         public void ClearMemoryCommandShouldClearMemory()
         {
             for (int i = 0; i <= byte.MaxValue; i++)
@@ -33,10 +29,10 @@ namespace SimpSim.NET.Presentation.Tests
             _viewModel.ClearMemoryCommand.Execute(null);
 
             for (int i = 0; i <= byte.MaxValue; i++)
-                Assert.AreEqual(0x00, _simulator.Memory[(byte)i]);
+                Assert.Equal(0x00, _simulator.Memory[(byte)i]);
         }
 
-        [Test]
+        [Fact]
         public void ClearRegistersCommandShouldClearRegisters()
         {
             for (byte b = 0; b <= 0x0F; b++)
@@ -45,15 +41,17 @@ namespace SimpSim.NET.Presentation.Tests
             _viewModel.ClearRegistersCommand.Execute(null);
 
             for (byte b = 0; b <= 0x0F; b++)
-                Assert.AreEqual(0x00, _simulator.Registers[b]);
+                Assert.Equal(0x00, _simulator.Registers[b]);
         }
 
-        [Test]
+        [Fact]
         public void SaveCommandShouldSaveMemoryStateToFile()
         {
-            _userInputService.Setup(s => s.GetSaveFileName()).Returns(_memorySaveFile).Verifiable();
+            FileInfo memorySaveFile = new FileInfo("MemorySaveFile.prg");
 
-            _stateSaver.Setup(s => s.SaveMemory(_simulator.Memory, _memorySaveFile)).Verifiable();
+            _userInputService.Setup(s => s.GetSaveFileName()).Returns(memorySaveFile).Verifiable();
+
+            _stateSaver.Setup(s => s.SaveMemory(_simulator.Memory, memorySaveFile)).Verifiable();
 
             _viewModel.SaveCommand.Execute(null);
 
@@ -62,7 +60,7 @@ namespace SimpSim.NET.Presentation.Tests
             _stateSaver.Verify();
         }
 
-        [Test]
+        [Fact]
         public void SaveCommandShouldNotSaveMemoryStateToFileIfFileIsNull()
         {
             _userInputService.Setup(s => s.GetSaveFileName()).Returns<FileInfo>(null).Verifiable();
@@ -74,12 +72,14 @@ namespace SimpSim.NET.Presentation.Tests
             _stateSaver.Verify(s => s.SaveMemory(It.IsAny<Memory>(), It.IsAny<FileInfo>()), Times.Never);
         }
 
-        [Test]
+        [Fact]
         public void OpenCommandShouldLoadMemoryStateFromFile()
         {
-            _userInputService.Setup(s => s.GetOpenFileName()).Returns(_memorySaveFile).Verifiable();
+            FileInfo memorySaveFile = new FileInfo("MemorySaveFile.prg");
 
-            _stateSaver.Setup(s => s.LoadMemory(_memorySaveFile)).Returns(new Memory()).Verifiable();
+            _userInputService.Setup(s => s.GetOpenFileName()).Returns(memorySaveFile).Verifiable();
+
+            _stateSaver.Setup(s => s.LoadMemory(memorySaveFile)).Returns(new Memory()).Verifiable();
 
             _viewModel.OpenCommand.Execute(null);
 
@@ -88,7 +88,7 @@ namespace SimpSim.NET.Presentation.Tests
             _stateSaver.Verify();
         }
 
-        [Test]
+        [Fact]
         public void OpenCommandShouldNotLoadMemoryStateFromFileIfFileIsNull()
         {
             _userInputService.Setup(s => s.GetOpenFileName()).Returns<FileInfo>(null).Verifiable();

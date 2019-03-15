@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 using SimpSim.NET.Presentation.ViewModels;
+using Xunit;
 
 namespace SimpSim.NET.Presentation.Tests
 {
-    [TestFixture]
     public class AssemblyEditorWindowViewModelTests
     {
-        [Test]
+        [Fact]
         public void AssembleCommandShouldAssembleInstructionsToMemory()
         {
             SimpleSimulator simulator = new SimpleSimulator();
@@ -26,7 +25,7 @@ namespace SimpSim.NET.Presentation.Tests
             for (byte address = 0; address < expectedBytes.Count; address++)
                 actualBytes.Add(simulator.Memory[address]);
 
-            CollectionAssert.AreEqual(expectedBytes, actualBytes);
+            Assert.Equal(expectedBytes, actualBytes);
         }
     }
 }
