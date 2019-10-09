@@ -1,4 +1,3 @@
-#tool nuget:?package=xunit.runner.console&version=2.4.1
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
@@ -28,7 +27,7 @@ Task("Run-Unit-Tests")
     .Does(() =>
 {
     DotNetCoreTest("./SimpSim.NET.Tests/SimpSim.NET.Tests.csproj");
-    XUnit2("./**/bin/" + configuration + "/SimpSim.NET.Presentation.Tests.dll");
+    DotNetCoreTest("./SimpSim.NET.Presentation.Tests/SimpSim.NET.Presentation.Tests.csproj");
 });
 
 //////////////////////////////////////////////////////////////////////
