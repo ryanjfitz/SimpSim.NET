@@ -9,25 +9,17 @@ var configuration = Argument("configuration", "Release");
 // TASKS
 //////////////////////////////////////////////////////////////////////
 
-Task("Restore-NuGet-Packages")
-    .Does(() =>
-{
-    NuGetRestore("SimpSim.NET.sln");
-});
-
 Task("Build")
-    .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    MSBuild("SimpSim.NET.sln", settings => settings.SetConfiguration(configuration));
+    DotNetCoreBuild("SimpSim.NET.sln", new DotNetCoreBuildSettings{Configuration = configuration});
 });
 
 Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    DotNetCoreTest("./SimpSim.NET.Tests/SimpSim.NET.Tests.csproj");
-    DotNetCoreTest("./SimpSim.NET.Presentation.Tests/SimpSim.NET.Presentation.Tests.csproj");
+	DotNetCoreTest();
 });
 
 //////////////////////////////////////////////////////////////////////
