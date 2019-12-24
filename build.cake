@@ -19,7 +19,7 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-	DotNetCoreTest();
+    DotNetCoreTest();
 });
 
 //////////////////////////////////////////////////////////////////////
