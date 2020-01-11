@@ -10,7 +10,7 @@ namespace SimpSim.NET.WPF.Views
         public MachineControls()
         {
             InitializeComponent();
-            DataContext = new MachineControlsViewModel(App.SimpleSimulator, new UserInputService(), new StateSaver());
+            DataContext = new MachineControlsViewModel(App.SimpleSimulator, new UserInputService(), new WindowService(App.SimpleSimulator), new StateSaver());
         }
     }
 }

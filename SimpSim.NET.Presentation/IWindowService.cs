@@ -1,9 +1,7 @@
-﻿using SimpSim.NET.Presentation.ViewModels;
-
-namespace SimpSim.NET.Presentation
+﻿namespace SimpSim.NET.Presentation
 {
     public interface IWindowService
     {
-        void ShowAssemblyEditorWindow(AssemblyEditorWindowViewModel viewModel);
+        void ShowAssemblyEditorWindow(string text = null);
     }
 }

@@ -9,6 +9,7 @@ namespace SimpSim.NET.Presentation.Tests
     {
         private readonly SimpleSimulator _simulator;
         private readonly Mock<IUserInputService> _userInputService;
+        private readonly Mock<IWindowService> _windowService;
         private readonly Mock<StateSaver> _stateSaver;
         private readonly MachineControlsViewModel _viewModel;
 
@@ -16,8 +17,9 @@ namespace SimpSim.NET.Presentation.Tests
         {
             _simulator = new SimpleSimulator();
             _userInputService = new Mock<IUserInputService>();
+            _windowService = new Mock<IWindowService>();
             _stateSaver = new Mock<StateSaver>();
-            _viewModel = new MachineControlsViewModel(_simulator, _userInputService.Object, _stateSaver.Object);
+            _viewModel = new MachineControlsViewModel(_simulator, _userInputService.Object, _windowService.Object, _stateSaver.Object);
         }
 
         [Fact]
@@ -73,7 +75,7 @@ namespace SimpSim.NET.Presentation.Tests
         }
 
         [Fact]
-        public void OpenCommandShouldLoadMemoryStateFromFile()
+        public void OpenCommandShouldLoadMemoryStateFromMemoryFile()
         {
             FileInfo memorySaveFile = new FileInfo("MemorySaveFile.prg");
 
@@ -89,7 +91,7 @@ namespace SimpSim.NET.Presentation.Tests
         }
 
         [Fact]
-        public void OpenCommandShouldNotLoadMemoryStateFromFileIfFileIsNull()
+        public void OpenCommandShouldNotLoadMemoryStateFromMemoryFileIfFileIsNull()
         {
             _userInputService.Setup(s => s.GetOpenFileName()).Returns<FileInfo>(null).Verifiable();
 
@@ -98,6 +100,29 @@ namespace SimpSim.NET.Presentation.Tests
             _userInputService.Verify();
 
             _stateSaver.Verify(s => s.LoadMemory(It.IsAny<FileInfo>()), Times.Never);
+        }
+
+        [Fact]
+        public void OpenCommandShouldOpenAssemblyEditorWindowWithAssemblyFileContents()
+        {
+            FileInfo assemblyFile = new FileInfo("AssemblyFile.asm");
+
+            try
+            {
+                File.WriteAllText(assemblyFile.FullName, "some text");
+
+                _userInputService.Setup(s => s.GetOpenFileName()).Returns(assemblyFile).Verifiable();
+
+                _viewModel.OpenCommand.Execute(null);
+
+                _userInputService.Verify();
+
+                _windowService.Verify(w => w.ShowAssemblyEditorWindow("some text"));
+            }
+            finally
+            {
+                assemblyFile.Delete();
+            }
         }
     }
 }

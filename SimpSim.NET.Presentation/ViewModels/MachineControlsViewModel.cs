@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -6,7 +7,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 {
     public class MachineControlsViewModel : ViewModelBase
     {
-        public MachineControlsViewModel(SimpleSimulator simulator, IUserInputService userInputService, StateSaver stateSaver) : base(simulator)
+        public MachineControlsViewModel(SimpleSimulator simulator, IUserInputService userInputService, IWindowService windowService, StateSaver stateSaver) : base(simulator)
         {
             OpenCommand = new Command(() =>
             {
@@ -14,9 +15,16 @@ namespace SimpSim.NET.Presentation.ViewModels
 
                 if (file != null)
                 {
-                    Memory memory = stateSaver.LoadMemory(file);
-                    for (int i = 0; i <= byte.MaxValue; i++)
-                        simulator.Memory[(byte)i] = memory[(byte)i];
+                    if (file.Extension.Equals(".prg", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Memory memory = stateSaver.LoadMemory(file);
+                        for (int i = 0; i <= byte.MaxValue; i++)
+                            simulator.Memory[(byte)i] = memory[(byte)i];
+                    }
+                    else if (file.Extension.Equals(".asm", StringComparison.OrdinalIgnoreCase))
+                    {
+                        windowService.ShowAssemblyEditorWindow(File.ReadAllText(file.FullName));
+                    }
                 }
             }, () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 

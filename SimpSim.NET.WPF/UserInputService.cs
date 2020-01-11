@@ -8,17 +8,17 @@ namespace SimpSim.NET.WPF
     {
         public FileInfo GetOpenFileName()
         {
-            return GetFileFromDialog(new OpenFileDialog());
+            return GetFileFromDialog(new OpenFileDialog(), "Supported File Types|*.asm;*.prg|Assembly Files|*.asm|Program Files|*.prg");
         }
 
         public FileInfo GetSaveFileName()
         {
-            return GetFileFromDialog(new SaveFileDialog());
+            return GetFileFromDialog(new SaveFileDialog(), "Program Files|*.prg");
         }
 
-        private FileInfo GetFileFromDialog(FileDialog fileDialog)
+        private FileInfo GetFileFromDialog(FileDialog fileDialog, string filter)
         {
-            fileDialog.Filter = "Program Files|*.prg";
+            fileDialog.Filter = filter;
             fileDialog.ShowDialog();
 
             if (string.IsNullOrWhiteSpace(fileDialog.FileName))

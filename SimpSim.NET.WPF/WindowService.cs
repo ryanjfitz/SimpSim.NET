@@ -7,10 +7,17 @@ namespace SimpSim.NET.WPF
 {
     internal class WindowService : IWindowService
     {
-        public void ShowAssemblyEditorWindow(AssemblyEditorWindowViewModel viewModel)
+        private readonly SimpleSimulator _simulator;
+
+        public WindowService(SimpleSimulator simulator)
+        {
+            _simulator = simulator;
+        }
+
+        public void ShowAssemblyEditorWindow(string text = null)
         {
             Window window = new AssemblyEditorWindow();
-            window.DataContext = viewModel;
+            window.DataContext = new AssemblyEditorWindowViewModel(_simulator) {AssemblyEditorText = text};
             window.Owner = Application.Current.MainWindow;
             window.Show();
         }
