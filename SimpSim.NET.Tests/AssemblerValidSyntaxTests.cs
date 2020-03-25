@@ -1,4 +1,4 @@
-﻿using Xunit;
+using Xunit;
 
 namespace SimpSim.NET.Tests
 {
@@ -9,6 +9,12 @@ namespace SimpSim.NET.Tests
         public AssemblerValidSyntaxTests()
         {
             _assembler = new Assembler();
+        }
+
+        [Fact]
+        public void ShouldAssembleEmptyInstructions()
+        {
+            Assert.Empty(_assembler.Assemble(null));
         }
 
         [Fact]

@@ -15,7 +15,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 
                 try
                 {
-                    instructions = simulator.Assembler.Assemble(AssemblyEditorText ?? "");
+                    instructions = simulator.Assembler.Assemble(AssemblyEditorText);
                     AssemblyResult = "Assembly Successful";
                 }
                 catch (AssemblyException ex)

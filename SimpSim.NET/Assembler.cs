@@ -23,7 +23,7 @@ namespace SimpSim.NET
             _symbolTable.Clear();
             _bytes.Clear();
 
-            foreach (string line in assemblyCode.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
+            foreach (string line in GetLines(assemblyCode))
             {
                 InstructionSyntax instructionSyntax = InstructionSyntax.Parse(line);
 
@@ -37,6 +37,11 @@ namespace SimpSim.NET
             Instruction[] instructions = _bytes.ToInstructions();
 
             return instructions;
+        }
+
+        private IEnumerable<string> GetLines(string assemblyCode)
+        {
+            return (assemblyCode ?? "").Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
         }
 
         private void AddLabelToSymbolTable(string label)
