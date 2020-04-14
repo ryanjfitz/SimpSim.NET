@@ -81,7 +81,7 @@ namespace SimpSim.NET
                 if (!"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#_~".Contains(c))
                     return false;
 
-            if (Char.IsNumber(input[0]))
+            if (char.IsNumber(input[0]))
                 return false;
 
             return true;
@@ -112,7 +112,7 @@ namespace SimpSim.NET
 
         public override string ToString()
         {
-            return $"{Mnemonic} {String.Join(",", Operands)}";
+            return $"{Mnemonic} {string.Join(",", Operands)}";
         }
     }
 }

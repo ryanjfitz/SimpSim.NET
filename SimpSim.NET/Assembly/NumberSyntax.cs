@@ -13,12 +13,12 @@ namespace SimpSim.NET
 
         private static bool TryParseDecimalLiteral(string input, out byte number)
         {
-            bool success = SByte.TryParse(input.TrimEnd('d'), out sbyte signedNumber);
+            bool success = sbyte.TryParse(input.TrimEnd('d'), out sbyte signedNumber);
 
             if (signedNumber < 0)
                 number = (byte)signedNumber;
             else
-                success = Byte.TryParse(input.TrimEnd('d'), out number);
+                success = byte.TryParse(input.TrimEnd('d'), out number);
 
             return success;
         }
@@ -43,9 +43,9 @@ namespace SimpSim.NET
 
         private static bool TryParseHexLiteral(string input, out byte number)
         {
-            bool success = Byte.TryParse(input.TrimStart("0x".ToCharArray()), NumberStyles.HexNumber, null, out number)
-                           || Byte.TryParse(input.TrimStart('$'), NumberStyles.HexNumber, null, out number)
-                           || Byte.TryParse(input.TrimEnd('h'), NumberStyles.HexNumber, null, out number) && !Char.IsLetter(input.FirstOrDefault());
+            bool success = byte.TryParse(input.TrimStart("0x".ToCharArray()), NumberStyles.HexNumber, null, out number)
+                           || byte.TryParse(input.TrimStart('$'), NumberStyles.HexNumber, null, out number)
+                           || byte.TryParse(input.TrimEnd('h'), NumberStyles.HexNumber, null, out number) && !char.IsLetter(input.FirstOrDefault());
 
             if (!success)
                 number = 0;
