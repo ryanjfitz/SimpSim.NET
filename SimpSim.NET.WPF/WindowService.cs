@@ -17,7 +17,7 @@ namespace SimpSim.NET.WPF
         public void ShowAssemblyEditorWindow(string text = null)
         {
             Window window = new AssemblyEditorWindow();
-            window.DataContext = new AssemblyEditorWindowViewModel(_simulator) {AssemblyEditorText = text};
+            window.DataContext = new AssemblyEditorWindowViewModel(_simulator) { AssemblyEditorText = text };
             window.Owner = Application.Current.MainWindow;
             window.Show();
         }
