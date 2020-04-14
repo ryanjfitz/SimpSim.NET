@@ -8,14 +8,15 @@ namespace SimpSim.NET
 {
     public class Assembler
     {
-        [ThreadStatic]
-        private static IDictionary<string, byte> _symbolTable;
+        private readonly IDictionary<string, byte> _symbolTable;
         private readonly InstructionByteCollection _bytes;
+        private readonly AddressSyntaxParser _addressSyntaxParser;
 
         public Assembler()
         {
             _symbolTable = new Dictionary<string, byte>();
-            _bytes = new InstructionByteCollection();
+            _bytes = new InstructionByteCollection(_symbolTable);
+            _addressSyntaxParser = new AddressSyntaxParser(_symbolTable);
         }
 
         public Instruction[] Assemble(string assemblyCode)
@@ -105,12 +106,12 @@ namespace SimpSim.NET
 
         private void Load(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0], out var register) && AddressSyntax.TryParse(operands[1], out var address))
+            if (RegisterSyntax.TryParse(operands[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address))
             {
                 _bytes.Add(Opcode.ImmediateLoad, register.Index);
                 _bytes.Add(address);
             }
-            else if (RegisterSyntax.TryParse(operands[0], out register) && AddressSyntax.TryParse(operands[1], out address, BracketExpectation.Present))
+            else if (RegisterSyntax.TryParse(operands[0], out register) && _addressSyntaxParser.TryParse(operands[1], out address, BracketExpectation.Present))
             {
                 _bytes.Add(Opcode.DirectLoad, register.Index);
                 _bytes.Add(address);
@@ -124,7 +125,7 @@ namespace SimpSim.NET
 
         private void Store(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0], out var register) && AddressSyntax.TryParse(operands[1], out var address, BracketExpectation.Present))
+            if (RegisterSyntax.TryParse(operands[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address, BracketExpectation.Present))
             {
                 _bytes.Add(Opcode.DirectStore, register.Index);
                 _bytes.Add(address);
@@ -170,7 +171,7 @@ namespace SimpSim.NET
             if (!RegisterSyntax.TryParse(registers[1], out var rightRegister) || rightRegister.Index != 0)
                 throw new AssemblyException("Expected a comparison with R0.");
 
-            if (RegisterSyntax.TryParse(registers[0], out var leftRegister) && AddressSyntax.TryParse(operands[1], out var address))
+            if (RegisterSyntax.TryParse(registers[0], out var leftRegister) && _addressSyntaxParser.TryParse(operands[1], out var address))
             {
                 _bytes.Add(Opcode.JumpEqual, leftRegister.Index);
                 _bytes.Add(address);
@@ -179,7 +180,7 @@ namespace SimpSim.NET
 
         private void JmpLE(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0].Split('<', '=')[0], out var register) && AddressSyntax.TryParse(operands[1], out var address))
+            if (RegisterSyntax.TryParse(operands[0].Split('<', '=')[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address))
             {
                 _bytes.Add(Opcode.JumpLessEqual, register.Index);
                 _bytes.Add(address);
@@ -192,7 +193,7 @@ namespace SimpSim.NET
 
             if (operands.Length != 1)
                 invalidSyntax = true;
-            else if (AddressSyntax.TryParse(operands[0], out var address))
+            else if (_addressSyntaxParser.TryParse(operands[0], out var address))
             {
                 _bytes.Add(Opcode.JumpEqual, 0x0);
                 _bytes.Add(address);
@@ -488,21 +489,16 @@ namespace SimpSim.NET
             }
         }
 
-        private class AddressSyntax
+        private class AddressSyntaxParser
         {
-            public byte Value { get; }
+            private readonly IDictionary<string, byte> _symbolTable;
 
-            public string UndefinedLabel { get; }
-
-            public bool ContainsUndefinedLabel => !string.IsNullOrWhiteSpace(UndefinedLabel);
-
-            private AddressSyntax(byte value, string undefinedLabel)
+            public AddressSyntaxParser(IDictionary<string, byte> symbolTable)
             {
-                Value = value;
-                UndefinedLabel = undefinedLabel;
+                _symbolTable = symbolTable;
             }
 
-            public static bool TryParse(string input, out AddressSyntax addressSyntax, BracketExpectation bracketExpectation = BracketExpectation.NotPresent)
+            public bool TryParse(string input, out AddressSyntax addressSyntax, BracketExpectation bracketExpectation = BracketExpectation.NotPresent)
             {
                 bool isSuccess;
 
@@ -523,7 +519,7 @@ namespace SimpSim.NET
                 return isSuccess;
             }
 
-            private static bool IsAddress(string input, out byte address, out string undefinedLabel)
+            private bool IsAddress(string input, out byte address, out string undefinedLabel)
             {
                 undefinedLabel = null;
 
@@ -541,9 +537,24 @@ namespace SimpSim.NET
                 return true;
             }
 
-            private static bool IsRegister(string input)
+            private bool IsRegister(string input)
             {
                 return RegisterSyntax.TryParse(input, out _);
+            }
+        }
+
+        private class AddressSyntax
+        {
+            public byte Value { get; }
+
+            public string UndefinedLabel { get; }
+
+            public bool ContainsUndefinedLabel => !string.IsNullOrWhiteSpace(UndefinedLabel);
+
+            public AddressSyntax(byte value, string undefinedLabel)
+            {
+                Value = value;
+                UndefinedLabel = undefinedLabel;
             }
 
             public override string ToString()
@@ -578,11 +589,13 @@ namespace SimpSim.NET
 
         private class InstructionByteCollection
         {
+            private readonly IDictionary<string, byte> _symbolTable;
             private readonly InstructionByte[] _bytes;
             private byte _originAddress;
 
-            public InstructionByteCollection()
+            public InstructionByteCollection(IDictionary<string, byte> symbolTable)
             {
+                _symbolTable = symbolTable;
                 _bytes = new InstructionByte[0x100];
             }
 
@@ -642,10 +655,10 @@ namespace SimpSim.NET
                     byte byte2 = 0x00;
 
                     if (_bytes[i] != null)
-                        byte1 = _bytes[i].GetValue();
+                        byte1 = _bytes[i].GetValue(_symbolTable);
 
                     if (_bytes[i + 1] != null)
-                        byte2 = _bytes[i + 1].GetValue();
+                        byte2 = _bytes[i + 1].GetValue(_symbolTable);
 
                     instructions.Add(new Instruction(byte1, byte2));
                 }
@@ -677,17 +690,17 @@ namespace SimpSim.NET
                     }
                 }
 
-                public byte GetValue()
+                public byte GetValue(IDictionary<string, byte> symbolTable)
                 {
                     switch (_addressType)
                     {
                         case AddressType.DirectValue:
                             return _byte;
                         case AddressType.Label:
-                            if (!_symbolTable.ContainsKey(_address.UndefinedLabel))
+                            if (!symbolTable.ContainsKey(_address.UndefinedLabel))
                                 throw new LabelAssemblyException(_address.UndefinedLabel);
 
-                            return _symbolTable[_address.UndefinedLabel];
+                            return symbolTable[_address.UndefinedLabel];
                         default:
                             return 0x00;
                     }
