@@ -39,7 +39,7 @@ namespace SimpSim.NET
 
         private IEnumerable<string> GetLines(string assemblyCode)
         {
-            return (assemblyCode ?? "").Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            return (assemblyCode ?? "").Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
         }
 
         private void AddLabelToSymbolTable(string label)
