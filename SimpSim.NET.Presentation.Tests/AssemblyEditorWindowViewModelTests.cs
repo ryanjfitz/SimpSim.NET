@@ -8,7 +8,7 @@ namespace SimpSim.NET.Presentation.Tests
     public class AssemblyEditorWindowViewModelTests
     {
         [Fact]
-        public void AssembleCommandShouldAssembleInstructionsToMemory()
+        public async void AssembleCommandShouldAssembleInstructionsToMemory()
         {
             SimpleSimulator simulator = new SimpleSimulator();
 
@@ -16,7 +16,7 @@ namespace SimpSim.NET.Presentation.Tests
 
             viewModel.AssemblyEditorText = SamplePrograms.HelloWorldCode;
 
-            viewModel.AssembleCommand.Execute(null);
+            await viewModel.AssembleCommand.ExecuteAsync(null);
 
             var expectedBytes = SamplePrograms.HelloWorldInstructions.SelectMany(instruction => instruction.Bytes).ToList();
 

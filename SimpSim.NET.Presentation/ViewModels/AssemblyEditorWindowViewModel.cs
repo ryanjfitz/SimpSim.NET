@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-
-namespace SimpSim.NET.Presentation.ViewModels
+﻿namespace SimpSim.NET.Presentation.ViewModels
 {
     public class AssemblyEditorWindowViewModel : ViewModelBase
     {
@@ -9,7 +7,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 
         public AssemblyEditorWindowViewModel(SimpleSimulator simulator) : base(simulator)
         {
-            AssembleCommand = new Command(() =>
+            AssembleCommand = new AsyncCommand(() =>
             {
                 Instruction[] instructions = null;
 
@@ -48,6 +46,6 @@ namespace SimpSim.NET.Presentation.ViewModels
             }
         }
 
-        public ICommand AssembleCommand { get; }
+        public IAsyncCommand AssembleCommand { get; }
     }
 }
