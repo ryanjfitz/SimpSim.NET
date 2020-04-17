@@ -11,9 +11,9 @@ namespace SimpSim.NET.Presentation.Tests
             OutputViewModel viewModel = new OutputViewModel(new SimpleSimulator());
 
             viewModel.OutputWindowText = "This is some output text.";
+            Assert.NotNull(viewModel.OutputWindowText);
 
             viewModel.ClearCommand.Execute(null);
-
             Assert.Null(viewModel.OutputWindowText);
         }
     }
