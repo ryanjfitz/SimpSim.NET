@@ -75,6 +75,14 @@ namespace SimpSim.NET.Presentation.Tests
         }
 
         [Fact]
+        public void NewCommandShouldUseOpenEmptyAssemblyEditorWindow()
+        {
+            _viewModel.NewCommand.Execute(null);
+
+            _windowService.Verify(w => w.ShowAssemblyEditorWindow(null));
+        }
+
+        [Fact]
         public void OpenCommandShouldLoadMemoryStateFromMemoryFile()
         {
             FileInfo memorySaveFile = new FileInfo("MemorySaveFile.prg");

@@ -9,6 +9,8 @@ namespace SimpSim.NET.Presentation.ViewModels
     {
         public MachineControlsViewModel(SimpleSimulator simulator, IUserInputService userInputService, IWindowService windowService, StateSaver stateSaver) : base(simulator)
         {
+            NewCommand = new Command(() => windowService.ShowAssemblyEditorWindow(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
+
             OpenCommand = new Command(() =>
             {
                 FileInfo file = userInputService.GetOpenFileName();
@@ -46,6 +48,8 @@ namespace SimpSim.NET.Presentation.ViewModels
 
             ClearRegistersCommand = new Command(() => simulator.Registers.Clear(), () => true, simulator);
         }
+
+        public ICommand NewCommand { get; }
 
         public ICommand OpenCommand { get; }
 

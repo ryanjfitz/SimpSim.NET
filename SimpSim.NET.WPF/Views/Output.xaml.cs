@@ -10,7 +10,7 @@ namespace SimpSim.NET.WPF.Views
         public Output()
         {
             InitializeComponent();
-            DataContext = new OutputViewModel(new WindowService(App.SimpleSimulator), App.SimpleSimulator);
+            DataContext = new OutputViewModel(App.SimpleSimulator);
         }
     }
 }

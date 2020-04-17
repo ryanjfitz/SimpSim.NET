@@ -1,15 +1,11 @@
-﻿using System.Windows.Input;
-
-namespace SimpSim.NET.Presentation.ViewModels
+﻿namespace SimpSim.NET.Presentation.ViewModels
 {
     public class OutputViewModel : ViewModelBase
     {
         private string _outputWindowText;
 
-        public OutputViewModel(IWindowService windowService, SimpleSimulator simulator) : base(simulator)
+        public OutputViewModel(SimpleSimulator simulator) : base(simulator)
         {
-            OpenAssemblyEditorWindow = new Command(() => windowService.ShowAssemblyEditorWindow(), () => true, simulator);
-
             simulator.Registers.ValueWrittenToOutputRegister += c => OutputWindowText += c;
         }
 
@@ -22,7 +18,5 @@ namespace SimpSim.NET.Presentation.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        public ICommand OpenAssemblyEditorWindow { get; }
     }
 }
