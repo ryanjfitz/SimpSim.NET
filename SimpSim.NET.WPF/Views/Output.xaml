@@ -9,12 +9,9 @@
             <RowDefinition/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <TextBlock Background="Black" Foreground="Green" FontFamily="Consolas" TextWrapping="Wrap" Text="{Binding OutputWindowText}" />
         </ScrollViewer>
+        <Button Grid.Row="1" Command="{Binding ClearCommand}">Clear</Button>
     </Grid>
 </UserControl>

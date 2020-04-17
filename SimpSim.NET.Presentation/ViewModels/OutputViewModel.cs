@@ -1,4 +1,6 @@
-﻿namespace SimpSim.NET.Presentation.ViewModels
+﻿using System.Windows.Input;
+
+namespace SimpSim.NET.Presentation.ViewModels
 {
     public class OutputViewModel : ViewModelBase
     {
@@ -6,6 +8,8 @@
 
         public OutputViewModel(SimpleSimulator simulator) : base(simulator)
         {
+            ClearCommand = new Command(() => OutputWindowText = null, () => true, simulator);
+
             simulator.Registers.ValueWrittenToOutputRegister += c => OutputWindowText += c;
         }
 
@@ -18,5 +22,7 @@
                 OnPropertyChanged();
             }
         }
+
+        public ICommand ClearCommand { get; }
     }
 }
