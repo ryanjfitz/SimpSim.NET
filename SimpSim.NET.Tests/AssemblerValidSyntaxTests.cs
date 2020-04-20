@@ -290,22 +290,22 @@ namespace SimpSim.NET.Tests
         {
             for (byte registerIndex = 0; registerIndex < 16; registerIndex++)
             {
-                Assert.Equal(new[] { new Instruction(0x40, (0x0, registerIndex).Combine()) }, _assembler.Assemble($"move R0,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0x1, registerIndex).Combine()) }, _assembler.Assemble($"move R1,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0x2, registerIndex).Combine()) }, _assembler.Assemble($"move R2,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0x3, registerIndex).Combine()) }, _assembler.Assemble($"move R3,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0x4, registerIndex).Combine()) }, _assembler.Assemble($"move R4,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0x5, registerIndex).Combine()) }, _assembler.Assemble($"move R5,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0x6, registerIndex).Combine()) }, _assembler.Assemble($"move R6,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0x7, registerIndex).Combine()) }, _assembler.Assemble($"move R7,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0x8, registerIndex).Combine()) }, _assembler.Assemble($"move R8,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0x9, registerIndex).Combine()) }, _assembler.Assemble($"move R9,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0xA, registerIndex).Combine()) }, _assembler.Assemble($"move RA,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0xB, registerIndex).Combine()) }, _assembler.Assemble($"move RB,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0xC, registerIndex).Combine()) }, _assembler.Assemble($"move RC,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0xD, registerIndex).Combine()) }, _assembler.Assemble($"move RD,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0xE, registerIndex).Combine()) }, _assembler.Assemble($"move RE,R{registerIndex.ToHexString()}"));
-                Assert.Equal(new[] { new Instruction(0x40, (0xF, registerIndex).Combine()) }, _assembler.Assemble($"move RF,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0x0).Combine()) }, _assembler.Assemble($"move R0,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0x1).Combine()) }, _assembler.Assemble($"move R1,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0x2).Combine()) }, _assembler.Assemble($"move R2,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0x3).Combine()) }, _assembler.Assemble($"move R3,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0x4).Combine()) }, _assembler.Assemble($"move R4,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0x5).Combine()) }, _assembler.Assemble($"move R5,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0x6).Combine()) }, _assembler.Assemble($"move R6,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0x7).Combine()) }, _assembler.Assemble($"move R7,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0x8).Combine()) }, _assembler.Assemble($"move R8,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0x9).Combine()) }, _assembler.Assemble($"move R9,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0xA).Combine()) }, _assembler.Assemble($"move RA,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0xB).Combine()) }, _assembler.Assemble($"move RB,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0xC).Combine()) }, _assembler.Assemble($"move RC,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0xD).Combine()) }, _assembler.Assemble($"move RD,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0xE).Combine()) }, _assembler.Assemble($"move RE,R{registerIndex.ToHexString()}"));
+                Assert.Equal(new[] { new Instruction(0x40, (registerIndex, 0xF).Combine()) }, _assembler.Assemble($"move RF,R{registerIndex.ToHexString()}"));
             }
         }
 

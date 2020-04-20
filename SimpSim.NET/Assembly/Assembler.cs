@@ -139,7 +139,7 @@ namespace SimpSim.NET
             if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2))
             {
                 _bytes.Add(Opcode.Move, 0x0);
-                _bytes.Add(register1.Index, register2.Index);
+                _bytes.Add(register2.Index, register1.Index);
             }
         }
 
