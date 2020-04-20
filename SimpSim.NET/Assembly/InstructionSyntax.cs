@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SimpSim.NET
 {
@@ -11,6 +12,7 @@ namespace SimpSim.NET
 
         private const char CommentDelimiter = ';';
         private const char LabelDelimiter = ':';
+        private const char OperandDelimiter = ',';
 
         private InstructionSyntax(string comment, string label, string mnemonic, string[] operands)
         {
@@ -35,26 +37,25 @@ namespace SimpSim.NET
 
         private static string GetComment(ref string line)
         {
-            string comment = "";
+            if (IsDelimiterBetweenQuotes(CommentDelimiter, line, out _))
+                return "";
 
             string[] split = line.Split(new[] { CommentDelimiter }, 2);
 
             if (split.Length == 2)
             {
                 line = split[0];
-                comment = split[1].Trim();
+                return split[1].Trim();
             }
 
-            return comment;
+            return "";
         }
 
         private static string GetLabel(ref string line)
         {
             string label = "";
 
-            int delimiterIndex = line.IndexOf(LabelDelimiter);
-
-            if (delimiterIndex > -1)
+            if (!IsDelimiterBetweenQuotes(LabelDelimiter, line, out int delimiterIndex) && delimiterIndex > -1)
             {
                 label = line.Substring(0, delimiterIndex + 1).Trim();
                 line = line.Substring(delimiterIndex + 1);
@@ -88,25 +89,36 @@ namespace SimpSim.NET
 
         private static string GetMnemonic(string line)
         {
-            string[] split = line.Trim().Split();
-
-            string mnemonic = split[0];
-
-            return mnemonic;
+            return line.Trim().Split()[0];
         }
 
         private static string[] GetOperands(string line)
         {
             string[] split = line.Trim().Split(null, 2);
 
-            string[] operands;
-
             if (split.Length == 2)
-                operands = split[1].Split(',').Select(o => o.Trim()).ToArray();
-            else
-                operands = new string[] { };
+            {
+                string operands = split[1];
 
-            return operands;
+                string pattern = $"[^{OperandDelimiter}\\s\"']+|\"[^\"]*\"|'[^']*'";
+
+                return Regex.Matches(operands, pattern).Select(match => match.Value.Trim()).ToArray();
+            }
+
+            return new string[] { };
+        }
+
+        private static bool IsDelimiterBetweenQuotes(char delimiter, string line, out int delimiterIndex)
+        {
+            delimiterIndex = line.IndexOf(delimiter);
+
+            int firstSingleQuoteIndex = line.IndexOf("'");
+            int lastSingleQuoteIndex = line.LastIndexOf("'");
+            int firstDoubleQuoteIndex = line.IndexOf("\"");
+            int lastDoubleQuoteIndex = line.LastIndexOf("\"");
+
+            return (firstSingleQuoteIndex < delimiterIndex && delimiterIndex < lastSingleQuoteIndex) ||
+                   (firstDoubleQuoteIndex < delimiterIndex && delimiterIndex < lastDoubleQuoteIndex);
         }
 
         public override string ToString()

@@ -55,6 +55,13 @@ namespace SimpSim.NET.Tests
         }
 
         [Fact]
+        public void ShouldNotAssembleDataByteInstructionWithOneQuote()
+        {
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("db '"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble("db \""));
+        }
+
+        [Fact]
         public void ShouldNotAssembleOriginInstructionWithoutSingleNumberOperand()
         {
             Assert.Throws<AssemblyException>(() => _assembler.Assemble("org R0"));

@@ -229,6 +229,19 @@ namespace SimpSim.NET.Tests
             Assert.Equal(expected, _assembler.Assemble("db 1,4,9,16,25,36,'Hello World'"));
         }
 
+        [Theory]
+        [InlineData(":")] // label delimiter
+        [InlineData(";")] // comment delimiter
+        [InlineData(",")] // operand delimiter
+        public void ShouldAssembleDataByteInstructionWithDelimiterInsideQuotes(string delimiter)
+        {
+            _assembler.Assemble($"db \"{delimiter}\"");
+            _assembler.Assemble($"db 1,\"{delimiter}\"");
+
+            _assembler.Assemble($"db '{delimiter}'");
+            _assembler.Assemble($"db 1,'{delimiter}'");
+        }
+
         [Fact]
         public void ShouldAssembleHaltInstruction()
         {
