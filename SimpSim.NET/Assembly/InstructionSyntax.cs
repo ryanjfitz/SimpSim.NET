@@ -120,10 +120,5 @@ namespace SimpSim.NET
             return (firstSingleQuoteIndex < delimiterIndex && delimiterIndex < lastSingleQuoteIndex) ||
                    (firstDoubleQuoteIndex < delimiterIndex && delimiterIndex < lastDoubleQuoteIndex);
         }
-
-        public override string ToString()
-        {
-            return $"{Mnemonic} {string.Join(",", Operands)}";
-        }
     }
 }
