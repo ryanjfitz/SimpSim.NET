@@ -53,8 +53,8 @@ namespace SimpSim.NET
 
         public void Clear()
         {
-            for (int i = 0; i < _array.Length; i++)
-                this[(byte)i] = 0x00;
+            Array.Clear(_array, 0, _array.Length);
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         [field: NonSerialized]

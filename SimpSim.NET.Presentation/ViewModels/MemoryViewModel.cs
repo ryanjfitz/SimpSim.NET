@@ -10,7 +10,7 @@ namespace SimpSim.NET.Presentation.ViewModels
         {
             _simulator = simulator;
 
-            _simulator.Memory.CollectionChanged += (sender, e) => this[(byte)e.NewStartingIndex] = (byte)e.NewItems[0];
+            _simulator.Memory.CollectionChanged += (sender, e) => this[(byte)e.NewStartingIndex] = e.NewItems != null ? (byte)e.NewItems[0] : (byte)0;
         }
 
         [IndexerName("Addresses")]
