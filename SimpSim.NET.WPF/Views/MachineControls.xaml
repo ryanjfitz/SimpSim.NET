@@ -10,14 +10,18 @@
                 <Setter Property="Margin" Value="0,5,0,0" />
             </Style>
         </DockPanel.Resources>
-        <Button DockPanel.Dock="Top" Command="{Binding NewCommand}">New...</Button>
-        <Button DockPanel.Dock="Top" Command="{Binding OpenCommand}">Open...</Button>
-        <Button DockPanel.Dock="Top" Command="{Binding SaveCommand}">Save</Button>
-        <Button DockPanel.Dock="Bottom" Command="{Binding ClearRegistersCommand}">Clear Registers</Button>
-        <Button DockPanel.Dock="Bottom" Command="{Binding ClearMemoryCommand}">Clear Memory</Button>
-        <Button DockPanel.Dock="Bottom" Command="{Binding BreakCommand}">Break</Button>
-        <Button DockPanel.Dock="Bottom" Command="{Binding StepCommand}">Step</Button>
-        <Button DockPanel.Dock="Bottom" Command="{Binding RunCommand}">Run</Button>
+        <StackPanel DockPanel.Dock="Top">
+            <Button Command="{Binding NewCommand}">New...</Button>
+            <Button Command="{Binding OpenCommand}">Open...</Button>
+            <Button Command="{Binding SaveCommand}">Save</Button>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom">
+            <Button Command="{Binding RunCommand}">Run</Button>
+            <Button Command="{Binding StepCommand}">Step</Button>
+            <Button Command="{Binding BreakCommand}">Break</Button>
+            <Button Command="{Binding ClearMemoryCommand}">Clear Memory</Button>
+            <Button Command="{Binding ClearRegistersCommand}">Clear Registers</Button>
+        </StackPanel>
         <TextBlock/>
     </DockPanel>
 </UserControl>
