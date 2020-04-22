@@ -21,7 +21,7 @@ namespace SimpSim.NET.WPF.Views
         {
             DependencyPropertyDescriptor
                 .FromProperty(TextBlock.TextProperty, typeof(TextBlock))
-                .AddValueChanged(outputTextBlock, (sender, args) => outputScrollViewer.ScrollToEnd());
+                .AddValueChanged(OutputTextBlock, (sender, args) => OutputScrollViewer.ScrollToEnd());
         }
     }
 }
