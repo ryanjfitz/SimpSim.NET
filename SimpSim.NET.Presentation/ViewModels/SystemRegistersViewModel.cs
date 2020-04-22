@@ -12,8 +12,8 @@ namespace SimpSim.NET.Presentation.ViewModels
 
             ResetProgramCounterCommand = new Command(() => _simulator.Machine.ProgramCounter = 0x00, () => true, _simulator);
 
-            _simulator.Machine.ProgramCounterChanged += () => { OnPropertyChanged("ProgramCounter"); };
-            _simulator.Machine.InstructionRegisterChanged += () => { OnPropertyChanged("InstructionRegister"); };
+            _simulator.Machine.ProgramCounterChanged += () => { OnPropertyChanged(nameof(ProgramCounter)); };
+            _simulator.Machine.InstructionRegisterChanged += () => { OnPropertyChanged(nameof(InstructionRegister)); };
         }
 
         public ICommand ResetProgramCounterCommand { get; }
@@ -21,11 +21,7 @@ namespace SimpSim.NET.Presentation.ViewModels
         public byte ProgramCounter
         {
             get => _simulator.Machine.ProgramCounter;
-            set
-            {
-                _simulator.Machine.ProgramCounter = value;
-                OnPropertyChanged("ProgramCounter");
-            }
+            set => _simulator.Machine.ProgramCounter = value;
         }
 
         public Instruction InstructionRegister => _simulator.Machine.InstructionRegister;
