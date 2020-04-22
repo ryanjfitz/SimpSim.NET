@@ -6,11 +6,11 @@ namespace SimpSim.NET.Presentation.ViewModels
     {
         private readonly SimpleSimulator _simulator;
 
-        public MemoryViewModel(SimpleSimulator simulator) : base(simulator)
+        public MemoryViewModel(SimpleSimulator simulator)
         {
             _simulator = simulator;
 
-            _simulator.Memory.CollectionChanged += (sender, e) => this[(byte)e.NewStartingIndex] = e.NewItems != null ? (byte)e.NewItems[0] : (byte)0;
+            _simulator.Memory.Changed += () => OnPropertyChanged("Addresses");
         }
 
         [IndexerName("Addresses")]
@@ -25,7 +25,7 @@ namespace SimpSim.NET.Presentation.ViewModels
                 if (newValue != oldValue)
                     _simulator.Memory[address] = newValue;
 
-                OnPropertyChanged();
+                OnPropertyChanged("Addresses");
             }
         }
     }

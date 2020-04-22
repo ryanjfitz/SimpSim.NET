@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Specialized;
 
 namespace SimpSim.NET
 {
     [Serializable]
-    public class Memory : INotifyCollectionChanged
+    public class Memory
     {
+        [field: NonSerialized]
+        public event Action Changed;
+
         private readonly byte[] _array;
 
         public Memory()
@@ -25,7 +27,7 @@ namespace SimpSim.NET
                 {
                     _array[address] = newValue;
 
-                    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, newItem: newValue, oldItem: oldValue, index: address));
+                    Changed?.Invoke();
                 }
             }
         }
@@ -54,10 +56,7 @@ namespace SimpSim.NET
         public void Clear()
         {
             Array.Clear(_array, 0, _array.Length);
-            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            Changed?.Invoke();
         }
-
-        [field: NonSerialized]
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }

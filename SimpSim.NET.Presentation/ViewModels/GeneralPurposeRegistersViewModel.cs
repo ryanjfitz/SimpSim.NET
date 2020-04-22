@@ -6,11 +6,11 @@ namespace SimpSim.NET.Presentation.ViewModels
     {
         private readonly SimpleSimulator _simulator;
 
-        public GeneralPurposeRegistersViewModel(SimpleSimulator simulator) : base(simulator)
+        public GeneralPurposeRegistersViewModel(SimpleSimulator simulator)
         {
             _simulator = simulator;
 
-            _simulator.Registers.CollectionChanged += (sender, e) => this[(byte)e.NewStartingIndex] = (byte)e.NewItems[0];
+            _simulator.Registers.Changed += () => OnPropertyChanged("GPR");
         }
 
         [IndexerName("GPR")]
@@ -25,7 +25,7 @@ namespace SimpSim.NET.Presentation.ViewModels
                 if (newValue != oldValue)
                     _simulator.Registers[register] = newValue;
 
-                OnPropertyChanged();
+                OnPropertyChanged("GPR");
             }
         }
     }

@@ -15,11 +15,7 @@ namespace SimpSim.NET.Presentation
             _executeAction = executeAction;
             _canExecuteFunc = canExecuteFunc;
 
-            simulator.Machine.PropertyChanged += (sender, e) =>
-            {
-                if (e.PropertyName == "State")
-                    OnCanExecuteChanged();
-            };
+            simulator.Machine.StateChanged += OnCanExecuteChanged;
         }
 
         public bool CanExecute(object parameter)
@@ -56,11 +52,7 @@ namespace SimpSim.NET.Presentation
             _executeAction = executeAction;
             _canExecuteFunc = canExecuteFunc;
 
-            simulator.Machine.PropertyChanged += (sender, e) =>
-            {
-                if (e.PropertyName == "State")
-                    OnCanExecuteChanged();
-            };
+            simulator.Machine.StateChanged += OnCanExecuteChanged;
         }
 
         public bool CanExecute(object parameter)

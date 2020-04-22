@@ -1,13 +1,18 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace SimpSim.NET
 {
     [Serializable]
-    public class Machine : INotifyPropertyChanged
+    public class Machine
     {
+        [field: NonSerialized]
+        public event Action ProgramCounterChanged;
+        [field: NonSerialized]
+        public event Action InstructionRegisterChanged;
+        [field: NonSerialized]
+        public event Action StateChanged;
+
         private readonly Memory _memory;
         private readonly Registers _registers;
         private bool _breakPending;
@@ -30,7 +35,7 @@ namespace SimpSim.NET
                 if (_programCounter != value)
                 {
                     _programCounter = value;
-                    OnPropertyChanged();
+                    ProgramCounterChanged?.Invoke();
                 }
             }
         }
@@ -43,7 +48,7 @@ namespace SimpSim.NET
                 if (!Equals(_instructionRegister, value))
                 {
                     _instructionRegister = value;
-                    OnPropertyChanged();
+                    InstructionRegisterChanged?.Invoke();
                 }
             }
         }
@@ -56,7 +61,7 @@ namespace SimpSim.NET
                 if (_state != value)
                 {
                     _state = value;
-                    OnPropertyChanged();
+                    StateChanged?.Invoke();
                 }
             }
         }
@@ -219,14 +224,6 @@ namespace SimpSim.NET
             InvalidInstruction,
             Ready,
             Running
-        }
-
-        [field: NonSerialized]
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

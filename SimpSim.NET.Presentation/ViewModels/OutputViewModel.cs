@@ -6,7 +6,7 @@ namespace SimpSim.NET.Presentation.ViewModels
     {
         private string _outputWindowText;
 
-        public OutputViewModel(SimpleSimulator simulator) : base(simulator)
+        public OutputViewModel(SimpleSimulator simulator)
         {
             ClearCommand = new Command(() => OutputWindowText = null, () => true, simulator);
 

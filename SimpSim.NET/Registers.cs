@@ -4,10 +4,12 @@ using System.Collections.Specialized;
 namespace SimpSim.NET
 {
     [Serializable]
-    public class Registers : INotifyCollectionChanged
+    public class Registers
     {
         [field: NonSerialized]
         public event Action<char> ValueWrittenToOutputRegister;
+        [field: NonSerialized]
+        public event Action Changed;
 
         private readonly byte[] _array;
 
@@ -28,7 +30,7 @@ namespace SimpSim.NET
                 {
                     _array[register] = newValue;
 
-                    CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, newItem: newValue, oldItem: oldValue, index: register));
+                    Changed?.Invoke();
                 }
 
                 if (register == 0x0f)
@@ -38,11 +40,8 @@ namespace SimpSim.NET
 
         public void Clear()
         {
-            for (byte b = 0; b < _array.Length; b++)
-                this[b] = 0x00;
+            Array.Clear(_array, 0, _array.Length);
+            Changed?.Invoke();
         }
-
-        [field: NonSerialized]
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }

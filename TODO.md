@@ -7,4 +7,3 @@ Todo list
 - Add ability to configure machine execution speed in the WPF app.
 - Add disassembler window to WPF app.
 - Export contents of disassembler window to a text file when the Disasm button is clicked in the WPF app.
-- Stop using INotifyPropertyChanged/INotifyCollectionChanged on core domain classes? I think they are pretty much specific to WPF. A customized alternative should probably be used.

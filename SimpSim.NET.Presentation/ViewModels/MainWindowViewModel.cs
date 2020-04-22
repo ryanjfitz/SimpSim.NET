@@ -2,8 +2,5 @@
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public MainWindowViewModel(SimpleSimulator simulator) : base(simulator)
-        {
-        }
     }
 }

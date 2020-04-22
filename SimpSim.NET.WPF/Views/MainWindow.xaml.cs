@@ -10,7 +10,7 @@ namespace SimpSim.NET.WPF.Views
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel(App.SimpleSimulator);
+            DataContext = new MainWindowViewModel();
         }
     }
 }

@@ -5,7 +5,7 @@
         private string _assemblyEditorText;
         private string _assemblyResult;
 
-        public AssemblyEditorWindowViewModel(SimpleSimulator simulator) : base(simulator)
+        public AssemblyEditorWindowViewModel(SimpleSimulator simulator)
         {
             AssembleCommand = new AsyncCommand(() =>
             {

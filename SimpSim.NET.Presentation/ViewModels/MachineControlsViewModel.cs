@@ -7,7 +7,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 {
     public class MachineControlsViewModel : ViewModelBase
     {
-        public MachineControlsViewModel(SimpleSimulator simulator, IUserInputService userInputService, IWindowService windowService, StateSaver stateSaver) : base(simulator)
+        public MachineControlsViewModel(SimpleSimulator simulator, IUserInputService userInputService, IWindowService windowService, StateSaver stateSaver)
         {
             NewCommand = new Command(() => windowService.ShowAssemblyEditorWindow(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 
