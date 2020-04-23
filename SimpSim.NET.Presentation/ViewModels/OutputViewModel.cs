@@ -10,7 +10,10 @@ namespace SimpSim.NET.Presentation.ViewModels
         {
             ClearCommand = new Command(() => OutputWindowText = null, () => true, simulator);
 
-            simulator.Registers.ValueWrittenToOutputRegister += c => OutputWindowText += c;
+            // Needed for proper word wrap on XAML TextBlock.
+            const string zeroWidthSpace = "\u200B";
+
+            simulator.Registers.ValueWrittenToOutputRegister += c => OutputWindowText += c + zeroWidthSpace;
         }
 
         public string OutputWindowText
