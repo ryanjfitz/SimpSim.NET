@@ -7,73 +7,25 @@ namespace SimpSim.NET.Presentation
 {
     internal class Command : ICommand
     {
-        private readonly Action _executeAction;
-        private readonly Func<bool> _canExecuteFunc;
+        protected readonly Action ExecuteAction;
+        protected readonly Func<bool> CanExecuteFunc;
 
         public Command(Action executeAction, Func<bool> canExecuteFunc, SimpleSimulator simulator)
         {
-            _executeAction = executeAction;
-            _canExecuteFunc = canExecuteFunc;
+            ExecuteAction = executeAction;
+            CanExecuteFunc = canExecuteFunc;
 
-            simulator.Machine.StateChanged += OnCanExecuteChanged;
+            simulator.Machine.StateChanged += RaiseCanExecuteChanged;
         }
 
-        public bool CanExecute(object parameter)
+        public virtual bool CanExecute(object parameter)
         {
-            return _canExecuteFunc.Invoke();
+            return CanExecuteFunc.Invoke();
         }
 
-        public void Execute(object parameter)
+        public virtual void Execute(object parameter)
         {
-            _executeAction.Invoke();
-        }
-
-        public event EventHandler CanExecuteChanged;
-
-        private void OnCanExecuteChanged()
-        {
-            Application.Current?.Dispatcher?.Invoke(() => CanExecuteChanged?.Invoke(this, EventArgs.Empty));
-        }
-    }
-
-    public interface IAsyncCommand : ICommand
-    {
-        Task ExecuteAsync(object parameter);
-    }
-
-    internal class AsyncCommand : IAsyncCommand
-    {
-        private bool _isExecuting;
-        private readonly Action _executeAction;
-        private readonly Func<bool> _canExecuteFunc;
-
-        public AsyncCommand(Action executeAction, Func<bool> canExecuteFunc, SimpleSimulator simulator)
-        {
-            _executeAction = executeAction;
-            _canExecuteFunc = canExecuteFunc;
-
-            simulator.Machine.StateChanged += OnCanExecuteChanged;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return !_isExecuting && _canExecuteFunc.Invoke();
-        }
-
-        public async void Execute(object parameter)
-        {
-            await ExecuteAsync(parameter);
-        }
-
-        public async Task ExecuteAsync(object parameter)
-        {
-            _isExecuting = true;
-            OnCanExecuteChanged();
-
-            await Task.Run(() => _executeAction.Invoke());
-
-            _isExecuting = false;
-            OnCanExecuteChanged();
+            ExecuteAction.Invoke();
         }
 
         public event EventHandler CanExecuteChanged
@@ -82,9 +34,44 @@ namespace SimpSim.NET.Presentation
             remove => CommandManager.RequerySuggested -= value;
         }
 
-        private void OnCanExecuteChanged()
+        protected void RaiseCanExecuteChanged()
         {
-            CommandManager.InvalidateRequerySuggested();
+            Application.Current?.Dispatcher?.Invoke(CommandManager.InvalidateRequerySuggested);
+        }
+    }
+
+    public interface IAsyncCommand : ICommand
+    {
+        Task ExecuteAsync(object parameter);
+    }
+
+    internal class AsyncCommand : Command, IAsyncCommand
+    {
+        private bool _isExecuting;
+
+        public AsyncCommand(Action executeAction, Func<bool> canExecuteFunc, SimpleSimulator simulator) : base(executeAction, canExecuteFunc, simulator)
+        {
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !_isExecuting && CanExecuteFunc.Invoke();
+        }
+
+        public override async void Execute(object parameter)
+        {
+            await ExecuteAsync(parameter);
+        }
+
+        public async Task ExecuteAsync(object parameter)
+        {
+            _isExecuting = true;
+            RaiseCanExecuteChanged();
+
+            await Task.Run(() => ExecuteAction.Invoke());
+
+            _isExecuting = false;
+            RaiseCanExecuteChanged();
         }
     }
 }
