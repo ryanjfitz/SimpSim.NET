@@ -19,11 +19,7 @@ namespace SimpSim.NET.Presentation.ViewModels
         public string OutputWindowText
         {
             get => _outputWindowText;
-            set
-            {
-                _outputWindowText = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _outputWindowText, value);
         }
 
         public ICommand ClearCommand { get; }

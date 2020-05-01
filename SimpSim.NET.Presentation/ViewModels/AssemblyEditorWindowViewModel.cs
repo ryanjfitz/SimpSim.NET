@@ -29,21 +29,13 @@
         public string AssemblyEditorText
         {
             get => _assemblyEditorText;
-            set
-            {
-                _assemblyEditorText = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _assemblyEditorText, value);
         }
 
         public string AssemblyResult
         {
             get => _assemblyResult;
-            set
-            {
-                _assemblyResult = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _assemblyResult, value);
         }
 
         public IAsyncCommand AssembleCommand { get; }

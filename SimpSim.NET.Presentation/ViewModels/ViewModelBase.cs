@@ -11,5 +11,15 @@ namespace SimpSim.NET.Presentation.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        protected void SetProperty<T>(ref T member, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (Equals(member, value))
+                return;
+
+            member = value;
+
+            OnPropertyChanged(propertyName);
+        }
     }
 }
