@@ -12,8 +12,8 @@ namespace SimpSim.NET.Presentation.ViewModels
 
             ResetProgramCounterCommand = new Command(() => _simulator.Machine.ProgramCounter = 0x00, () => true, _simulator);
 
-            _simulator.Machine.ProgramCounterChanged += () => { OnPropertyChanged(nameof(ProgramCounter)); };
-            _simulator.Machine.InstructionRegisterChanged += () => { OnPropertyChanged(nameof(InstructionRegister)); };
+            _simulator.Machine.ProgramCounterChanged += () => OnPropertyChanged(nameof(ProgramCounter));
+            _simulator.Machine.InstructionRegisterChanged += () => OnPropertyChanged(nameof(InstructionRegister));
         }
 
         public ICommand ResetProgramCounterCommand { get; }
