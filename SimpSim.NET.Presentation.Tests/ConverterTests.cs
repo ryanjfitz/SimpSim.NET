@@ -5,20 +5,6 @@ namespace SimpSim.NET.Presentation.Tests
     public class ConverterTests
     {
         [Fact]
-        public void InstructionToStringConverter_WhenConvertingInstructionObject_ReturnsHexString()
-        {
-            InstructionToStringConverter converter = new InstructionToStringConverter();
-
-            Assert.Equal("", converter.Convert(null, null, null, null));
-
-            Assert.Equal("10FF", converter.Convert(new Instruction(0x10, 0xFF), null, null, null));
-
-            Assert.Equal("AA7E", converter.Convert(new Instruction(0xAA, 0x7E), null, null, null));
-
-            Assert.Equal("00FF", converter.Convert(new Instruction(0x00, 0xFF), null, null, null));
-        }
-
-        [Fact]
         public void DecimalToHexConverter_WhenConvertingNumber_ReturnsHexString()
         {
             DecimalToHexConverter converter = new DecimalToHexConverter();
