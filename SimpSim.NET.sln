@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.Presentation", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.Presentation.Tests", "SimpSim.NET.Presentation.Tests\SimpSim.NET.Presentation.Tests.csproj", "{7531DFD2-52DC-4181-9ACC-0F87ACA330BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.Blazor", "SimpSim.NET.Blazor\SimpSim.NET.Blazor.csproj", "{AC4BE82C-CBE8-48A3-A496-256604D0D358}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{7531DFD2-52DC-4181-9ACC-0F87ACA330BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7531DFD2-52DC-4181-9ACC-0F87ACA330BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7531DFD2-52DC-4181-9ACC-0F87ACA330BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC4BE82C-CBE8-48A3-A496-256604D0D358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC4BE82C-CBE8-48A3-A496-256604D0D358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC4BE82C-CBE8-48A3-A496-256604D0D358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC4BE82C-CBE8-48A3-A496-256604D0D358}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

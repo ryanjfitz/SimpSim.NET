@@ -1,0 +1,123 @@
+﻿@page "/"
+@implements IDisposable
+
+<div class="container-fluid border mb-2">
+    <h2 class="text-center">Memory</h2>
+    @foreach (int i in Enumerable.Range(0, 32))
+    {
+        <div class="row">
+            @foreach (int j in Enumerable.Range(0, 8))
+            {
+                <input class="col form-control-sm" @bind="_memory[(byte) (i * 8 + j)]"/>
+            }
+        </div>
+    }
+</div>
+
+<div class="container-fluid border mb-2">
+    <h2 class="text-center">Registers</h2>
+    @foreach (int i in Enumerable.Range(0, 2))
+    {
+        <div class="row">
+            @foreach (int j in Enumerable.Range(0, 8))
+            {
+                <input class="col form-control-sm" @bind="_registers[(byte) (i * 8 + j)]"/>
+            }
+        </div>
+    }
+</div>
+
+<div class="container-fluid border mb-2">
+    <div class="row">
+        <h5 class="col text-center">Program Counter</h5>
+        <h5 class="col text-center">Instruction Register</h5>
+    </div>
+    <div class="row">
+        <input class="form-control-sm col" @bind="_machine.ProgramCounter"/>
+        <input class="form-control-sm col" value="@_machine.InstructionRegister" readonly/>
+    </div>
+</div>
+
+<div class="container-fluid border mb-2">
+    <div class="row">
+        <button class="col" @onclick="RunClicked">Run</button>
+        <button class="col" @onclick="StepClicked">Step</button>
+        <button class="col" @onclick="BreakClicked">Break</button>
+    </div>
+    <div class="row">
+        <button class="col" @onclick="ClearMemoryClicked">Clear Memory</button>
+        <button class="col" @onclick="ClearRegistersClicked">Clear Registers</button>
+        <button class="col" @onclick="ClearOutputClicked">Clear Output</button>
+    </div>
+</div>
+
+<div class="container-fluid border mb-2">
+    <div class="row">
+        <textarea class="col" rows="5" readonly>@_outputText</textarea>
+    </div>
+</div>
+
+@code {
+
+    private Memory _memory;
+    private Registers _registers;
+    private Machine _machine;
+    private string _outputText;
+
+    protected override void OnInitialized()
+    {
+        _memory = new Memory();
+        _registers = new Registers();
+        _machine = new Machine(_memory, _registers);
+
+        _registers.ValueWrittenToOutputRegister += AppendToOutputText;
+        _machine.ProgramCounterChanged += StateHasChanged;
+        _machine.InstructionRegisterChanged += StateHasChanged;
+    }
+
+    private async Task RunClicked()
+    {
+        _memory.LoadInstructions(SamplePrograms.HelloWorldInstructions);
+
+        await _machine.RunAsync(25);
+    }
+
+    private void StepClicked()
+    {
+        _machine.Step();
+    }
+
+    private void BreakClicked()
+    {
+        _machine.Break();
+    }
+
+    private void ClearMemoryClicked()
+    {
+        _memory.Clear();
+    }
+
+    private void ClearRegistersClicked()
+    {
+        _registers.Clear();
+    }
+
+    private void ClearOutputClicked()
+    {
+        _outputText = null;
+    }
+
+    private void AppendToOutputText(char c)
+    {
+        _outputText += c;
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        _registers.ValueWrittenToOutputRegister -= AppendToOutputText;
+        _machine.ProgramCounterChanged -= StateHasChanged;
+        _machine.InstructionRegisterChanged -= StateHasChanged;
+    }
+
+}

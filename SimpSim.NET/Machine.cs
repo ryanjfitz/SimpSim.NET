@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace SimpSim.NET
 {
@@ -83,6 +84,26 @@ namespace SimpSim.NET
                 {
                     Step();
                     Thread.Sleep(millisecondsBetweenSteps);
+                }
+        }
+
+        public async Task RunAsync(int millisecondsBetweenSteps = 0)
+        {
+            if (State == MachineState.Running)
+                throw new InvalidOperationException("A run operation may not be performed while the machine is already running.");
+
+            State = MachineState.Running;
+
+            while (State == MachineState.Running)
+                if (_breakPending)
+                {
+                    State = MachineState.Ready;
+                    _breakPending = false;
+                }
+                else
+                {
+                    Step();
+                    await Task.Delay(millisecondsBetweenSteps);
                 }
         }
 
