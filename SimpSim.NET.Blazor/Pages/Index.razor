@@ -7,15 +7,15 @@
         <textarea class="col" rows="10" @bind="@_assemblyCode" placeholder="Type assembly code here..."></textarea>
     </div>
     <div class="row">
-        <button class="col" @onclick="AssembleClicked" disabled="@(_machine.State == Machine.MachineState.Running)">Assemble</button>
+        <button class="col" @onclick="AssembleClicked" disabled="@IsMachineRunning">Assemble</button>
     </div>
 </div>
 
 <div class="container-fluid border mb-2">
     <div class="row">
-        <button class="col" @onclick="RunClicked" disabled="@(_machine.State == Machine.MachineState.Running)">Run</button>
+        <button class="col" @onclick="RunClicked" disabled="@IsMachineRunning">Run</button>
         <button class="col" @onclick="StepClicked">Step</button>
-        <button class="col" @onclick="BreakClicked" disabled="@(_machine.State != Machine.MachineState.Running)">Break</button>
+        <button class="col" @onclick="BreakClicked" disabled="@(!IsMachineRunning)">Break</button>
     </div>
     <div class="row">
         <button class="col" @onclick="ClearMemoryClicked">Clear Memory</button>
@@ -94,6 +94,8 @@
         _machine.InstructionRegisterChanged += StateHasChanged;
         _machine.StateChanged += StateHasChanged;
     }
+
+    private bool IsMachineRunning => _machine.State == Machine.MachineState.Running;
 
     private async Task RunClicked()
     {
