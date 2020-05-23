@@ -1,5 +1,6 @@
 ﻿@page "/"
 @implements IDisposable
+@inject IJSRuntime JSRuntime
 
 <div class="container-fluid border mb-2">
     <h2 class="text-center">Editor</h2>
@@ -30,7 +31,7 @@
 
 <div class="container-fluid border mb-2">
     <div class="row">
-        <textarea class="col" rows="5" readonly>@_outputText</textarea>
+        <textarea @ref="@_outputTextArea" class="col" rows="5" readonly>@_outputText</textarea>
     </div>
 </div>
 
@@ -79,6 +80,7 @@
     private Assembler _assembler;
     private string _outputText;
     private string _assemblyCode;
+    private ElementReference _outputTextArea;
 
     protected override void OnInitialized()
     {
@@ -130,7 +132,11 @@
     private void AppendToOutputText(char c)
     {
         _outputText += c;
-        StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("ScrollTextAreaToBottom", _outputTextArea);
     }
 
     private void AssembleClicked()
