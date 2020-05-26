@@ -66,18 +66,15 @@ namespace SimpSim.NET.Console
 
         private static void RunProgram(string assemblyCode)
         {
-            Assembler assembler = new Assembler();
+            SimpleSimulator simulator = new SimpleSimulator();
 
-            Instruction[] instructions = assembler.Assemble(assemblyCode);
+            Instruction[] instructions = simulator.Assembler.Assemble(assemblyCode);
 
-            Memory memory = new Memory();
-            memory.LoadInstructions(instructions);
+            simulator.Memory.LoadInstructions(instructions);
 
-            Registers registers = new Registers();
-            registers.ValueWrittenToOutputRegister += System.Console.Write;
+            simulator.Registers.ValueWrittenToOutputRegister += System.Console.Write;
 
-            Machine machine = new Machine(memory, registers);
-            machine.Run(25);
+            simulator.Machine.Run(25);
 
             System.Console.ReadLine();
         }

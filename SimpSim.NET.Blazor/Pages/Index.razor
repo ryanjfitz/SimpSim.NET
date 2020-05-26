@@ -1,6 +1,7 @@
 ﻿@page "/"
-@implements IDisposable
+@inject SimpleSimulator SimpleSimulator
 @inject IJSRuntime JSRuntime
+@implements IDisposable
 
 <div class="container-fluid border mb-2">
     <h2 class="text-center">Editor</h2>
@@ -41,8 +42,8 @@
         <h5 class="col text-center">Instruction Register</h5>
     </div>
     <div class="row">
-        <input class="form-control-sm col" @bind="_machine.ProgramCounter"/>
-        <input class="form-control-sm col" value="@_machine.InstructionRegister" readonly/>
+        <input class="form-control-sm col" @bind="SimpleSimulator.Machine.ProgramCounter"/>
+        <input class="form-control-sm col" value="@SimpleSimulator.Machine.InstructionRegister" readonly/>
     </div>
 </div>
 
@@ -53,7 +54,7 @@
         <div class="row">
             @foreach (int j in Enumerable.Range(0, 8))
             {
-                <input class="col form-control-sm" @bind="_memory[(byte) (i * 8 + j)]"/>
+                <input class="col form-control-sm" @bind="SimpleSimulator.Memory[(byte) (i * 8 + j)]"/>
             }
         </div>
     }
@@ -66,7 +67,7 @@
         <div class="row">
             @foreach (int j in Enumerable.Range(0, 8))
             {
-                <input class="col form-control-sm" @bind="_registers[(byte) (i * 8 + j)]"/>
+                <input class="col form-control-sm" @bind="SimpleSimulator.Registers[(byte) (i * 8 + j)]"/>
             }
         </div>
     }
@@ -74,54 +75,46 @@
 
 @code {
 
-    private Memory _memory;
-    private Registers _registers;
-    private Machine _machine;
-    private Assembler _assembler;
-    private string _outputText;
     private string _assemblyCode;
+    private string _outputText;
     private ElementReference _outputTextArea;
 
     protected override void OnInitialized()
     {
-        _memory = new Memory();
-        _registers = new Registers();
-        _machine = new Machine(_memory, _registers);
-        _assembler = new Assembler();
-        _outputText = null;
         _assemblyCode = null;
+        _outputText = null;
 
-        _registers.ValueWrittenToOutputRegister += AppendToOutputText;
-        _machine.ProgramCounterChanged += StateHasChanged;
-        _machine.InstructionRegisterChanged += StateHasChanged;
-        _machine.StateChanged += StateHasChanged;
+        SimpleSimulator.Registers.ValueWrittenToOutputRegister += AppendToOutputText;
+        SimpleSimulator.Machine.ProgramCounterChanged += StateHasChanged;
+        SimpleSimulator.Machine.InstructionRegisterChanged += StateHasChanged;
+        SimpleSimulator.Machine.StateChanged += StateHasChanged;
     }
 
-    private bool IsMachineRunning => _machine.State == Machine.MachineState.Running;
+    private bool IsMachineRunning => SimpleSimulator.Machine.State == Machine.MachineState.Running;
 
     private async Task RunClicked()
     {
-        await _machine.RunAsync(25);
+        await SimpleSimulator.Machine.RunAsync(25);
     }
 
     private void StepClicked()
     {
-        _machine.Step();
+        SimpleSimulator.Machine.Step();
     }
 
     private void BreakClicked()
     {
-        _machine.Break();
+        SimpleSimulator.Machine.Break();
     }
 
     private void ClearMemoryClicked()
     {
-        _memory.Clear();
+        SimpleSimulator.Memory.Clear();
     }
 
     private void ClearRegistersClicked()
     {
-        _registers.Clear();
+        SimpleSimulator.Registers.Clear();
     }
 
     private void ClearOutputClicked()
@@ -141,17 +134,17 @@
 
     private void AssembleClicked()
     {
-        Instruction[] instructions = _assembler.Assemble(_assemblyCode);
+        Instruction[] instructions = SimpleSimulator.Assembler.Assemble(_assemblyCode);
 
-        _memory.LoadInstructions(instructions);
+        SimpleSimulator.Memory.LoadInstructions(instructions);
     }
 
     public void Dispose()
     {
-        _registers.ValueWrittenToOutputRegister -= AppendToOutputText;
-        _machine.ProgramCounterChanged -= StateHasChanged;
-        _machine.InstructionRegisterChanged -= StateHasChanged;
-        _machine.StateChanged -= StateHasChanged;
+        SimpleSimulator.Registers.ValueWrittenToOutputRegister -= AppendToOutputText;
+        SimpleSimulator.Machine.ProgramCounterChanged -= StateHasChanged;
+        SimpleSimulator.Machine.InstructionRegisterChanged -= StateHasChanged;
+        SimpleSimulator.Machine.StateChanged -= StateHasChanged;
     }
 
 }

@@ -1,6 +1,4 @@
-﻿using SimpSim.NET.Presentation;
-
-namespace SimpSim.NET.WPF
+﻿namespace SimpSim.NET.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml
