@@ -60,13 +60,13 @@ namespace SimpSim.NET.Tests
         [Fact]
         public void ShouldBeAbleToSaveMachineState()
         {
-            RunFileTest("MachineSaveFile.prg", file =>
+            RunFileTest("MachineSaveFile.prg", async file =>
             {
                 Memory memory = new Memory();
                 memory.LoadInstructions(SamplePrograms.HelloWorldInstructions);
 
                 Machine expectedMachine = new Machine(memory, new Registers());
-                expectedMachine.Run();
+                await expectedMachine.RunAsync();
 
                 _stateSaver.SaveMachine(expectedMachine, file);
 

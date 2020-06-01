@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Threading.Tasks;
+using Xunit;
 
 namespace SimpSim.NET.Tests
 {
@@ -22,11 +23,11 @@ namespace SimpSim.NET.Tests
         }
 
         [Fact]
-        public void TestHelloWorldOutput()
+        public async Task TestHelloWorldOutput()
         {
             _memory.LoadInstructions(SamplePrograms.HelloWorldInstructions);
 
-            _machine.Run();
+            await _machine.RunAsync();
 
             const string expectedOutput = "\nHello world !!\n    from the\n  Simple Simulator\n\0";
 
@@ -34,11 +35,11 @@ namespace SimpSim.NET.Tests
         }
 
         [Fact]
-        public void TestAsciiOutput()
+        public async Task TestAsciiOutput()
         {
             _memory.LoadInstructions(SamplePrograms.OutputTestNonInfiniteInstructions);
 
-            _machine.Run();
+            await _machine.RunAsync();
 
             string expectedOutput = null;
             for (int i = 0; i <= byte.MaxValue; i++)
@@ -48,11 +49,11 @@ namespace SimpSim.NET.Tests
         }
 
         [Fact]
-        public void TestTemplateOutput()
+        public async Task TestTemplateOutput()
         {
             _memory.LoadInstructions(SamplePrograms.TemplateInstructions);
 
-            _machine.Run();
+            await _machine.RunAsync();
 
             const string expectedOutput = "\nAnswer : $00\0";
 

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace SimpSim.NET.Console
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             string assemblyCode = null;
 
@@ -61,10 +62,10 @@ namespace SimpSim.NET.Console
             }
 
             if (assemblyCode != null)
-                RunProgram(assemblyCode);
+                await RunProgram(assemblyCode);
         }
 
-        private static void RunProgram(string assemblyCode)
+        private static async Task RunProgram(string assemblyCode)
         {
             SimpleSimulator simulator = new SimpleSimulator();
 
@@ -74,7 +75,7 @@ namespace SimpSim.NET.Console
 
             simulator.Registers.ValueWrittenToOutputRegister += System.Console.Write;
 
-            simulator.Machine.Run(25);
+            await simulator.Machine.RunAsync(25);
 
             System.Console.ReadLine();
         }

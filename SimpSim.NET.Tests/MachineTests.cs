@@ -80,7 +80,7 @@ namespace SimpSim.NET.Tests
 
             Assert.Equal(Machine.MachineState.Running, _machine.State);
 
-            Assert.Throws<InvalidOperationException>(() => _machine.Run());
+            Assert.ThrowsAsync<InvalidOperationException>(() => _machine.RunAsync());
         }
 
         [Fact]
@@ -94,11 +94,11 @@ namespace SimpSim.NET.Tests
             // Load a program that runs forever.
             _memory.LoadInstructions(SamplePrograms.OutputTestInstructions);
 
-            Task task = Task.Run(() => _machine.Run());
+            Task task = Task.Run(() => _machine.RunAsync().Wait());
 
             while (task.Status != TaskStatus.Running)
             {
-                // Wait until the task is runnning.
+                // Wait until the task is running.
             }
 
             // Give the program time to begin executing.
