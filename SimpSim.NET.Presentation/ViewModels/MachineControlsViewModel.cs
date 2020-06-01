@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SimpSim.NET.Presentation.ViewModels
