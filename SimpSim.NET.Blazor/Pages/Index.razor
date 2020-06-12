@@ -11,6 +11,12 @@
     <div class="row">
         <button class="col" @onclick="AssembleClicked" disabled="@IsMachineRunning">Assemble</button>
     </div>
+    @if (_assemblyException != null)
+    {
+        <div class="row alert alert-danger mb-0">
+            @_assemblyException.Message
+        </div>
+    }
 </div>
 
 <div class="container-fluid border mb-2">
@@ -76,12 +82,14 @@
 @code {
 
     private string _assemblyCode;
+    private AssemblyException _assemblyException;
     private string _outputText;
     private ElementReference _outputTextArea;
 
     protected override void OnInitialized()
     {
         _assemblyCode = null;
+        _assemblyException = null;
         _outputText = null;
 
         SimpleSimulator.Registers.ValueWrittenToOutputRegister += AppendToOutputText;
@@ -134,9 +142,20 @@
 
     private void AssembleClicked()
     {
-        Instruction[] instructions = SimpleSimulator.Assembler.Assemble(_assemblyCode);
+        Instruction[] instructions = null;
+        _assemblyException = null;
 
-        SimpleSimulator.Memory.LoadInstructions(instructions);
+        try
+        {
+            instructions = SimpleSimulator.Assembler.Assemble(_assemblyCode);
+        }
+        catch (AssemblyException ex)
+        {
+            _assemblyException = ex;
+        }
+
+        if (instructions != null)
+            SimpleSimulator.Memory.LoadInstructions(instructions);
     }
 
     public void Dispose()
