@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace SimpSim.NET
 {
@@ -6,26 +7,29 @@ namespace SimpSim.NET
     {
         public static bool TryParse(string input, out string stringLiteral)
         {
-            const char doubleQuote = '"';
-            const char singleQuote = '\'';
-
             if (input.Length > 1)
             {
-                if (input.First() == doubleQuote && input.Last() == doubleQuote)
+                foreach (var (leftQuote, rightQuote) in GetQuotePairs())
                 {
-                    stringLiteral = input.TrimStart(doubleQuote).TrimEnd(doubleQuote);
-                    return true;
-                }
-
-                if (input.First() == singleQuote && input.Last() == singleQuote)
-                {
-                    stringLiteral = input.TrimStart(singleQuote).TrimEnd(singleQuote);
-                    return true;
+                    if (input.First() == leftQuote && input.Last() == rightQuote)
+                    {
+                        stringLiteral = input.TrimStart(leftQuote).TrimEnd(rightQuote);
+                        return true;
+                    }                    
                 }
             }
 
             stringLiteral = null;
             return false;
+        }
+
+        private static IEnumerable<(char, char)> GetQuotePairs()
+        {
+            return new[]
+            {
+                ('\"', '\"'), 
+                ('\'', '\'')
+            };
         }
     }
 }
