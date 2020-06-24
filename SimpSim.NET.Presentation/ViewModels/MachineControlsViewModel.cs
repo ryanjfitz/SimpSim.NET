@@ -6,8 +6,12 @@ namespace SimpSim.NET.Presentation.ViewModels
 {
     public class MachineControlsViewModel : ViewModelBase
     {
+        private readonly SimpleSimulator _simulator;
+
         public MachineControlsViewModel(SimpleSimulator simulator, IUserInputService userInputService, IWindowService windowService, StateSaver stateSaver)
         {
+            _simulator = simulator;
+
             NewCommand = new Command(() => windowService.ShowAssemblyEditorWindow(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 
             OpenCommand = new Command(() =>
@@ -37,7 +41,7 @@ namespace SimpSim.NET.Presentation.ViewModels
                     stateSaver.SaveMemory(simulator.Memory, file);
             }, () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 
-            RunCommand = new Command(() => simulator.Machine.RunAsync(25), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
+            RunCommand = new Command(() => simulator.Machine.RunAsync(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 
             StepCommand = new Command(() => simulator.Machine.Step(), () => true, simulator);
 
@@ -63,5 +67,11 @@ namespace SimpSim.NET.Presentation.ViewModels
         public ICommand ClearMemoryCommand { get; }
 
         public ICommand ClearRegistersCommand { get; }
+
+        public int MillisecondsBetweenSteps
+        {
+            get => _simulator.Machine.MillisecondsBetweenSteps;
+            set => _simulator.Machine.MillisecondsBetweenSteps = value;
+        }
     }
 }

@@ -75,7 +75,7 @@ namespace SimpSim.NET.Console
 
             simulator.Registers.ValueWrittenToOutputRegister += System.Console.Write;
 
-            await simulator.Machine.RunAsync(25);
+            await simulator.Machine.RunAsync();
 
             System.Console.ReadLine();
         }

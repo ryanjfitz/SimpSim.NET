@@ -17,6 +17,11 @@
         </StackPanel>
         <StackPanel DockPanel.Dock="Bottom">
             <Button Command="{Binding RunCommand}">Run</Button>
+            <GroupBox Header="Speed">
+                <StackPanel>
+                    <Slider IsDirectionReversed="True" Minimum="1" Maximum="5000" SmallChange="1" LargeChange="50" Value="{Binding MillisecondsBetweenSteps}"></Slider>
+                </StackPanel>
+            </GroupBox>
             <Button Command="{Binding StepCommand}">Step</Button>
             <Button Command="{Binding BreakCommand}">Break</Button>
             <Button Command="{Binding ClearMemoryCommand}">Clear Memory</Button>

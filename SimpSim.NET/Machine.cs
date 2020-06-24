@@ -66,7 +66,9 @@ namespace SimpSim.NET
             }
         }
 
-        public async Task RunAsync(int millisecondsBetweenSteps = 0)
+        public int MillisecondsBetweenSteps { get; set; } = 1;
+
+        public async Task RunAsync()
         {
             if (State == MachineState.Running)
                 throw new InvalidOperationException("A run operation may not be performed while the machine is already running.");
@@ -82,7 +84,7 @@ namespace SimpSim.NET
                 else
                 {
                     Step();
-                    await Task.Delay(millisecondsBetweenSteps);
+                    await Task.Delay(MillisecondsBetweenSteps);
                 }
         }
 

@@ -15,7 +15,7 @@ namespace SimpSim.NET
                     {
                         stringLiteral = input.TrimStart(leftQuote).TrimEnd(rightQuote);
                         return true;
-                    }                    
+                    }
                 }
             }
 
@@ -27,7 +27,7 @@ namespace SimpSim.NET
         {
             return new[]
             {
-                ('\"', '\"'), 
+                ('\"', '\"'),
                 ('\'', '\''),
                 ('“', '”'),
                 ('‘', '’'),
