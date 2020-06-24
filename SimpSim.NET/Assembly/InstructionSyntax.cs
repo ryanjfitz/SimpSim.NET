@@ -112,13 +112,11 @@ namespace SimpSim.NET
         {
             delimiterIndex = line.IndexOf(delimiter);
 
-            int firstSingleQuoteIndex = line.IndexOf("'");
-            int lastSingleQuoteIndex = line.LastIndexOf("'");
-            int firstDoubleQuoteIndex = line.IndexOf("\"");
-            int lastDoubleQuoteIndex = line.LastIndexOf("\"");
+            foreach (var (leftQuote, rightQuote) in StringLiteralSyntax.GetQuotePairs())
+                if (line.IndexOf(leftQuote) < delimiterIndex && delimiterIndex < line.LastIndexOf(rightQuote))
+                    return true;
 
-            return (firstSingleQuoteIndex < delimiterIndex && delimiterIndex < lastSingleQuoteIndex) ||
-                   (firstDoubleQuoteIndex < delimiterIndex && delimiterIndex < lastDoubleQuoteIndex);
+            return false;
         }
     }
 }

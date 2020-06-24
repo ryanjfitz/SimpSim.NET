@@ -23,7 +23,7 @@ namespace SimpSim.NET
             return false;
         }
 
-        private static IEnumerable<(char, char)> GetQuotePairs()
+        public static IEnumerable<(char, char)> GetQuotePairs()
         {
             return new[]
             {
