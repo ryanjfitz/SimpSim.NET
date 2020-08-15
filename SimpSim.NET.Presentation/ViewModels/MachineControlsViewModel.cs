@@ -41,7 +41,7 @@ namespace SimpSim.NET.Presentation.ViewModels
                     stateSaver.SaveMemory(simulator.Memory, file);
             }, () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 
-            RunCommand = new Command(() => simulator.Machine.RunAsync(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
+            RunCommand = new Command(async () => await simulator.Machine.RunAsync(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 
             StepCommand = new Command(() => simulator.Machine.Step(), () => true, simulator);
 

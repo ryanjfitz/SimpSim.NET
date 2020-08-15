@@ -1,29 +1,48 @@
-﻿namespace SimpSim.NET.Presentation.ViewModels
+﻿using System.Threading.Tasks;
+
+namespace SimpSim.NET.Presentation.ViewModels
 {
     public class AssemblyEditorWindowViewModel : ViewModelBase
     {
+        private bool _isAssembling;
         private string _assemblyEditorText;
         private string _assemblyResult;
 
         public AssemblyEditorWindowViewModel(SimpleSimulator simulator)
         {
-            AssembleCommand = new AsyncCommand(() =>
+            AssembleCommand = new Command(async () =>
             {
                 Instruction[] instructions = null;
 
                 try
                 {
-                    instructions = simulator.Assembler.Assemble(AssemblyEditorText);
+                    IsAssembling = true;
+                    AssemblyResult = null;
+                    instructions = await Task.Run(() => simulator.Assembler.Assemble(AssemblyEditorText)).ConfigureAwait(false);
                     AssemblyResult = "Assembly Successful";
                 }
                 catch (AssemblyException ex)
                 {
                     AssemblyResult = ex.Message;
                 }
+                finally
+                {
+                    IsAssembling = false;
+                }
 
                 if (instructions != null)
                     simulator.Memory.LoadInstructions(instructions);
-            }, () => true, simulator);
+            }, () => !IsAssembling, simulator);
+        }
+
+        public bool IsAssembling
+        {
+            get => _isAssembling;
+            set
+            {
+                SetProperty(ref _isAssembling, value);
+                AssembleCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public string AssemblyEditorText
@@ -38,6 +57,6 @@
             set => SetProperty(ref _assemblyResult, value);
         }
 
-        public IAsyncCommand AssembleCommand { get; }
+        public Command AssembleCommand { get; }
     }
 }

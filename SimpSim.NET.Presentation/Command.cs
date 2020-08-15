@@ -1,77 +1,46 @@
 ﻿using System;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Threading;
 using System.Windows.Input;
 
 namespace SimpSim.NET.Presentation
 {
-    internal class Command : ICommand
+    public class Command : ICommand
     {
-        protected readonly Action ExecuteAction;
-        protected readonly Func<bool> CanExecuteFunc;
+        private readonly Action _executeAction;
+        private readonly Func<bool> _canExecuteFunc;
+        private readonly SynchronizationContext _synchronizationContext;
 
         public Command(Action executeAction, Func<bool> canExecuteFunc, SimpleSimulator simulator)
         {
-            ExecuteAction = executeAction;
-            CanExecuteFunc = canExecuteFunc;
+            _executeAction = executeAction;
+            _canExecuteFunc = canExecuteFunc;
+            _synchronizationContext = SynchronizationContext.Current;
 
             simulator.Machine.StateChanged += RaiseCanExecuteChanged;
         }
 
-        public virtual bool CanExecute(object parameter)
+        public bool CanExecute(object parameter)
         {
-            return CanExecuteFunc.Invoke();
+            return _canExecuteFunc.Invoke();
         }
 
-        public virtual void Execute(object parameter)
+        public void Execute(object parameter)
         {
-            ExecuteAction.Invoke();
+            _executeAction.Invoke();
         }
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler CanExecuteChanged;
+
+        public void RaiseCanExecuteChanged()
         {
-            add => CommandManager.RequerySuggested += value;
-            remove => CommandManager.RequerySuggested -= value;
-        }
-
-        protected void RaiseCanExecuteChanged()
-        {
-            Application.Current?.Dispatcher?.Invoke(CommandManager.InvalidateRequerySuggested);
-        }
-    }
-
-    public interface IAsyncCommand : ICommand
-    {
-        Task ExecuteAsync(object parameter);
-    }
-
-    internal class AsyncCommand : Command, IAsyncCommand
-    {
-        private bool _isExecuting;
-
-        public AsyncCommand(Action executeAction, Func<bool> canExecuteFunc, SimpleSimulator simulator) : base(executeAction, canExecuteFunc, simulator)
-        {
-        }
-
-        public override bool CanExecute(object parameter)
-        {
-            return !_isExecuting && CanExecuteFunc.Invoke();
-        }
-
-        public override async void Execute(object parameter)
-        {
-            await ExecuteAsync(parameter);
-        }
-
-        public async Task ExecuteAsync(object parameter)
-        {
-            _isExecuting = true;
-            RaiseCanExecuteChanged();
-
-            await Task.Run(() => ExecuteAction.Invoke());
-
-            _isExecuting = false;
-            RaiseCanExecuteChanged();
+            var handler = CanExecuteChanged;
+            if (handler != null)
+            {
+                if (_synchronizationContext != null && _synchronizationContext != SynchronizationContext.Current)
+                    _synchronizationContext.Post((o) => handler.Invoke(this, EventArgs.Empty), null);
+                else
+                    handler.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }
