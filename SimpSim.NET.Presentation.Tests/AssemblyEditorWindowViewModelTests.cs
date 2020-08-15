@@ -16,7 +16,7 @@ namespace SimpSim.NET.Presentation.Tests
 
             viewModel.AssemblyEditorText = SamplePrograms.HelloWorldCode;
 
-            viewModel.AssembleCommand.Execute(null);
+            viewModel.AssembleCommand.Execute();
 
             var expectedBytes = SamplePrograms.HelloWorldInstructions.SelectMany(instruction => instruction.Bytes).ToList();
 

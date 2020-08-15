@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
+using Prism.Mvvm;
 
 namespace SimpSim.NET.Presentation.ViewModels
 {
-    public class AssemblyEditorWindowViewModel : ViewModelBase
+    public class AssemblyEditorWindowViewModel : BindableBase
     {
         private bool _isAssembling;
         private string _assemblyEditorText;

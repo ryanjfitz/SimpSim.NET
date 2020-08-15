@@ -1,6 +1,8 @@
-﻿namespace SimpSim.NET.Presentation.ViewModels
+﻿using Prism.Mvvm;
+
+namespace SimpSim.NET.Presentation.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : BindableBase
     {
     }
 }

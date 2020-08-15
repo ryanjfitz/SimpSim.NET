@@ -1,8 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
+using Prism.Mvvm;
 
 namespace SimpSim.NET.Presentation.ViewModels
 {
-    public class MemoryViewModel : ViewModelBase
+    public class MemoryViewModel : BindableBase
     {
         private const string IndexerName = "Addresses";
 
@@ -12,7 +13,7 @@ namespace SimpSim.NET.Presentation.ViewModels
         {
             _simulator = simulator;
 
-            _simulator.Memory.Changed += () => OnPropertyChanged(IndexerName);
+            _simulator.Memory.Changed += () => RaisePropertyChanged(IndexerName);
         }
 
         [IndexerName(IndexerName)]

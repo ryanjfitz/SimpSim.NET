@@ -1,8 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
+using Prism.Mvvm;
 
 namespace SimpSim.NET.Presentation.ViewModels
 {
-    public class GeneralPurposeRegistersViewModel : ViewModelBase
+    public class GeneralPurposeRegistersViewModel : BindableBase
     {
         private const string IndexerName = "GPR";
 
@@ -12,7 +13,7 @@ namespace SimpSim.NET.Presentation.ViewModels
         {
             _simulator = simulator;
 
-            _simulator.Registers.Changed += () => OnPropertyChanged(IndexerName);
+            _simulator.Registers.Changed += () => RaisePropertyChanged(IndexerName);
         }
 
         [IndexerName(IndexerName)]

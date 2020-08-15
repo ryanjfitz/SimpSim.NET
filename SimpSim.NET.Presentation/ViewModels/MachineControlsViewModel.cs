@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Input;
+using Prism.Mvvm;
 
 namespace SimpSim.NET.Presentation.ViewModels
 {
-    public class MachineControlsViewModel : ViewModelBase
+    public class MachineControlsViewModel : BindableBase
     {
         private readonly SimpleSimulator _simulator;
 

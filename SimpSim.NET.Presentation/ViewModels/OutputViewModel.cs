@@ -1,8 +1,9 @@
 ﻿using System.Windows.Input;
+using Prism.Mvvm;
 
 namespace SimpSim.NET.Presentation.ViewModels
 {
-    public class OutputViewModel : ViewModelBase
+    public class OutputViewModel : BindableBase
     {
         private string _outputWindowText;
 
