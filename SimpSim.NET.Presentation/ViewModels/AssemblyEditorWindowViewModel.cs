@@ -1,27 +1,25 @@
 ﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using Prism.Mvvm;
 
 namespace SimpSim.NET.Presentation.ViewModels
 {
     public class AssemblyEditorWindowViewModel : BindableBase
     {
-        private bool _isAssembling;
+        private bool _canExecuteAssembleCommand;
         private string _assemblyEditorText;
         private string _assemblyResult;
 
         public AssemblyEditorWindowViewModel(SimpleSimulator simulator)
         {
-            AssembleCommand = new Command(async () => await Assemble(simulator), () => !IsAssembling, simulator);
+            CanExecuteAssembleCommand = true;
+            AssembleCommand = new Command(async () => await Assemble(simulator), simulator).ObservesCanExecute(() => CanExecuteAssembleCommand);
         }
 
-        public bool IsAssembling
+        public bool CanExecuteAssembleCommand
         {
-            get => _isAssembling;
-            set
-            {
-                SetProperty(ref _isAssembling, value);
-                AssembleCommand.RaiseCanExecuteChanged();
-            }
+            get => _canExecuteAssembleCommand;
+            set => SetProperty(ref _canExecuteAssembleCommand, value);
         }
 
         public string AssemblyEditorText
@@ -42,7 +40,7 @@ namespace SimpSim.NET.Presentation.ViewModels
 
             try
             {
-                IsAssembling = true;
+                CanExecuteAssembleCommand = false;
                 AssemblyResult = null;
                 instructions = await Task.Run(() => simulator.Assembler.Assemble(AssemblyEditorText)).ConfigureAwait(false);
                 AssemblyResult = "Assembly Successful";
@@ -53,13 +51,13 @@ namespace SimpSim.NET.Presentation.ViewModels
             }
             finally
             {
-                IsAssembling = false;
+                CanExecuteAssembleCommand = true;
             }
 
             if (instructions != null)
                 simulator.Memory.LoadInstructions(instructions);
         }
 
-        public Command AssembleCommand { get; }
+        public ICommand AssembleCommand { get; }
     }
 }
