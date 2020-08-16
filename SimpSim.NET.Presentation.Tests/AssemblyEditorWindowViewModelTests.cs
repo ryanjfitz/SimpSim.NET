@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using SimpSim.NET.Presentation.ViewModels;
 using Xunit;
 
@@ -7,8 +8,8 @@ namespace SimpSim.NET.Presentation.Tests
 {
     public class AssemblyEditorWindowViewModelTests
     {
-        [Fact(Skip = "Not passing due to use of async/await in AssembleCommand.")]
-        public void AssembleCommandShouldAssembleInstructionsToMemory()
+        [Fact]
+        public async Task AssembleCommandShouldAssembleInstructionsToMemory()
         {
             SimpleSimulator simulator = new SimpleSimulator();
 
@@ -16,7 +17,7 @@ namespace SimpSim.NET.Presentation.Tests
 
             viewModel.AssemblyEditorText = SamplePrograms.HelloWorldCode;
 
-            viewModel.AssembleCommand.Execute();
+            await viewModel.Assemble(simulator);
 
             var expectedBytes = SamplePrograms.HelloWorldInstructions.SelectMany(instruction => instruction.Bytes).ToList();
 
