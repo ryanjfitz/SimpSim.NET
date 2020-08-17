@@ -1,6 +1,4 @@
-﻿using SimpSim.NET.WPF.ViewModels;
-
-namespace SimpSim.NET.WPF.Views
+﻿namespace SimpSim.NET.WPF.Views
 {
     /// <summary>
     /// Interaction logic for GeneralPurposeRegisters.xaml
@@ -10,7 +8,6 @@ namespace SimpSim.NET.WPF.Views
         public GeneralPurposeRegisters()
         {
             InitializeComponent();
-            DataContext = new GeneralPurposeRegistersViewModel(App.SimpleSimulator);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
-using SimpSim.NET.WPF.ViewModels;
 
 namespace SimpSim.NET.WPF.Views
 {
@@ -12,7 +11,6 @@ namespace SimpSim.NET.WPF.Views
         public Output()
         {
             InitializeComponent();
-            DataContext = new OutputViewModel(App.SimpleSimulator);
 
             SetupAutoScroll();
         }
