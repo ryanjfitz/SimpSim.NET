@@ -73,6 +73,6 @@ namespace SimpSim.NET.WPF.ViewModels
 
         public string Title => "Assembly Editor";
 
-        public event Action<IDialogResult> RequestClose;
+        public event Action<IDialogResult> RequestClose { add{} remove{} }
     }
 }
