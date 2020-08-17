@@ -1,4 +1,4 @@
-﻿using SimpSim.NET.Presentation.ViewModels;
+﻿using SimpSim.NET.WPF.ViewModels;
 using Xunit;
 
 namespace SimpSim.NET.Presentation.Tests

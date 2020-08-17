@@ -1,7 +1,7 @@
 ﻿using System;
 using Prism.Commands;
 
-namespace SimpSim.NET.Presentation
+namespace SimpSim.NET.WPF
 {
     internal class Command : DelegateCommand
     {

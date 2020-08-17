@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
-using SimpSim.NET.Presentation.ViewModels;
+using SimpSim.NET.WPF.ViewModels;
 
 namespace SimpSim.NET.WPF.Views
 {

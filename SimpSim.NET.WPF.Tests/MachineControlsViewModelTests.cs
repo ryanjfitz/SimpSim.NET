@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Moq;
-using SimpSim.NET.Presentation.ViewModels;
+using SimpSim.NET.WPF;
+using SimpSim.NET.WPF.ViewModels;
 using Xunit;
 
 namespace SimpSim.NET.Presentation.Tests

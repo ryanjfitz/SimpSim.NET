@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SimpSim.NET.Presentation.ViewModels;
+using SimpSim.NET.WPF.ViewModels;
 using Xunit;
 
 namespace SimpSim.NET.Presentation.Tests

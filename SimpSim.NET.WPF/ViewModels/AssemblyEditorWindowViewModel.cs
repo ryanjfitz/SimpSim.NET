@@ -2,7 +2,7 @@
 using System.Windows.Input;
 using Prism.Mvvm;
 
-namespace SimpSim.NET.Presentation.ViewModels
+namespace SimpSim.NET.WPF.ViewModels
 {
     public class AssemblyEditorWindowViewModel : BindableBase
     {

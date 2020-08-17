@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using SimpSim.NET.WPF;
+using Xunit;
 
 namespace SimpSim.NET.Presentation.Tests
 {

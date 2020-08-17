@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SimpSim.NET.Presentation\SimpSim.NET.Presentation.csproj" />
+    <PackageReference Include="Prism.DryIoc" Version="7.2.0.1422" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpSim.NET\SimpSim.NET.csproj" />
   </ItemGroup>
 
 </Project>

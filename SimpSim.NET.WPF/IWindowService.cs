@@ -1,4 +1,4 @@
-﻿namespace SimpSim.NET.Presentation
+﻿namespace SimpSim.NET.WPF
 {
     public interface IWindowService
     {

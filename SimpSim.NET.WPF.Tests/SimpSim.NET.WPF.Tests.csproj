@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
+    <RootNamespace>SimpSim.NET.Presentation.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SimpSim.NET.Presentation\SimpSim.NET.Presentation.csproj" />
+    <ProjectReference Include="..\SimpSim.NET.WPF\SimpSim.NET.WPF.csproj" />
     <ProjectReference Include="..\SimpSim.NET\SimpSim.NET.csproj" />
   </ItemGroup>
 

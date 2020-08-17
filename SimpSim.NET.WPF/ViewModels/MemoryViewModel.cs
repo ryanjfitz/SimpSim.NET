@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Prism.Mvvm;
 
-namespace SimpSim.NET.Presentation.ViewModels
+namespace SimpSim.NET.WPF.ViewModels
 {
     public class MemoryViewModel : BindableBase
     {

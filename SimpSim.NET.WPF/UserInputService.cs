@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Microsoft.Win32;
-using SimpSim.NET.Presentation;
 
 namespace SimpSim.NET.WPF
 {

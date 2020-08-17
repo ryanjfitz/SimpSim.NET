@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpSim.NET.Console", "Simp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.WPF", "SimpSim.NET.WPF\SimpSim.NET.WPF.csproj", "{D5CDBA5B-16BC-49CE-8E95-6350851773A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.Presentation", "SimpSim.NET.Presentation\SimpSim.NET.Presentation.csproj", "{6E5E9D0A-412B-4960-BE9A-E75B5349E08F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.Presentation.Tests", "SimpSim.NET.Presentation.Tests\SimpSim.NET.Presentation.Tests.csproj", "{7531DFD2-52DC-4181-9ACC-0F87ACA330BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.WPF.Tests", "SimpSim.NET.WPF.Tests\SimpSim.NET.WPF.Tests.csproj", "{7531DFD2-52DC-4181-9ACC-0F87ACA330BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpSim.NET.Blazor", "SimpSim.NET.Blazor\SimpSim.NET.Blazor.csproj", "{AC4BE82C-CBE8-48A3-A496-256604D0D358}"
 EndProject
@@ -39,10 +37,6 @@ Global
 		{D5CDBA5B-16BC-49CE-8E95-6350851773A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5CDBA5B-16BC-49CE-8E95-6350851773A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5CDBA5B-16BC-49CE-8E95-6350851773A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E5E9D0A-412B-4960-BE9A-E75B5349E08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E5E9D0A-412B-4960-BE9A-E75B5349E08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E5E9D0A-412B-4960-BE9A-E75B5349E08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E5E9D0A-412B-4960-BE9A-E75B5349E08F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7531DFD2-52DC-4181-9ACC-0F87ACA330BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7531DFD2-52DC-4181-9ACC-0F87ACA330BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7531DFD2-52DC-4181-9ACC-0F87ACA330BE}.Release|Any CPU.ActiveCfg = Release|Any CPU

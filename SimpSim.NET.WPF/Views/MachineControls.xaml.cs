@@ -1,4 +1,4 @@
-﻿using SimpSim.NET.Presentation.ViewModels;
+﻿using SimpSim.NET.WPF.ViewModels;
 
 namespace SimpSim.NET.WPF.Views
 {
