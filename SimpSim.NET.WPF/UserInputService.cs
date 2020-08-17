@@ -3,6 +3,12 @@ using Microsoft.Win32;
 
 namespace SimpSim.NET.WPF
 {
+    public interface IUserInputService
+    {
+        FileInfo GetOpenFileName();
+        FileInfo GetSaveFileName();
+    }
+
     internal class UserInputService : IUserInputService
     {
         public FileInfo GetOpenFileName()

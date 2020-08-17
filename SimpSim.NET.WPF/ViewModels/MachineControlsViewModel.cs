@@ -9,11 +9,11 @@ namespace SimpSim.NET.WPF.ViewModels
     {
         private readonly SimpleSimulator _simulator;
 
-        public MachineControlsViewModel(SimpleSimulator simulator, IUserInputService userInputService, IWindowService windowService, StateSaver stateSaver)
+        public MachineControlsViewModel(SimpleSimulator simulator, IUserInputService userInputService, IDialogServiceAdapter dialogServiceAdapter, StateSaver stateSaver)
         {
             _simulator = simulator;
 
-            NewCommand = new Command(() => windowService.ShowAssemblyEditorWindow(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
+            NewCommand = new Command(() => dialogServiceAdapter.ShowAssemblyEditorDialog(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 
             OpenCommand = new Command(() =>
             {
@@ -29,7 +29,7 @@ namespace SimpSim.NET.WPF.ViewModels
                     }
                     else if (file.Extension.Equals(".asm", StringComparison.OrdinalIgnoreCase))
                     {
-                        windowService.ShowAssemblyEditorWindow(File.ReadAllText(file.FullName));
+                        dialogServiceAdapter.ShowAssemblyEditorDialog(File.ReadAllText(file.FullName));
                     }
                 }
             }, () => simulator.Machine.State != Machine.MachineState.Running, simulator);

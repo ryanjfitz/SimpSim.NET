@@ -3,9 +3,9 @@
     /// <summary>
     /// Interaction logic for AssemblyEditorWindow.xaml
     /// </summary>
-    public partial class AssemblyEditorWindow
+    public partial class AssemblyEditorDialog
     {
-        public AssemblyEditorWindow()
+        public AssemblyEditorDialog()
         {
             InitializeComponent();
         }

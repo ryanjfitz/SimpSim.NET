@@ -9,7 +9,7 @@ namespace SimpSim.NET.WPF.Tests
     {
         private readonly SimpleSimulator _simulator;
         private readonly Mock<IUserInputService> _userInputService;
-        private readonly Mock<IWindowService> _windowService;
+        private readonly Mock<IDialogServiceAdapter> _dialogServiceAdapter;
         private readonly Mock<StateSaver> _stateSaver;
         private readonly MachineControlsViewModel _viewModel;
 
@@ -17,9 +17,9 @@ namespace SimpSim.NET.WPF.Tests
         {
             _simulator = new SimpleSimulator();
             _userInputService = new Mock<IUserInputService>();
-            _windowService = new Mock<IWindowService>();
+            _dialogServiceAdapter = new Mock<IDialogServiceAdapter>();
             _stateSaver = new Mock<StateSaver>();
-            _viewModel = new MachineControlsViewModel(_simulator, _userInputService.Object, _windowService.Object, _stateSaver.Object);
+            _viewModel = new MachineControlsViewModel(_simulator, _userInputService.Object, _dialogServiceAdapter.Object, _stateSaver.Object);
         }
 
         [Fact]
@@ -79,7 +79,7 @@ namespace SimpSim.NET.WPF.Tests
         {
             _viewModel.NewCommand.Execute(null);
 
-            _windowService.Verify(w => w.ShowAssemblyEditorWindow(null));
+            _dialogServiceAdapter.Verify(w => w.ShowAssemblyEditorDialog(null));
         }
 
         [Fact]
@@ -125,7 +125,7 @@ namespace SimpSim.NET.WPF.Tests
 
                 _userInputService.Verify();
 
-                _windowService.Verify(w => w.ShowAssemblyEditorWindow("some text"));
+                _dialogServiceAdapter.Verify(w => w.ShowAssemblyEditorDialog("some text"));
             }
             finally
             {

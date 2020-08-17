@@ -1,16 +1,18 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Mvvm;
+using Prism.Services.Dialogs;
 
 namespace SimpSim.NET.WPF.ViewModels
 {
-    public class AssemblyEditorWindowViewModel : BindableBase
+    public class AssemblyEditorDialogViewModel : BindableBase, IDialogAware
     {
         private bool _canExecuteAssembleCommand;
         private string _assemblyEditorText;
         private string _assemblyResult;
 
-        public AssemblyEditorWindowViewModel(SimpleSimulator simulator)
+        public AssemblyEditorDialogViewModel(SimpleSimulator simulator)
         {
             CanExecuteAssembleCommand = true;
             AssembleCommand = new Command(async () => await Assemble(simulator), simulator).ObservesCanExecute(() => CanExecuteAssembleCommand);
@@ -59,5 +61,18 @@ namespace SimpSim.NET.WPF.ViewModels
         }
 
         public ICommand AssembleCommand { get; }
+
+        public bool CanCloseDialog() => true;
+
+        public void OnDialogClosed() { }
+
+        public void OnDialogOpened(IDialogParameters parameters)
+        {
+            AssemblyEditorText = parameters.GetValue<string>("text");
+        }
+
+        public string Title => "Assembly Editor";
+
+        public event Action<IDialogResult> RequestClose;
     }
 }

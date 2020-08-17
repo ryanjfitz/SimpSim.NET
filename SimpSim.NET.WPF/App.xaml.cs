@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using Prism.DryIoc;
 using Prism.Ioc;
+using SimpSim.NET.WPF.ViewModels;
 using SimpSim.NET.WPF.Views;
 
 namespace SimpSim.NET.WPF
@@ -19,8 +20,9 @@ namespace SimpSim.NET.WPF
         {
             containerRegistry.RegisterSingleton<SimpleSimulator>();
             containerRegistry.Register<IUserInputService, UserInputService>();
-            containerRegistry.Register<IWindowService, WindowService>();
+            containerRegistry.Register<IDialogServiceAdapter, DialogServiceAdapter>();
             containerRegistry.RegisterSingleton<StateSaver>();
+            containerRegistry.RegisterDialog<AssemblyEditorDialog, AssemblyEditorDialogViewModel>();
         }
     }
 }

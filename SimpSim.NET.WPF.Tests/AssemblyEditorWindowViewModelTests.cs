@@ -13,7 +13,7 @@ namespace SimpSim.NET.WPF.Tests
         {
             SimpleSimulator simulator = new SimpleSimulator();
 
-            AssemblyEditorWindowViewModel viewModel = new AssemblyEditorWindowViewModel(simulator);
+            AssemblyEditorDialogViewModel viewModel = new AssemblyEditorDialogViewModel(simulator);
 
             viewModel.AssemblyEditorText = SamplePrograms.HelloWorldCode;
 
