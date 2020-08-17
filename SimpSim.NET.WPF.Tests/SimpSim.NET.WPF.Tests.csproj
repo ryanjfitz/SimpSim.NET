@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
-    <RootNamespace>SimpSim.NET.Presentation.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

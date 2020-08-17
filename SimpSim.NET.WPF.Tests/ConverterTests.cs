@@ -1,7 +1,6 @@
-﻿using SimpSim.NET.WPF;
-using Xunit;
+﻿using Xunit;
 
-namespace SimpSim.NET.Presentation.Tests
+namespace SimpSim.NET.WPF.Tests
 {
     public class ConverterTests
     {

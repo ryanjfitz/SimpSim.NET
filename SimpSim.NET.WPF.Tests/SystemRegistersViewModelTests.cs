@@ -1,7 +1,7 @@
 ﻿using SimpSim.NET.WPF.ViewModels;
 using Xunit;
 
-namespace SimpSim.NET.Presentation.Tests
+namespace SimpSim.NET.WPF.Tests
 {
     public class SystemRegistersViewModelTests
     {
