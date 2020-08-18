@@ -1,4 +1,5 @@
 ﻿using Prism.Services.Dialogs;
+using SimpSim.NET.WPF.Views;
 
 namespace SimpSim.NET.WPF
 {
@@ -18,7 +19,7 @@ namespace SimpSim.NET.WPF
 
         public void ShowAssemblyEditorDialog(string text = null)
         {
-            _dialogService.ShowDialog("AssemblyEditorDialog", new DialogParameters { { "text", text } }, result => { });
+            _dialogService.ShowDialog(nameof(AssemblyEditorDialog), new DialogParameters { { "text", text } }, result => { });
         }
     }
 }
