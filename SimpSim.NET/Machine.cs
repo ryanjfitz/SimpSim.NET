@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace SimpSim.NET
@@ -223,6 +224,7 @@ namespace SimpSim.NET
         public enum MachineState
         {
             Halted,
+            [Description("Invalid Instruction")]
             InvalidInstruction,
             Ready,
             Running

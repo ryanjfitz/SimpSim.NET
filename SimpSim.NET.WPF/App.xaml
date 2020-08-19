@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <local:DecimalToHexConverter x:Key="DecimalToHexConverter" />
+                    <local:EnumToDescriptionConverter x:Key="EnumToDescriptionConverter" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
