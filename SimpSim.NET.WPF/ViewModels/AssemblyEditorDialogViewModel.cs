@@ -10,12 +10,16 @@ namespace SimpSim.NET.WPF.ViewModels
     {
         private bool _canExecuteAssembleCommand;
         private string _assemblyEditorText;
-        private string _assemblyResult;
+        private string _assemblyError;
 
         public AssemblyEditorDialogViewModel(SimpleSimulator simulator)
         {
             CanExecuteAssembleCommand = true;
-            AssembleCommand = new Command(async () => await Assemble(simulator), simulator).ObservesCanExecute(() => CanExecuteAssembleCommand);
+            AssembleCommand = new Command(async () =>
+            {
+                if (await Assemble(simulator))
+                    RequestClose?.Invoke(new DialogResult());
+            }, simulator).ObservesCanExecute(() => CanExecuteAssembleCommand);
         }
 
         public bool CanExecuteAssembleCommand
@@ -30,26 +34,26 @@ namespace SimpSim.NET.WPF.ViewModels
             set => SetProperty(ref _assemblyEditorText, value);
         }
 
-        public string AssemblyResult
+        public string AssemblyError
         {
-            get => _assemblyResult;
-            set => SetProperty(ref _assemblyResult, value);
+            get => _assemblyError;
+            set => SetProperty(ref _assemblyError, value);
         }
 
-        public async Task Assemble(SimpleSimulator simulator)
+        public async Task<bool> Assemble(SimpleSimulator simulator)
         {
             Instruction[] instructions = null;
 
+            CanExecuteAssembleCommand = false;
+            AssemblyError = null;
+
             try
             {
-                CanExecuteAssembleCommand = false;
-                AssemblyResult = null;
                 instructions = await Task.Run(() => simulator.Assembler.Assemble(AssemblyEditorText)).ConfigureAwait(false);
-                AssemblyResult = "Assembly Successful";
             }
             catch (AssemblyException ex)
             {
-                AssemblyResult = ex.Message;
+                AssemblyError = ex.Message;
             }
             finally
             {
@@ -58,6 +62,8 @@ namespace SimpSim.NET.WPF.ViewModels
 
             if (instructions != null)
                 simulator.Memory.LoadInstructions(instructions);
+
+            return AssemblyError == null;
         }
 
         public ICommand AssembleCommand { get; }
@@ -73,6 +79,6 @@ namespace SimpSim.NET.WPF.ViewModels
 
         public string Title => "Assembly Editor";
 
-        public event Action<IDialogResult> RequestClose { add { } remove { } }
+        public event Action<IDialogResult> RequestClose;
     }
 }

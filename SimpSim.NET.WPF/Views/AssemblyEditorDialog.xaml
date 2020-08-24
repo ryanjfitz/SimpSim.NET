@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" Text="{Binding AssemblyEditorText}" AcceptsReturn="True" />
-        <TextBlock Grid.Row="1" Text="{Binding AssemblyResult}" />
+        <TextBlock Grid.Row="1" Text="{Binding AssemblyError}" />
         <Button Grid.Row="2" Command="{Binding AssembleCommand}">Assemble</Button>
     </Grid>
 </UserControl>

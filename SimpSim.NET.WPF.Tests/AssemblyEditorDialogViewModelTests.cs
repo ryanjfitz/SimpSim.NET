@@ -6,7 +6,7 @@ using Xunit;
 
 namespace SimpSim.NET.WPF.Tests
 {
-    public class AssemblyEditorWindowViewModelTests
+    public class AssemblyEditorDialogViewModelTests
     {
         [Fact]
         public async Task AssembleCommandShouldAssembleInstructionsToMemory()

@@ -44,7 +44,7 @@ namespace SimpSim.NET.WPF.ViewModels
 
             RunCommand = new Command(async () => await simulator.Machine.RunAsync(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 
-            StepCommand = new Command(() => simulator.Machine.Step(), () => true, simulator);
+            StepCommand = new Command(() => simulator.Machine.Step(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
 
             BreakCommand = new Command(() => simulator.Machine.Break(), () => simulator.Machine.State == Machine.MachineState.Running, simulator);
 
