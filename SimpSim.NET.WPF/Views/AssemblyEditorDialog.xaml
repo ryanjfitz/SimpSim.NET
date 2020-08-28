@@ -16,10 +16,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" Text="{Binding AssemblyEditorText}" AcceptsReturn="True" />
-        <TextBlock Grid.Row="1" Text="{Binding AssemblyError}" />
-        <Button Grid.Row="2" Command="{Binding AssembleCommand}">Assemble</Button>
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" Text="{Binding AssemblyError}" Foreground="Red" />
+            <Button Grid.Column="1" Command="{Binding AssembleCommand}" MinWidth="90">Assemble</Button>
+        </Grid>
     </Grid>
 </UserControl>
