@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Input;
+using Prism.Commands;
 using Prism.Mvvm;
 
 namespace SimpSim.NET.WPF.ViewModels
@@ -13,9 +14,9 @@ namespace SimpSim.NET.WPF.ViewModels
         {
             _simulator = simulator;
 
-            NewCommand = new Command(() => dialogServiceAdapter.ShowAssemblyEditorDialog(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
+            NewCommand = new DelegateCommand(() => dialogServiceAdapter.ShowAssemblyEditorDialog(), () => simulator.Machine.State != Machine.MachineState.Running);
 
-            OpenCommand = new Command(() =>
+            OpenCommand = new DelegateCommand(() =>
             {
                 FileInfo file = userInputService.GetOpenFileName();
 
@@ -32,38 +33,48 @@ namespace SimpSim.NET.WPF.ViewModels
                         dialogServiceAdapter.ShowAssemblyEditorDialog(File.ReadAllText(file.FullName));
                     }
                 }
-            }, () => simulator.Machine.State != Machine.MachineState.Running, simulator);
+            }, () => simulator.Machine.State != Machine.MachineState.Running);
 
-            SaveCommand = new Command(() =>
+            SaveCommand = new DelegateCommand(() =>
             {
                 FileInfo file = userInputService.GetSaveFileName();
 
                 if (file != null)
                     stateSaver.SaveMemory(simulator.Memory, file);
-            }, () => simulator.Machine.State != Machine.MachineState.Running, simulator);
+            }, () => simulator.Machine.State != Machine.MachineState.Running);
 
-            RunCommand = new Command(async () => await simulator.Machine.RunAsync(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
+            RunCommand = new DelegateCommand(async () => await simulator.Machine.RunAsync(), () => simulator.Machine.State != Machine.MachineState.Running);
 
-            StepCommand = new Command(() => simulator.Machine.Step(), () => simulator.Machine.State != Machine.MachineState.Running, simulator);
+            StepCommand = new DelegateCommand(() => simulator.Machine.Step(), () => simulator.Machine.State != Machine.MachineState.Running);
 
-            BreakCommand = new Command(() => simulator.Machine.Break(), () => simulator.Machine.State == Machine.MachineState.Running, simulator);
+            BreakCommand = new DelegateCommand(() => simulator.Machine.Break(), () => simulator.Machine.State == Machine.MachineState.Running);
 
-            ClearMemoryCommand = new Command(() => simulator.Memory.Clear(), () => true, simulator);
+            ClearMemoryCommand = new DelegateCommand(() => simulator.Memory.Clear());
 
-            ClearRegistersCommand = new Command(() => simulator.Registers.Clear(), () => true, simulator);
+            ClearRegistersCommand = new DelegateCommand(() => simulator.Registers.Clear());
+
+            simulator.Machine.StateChanged += () =>
+            {
+                NewCommand.RaiseCanExecuteChanged();
+                OpenCommand.RaiseCanExecuteChanged();
+                SaveCommand.RaiseCanExecuteChanged();
+                RunCommand.RaiseCanExecuteChanged();
+                StepCommand.RaiseCanExecuteChanged();
+                BreakCommand.RaiseCanExecuteChanged();
+            };
         }
 
-        public ICommand NewCommand { get; }
+        public DelegateCommand NewCommand { get; }
 
-        public ICommand OpenCommand { get; }
+        public DelegateCommand OpenCommand { get; }
 
-        public ICommand SaveCommand { get; }
+        public DelegateCommand SaveCommand { get; }
 
-        public ICommand RunCommand { get; }
+        public DelegateCommand RunCommand { get; }
 
-        public ICommand StepCommand { get; }
+        public DelegateCommand StepCommand { get; }
 
-        public ICommand BreakCommand { get; }
+        public DelegateCommand BreakCommand { get; }
 
         public ICommand ClearMemoryCommand { get; }
 

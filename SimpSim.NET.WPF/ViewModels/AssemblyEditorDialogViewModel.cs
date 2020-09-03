@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 
@@ -15,11 +16,11 @@ namespace SimpSim.NET.WPF.ViewModels
         public AssemblyEditorDialogViewModel(SimpleSimulator simulator)
         {
             CanExecuteAssembleCommand = true;
-            AssembleCommand = new Command(async () =>
+            AssembleCommand = new DelegateCommand(async () =>
             {
                 if (await Assemble(simulator))
                     RequestClose?.Invoke(new DialogResult());
-            }, simulator).ObservesCanExecute(() => CanExecuteAssembleCommand);
+            }).ObservesCanExecute(() => CanExecuteAssembleCommand);
         }
 
         public bool CanExecuteAssembleCommand

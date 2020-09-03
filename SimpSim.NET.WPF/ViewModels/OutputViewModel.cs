@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Prism.Commands;
 using Prism.Mvvm;
 
 namespace SimpSim.NET.WPF.ViewModels
@@ -9,7 +10,7 @@ namespace SimpSim.NET.WPF.ViewModels
 
         public OutputViewModel(SimpleSimulator simulator)
         {
-            ClearCommand = new Command(() => OutputWindowText = null, () => true, simulator);
+            ClearCommand = new DelegateCommand(() => OutputWindowText = null);
 
             // Needed for proper word wrap on XAML TextBlock.
             const string zeroWidthSpace = "\u200B";

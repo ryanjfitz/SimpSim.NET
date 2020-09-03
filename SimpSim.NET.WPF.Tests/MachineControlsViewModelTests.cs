@@ -55,7 +55,7 @@ namespace SimpSim.NET.WPF.Tests
 
             _stateSaver.Setup(s => s.SaveMemory(_simulator.Memory, memorySaveFile)).Verifiable();
 
-            _viewModel.SaveCommand.Execute(null);
+            _viewModel.SaveCommand.Execute();
 
             _userInputService.Verify();
 
@@ -67,7 +67,7 @@ namespace SimpSim.NET.WPF.Tests
         {
             _userInputService.Setup(s => s.GetSaveFileName()).Returns<FileInfo>(null).Verifiable();
 
-            _viewModel.SaveCommand.Execute(null);
+            _viewModel.SaveCommand.Execute();
 
             _userInputService.Verify();
 
@@ -77,7 +77,7 @@ namespace SimpSim.NET.WPF.Tests
         [Fact]
         public void NewCommandShouldUseOpenEmptyAssemblyEditorWindow()
         {
-            _viewModel.NewCommand.Execute(null);
+            _viewModel.NewCommand.Execute();
 
             _dialogServiceAdapter.Verify(w => w.ShowAssemblyEditorDialog(null));
         }
@@ -91,7 +91,7 @@ namespace SimpSim.NET.WPF.Tests
 
             _stateSaver.Setup(s => s.LoadMemory(memorySaveFile)).Returns(new Memory()).Verifiable();
 
-            _viewModel.OpenCommand.Execute(null);
+            _viewModel.OpenCommand.Execute();
 
             _userInputService.Verify();
 
@@ -103,7 +103,7 @@ namespace SimpSim.NET.WPF.Tests
         {
             _userInputService.Setup(s => s.GetOpenFileName()).Returns<FileInfo>(null).Verifiable();
 
-            _viewModel.OpenCommand.Execute(null);
+            _viewModel.OpenCommand.Execute();
 
             _userInputService.Verify();
 
@@ -121,7 +121,7 @@ namespace SimpSim.NET.WPF.Tests
 
                 _userInputService.Setup(s => s.GetOpenFileName()).Returns(assemblyFile).Verifiable();
 
-                _viewModel.OpenCommand.Execute(null);
+                _viewModel.OpenCommand.Execute();
 
                 _userInputService.Verify();
 

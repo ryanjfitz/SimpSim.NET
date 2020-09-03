@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Prism.Commands;
 using Prism.Mvvm;
 
 namespace SimpSim.NET.WPF.ViewModels
@@ -11,7 +12,7 @@ namespace SimpSim.NET.WPF.ViewModels
         {
             _simulator = simulator;
 
-            ResetProgramCounterCommand = new Command(() => _simulator.Machine.ProgramCounter = 0x00, () => true, _simulator);
+            ResetProgramCounterCommand = new DelegateCommand(() => _simulator.Machine.ProgramCounter = 0x00);
 
             _simulator.Machine.ProgramCounterChanged += () => RaisePropertyChanged(nameof(ProgramCounter));
             _simulator.Machine.InstructionRegisterChanged += () => RaisePropertyChanged(nameof(InstructionRegister));
