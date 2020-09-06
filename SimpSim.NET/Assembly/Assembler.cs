@@ -94,7 +94,7 @@ namespace SimpSim.NET
                     Org(instructionSyntax.Operands);
                     break;
                 case "halt":
-                    Halt();
+                    Halt(instructionSyntax.Operands);
                     break;
                 default:
                     throw new UnrecognizedMnemonicException();
@@ -103,85 +103,133 @@ namespace SimpSim.NET
 
         private void Load(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address))
+            if (operands.Length == 2)
             {
-                _bytes.Add(Opcode.ImmediateLoad, register.Index);
-                _bytes.Add(address);
+                if (RegisterSyntax.TryParse(operands[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address))
+                {
+                    _bytes.Add(Opcode.ImmediateLoad, register.Index);
+                    _bytes.Add(address);
+                    return;
+                }
+
+                if (RegisterSyntax.TryParse(operands[0], out register) && _addressSyntaxParser.TryParse(operands[1], out address, BracketExpectation.Present))
+                {
+                    _bytes.Add(Opcode.DirectLoad, register.Index);
+                    _bytes.Add(address);
+                    return;
+                }
+
+                if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2, BracketExpectation.Present))
+                {
+                    _bytes.Add(Opcode.IndirectLoad, 0x0);
+                    _bytes.Add(register1.Index, register2.Index);
+                    return;
+                }
             }
-            else if (RegisterSyntax.TryParse(operands[0], out register) && _addressSyntaxParser.TryParse(operands[1], out address, BracketExpectation.Present))
-            {
-                _bytes.Add(Opcode.DirectLoad, register.Index);
-                _bytes.Add(address);
-            }
-            else if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2, BracketExpectation.Present))
-            {
-                _bytes.Add(Opcode.IndirectLoad, 0x0);
-                _bytes.Add(register1.Index, register2.Index);
-            }
+
+            throw new AssemblyException("Invalid operands for load instruction.");
         }
 
         private void Store(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address, BracketExpectation.Present))
+            if (operands.Length == 2)
             {
-                _bytes.Add(Opcode.DirectStore, register.Index);
-                _bytes.Add(address);
+                if (RegisterSyntax.TryParse(operands[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address, BracketExpectation.Present))
+                {
+                    _bytes.Add(Opcode.DirectStore, register.Index);
+                    _bytes.Add(address);
+                    return;
+                }
+
+                if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2, BracketExpectation.Present))
+                {
+                    _bytes.Add(Opcode.IndirectStore, 0x0);
+                    _bytes.Add(register1.Index, register2.Index);
+                    return;
+                }
             }
-            else if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2, BracketExpectation.Present))
-            {
-                _bytes.Add(Opcode.IndirectStore, 0x0);
-                _bytes.Add(register1.Index, register2.Index);
-            }
+
+            throw new AssemblyException("Invalid operands for store instruction.");
         }
 
         private void Move(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2))
+            if (operands.Length == 2)
             {
-                _bytes.Add(Opcode.Move, 0x0);
-                _bytes.Add(register2.Index, register1.Index);
+                if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2))
+                {
+                    _bytes.Add(Opcode.Move, 0x0);
+                    _bytes.Add(register2.Index, register1.Index);
+                    return;
+                }
             }
+
+            throw new AssemblyException("Invalid operands for move instruction.");
         }
 
         private void Addi(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
+            if (operands.Length == 3)
             {
-                _bytes.Add(Opcode.IntegerAdd, register1.Index);
-                _bytes.Add(register2.Index, register3.Index);
+                if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
+                {
+                    _bytes.Add(Opcode.IntegerAdd, register1.Index);
+                    _bytes.Add(register2.Index, register3.Index);
+                    return;
+                }
             }
+
+            throw new AssemblyException("Invalid operands for addi instruction.");
         }
 
         private void Addf(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
+            if (operands.Length == 3)
             {
-                _bytes.Add(Opcode.FloatingPointAdd, register1.Index);
-                _bytes.Add(register2.Index, register3.Index);
+                if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
+                {
+                    _bytes.Add(Opcode.FloatingPointAdd, register1.Index);
+                    _bytes.Add(register2.Index, register3.Index);
+                    return;
+                }
             }
+
+            throw new AssemblyException("Invalid operands for addf instruction.");
         }
 
         private void JmpEQ(string[] operands)
         {
-            string[] registers = operands[0].Split('=');
-
-            if (!RegisterSyntax.TryParse(registers[1], out var rightRegister) || rightRegister.Index != 0)
-                throw new AssemblyException("Expected a comparison with R0.");
-
-            if (RegisterSyntax.TryParse(registers[0], out var leftRegister) && _addressSyntaxParser.TryParse(operands[1], out var address))
+            if (operands.Length == 2)
             {
-                _bytes.Add(Opcode.JumpEqual, leftRegister.Index);
-                _bytes.Add(address);
+                string[] registers = operands[0].Split('=');
+
+                if (!RegisterSyntax.TryParse(registers[1], out var rightRegister) || rightRegister.Index != 0)
+                    throw new AssemblyException("Expected a comparison with R0.");
+
+                if (RegisterSyntax.TryParse(registers[0], out var leftRegister) && _addressSyntaxParser.TryParse(operands[1], out var address))
+                {
+                    _bytes.Add(Opcode.JumpEqual, leftRegister.Index);
+                    _bytes.Add(address);
+                    return;
+                }
             }
+
+            throw new AssemblyException("Invalid operands for jmpeq instruction.");
         }
 
         private void JmpLE(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0].Split('<', '=')[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address))
+            if (operands.Length == 2)
             {
-                _bytes.Add(Opcode.JumpLessEqual, register.Index);
-                _bytes.Add(address);
+                if (RegisterSyntax.TryParse(operands[0].Split('<', '=')[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address))
+                {
+                    _bytes.Add(Opcode.JumpLessEqual, register.Index);
+                    _bytes.Add(address);
+                    return;
+                }
             }
+
+            throw new AssemblyException("Invalid operands for jmple instruction.");
         }
 
         private void Jmp(string[] operands)
@@ -204,41 +252,65 @@ namespace SimpSim.NET
 
         private void And(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
+            if (operands.Length == 3)
             {
-                _bytes.Add(Opcode.And, register1.Index);
-                _bytes.Add(register2.Index, register3.Index);
+                if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
+                {
+                    _bytes.Add(Opcode.And, register1.Index);
+                    _bytes.Add(register2.Index, register3.Index);
+                    return;
+                }
             }
+
+            throw new AssemblyException("Invalid operands for and instruction.");
         }
 
         private void Or(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
+            if (operands.Length == 3)
             {
-                _bytes.Add(Opcode.Or, register1.Index);
-                _bytes.Add(register2.Index, register3.Index);
+                if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
+                {
+                    _bytes.Add(Opcode.Or, register1.Index);
+                    _bytes.Add(register2.Index, register3.Index);
+                    return;
+                }
             }
+
+            throw new AssemblyException("Invalid operands for or instruction.");
         }
 
         private void Xor(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
+            if (operands.Length == 3)
             {
-                _bytes.Add(Opcode.Xor, register1.Index);
-                _bytes.Add(register2.Index, register3.Index);
+                if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
+                {
+                    _bytes.Add(Opcode.Xor, register1.Index);
+                    _bytes.Add(register2.Index, register3.Index);
+                    return;
+                }
             }
+
+            throw new AssemblyException("Invalid operands for xor instruction.");
         }
 
         private void Ror(string[] operands)
         {
-            if (RegisterSyntax.TryParse(operands[0], out var register) && NumberSyntax.TryParse(operands[1], out byte number))
-                if (number < 16)
-                {
-                    _bytes.Add(Opcode.Ror, register.Index);
-                    _bytes.Add((byte)0x0, number);
-                }
-                else
-                    throw new AssemblyException("Number cannot be larger than 15.");
+            if (operands.Length == 2)
+            {
+                if (RegisterSyntax.TryParse(operands[0], out var register) && NumberSyntax.TryParse(operands[1], out byte number))
+                    if (number < 16)
+                    {
+                        _bytes.Add(Opcode.Ror, register.Index);
+                        _bytes.Add((byte)0x0, number);
+                        return;
+                    }
+                    else
+                        throw new AssemblyException("Number cannot be larger than 15.");
+            }
+
+            throw new AssemblyException("Invalid operands for ror instruction.");
         }
 
         private void DataByte(string[] operands)
@@ -279,8 +351,11 @@ namespace SimpSim.NET
                 throw new AssemblyException("Expected a single number.");
         }
 
-        private void Halt()
+        private void Halt(string[] operands)
         {
+            if (operands.Length > 0)
+                throw new AssemblyException("Expected no operands for halt instruction.");
+
             _bytes.Add(Opcode.Halt, 0x0);
             _bytes.Add(0x00);
         }

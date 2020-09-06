@@ -11,6 +11,34 @@ namespace SimpSim.NET.Tests
             _assembler = new Assembler();
         }
 
+        [Theory]
+        [InlineData("load")]
+        [InlineData("store")]
+        [InlineData("move")]
+        [InlineData("addi")]
+        [InlineData("addf")]
+        [InlineData("jmpeq")]
+        [InlineData("jmple")]
+        [InlineData("jmp")]
+        [InlineData("and")]
+        [InlineData("or")]
+        [InlineData("xor")]
+        [InlineData("ror")]
+        [InlineData("db")]
+        [InlineData("org")]
+        public void ShouldNotAssembleInstructionWithMissingOperands(string mnemonic)
+        {
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"{mnemonic}"));
+        }
+
+        [Fact]
+        public void ShouldNotAssembleHaltInstructionWithAnyOperands()
+        {
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"halt abc"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"halt abc 123"));
+            Assert.Throws<AssemblyException>(() => _assembler.Assemble($"halt abc 123 xyz"));
+        }
+
         [Fact]
         public void ShouldNotAssembleRorInstructionsWithNumberGreaterThan15()
         {
