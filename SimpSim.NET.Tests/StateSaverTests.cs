@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace SimpSim.NET.Tests
@@ -14,36 +15,28 @@ namespace SimpSim.NET.Tests
         }
 
         [Fact]
-        public void ShouldBeAbleToSaveMemoryState()
+        public async Task ShouldBeAbleToSaveMemoryState()
         {
-            RunFileTest("MemorySaveFile.prg", file =>
+            FileInfo file = null;
+
+            try
             {
+                file = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.prg"));
+
                 Memory expectedMemory = new Memory();
 
                 Random random = new Random();
                 for (int address = 0; address <= byte.MaxValue; address++)
                     expectedMemory[(byte)address] = (byte)random.Next(0x00, byte.MaxValue);
 
-                _stateSaver.SaveMemory(expectedMemory, file);
+                await _stateSaver.SaveMemoryAsync(expectedMemory, file);
 
                 Assert.True(file.Exists);
 
-                Memory actualMemory = _stateSaver.LoadMemory(file);
+                Memory actualMemory = await _stateSaver.LoadMemoryAsync(file);
 
                 for (int address = 0; address <= byte.MaxValue; address++)
                     Assert.Equal(expectedMemory[(byte)address], actualMemory[(byte)address]);
-            });
-        }
-
-        private void RunFileTest(string fileName, Action<FileInfo> testAction)
-        {
-            FileInfo file = null;
-
-            try
-            {
-                file = new FileInfo(Path.Combine(Path.GetTempPath(), fileName));
-
-                testAction(file);
             }
             finally
             {

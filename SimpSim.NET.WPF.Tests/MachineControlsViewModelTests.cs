@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Moq;
 using SimpSim.NET.WPF.ViewModels;
 using Xunit;
@@ -53,7 +54,7 @@ namespace SimpSim.NET.WPF.Tests
 
             _userInputService.Setup(s => s.GetSaveFileName()).Returns(memorySaveFile).Verifiable();
 
-            _stateSaver.Setup(s => s.SaveMemory(_simulator.Memory, memorySaveFile)).Verifiable();
+            _stateSaver.Setup(s => s.SaveMemoryAsync(_simulator.Memory, memorySaveFile)).Verifiable();
 
             _viewModel.SaveCommand.Execute();
 
@@ -71,7 +72,7 @@ namespace SimpSim.NET.WPF.Tests
 
             _userInputService.Verify();
 
-            _stateSaver.Verify(s => s.SaveMemory(It.IsAny<Memory>(), It.IsAny<FileInfo>()), Times.Never);
+            _stateSaver.Verify(s => s.SaveMemoryAsync(It.IsAny<Memory>(), It.IsAny<FileInfo>()), Times.Never);
         }
 
         [Fact]
@@ -89,7 +90,7 @@ namespace SimpSim.NET.WPF.Tests
 
             _userInputService.Setup(s => s.GetOpenFileName()).Returns(memorySaveFile).Verifiable();
 
-            _stateSaver.Setup(s => s.LoadMemory(memorySaveFile)).Returns(new Memory()).Verifiable();
+            _stateSaver.Setup(s => s.LoadMemoryAsync(memorySaveFile)).Returns(Task.FromResult(new Memory())).Verifiable();
 
             _viewModel.OpenCommand.Execute();
 
@@ -107,7 +108,7 @@ namespace SimpSim.NET.WPF.Tests
 
             _userInputService.Verify();
 
-            _stateSaver.Verify(s => s.LoadMemory(It.IsAny<FileInfo>()), Times.Never);
+            _stateSaver.Verify(s => s.LoadMemoryAsync(It.IsAny<FileInfo>()), Times.Never);
         }
 
         [Fact]

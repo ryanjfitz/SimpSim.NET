@@ -1,32 +1,31 @@
 ﻿using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace SimpSim.NET
 {
     public interface IStateSaver
     {
-        void SaveMemory(Memory memory, FileInfo file);
-        Memory LoadMemory(FileInfo file);
+        Task SaveMemoryAsync(Memory memory, FileInfo file);
+        Task<Memory> LoadMemoryAsync(FileInfo file);
     }
 
     public class StateSaver : IStateSaver
     {
-        public void SaveMemory(Memory memory, FileInfo file)
+        public async Task SaveMemoryAsync(Memory memory, FileInfo file)
         {
-            using (var streamWriter = file.CreateText())
+            using (var fileStream = file.Create())
             {
                 byte[] bytes = memory.ToArray();
-                string serializedBytes = JsonSerializer.Serialize(bytes);
-                streamWriter.Write(serializedBytes);
+                await JsonSerializer.SerializeAsync(fileStream, bytes);
             }
         }
 
-        public Memory LoadMemory(FileInfo file)
+        public async Task<Memory> LoadMemoryAsync(FileInfo file)
         {
-            using (var streamReader = file.OpenText())
+            using (var fileStream = file.OpenRead())
             {
-                string serializedBytes = streamReader.ReadToEnd();
-                byte[] bytes = JsonSerializer.Deserialize<byte[]>(serializedBytes);
+                byte[] bytes = await JsonSerializer.DeserializeAsync<byte[]>(fileStream);
                 return new Memory(bytes);
             }
         }

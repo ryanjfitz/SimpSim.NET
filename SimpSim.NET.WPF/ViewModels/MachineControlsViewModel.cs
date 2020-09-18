@@ -16,7 +16,7 @@ namespace SimpSim.NET.WPF.ViewModels
 
             NewCommand = new DelegateCommand(() => dialogServiceAdapter.ShowAssemblyEditorDialog(), () => simulator.Machine.State != Machine.MachineState.Running);
 
-            OpenCommand = new DelegateCommand(() =>
+            OpenCommand = new DelegateCommand(async () =>
             {
                 FileInfo file = userInputService.GetOpenFileName();
 
@@ -24,7 +24,7 @@ namespace SimpSim.NET.WPF.ViewModels
                 {
                     if (file.Extension.Equals(".prg", StringComparison.OrdinalIgnoreCase))
                     {
-                        Memory memory = stateSaver.LoadMemory(file);
+                        Memory memory = await stateSaver.LoadMemoryAsync(file);
                         for (int i = 0; i <= byte.MaxValue; i++)
                             simulator.Memory[(byte)i] = memory[(byte)i];
                     }
@@ -35,12 +35,12 @@ namespace SimpSim.NET.WPF.ViewModels
                 }
             }, () => simulator.Machine.State != Machine.MachineState.Running);
 
-            SaveCommand = new DelegateCommand(() =>
+            SaveCommand = new DelegateCommand(async () =>
             {
                 FileInfo file = userInputService.GetSaveFileName();
 
                 if (file != null)
-                    stateSaver.SaveMemory(simulator.Memory, file);
+                    await stateSaver.SaveMemoryAsync(simulator.Memory, file);
             }, () => simulator.Machine.State != Machine.MachineState.Running);
 
             RunCommand = new DelegateCommand(async () => await simulator.Machine.RunAsync(), () => simulator.Machine.State != Machine.MachineState.Running);
