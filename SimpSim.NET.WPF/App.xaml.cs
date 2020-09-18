@@ -10,6 +10,15 @@ namespace SimpSim.NET.WPF
     /// </summary>
     public partial class App
     {
+        public App()
+        {
+            DispatcherUnhandledException += (sender, e) =>
+            {
+                MessageBox.Show(e.Exception.ToString(), "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                e.Handled = true;
+            };
+        }
+
         protected override Window CreateShell()
         {
             return Container.Resolve<MainWindow>();
