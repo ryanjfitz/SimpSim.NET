@@ -20,7 +20,7 @@ namespace SimpSim.NET.WPF
             containerRegistry.RegisterSingleton<SimpleSimulator>();
             containerRegistry.Register<IUserInputService, UserInputService>();
             containerRegistry.Register<IDialogServiceAdapter, DialogServiceAdapter>();
-            containerRegistry.RegisterSingleton<StateSaver>();
+            containerRegistry.RegisterSingleton<IStateSaver, StateSaver>();
             containerRegistry.RegisterDialog<AssemblyEditorDialog, AssemblyEditorDialogViewModel>();
         }
     }

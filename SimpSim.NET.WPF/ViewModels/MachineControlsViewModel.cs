@@ -10,7 +10,7 @@ namespace SimpSim.NET.WPF.ViewModels
     {
         private readonly SimpleSimulator _simulator;
 
-        public MachineControlsViewModel(SimpleSimulator simulator, IUserInputService userInputService, IDialogServiceAdapter dialogServiceAdapter, StateSaver stateSaver)
+        public MachineControlsViewModel(SimpleSimulator simulator, IUserInputService userInputService, IDialogServiceAdapter dialogServiceAdapter, IStateSaver stateSaver)
         {
             _simulator = simulator;
 
