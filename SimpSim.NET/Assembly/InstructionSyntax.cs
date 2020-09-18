@@ -22,11 +22,11 @@ namespace SimpSim.NET
             Operands = operands;
         }
 
-        public static InstructionSyntax Parse(string line)
+        public static InstructionSyntax Parse(string line, int lineNumber)
         {
             string comment = GetComment(ref line);
 
-            string label = GetLabel(ref line);
+            string label = GetLabel(ref line, lineNumber);
 
             string mnemonic = GetMnemonic(line);
 
@@ -51,7 +51,7 @@ namespace SimpSim.NET
             return "";
         }
 
-        private static string GetLabel(ref string line)
+        private static string GetLabel(ref string line, int lineNumber)
         {
             string label = "";
 
@@ -61,7 +61,7 @@ namespace SimpSim.NET
                 line = line.Substring(delimiterIndex + 1);
 
                 if (!IsValidLabel(label))
-                    throw new LabelAssemblyException(label);
+                    throw new LabelAssemblyException(label, lineNumber);
 
                 label = label.TrimEnd(LabelDelimiter);
             }

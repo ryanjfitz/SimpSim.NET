@@ -33,25 +33,15 @@ namespace SimpSim.NET
 
         public int Count { get; private set; }
 
-        public void Add(byte @byte)
+        public void Add(byte @byte, int lineNumber)
         {
-            _bytes[OriginAddress] = new InstructionByte(@byte);
+            _bytes[OriginAddress] = new InstructionByte(@byte, lineNumber);
             OriginAddress++;
         }
 
-        public void Add(byte nibble1, byte nibble2)
+        public void Add(AddressSyntax addressSyntax, int lineNumber)
         {
-            Add((nibble1, nibble2).Combine());
-        }
-
-        public void Add(Opcode nibble1, byte nibble2)
-        {
-            Add((nibble1, nibble2).Combine());
-        }
-
-        public void Add(AddressSyntax addressSyntax)
-        {
-            _bytes[OriginAddress] = new InstructionByte(addressSyntax);
+            _bytes[OriginAddress] = new InstructionByte(addressSyntax, lineNumber);
             OriginAddress++;
         }
 

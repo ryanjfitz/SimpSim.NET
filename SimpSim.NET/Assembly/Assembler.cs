@@ -8,6 +8,7 @@ namespace SimpSim.NET
         private readonly IDictionary<string, byte> _symbolTable;
         private readonly InstructionByteCollection _bytes;
         private readonly AddressSyntaxParser _addressSyntaxParser;
+        private int _currentLineNumber;
 
         public Assembler()
         {
@@ -20,10 +21,13 @@ namespace SimpSim.NET
         {
             _symbolTable.Clear();
             _bytes.Clear();
+            _currentLineNumber = 0;
 
             foreach (string line in GetLines(assemblyCode))
             {
-                InstructionSyntax instructionSyntax = InstructionSyntax.Parse(line);
+                _currentLineNumber += 1;
+
+                InstructionSyntax instructionSyntax = InstructionSyntax.Parse(line, _currentLineNumber);
 
                 if (!string.IsNullOrWhiteSpace(instructionSyntax.Label))
                     AddLabelToSymbolTable(instructionSyntax.Label);
@@ -97,7 +101,7 @@ namespace SimpSim.NET
                     Halt(instructionSyntax.Operands);
                     break;
                 default:
-                    throw new UnrecognizedMnemonicException();
+                    throw new UnrecognizedMnemonicException(_currentLineNumber);
             }
         }
 
@@ -107,27 +111,27 @@ namespace SimpSim.NET
             {
                 if (RegisterSyntax.TryParse(operands[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address))
                 {
-                    _bytes.Add(Opcode.ImmediateLoad, register.Index);
-                    _bytes.Add(address);
+                    _bytes.Add(((byte)Opcode.ImmediateLoad, register.Index).Combine(), _currentLineNumber);
+                    _bytes.Add(address, _currentLineNumber);
                     return;
                 }
 
                 if (RegisterSyntax.TryParse(operands[0], out register) && _addressSyntaxParser.TryParse(operands[1], out address, BracketExpectation.Present))
                 {
-                    _bytes.Add(Opcode.DirectLoad, register.Index);
-                    _bytes.Add(address);
+                    _bytes.Add(((byte)Opcode.DirectLoad, register.Index).Combine(), _currentLineNumber);
+                    _bytes.Add(address, _currentLineNumber);
                     return;
                 }
 
                 if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2, BracketExpectation.Present))
                 {
-                    _bytes.Add(Opcode.IndirectLoad, 0x0);
-                    _bytes.Add(register1.Index, register2.Index);
+                    _bytes.Add(((byte)Opcode.IndirectLoad, (byte)0x0).Combine(), _currentLineNumber);
+                    _bytes.Add((register1.Index, register2.Index).Combine(), _currentLineNumber);
                     return;
                 }
             }
 
-            throw new AssemblyException("Invalid operands for load instruction.");
+            throw new AssemblyException("Invalid operands for load instruction.", _currentLineNumber);
         }
 
         private void Store(string[] operands)
@@ -136,20 +140,20 @@ namespace SimpSim.NET
             {
                 if (RegisterSyntax.TryParse(operands[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address, BracketExpectation.Present))
                 {
-                    _bytes.Add(Opcode.DirectStore, register.Index);
-                    _bytes.Add(address);
+                    _bytes.Add(((byte)Opcode.DirectStore, register.Index).Combine(), _currentLineNumber);
+                    _bytes.Add(address, _currentLineNumber);
                     return;
                 }
 
                 if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2, BracketExpectation.Present))
                 {
-                    _bytes.Add(Opcode.IndirectStore, 0x0);
-                    _bytes.Add(register1.Index, register2.Index);
+                    _bytes.Add(((byte)Opcode.IndirectStore, (byte)0x0).Combine(), _currentLineNumber);
+                    _bytes.Add((register1.Index, register2.Index).Combine(), _currentLineNumber);
                     return;
                 }
             }
 
-            throw new AssemblyException("Invalid operands for store instruction.");
+            throw new AssemblyException("Invalid operands for store instruction.", _currentLineNumber);
         }
 
         private void Move(string[] operands)
@@ -158,13 +162,13 @@ namespace SimpSim.NET
             {
                 if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2))
                 {
-                    _bytes.Add(Opcode.Move, 0x0);
-                    _bytes.Add(register2.Index, register1.Index);
+                    _bytes.Add(((byte)Opcode.Move, (byte)0x0).Combine(), _currentLineNumber);
+                    _bytes.Add((register2.Index, register1.Index).Combine(), _currentLineNumber);
                     return;
                 }
             }
 
-            throw new AssemblyException("Invalid operands for move instruction.");
+            throw new AssemblyException("Invalid operands for move instruction.", _currentLineNumber);
         }
 
         private void Addi(string[] operands)
@@ -173,13 +177,13 @@ namespace SimpSim.NET
             {
                 if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
                 {
-                    _bytes.Add(Opcode.IntegerAdd, register1.Index);
-                    _bytes.Add(register2.Index, register3.Index);
+                    _bytes.Add(((byte)Opcode.IntegerAdd, register1.Index).Combine(), _currentLineNumber);
+                    _bytes.Add((register2.Index, register3.Index).Combine(), _currentLineNumber);
                     return;
                 }
             }
 
-            throw new AssemblyException("Invalid operands for addi instruction.");
+            throw new AssemblyException("Invalid operands for addi instruction.", _currentLineNumber);
         }
 
         private void Addf(string[] operands)
@@ -188,13 +192,13 @@ namespace SimpSim.NET
             {
                 if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
                 {
-                    _bytes.Add(Opcode.FloatingPointAdd, register1.Index);
-                    _bytes.Add(register2.Index, register3.Index);
+                    _bytes.Add(((byte)Opcode.FloatingPointAdd, register1.Index).Combine(), _currentLineNumber);
+                    _bytes.Add((register2.Index, register3.Index).Combine(), _currentLineNumber);
                     return;
                 }
             }
 
-            throw new AssemblyException("Invalid operands for addf instruction.");
+            throw new AssemblyException("Invalid operands for addf instruction.", _currentLineNumber);
         }
 
         private void JmpEQ(string[] operands)
@@ -204,17 +208,17 @@ namespace SimpSim.NET
                 string[] registers = operands[0].Split('=');
 
                 if (!RegisterSyntax.TryParse(registers[1], out var rightRegister) || rightRegister.Index != 0)
-                    throw new AssemblyException("Expected a comparison with R0.");
+                    throw new AssemblyException("Expected a comparison with R0.", _currentLineNumber);
 
                 if (RegisterSyntax.TryParse(registers[0], out var leftRegister) && _addressSyntaxParser.TryParse(operands[1], out var address))
                 {
-                    _bytes.Add(Opcode.JumpEqual, leftRegister.Index);
-                    _bytes.Add(address);
+                    _bytes.Add(((byte)Opcode.JumpEqual, leftRegister.Index).Combine(), _currentLineNumber);
+                    _bytes.Add(address, _currentLineNumber);
                     return;
                 }
             }
 
-            throw new AssemblyException("Invalid operands for jmpeq instruction.");
+            throw new AssemblyException("Invalid operands for jmpeq instruction.", _currentLineNumber);
         }
 
         private void JmpLE(string[] operands)
@@ -223,13 +227,13 @@ namespace SimpSim.NET
             {
                 if (RegisterSyntax.TryParse(operands[0].Split('<', '=')[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address))
                 {
-                    _bytes.Add(Opcode.JumpLessEqual, register.Index);
-                    _bytes.Add(address);
+                    _bytes.Add(((byte)Opcode.JumpLessEqual, register.Index).Combine(), _currentLineNumber);
+                    _bytes.Add(address, _currentLineNumber);
                     return;
                 }
             }
 
-            throw new AssemblyException("Invalid operands for jmple instruction.");
+            throw new AssemblyException("Invalid operands for jmple instruction.", _currentLineNumber);
         }
 
         private void Jmp(string[] operands)
@@ -240,14 +244,14 @@ namespace SimpSim.NET
                 invalidSyntax = true;
             else if (_addressSyntaxParser.TryParse(operands[0], out var address))
             {
-                _bytes.Add(Opcode.JumpEqual, 0x0);
-                _bytes.Add(address);
+                _bytes.Add(((byte)Opcode.JumpEqual, (byte)0x0).Combine(), _currentLineNumber);
+                _bytes.Add(address, _currentLineNumber);
             }
             else
                 invalidSyntax = true;
 
             if (invalidSyntax)
-                throw new AssemblyException("Expected a single address.");
+                throw new AssemblyException("Expected a single address.", _currentLineNumber);
         }
 
         private void And(string[] operands)
@@ -256,13 +260,13 @@ namespace SimpSim.NET
             {
                 if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
                 {
-                    _bytes.Add(Opcode.And, register1.Index);
-                    _bytes.Add(register2.Index, register3.Index);
+                    _bytes.Add(((byte)Opcode.And, register1.Index).Combine(), _currentLineNumber);
+                    _bytes.Add((register2.Index, register3.Index).Combine(), _currentLineNumber);
                     return;
                 }
             }
 
-            throw new AssemblyException("Invalid operands for and instruction.");
+            throw new AssemblyException("Invalid operands for and instruction.", _currentLineNumber);
         }
 
         private void Or(string[] operands)
@@ -271,13 +275,13 @@ namespace SimpSim.NET
             {
                 if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
                 {
-                    _bytes.Add(Opcode.Or, register1.Index);
-                    _bytes.Add(register2.Index, register3.Index);
+                    _bytes.Add(((byte)Opcode.Or, register1.Index).Combine(), _currentLineNumber);
+                    _bytes.Add((register2.Index, register3.Index).Combine(), _currentLineNumber);
                     return;
                 }
             }
 
-            throw new AssemblyException("Invalid operands for or instruction.");
+            throw new AssemblyException("Invalid operands for or instruction.", _currentLineNumber);
         }
 
         private void Xor(string[] operands)
@@ -286,13 +290,13 @@ namespace SimpSim.NET
             {
                 if (RegisterSyntax.TryParse(operands[0], out var register1) && RegisterSyntax.TryParse(operands[1], out var register2) && RegisterSyntax.TryParse(operands[2], out var register3))
                 {
-                    _bytes.Add(Opcode.Xor, register1.Index);
-                    _bytes.Add(register2.Index, register3.Index);
+                    _bytes.Add(((byte)Opcode.Xor, register1.Index).Combine(), _currentLineNumber);
+                    _bytes.Add((register2.Index, register3.Index).Combine(), _currentLineNumber);
                     return;
                 }
             }
 
-            throw new AssemblyException("Invalid operands for xor instruction.");
+            throw new AssemblyException("Invalid operands for xor instruction.", _currentLineNumber);
         }
 
         private void Ror(string[] operands)
@@ -302,15 +306,15 @@ namespace SimpSim.NET
                 if (RegisterSyntax.TryParse(operands[0], out var register) && NumberSyntax.TryParse(operands[1], out byte number))
                     if (number < 16)
                     {
-                        _bytes.Add(Opcode.Ror, register.Index);
-                        _bytes.Add((byte)0x0, number);
+                        _bytes.Add(((byte)Opcode.Ror, register.Index).Combine(), _currentLineNumber);
+                        _bytes.Add(((byte)0x0, number).Combine(), _currentLineNumber);
                         return;
                     }
                     else
-                        throw new AssemblyException("Number cannot be larger than 15.");
+                        throw new AssemblyException("Number cannot be larger than 15.", _currentLineNumber);
             }
 
-            throw new AssemblyException("Invalid operands for ror instruction.");
+            throw new AssemblyException("Invalid operands for ror instruction.", _currentLineNumber);
         }
 
         private void DataByte(string[] operands)
@@ -322,10 +326,10 @@ namespace SimpSim.NET
             else
                 foreach (string operand in operands)
                     if (NumberSyntax.TryParse(operand, out byte number))
-                        _bytes.Add(number);
+                        _bytes.Add(number, _currentLineNumber);
                     else if (StringLiteralSyntax.TryParse(operand, out string stringLiteral))
                         foreach (char c in stringLiteral)
-                            _bytes.Add((byte)c);
+                            _bytes.Add((byte)c, _currentLineNumber);
                     else
                     {
                         invalidSyntax = true;
@@ -333,7 +337,7 @@ namespace SimpSim.NET
                     }
 
             if (invalidSyntax)
-                throw new AssemblyException("Expected a number or string literal.");
+                throw new AssemblyException("Expected a number or string literal.", _currentLineNumber);
         }
 
         private void Org(string[] operands)
@@ -348,16 +352,16 @@ namespace SimpSim.NET
                 invalidSyntax = true;
 
             if (invalidSyntax)
-                throw new AssemblyException("Expected a single number.");
+                throw new AssemblyException("Expected a single number.", _currentLineNumber);
         }
 
         private void Halt(string[] operands)
         {
             if (operands.Length > 0)
-                throw new AssemblyException("Expected no operands for halt instruction.");
+                throw new AssemblyException("Expected no operands for halt instruction.", _currentLineNumber);
 
-            _bytes.Add(Opcode.Halt, 0x0);
-            _bytes.Add(0x00);
+            _bytes.Add(((byte)Opcode.Halt, (byte)0x0).Combine(), _currentLineNumber);
+            _bytes.Add(0x00, _currentLineNumber);
         }
     }
 }

@@ -114,5 +114,13 @@ namespace SimpSim.NET.Tests
                     for (int number = 0; number <= byte.MaxValue; number++)
                         Assert.Throws<AssemblyException>(() => _assembler.Assemble($"jmpEQ R{leftRegisterIndex.ToHexString()}=R{rightRegisterIndex.ToHexString()},{number}"));
         }
+
+        [Fact]
+        public void ShouldIncludeLineNumberInException()
+        {
+            var exception = Assert.Throws<UnrecognizedMnemonicException>(() => _assembler.Assemble("\n\nabc"));
+
+            Assert.Equal(3, exception.LineNumber);
+        }
     }
 }

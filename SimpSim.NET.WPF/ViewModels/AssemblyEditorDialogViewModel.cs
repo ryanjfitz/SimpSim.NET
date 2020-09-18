@@ -54,7 +54,7 @@ namespace SimpSim.NET.WPF.ViewModels
             }
             catch (AssemblyException ex)
             {
-                AssemblyError = ex.Message;
+                AssemblyError = $"Line {ex.LineNumber}: {ex.Message}";
             }
             finally
             {

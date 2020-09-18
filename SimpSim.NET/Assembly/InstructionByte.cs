@@ -7,14 +7,16 @@ namespace SimpSim.NET
         private readonly byte _byte;
         private readonly AddressSyntax _address;
         private readonly AddressType _addressType;
+        private readonly int _lineNumber;
 
-        public InstructionByte(byte @byte)
+        public InstructionByte(byte @byte, int lineNumber)
         {
             _byte = @byte;
             _addressType = AddressType.DirectValue;
+            _lineNumber = lineNumber;
         }
 
-        public InstructionByte(AddressSyntax address)
+        public InstructionByte(AddressSyntax address, int lineNumber)
         {
             _address = address;
             if (address.ContainsUndefinedLabel)
@@ -24,6 +26,7 @@ namespace SimpSim.NET
                 _addressType = AddressType.DirectValue;
                 _byte = _address.Value;
             }
+            _lineNumber = lineNumber;
         }
 
         public byte GetValue(IDictionary<string, byte> symbolTable)
@@ -34,7 +37,7 @@ namespace SimpSim.NET
                     return _byte;
                 case AddressType.Label:
                     if (!symbolTable.ContainsKey(_address.UndefinedLabel))
-                        throw new LabelAssemblyException(_address.UndefinedLabel);
+                        throw new LabelAssemblyException(_address.UndefinedLabel, _lineNumber);
 
                     return symbolTable[_address.UndefinedLabel];
                 default:
