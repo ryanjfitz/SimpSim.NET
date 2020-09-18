@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
 
 namespace SimpSim.NET
 {
@@ -37,14 +37,14 @@ namespace SimpSim.NET
 
         private void Save(object @object, FileInfo file)
         {
-            using (var fileStream = file.Create())
-                new BinaryFormatter().Serialize(fileStream, @object);
+            using (var streamWriter = file.CreateText())
+                streamWriter.Write(JsonSerializer.Serialize(@object));
         }
 
         private T Load<T>(FileInfo file)
         {
-            using (var fileStream = file.OpenRead())
-                return (T)new BinaryFormatter().Deserialize(fileStream);
+            using (var streamReader = file.OpenText())
+                return JsonSerializer.Deserialize<T>(streamReader.ReadToEnd());
         }
     }
 }
