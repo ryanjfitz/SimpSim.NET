@@ -2,12 +2,9 @@ using System;
 
 namespace SimpSim.NET
 {
-    [Serializable]
     public class Registers
     {
-        [field: NonSerialized]
         public event Action<char> ValueWrittenToOutputRegister;
-        [field: NonSerialized]
         public event Action Changed;
 
         private readonly byte[] _array;

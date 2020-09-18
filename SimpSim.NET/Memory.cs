@@ -2,10 +2,8 @@
 
 namespace SimpSim.NET
 {
-    [Serializable]
     public class Memory
     {
-        [field: NonSerialized]
         public event Action Changed;
 
         private readonly byte[] _array;

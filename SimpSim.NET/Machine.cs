@@ -4,14 +4,10 @@ using System.Threading.Tasks;
 
 namespace SimpSim.NET
 {
-    [Serializable]
     public class Machine
     {
-        [field: NonSerialized]
         public event Action ProgramCounterChanged;
-        [field: NonSerialized]
         public event Action InstructionRegisterChanged;
-        [field: NonSerialized]
         public event Action StateChanged;
 
         private readonly Memory _memory;
