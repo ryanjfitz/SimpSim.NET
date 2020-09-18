@@ -14,13 +14,21 @@ namespace SimpSim.NET
         public void SaveMemory(Memory memory, FileInfo file)
         {
             using (var streamWriter = file.CreateText())
-                streamWriter.Write(JsonSerializer.Serialize(memory));
+            {
+                byte[] bytes = memory.ToArray();
+                string serializedBytes = JsonSerializer.Serialize(bytes);
+                streamWriter.Write(serializedBytes);
+            }
         }
 
         public Memory LoadMemory(FileInfo file)
         {
             using (var streamReader = file.OpenText())
-                return JsonSerializer.Deserialize<Memory>(streamReader.ReadToEnd());
+            {
+                string serializedBytes = streamReader.ReadToEnd();
+                byte[] bytes = JsonSerializer.Deserialize<byte[]>(serializedBytes);
+                return new Memory(bytes);
+            }
         }
     }
 }

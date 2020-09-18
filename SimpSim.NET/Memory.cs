@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SimpSim.NET
 {
@@ -8,9 +9,14 @@ namespace SimpSim.NET
 
         private readonly byte[] _array;
 
-        public Memory()
+        public Memory() : this(new byte[0x100]) { }
+
+        public Memory(byte[] array)
         {
-            _array = new byte[0x100];
+            if (array.Length != 0x100)
+                throw new ArgumentException("Array must have a length of 0x100.", nameof(array));
+
+            _array = array;
         }
 
         public byte this[byte address]
@@ -55,6 +61,11 @@ namespace SimpSim.NET
         {
             Array.Clear(_array, 0, _array.Length);
             Changed?.Invoke();
+        }
+
+        public byte[] ToArray()
+        {
+            return _array.ToArray();
         }
     }
 }
