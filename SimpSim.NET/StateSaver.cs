@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -26,7 +27,9 @@ namespace SimpSim.NET
             using (var fileStream = file.OpenRead())
             {
                 byte[] bytes = await JsonSerializer.DeserializeAsync<byte[]>(fileStream);
-                return new Memory(bytes);
+                Memory memory = new Memory();
+                memory.LoadByteArray(bytes);
+                return memory;
             }
         }
     }

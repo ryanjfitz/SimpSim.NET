@@ -1,39 +1,46 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SimpSim.NET
 {
-    public class Memory
+    public class Memory : IEnumerable<byte>
     {
         public event Action Changed;
 
-        private readonly byte[] _array;
+        private byte[] _bytes;
 
-        public Memory() : this(new byte[0x100]) { }
-
-        public Memory(byte[] array)
+        public Memory()
         {
-            if (array.Length != 0x100)
-                throw new ArgumentException("Array must have a length of 0x100.", nameof(array));
-
-            _array = array;
+            LoadByteArray(new byte[0x100]);
         }
 
         public byte this[byte address]
         {
-            get => _array[address];
+            get => _bytes[address];
             set
             {
                 byte newValue = value;
-                byte oldValue = _array[address];
+                byte oldValue = _bytes[address];
 
                 if (newValue != oldValue)
                 {
-                    _array[address] = newValue;
-
+                    _bytes[address] = newValue;
                     Changed?.Invoke();
                 }
             }
+        }
+
+        public void LoadByteArray(IEnumerable<byte> bytes)
+        {
+            byte[] byteArray = bytes.ToArray();
+
+            if (byteArray.Length != 0x100)
+                throw new ArgumentException("Array must have a length of 0x100.", nameof(bytes));
+
+            _bytes = byteArray;
+            Changed?.Invoke();
         }
 
         public void LoadInstructions(Instruction[] instructions)
@@ -59,13 +66,18 @@ namespace SimpSim.NET
 
         public void Clear()
         {
-            Array.Clear(_array, 0, _array.Length);
+            Array.Clear(_bytes, 0, _bytes.Length);
             Changed?.Invoke();
         }
 
-        public byte[] ToArray()
+        public IEnumerator<byte> GetEnumerator()
         {
-            return _array.ToArray();
+            return ((IEnumerable<byte>)_bytes).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
