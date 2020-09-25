@@ -25,7 +25,7 @@ namespace SimpSim.NET.WPF.ViewModels
                     if (file.Extension.Equals(".prg", StringComparison.OrdinalIgnoreCase))
                     {
                         Memory memory = await stateSaver.LoadMemoryAsync(file);
-                        simulator.Memory.LoadByteArray(memory);
+                        simulator.Memory.LoadByteArray(memory.ToByteArray());
                     }
                     else if (file.Extension.Equals(".asm", StringComparison.OrdinalIgnoreCase))
                     {

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace SimpSim.NET
 {
-    public class Memory : IEnumerable<byte>
+    public class Memory
     {
         public event Action Changed;
 
@@ -32,17 +30,6 @@ namespace SimpSim.NET
             }
         }
 
-        public void LoadByteArray(IEnumerable<byte> bytes)
-        {
-            byte[] byteArray = bytes.ToArray();
-
-            if (byteArray.Length != 0x100)
-                throw new ArgumentException("Array must have a length of 0x100.", nameof(bytes));
-
-            _bytes = byteArray;
-            Changed?.Invoke();
-        }
-
         public void LoadInstructions(Instruction[] instructions)
         {
             byte address = 0x00;
@@ -64,20 +51,24 @@ namespace SimpSim.NET
             return new Instruction(this[address], this[++address]);
         }
 
+        public void LoadByteArray(byte[] bytes)
+        {
+            if (bytes.Length != 0x100)
+                throw new ArgumentException("Array must have a length of 0x100.", nameof(bytes));
+
+            _bytes = bytes;
+            Changed?.Invoke();
+        }
+
+        public byte[] ToByteArray()
+        {
+            return _bytes.ToArray();
+        }
+
         public void Clear()
         {
             Array.Clear(_bytes, 0, _bytes.Length);
             Changed?.Invoke();
-        }
-
-        public IEnumerator<byte> GetEnumerator()
-        {
-            return ((IEnumerable<byte>)_bytes).GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }
