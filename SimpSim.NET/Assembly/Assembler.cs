@@ -12,7 +12,7 @@ namespace SimpSim.NET
         public Assembler()
         {
             _symbolTable = new SymbolTable();
-            _bytes = new InstructionByteCollection(_symbolTable);
+            _bytes = new InstructionByteCollection();
         }
 
         public Instruction[] Assemble(string assemblyCode)
@@ -34,7 +34,7 @@ namespace SimpSim.NET
                     AssembleLine(instructionSyntax);
             }
 
-            Instruction[] instructions = _bytes.ToInstructions();
+            Instruction[] instructions = _bytes.ToInstructions(_symbolTable);
 
             return instructions;
         }

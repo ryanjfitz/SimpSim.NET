@@ -6,13 +6,11 @@ namespace SimpSim.NET
 {
     internal class InstructionByteCollection
     {
-        private readonly SymbolTable _symbolTable;
         private readonly InstructionByte[] _bytes;
         private byte _originAddress;
 
-        public InstructionByteCollection(SymbolTable symbolTable)
+        public InstructionByteCollection()
         {
-            _symbolTable = symbolTable;
             _bytes = new InstructionByte[0x100];
         }
 
@@ -52,7 +50,7 @@ namespace SimpSim.NET
             Count = 0;
         }
 
-        public Instruction[] ToInstructions()
+        public Instruction[] ToInstructions(SymbolTable symbolTable)
         {
             IList<Instruction> instructions = new List<Instruction>();
 
@@ -62,10 +60,10 @@ namespace SimpSim.NET
                 byte byte2 = 0x00;
 
                 if (_bytes[i] != null)
-                    byte1 = _bytes[i].GetValue(_symbolTable);
+                    byte1 = _bytes[i].GetValue(symbolTable);
 
                 if (_bytes[i + 1] != null)
-                    byte2 = _bytes[i + 1].GetValue(_symbolTable);
+                    byte2 = _bytes[i + 1].GetValue(symbolTable);
 
                 instructions.Add(new Instruction(byte1, byte2));
             }
