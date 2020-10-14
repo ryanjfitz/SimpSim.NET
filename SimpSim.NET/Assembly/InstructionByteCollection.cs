@@ -6,11 +6,11 @@ namespace SimpSim.NET
 {
     internal class InstructionByteCollection
     {
-        private readonly IDictionary<string, byte> _symbolTable;
+        private readonly SymbolTable _symbolTable;
         private readonly InstructionByte[] _bytes;
         private byte _originAddress;
 
-        public InstructionByteCollection(IDictionary<string, byte> symbolTable)
+        public InstructionByteCollection(SymbolTable symbolTable)
         {
             _symbolTable = symbolTable;
             _bytes = new InstructionByte[0x100];

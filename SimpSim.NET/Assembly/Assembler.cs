@@ -5,14 +5,14 @@ namespace SimpSim.NET
 {
     public class Assembler
     {
-        private readonly IDictionary<string, byte> _symbolTable;
+        private readonly SymbolTable _symbolTable;
         private readonly InstructionByteCollection _bytes;
         private readonly AddressSyntaxParser _addressSyntaxParser;
         private int _currentLineNumber;
 
         public Assembler()
         {
-            _symbolTable = new Dictionary<string, byte>();
+            _symbolTable = new SymbolTable();
             _bytes = new InstructionByteCollection(_symbolTable);
             _addressSyntaxParser = new AddressSyntaxParser(_symbolTable);
         }

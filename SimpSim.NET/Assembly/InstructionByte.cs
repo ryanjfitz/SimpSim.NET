@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SimpSim.NET
+﻿namespace SimpSim.NET
 {
     internal class InstructionByte
     {
@@ -29,14 +27,14 @@ namespace SimpSim.NET
             _lineNumber = lineNumber;
         }
 
-        public byte GetValue(IDictionary<string, byte> symbolTable)
+        public byte GetValue(SymbolTable symbolTable)
         {
             switch (_addressType)
             {
                 case AddressType.DirectValue:
                     return _byte;
                 case AddressType.Label:
-                    if (!symbolTable.ContainsKey(_address.UndefinedLabel))
+                    if (!symbolTable.ContainsLabel(_address.UndefinedLabel))
                         throw new LabelAssemblyException(_address.UndefinedLabel, _lineNumber);
 
                     return symbolTable[_address.UndefinedLabel];

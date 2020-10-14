@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace SimpSim.NET
+﻿namespace SimpSim.NET
 {
     internal class AddressSyntaxParser
     {
-        private readonly IDictionary<string, byte> _symbolTable;
+        private readonly SymbolTable _symbolTable;
 
-        public AddressSyntaxParser(IDictionary<string, byte> symbolTable)
+        public AddressSyntaxParser(SymbolTable symbolTable)
         {
             _symbolTable = symbolTable;
         }
@@ -42,7 +40,7 @@ namespace SimpSim.NET
             if (IsRegister(input))
                 return false;
 
-            if (_symbolTable.ContainsKey(input))
+            if (_symbolTable.ContainsLabel(input))
                 address = _symbolTable[input];
             else
                 undefinedLabel = input;
