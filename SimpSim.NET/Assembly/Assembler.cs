@@ -7,14 +7,12 @@ namespace SimpSim.NET
     {
         private readonly SymbolTable _symbolTable;
         private readonly InstructionByteCollection _bytes;
-        private readonly AddressSyntaxParser _addressSyntaxParser;
         private int _currentLineNumber;
 
         public Assembler()
         {
             _symbolTable = new SymbolTable();
             _bytes = new InstructionByteCollection(_symbolTable);
-            _addressSyntaxParser = new AddressSyntaxParser(_symbolTable);
         }
 
         public Instruction[] Assemble(string assemblyCode)
@@ -109,14 +107,14 @@ namespace SimpSim.NET
         {
             if (operands.Length == 2)
             {
-                if (RegisterSyntax.TryParse(operands[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address))
+                if (RegisterSyntax.TryParse(operands[0], out var register) && AddressSyntax.TryParse(operands[1], _symbolTable, out var address))
                 {
                     _bytes.Add(((byte)Opcode.ImmediateLoad, register.Index).Combine(), _currentLineNumber);
                     _bytes.Add(address, _currentLineNumber);
                     return;
                 }
 
-                if (RegisterSyntax.TryParse(operands[0], out register) && _addressSyntaxParser.TryParse(operands[1], out address, BracketExpectation.Present))
+                if (RegisterSyntax.TryParse(operands[0], out register) && AddressSyntax.TryParse(operands[1], _symbolTable, out address, BracketExpectation.Present))
                 {
                     _bytes.Add(((byte)Opcode.DirectLoad, register.Index).Combine(), _currentLineNumber);
                     _bytes.Add(address, _currentLineNumber);
@@ -138,7 +136,7 @@ namespace SimpSim.NET
         {
             if (operands.Length == 2)
             {
-                if (RegisterSyntax.TryParse(operands[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address, BracketExpectation.Present))
+                if (RegisterSyntax.TryParse(operands[0], out var register) && AddressSyntax.TryParse(operands[1], _symbolTable, out var address, BracketExpectation.Present))
                 {
                     _bytes.Add(((byte)Opcode.DirectStore, register.Index).Combine(), _currentLineNumber);
                     _bytes.Add(address, _currentLineNumber);
@@ -210,7 +208,7 @@ namespace SimpSim.NET
                 if (!RegisterSyntax.TryParse(registers[1], out var rightRegister) || rightRegister.Index != 0)
                     throw new AssemblyException("Expected a comparison with R0.", _currentLineNumber);
 
-                if (RegisterSyntax.TryParse(registers[0], out var leftRegister) && _addressSyntaxParser.TryParse(operands[1], out var address))
+                if (RegisterSyntax.TryParse(registers[0], out var leftRegister) && AddressSyntax.TryParse(operands[1], _symbolTable, out var address))
                 {
                     _bytes.Add(((byte)Opcode.JumpEqual, leftRegister.Index).Combine(), _currentLineNumber);
                     _bytes.Add(address, _currentLineNumber);
@@ -225,7 +223,7 @@ namespace SimpSim.NET
         {
             if (operands.Length == 2)
             {
-                if (RegisterSyntax.TryParse(operands[0].Split('<', '=')[0], out var register) && _addressSyntaxParser.TryParse(operands[1], out var address))
+                if (RegisterSyntax.TryParse(operands[0].Split('<', '=')[0], out var register) && AddressSyntax.TryParse(operands[1], _symbolTable, out var address))
                 {
                     _bytes.Add(((byte)Opcode.JumpLessEqual, register.Index).Combine(), _currentLineNumber);
                     _bytes.Add(address, _currentLineNumber);
@@ -242,7 +240,7 @@ namespace SimpSim.NET
 
             if (operands.Length != 1)
                 invalidSyntax = true;
-            else if (_addressSyntaxParser.TryParse(operands[0], out var address))
+            else if (AddressSyntax.TryParse(operands[0], _symbolTable, out var address))
             {
                 _bytes.Add(((byte)Opcode.JumpEqual, (byte)0x0).Combine(), _currentLineNumber);
                 _bytes.Add(address, _currentLineNumber);
