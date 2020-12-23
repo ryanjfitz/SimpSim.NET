@@ -36,15 +36,7 @@ namespace SimpSim.NET
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                int hashCode = 17;
-
-                hashCode = 31 * hashCode + Byte1.GetHashCode();
-                hashCode = 31 * hashCode + Byte2.GetHashCode();
-
-                return hashCode;
-            }
+            return HashCode.Combine(Byte1, Byte2);
         }
 
         public override string ToString()
