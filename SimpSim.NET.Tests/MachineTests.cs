@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -59,7 +58,7 @@ namespace SimpSim.NET.Tests
         }
 
         [Fact]
-        public void ShouldBeAbleToBreakIfRunning()
+        public async Task ShouldBeAbleToBreakIfRunning()
         {
             Task task = LaunchNonTerminatingProgram();
 
@@ -68,7 +67,7 @@ namespace SimpSim.NET.Tests
             _machine.Break();
 
             // Wait for pending machine steps to execute.
-            task.Wait();
+            await task;
 
             Assert.Equal(Machine.MachineState.Ready, _machine.State);
         }
@@ -94,15 +93,7 @@ namespace SimpSim.NET.Tests
             // Load a program that runs forever.
             _memory.LoadInstructions(SamplePrograms.OutputTestInstructions);
 
-            Task task = Task.Run(() => _machine.RunAsync().Wait());
-
-            while (task.Status != TaskStatus.Running)
-            {
-                // Wait until the task is running.
-            }
-
-            // Give the program time to begin executing.
-            Thread.Sleep(100);
+            Task task = _machine.RunAsync();
 
             return task;
         }
