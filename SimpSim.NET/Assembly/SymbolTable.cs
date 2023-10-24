@@ -1,30 +1,29 @@
 ﻿using System.Collections.Generic;
 
-namespace SimpSim.NET
+namespace SimpSim.NET;
+
+public class SymbolTable
 {
-    public class SymbolTable
+    private readonly IDictionary<string, byte> _dictionary;
+
+    public SymbolTable()
     {
-        private readonly IDictionary<string, byte> _dictionary;
+        _dictionary = new Dictionary<string, byte>();
+    }
 
-        public SymbolTable()
-        {
-            _dictionary = new Dictionary<string, byte>();
-        }
+    public byte this[string label]
+    {
+        get => _dictionary[label];
+        set => _dictionary[label] = value;
+    }
 
-        public byte this[string label]
-        {
-            get => _dictionary[label];
-            set => _dictionary[label] = value;
-        }
+    public bool ContainsLabel(string label)
+    {
+        return _dictionary.ContainsKey(label);
+    }
 
-        public bool ContainsLabel(string label)
-        {
-            return _dictionary.ContainsKey(label);
-        }
-
-        public void Clear()
-        {
-            _dictionary.Clear();
-        }
+    public void Clear()
+    {
+        _dictionary.Clear();
     }
 }

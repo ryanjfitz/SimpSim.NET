@@ -1,13 +1,12 @@
-﻿namespace SimpSim.NET.WPF.Views
+﻿namespace SimpSim.NET.WPF.Views;
+
+/// <summary>
+/// Interaction logic for MachineControls.xaml
+/// </summary>
+public partial class MachineControls
 {
-    /// <summary>
-    /// Interaction logic for MachineControls.xaml
-    /// </summary>
-    public partial class MachineControls
+    public MachineControls()
     {
-        public MachineControls()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

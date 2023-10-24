@@ -1,13 +1,12 @@
-﻿namespace SimpSim.NET.WPF.Views
+﻿namespace SimpSim.NET.WPF.Views;
+
+/// <summary>
+/// Interaction logic for SystemRegisters.xaml
+/// </summary>
+public partial class SystemRegisters
 {
-    /// <summary>
-    /// Interaction logic for SystemRegisters.xaml
-    /// </summary>
-    public partial class SystemRegisters
+    public SystemRegisters()
     {
-        public SystemRegisters()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

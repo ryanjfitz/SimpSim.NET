@@ -1,37 +1,36 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SimpSim.NET
+namespace SimpSim.NET;
+
+internal static class StringLiteralSyntax
 {
-    internal static class StringLiteralSyntax
+    public static bool TryParse(string input, out string stringLiteral)
     {
-        public static bool TryParse(string input, out string stringLiteral)
+        if (input.Length > 1)
         {
-            if (input.Length > 1)
+            foreach (var (leftQuote, rightQuote) in GetQuotePairs())
             {
-                foreach (var (leftQuote, rightQuote) in GetQuotePairs())
+                if (input.First() == leftQuote && input.Last() == rightQuote)
                 {
-                    if (input.First() == leftQuote && input.Last() == rightQuote)
-                    {
-                        stringLiteral = input.TrimStart(leftQuote).TrimEnd(rightQuote);
-                        return true;
-                    }
+                    stringLiteral = input.TrimStart(leftQuote).TrimEnd(rightQuote);
+                    return true;
                 }
             }
-
-            stringLiteral = null;
-            return false;
         }
 
-        public static IEnumerable<(char, char)> GetQuotePairs()
+        stringLiteral = null;
+        return false;
+    }
+
+    public static IEnumerable<(char, char)> GetQuotePairs()
+    {
+        return new[]
         {
-            return new[]
-            {
-                ('\"', '\"'),
-                ('\'', '\''),
-                ('“', '”'),
-                ('‘', '’'),
-            };
-        }
+            ('\"', '\"'),
+            ('\'', '\''),
+            ('“', '”'),
+            ('‘', '’'),
+        };
     }
 }

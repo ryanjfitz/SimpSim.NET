@@ -1,13 +1,12 @@
-﻿namespace SimpSim.NET.WPF.Views
+﻿namespace SimpSim.NET.WPF.Views;
+
+/// <summary>
+/// Interaction logic for Memory.xaml
+/// </summary>
+public partial class Memory
 {
-    /// <summary>
-    /// Interaction logic for Memory.xaml
-    /// </summary>
-    public partial class Memory
+    public Memory()
     {
-        public Memory()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

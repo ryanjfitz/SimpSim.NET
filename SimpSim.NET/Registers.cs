@@ -1,43 +1,42 @@
 using System;
 
-namespace SimpSim.NET
+namespace SimpSim.NET;
+
+public class Registers
 {
-    public class Registers
+    public event Action<char> ValueWrittenToOutputRegister;
+    public event Action Changed;
+
+    private readonly byte[] _array;
+
+    public Registers()
     {
-        public event Action<char> ValueWrittenToOutputRegister;
-        public event Action Changed;
+        _array = new byte[16];
+    }
 
-        private readonly byte[] _array;
-
-        public Registers()
+    public byte this[byte register]
+    {
+        get => _array[register];
+        set
         {
-            _array = new byte[16];
-        }
+            byte newValue = value;
+            byte oldValue = _array[register];
 
-        public byte this[byte register]
-        {
-            get => _array[register];
-            set
+            if (newValue != oldValue)
             {
-                byte newValue = value;
-                byte oldValue = _array[register];
+                _array[register] = newValue;
 
-                if (newValue != oldValue)
-                {
-                    _array[register] = newValue;
-
-                    Changed?.Invoke();
-                }
-
-                if (register == 0x0f)
-                    ValueWrittenToOutputRegister?.Invoke((char)newValue);
+                Changed?.Invoke();
             }
-        }
 
-        public void Clear()
-        {
-            Array.Clear(_array, 0, _array.Length);
-            Changed?.Invoke();
+            if (register == 0x0f)
+                ValueWrittenToOutputRegister?.Invoke((char)newValue);
         }
+    }
+
+    public void Clear()
+    {
+        Array.Clear(_array, 0, _array.Length);
+        Changed?.Invoke();
     }
 }

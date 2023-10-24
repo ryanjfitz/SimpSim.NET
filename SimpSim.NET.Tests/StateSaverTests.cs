@@ -3,45 +3,44 @@ using System.IO;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace SimpSim.NET.Tests
+namespace SimpSim.NET.Tests;
+
+public class StateSaverTests
 {
-    public class StateSaverTests
+    private readonly StateSaver _stateSaver;
+
+    public StateSaverTests()
     {
-        private readonly StateSaver _stateSaver;
+        _stateSaver = new StateSaver();
+    }
 
-        public StateSaverTests()
+    [Fact]
+    public async Task ShouldBeAbleToSaveMemoryState()
+    {
+        FileInfo file = null;
+
+        try
         {
-            _stateSaver = new StateSaver();
+            file = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.prg"));
+
+            Memory expectedMemory = new Memory();
+
+            Random random = new Random();
+            for (int address = 0; address <= byte.MaxValue; address++)
+                expectedMemory[(byte)address] = (byte)random.Next(0x00, byte.MaxValue);
+
+            await _stateSaver.SaveMemoryAsync(expectedMemory, file);
+
+            Assert.True(file.Exists);
+
+            Memory actualMemory = await _stateSaver.LoadMemoryAsync(file);
+
+            for (int address = 0; address <= byte.MaxValue; address++)
+                Assert.Equal(expectedMemory[(byte)address], actualMemory[(byte)address]);
         }
-
-        [Fact]
-        public async Task ShouldBeAbleToSaveMemoryState()
+        finally
         {
-            FileInfo file = null;
-
-            try
-            {
-                file = new FileInfo(Path.Combine(Path.GetTempPath(), "MemorySaveFile.prg"));
-
-                Memory expectedMemory = new Memory();
-
-                Random random = new Random();
-                for (int address = 0; address <= byte.MaxValue; address++)
-                    expectedMemory[(byte)address] = (byte)random.Next(0x00, byte.MaxValue);
-
-                await _stateSaver.SaveMemoryAsync(expectedMemory, file);
-
-                Assert.True(file.Exists);
-
-                Memory actualMemory = await _stateSaver.LoadMemoryAsync(file);
-
-                for (int address = 0; address <= byte.MaxValue; address++)
-                    Assert.Equal(expectedMemory[(byte)address], actualMemory[(byte)address]);
-            }
-            finally
-            {
-                file?.Delete();
-            }
+            file?.Delete();
         }
     }
 }

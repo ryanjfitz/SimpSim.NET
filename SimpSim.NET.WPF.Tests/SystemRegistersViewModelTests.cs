@@ -1,22 +1,21 @@
 ﻿using SimpSim.NET.WPF.ViewModels;
 using Xunit;
 
-namespace SimpSim.NET.WPF.Tests
+namespace SimpSim.NET.WPF.Tests;
+
+public class SystemRegistersViewModelTests
 {
-    public class SystemRegistersViewModelTests
+    [Fact]
+    public void ShouldBeAbleToResetProgramCounter()
     {
-        [Fact]
-        public void ShouldBeAbleToResetProgramCounter()
-        {
-            SimpleSimulator simulator = new SimpleSimulator();
+        SimpleSimulator simulator = new SimpleSimulator();
 
-            simulator.Machine.ProgramCounter = 0xFF;
+        simulator.Machine.ProgramCounter = 0xFF;
 
-            SystemRegistersViewModel viewModel = new SystemRegistersViewModel(simulator);
+        SystemRegistersViewModel viewModel = new SystemRegistersViewModel(simulator);
 
-            viewModel.ResetProgramCounterCommand.Execute(null);
+        viewModel.ResetProgramCounterCommand.Execute(null);
 
-            Assert.Equal(0x00, simulator.Machine.ProgramCounter);
-        }
+        Assert.Equal(0x00, simulator.Machine.ProgramCounter);
     }
 }

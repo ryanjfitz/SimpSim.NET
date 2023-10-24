@@ -1,25 +1,24 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
 
-namespace SimpSim.NET.WPF.Views
+namespace SimpSim.NET.WPF.Views;
+
+/// <summary>
+/// Interaction logic for Output.xaml
+/// </summary>
+public partial class Output
 {
-    /// <summary>
-    /// Interaction logic for Output.xaml
-    /// </summary>
-    public partial class Output
+    public Output()
     {
-        public Output()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            SetupAutoScroll();
-        }
+        SetupAutoScroll();
+    }
 
-        private void SetupAutoScroll()
-        {
-            DependencyPropertyDescriptor
-                .FromProperty(TextBlock.TextProperty, typeof(TextBlock))
-                .AddValueChanged(OutputTextBlock, (sender, args) => OutputScrollViewer.ScrollToEnd());
-        }
+    private void SetupAutoScroll()
+    {
+        DependencyPropertyDescriptor
+            .FromProperty(TextBlock.TextProperty, typeof(TextBlock))
+            .AddValueChanged(OutputTextBlock, (sender, args) => OutputScrollViewer.ScrollToEnd());
     }
 }

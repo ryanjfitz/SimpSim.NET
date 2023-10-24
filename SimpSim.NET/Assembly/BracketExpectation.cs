@@ -1,8 +1,7 @@
-﻿namespace SimpSim.NET
+﻿namespace SimpSim.NET;
+
+internal enum BracketExpectation
 {
-    internal enum BracketExpectation
-    {
-        Present,
-        NotPresent
-    }
+    Present,
+    NotPresent
 }

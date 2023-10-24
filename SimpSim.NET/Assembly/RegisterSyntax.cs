@@ -1,42 +1,41 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace SimpSim.NET
+namespace SimpSim.NET;
+
+internal class RegisterSyntax
 {
-    internal class RegisterSyntax
+    private string Value { get; }
+
+    private RegisterSyntax(string value)
     {
-        private string Value { get; }
+        Value = value;
+    }
 
-        private RegisterSyntax(string value)
-        {
-            Value = value;
-        }
+    public byte Index => Value[1].ToString().ToByteFromHex();
 
-        public byte Index => Value[1].ToString().ToByteFromHex();
+    public static bool TryParse(string input, out RegisterSyntax registerSyntax, BracketExpectation bracketExpectation = BracketExpectation.NotPresent)
+    {
+        bool isSuccess;
 
-        public static bool TryParse(string input, out RegisterSyntax registerSyntax, BracketExpectation bracketExpectation = BracketExpectation.NotPresent)
-        {
-            bool isSuccess;
+        bool isRegister = Regex.IsMatch(input, @"^\[?R[0-9A-F]\]?$");
 
-            bool isRegister = Regex.IsMatch(input, @"^\[?R[0-9A-F]\]?$");
+        bool isSurroundedByBrackets = input.StartsWith("[") && input.EndsWith("]");
 
-            bool isSurroundedByBrackets = input.StartsWith("[") && input.EndsWith("]");
+        if (bracketExpectation == BracketExpectation.Present)
+            isSuccess = isRegister && isSurroundedByBrackets;
+        else
+            isSuccess = isRegister && !isSurroundedByBrackets;
 
-            if (bracketExpectation == BracketExpectation.Present)
-                isSuccess = isRegister && isSurroundedByBrackets;
-            else
-                isSuccess = isRegister && !isSurroundedByBrackets;
+        if (isSuccess)
+            registerSyntax = new RegisterSyntax(input.Trim('[', ']'));
+        else
+            registerSyntax = null;
 
-            if (isSuccess)
-                registerSyntax = new RegisterSyntax(input.Trim('[', ']'));
-            else
-                registerSyntax = null;
+        return isSuccess;
+    }
 
-            return isSuccess;
-        }
-
-        public override string ToString()
-        {
-            return Value;
-        }
+    public override string ToString()
+    {
+        return Value;
     }
 }

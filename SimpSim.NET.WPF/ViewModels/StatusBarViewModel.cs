@@ -1,26 +1,25 @@
 ﻿using Prism.Mvvm;
 
-namespace SimpSim.NET.WPF.ViewModels
+namespace SimpSim.NET.WPF.ViewModels;
+
+public class StatusBarViewModel : BindableBase
 {
-    public class StatusBarViewModel : BindableBase
+    private Machine.MachineState _status;
+
+    public StatusBarViewModel(SimpleSimulator simulator)
     {
-        private Machine.MachineState _status;
+        SetStatus(simulator);
+        simulator.Machine.StateChanged += () => SetStatus(simulator);
+    }
 
-        public StatusBarViewModel(SimpleSimulator simulator)
-        {
-            SetStatus(simulator);
-            simulator.Machine.StateChanged += () => SetStatus(simulator);
-        }
+    private void SetStatus(SimpleSimulator simulator)
+    {
+        Status = simulator.Machine.State;
+    }
 
-        private void SetStatus(SimpleSimulator simulator)
-        {
-            Status = simulator.Machine.State;
-        }
-
-        public Machine.MachineState Status
-        {
-            get => _status;
-            set => SetProperty(ref _status, value);
-        }
+    public Machine.MachineState Status
+    {
+        get => _status;
+        set => SetProperty(ref _status, value);
     }
 }

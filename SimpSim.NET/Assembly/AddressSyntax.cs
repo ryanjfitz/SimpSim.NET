@@ -1,66 +1,65 @@
-﻿namespace SimpSim.NET
+﻿namespace SimpSim.NET;
+
+internal class AddressSyntax
 {
-    internal class AddressSyntax
+    public byte Value { get; }
+
+    public string UndefinedLabel { get; }
+
+    public bool ContainsUndefinedLabel => !string.IsNullOrWhiteSpace(UndefinedLabel);
+
+    private AddressSyntax(byte value, string undefinedLabel)
     {
-        public byte Value { get; }
+        Value = value;
+        UndefinedLabel = undefinedLabel;
+    }
 
-        public string UndefinedLabel { get; }
+    public static bool TryParse(string input, SymbolTable symbolTable, out AddressSyntax addressSyntax, BracketExpectation bracketExpectation = BracketExpectation.NotPresent)
+    {
+        bool isSuccess;
 
-        public bool ContainsUndefinedLabel => !string.IsNullOrWhiteSpace(UndefinedLabel);
+        bool isAddress = IsAddress(input.Trim('[', ']'), symbolTable, out byte address, out string undefinedLabel);
 
-        private AddressSyntax(byte value, string undefinedLabel)
-        {
-            Value = value;
-            UndefinedLabel = undefinedLabel;
-        }
+        bool isSurroundedByBrackets = input.StartsWith("[") && input.EndsWith("]");
 
-        public static bool TryParse(string input, SymbolTable symbolTable, out AddressSyntax addressSyntax, BracketExpectation bracketExpectation = BracketExpectation.NotPresent)
-        {
-            bool isSuccess;
+        if (bracketExpectation == BracketExpectation.Present)
+            isSuccess = isAddress && isSurroundedByBrackets;
+        else
+            isSuccess = isAddress && !isSurroundedByBrackets;
 
-            bool isAddress = IsAddress(input.Trim('[', ']'), symbolTable, out byte address, out string undefinedLabel);
+        if (isSuccess)
+            addressSyntax = new AddressSyntax(address, undefinedLabel);
+        else
+            addressSyntax = null;
 
-            bool isSurroundedByBrackets = input.StartsWith("[") && input.EndsWith("]");
+        return isSuccess;
+    }
 
-            if (bracketExpectation == BracketExpectation.Present)
-                isSuccess = isAddress && isSurroundedByBrackets;
-            else
-                isSuccess = isAddress && !isSurroundedByBrackets;
+    private static bool IsAddress(string input, SymbolTable symbolTable, out byte address, out string undefinedLabel)
+    {
+        undefinedLabel = null;
 
-            if (isSuccess)
-                addressSyntax = new AddressSyntax(address, undefinedLabel);
-            else
-                addressSyntax = null;
-
-            return isSuccess;
-        }
-
-        private static bool IsAddress(string input, SymbolTable symbolTable, out byte address, out string undefinedLabel)
-        {
-            undefinedLabel = null;
-
-            if (NumberSyntax.TryParse(input, out address))
-                return true;
-
-            if (IsRegister(input))
-                return false;
-
-            if (symbolTable.ContainsLabel(input))
-                address = symbolTable[input];
-            else
-                undefinedLabel = input;
-
+        if (NumberSyntax.TryParse(input, out address))
             return true;
-        }
 
-        private static bool IsRegister(string input)
-        {
-            return RegisterSyntax.TryParse(input, out _);
-        }
+        if (IsRegister(input))
+            return false;
 
-        public override string ToString()
-        {
-            return ContainsUndefinedLabel ? UndefinedLabel : Value.ToString();
-        }
+        if (symbolTable.ContainsLabel(input))
+            address = symbolTable[input];
+        else
+            undefinedLabel = input;
+
+        return true;
+    }
+
+    private static bool IsRegister(string input)
+    {
+        return RegisterSyntax.TryParse(input, out _);
+    }
+
+    public override string ToString()
+    {
+        return ContainsUndefinedLabel ? UndefinedLabel : Value.ToString();
     }
 }

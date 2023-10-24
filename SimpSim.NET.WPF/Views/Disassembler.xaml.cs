@@ -1,13 +1,12 @@
-﻿namespace SimpSim.NET.WPF.Views
+﻿namespace SimpSim.NET.WPF.Views;
+
+/// <summary>
+/// Interaction logic for Disassembler.xaml
+/// </summary>
+public partial class Disassembler
 {
-    /// <summary>
-    /// Interaction logic for Disassembler.xaml
-    /// </summary>
-    public partial class Disassembler
+    public Disassembler()
     {
-        public Disassembler()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

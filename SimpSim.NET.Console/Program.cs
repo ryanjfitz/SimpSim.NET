@@ -2,82 +2,81 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace SimpSim.NET.Console
+namespace SimpSim.NET.Console;
+
+class Program
 {
-    class Program
+    static async Task Main(string[] args)
     {
-        static async Task Main(string[] args)
+        string assemblyCode = null;
+
+        switch (args.Length)
         {
-            string assemblyCode = null;
+            case 0:
+                bool isValidSelection;
 
-            switch (args.Length)
-            {
-                case 0:
-                    bool isValidSelection;
+                do
+                {
+                    System.Console.WriteLine("Choose a sample program to execute:\n");
+                    System.Console.WriteLine("1) Hello World");
+                    System.Console.WriteLine("2) Output Test");
+                    System.Console.WriteLine("3) Template");
 
-                    do
+                    isValidSelection = int.TryParse(System.Console.ReadLine(), out int selection);
+
+                    switch (selection)
                     {
-                        System.Console.WriteLine("Choose a sample program to execute:\n");
-                        System.Console.WriteLine("1) Hello World");
-                        System.Console.WriteLine("2) Output Test");
-                        System.Console.WriteLine("3) Template");
-
-                        isValidSelection = int.TryParse(System.Console.ReadLine(), out int selection);
-
-                        switch (selection)
-                        {
-                            case 1:
-                                assemblyCode = SamplePrograms.HelloWorldCode;
-                                break;
-                            case 2:
-                                assemblyCode = SamplePrograms.OutputTestCode;
-                                break;
-                            case 3:
-                                assemblyCode = SamplePrograms.TemplateCode;
-                                break;
-                            default:
-                                isValidSelection = false;
-                                break;
-                        }
-
-                        if (!isValidSelection)
-                            System.Console.WriteLine("Invalid selection. Please choose again.\n");
-                    } while (!isValidSelection);
-                    break;
-                case 1:
-                    string file = args[0];
-                    try
-                    {
-                        assemblyCode = File.ReadAllText(file);
+                        case 1:
+                            assemblyCode = SamplePrograms.HelloWorldCode;
+                            break;
+                        case 2:
+                            assemblyCode = SamplePrograms.OutputTestCode;
+                            break;
+                        case 3:
+                            assemblyCode = SamplePrograms.TemplateCode;
+                            break;
+                        default:
+                            isValidSelection = false;
+                            break;
                     }
-                    catch (Exception ex)
-                    {
-                        System.Console.WriteLine($"Unable to read file \"{file}\": {ex.Message}");
-                    }
-                    break;
-                default:
-                    System.Console.WriteLine("Usage:");
-                    System.Console.WriteLine("  SimpSim.NET.Console [<assembly-file>]");
-                    break;
-            }
 
-            if (assemblyCode != null)
-                await RunProgram(assemblyCode);
+                    if (!isValidSelection)
+                        System.Console.WriteLine("Invalid selection. Please choose again.\n");
+                } while (!isValidSelection);
+                break;
+            case 1:
+                string file = args[0];
+                try
+                {
+                    assemblyCode = File.ReadAllText(file);
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine($"Unable to read file \"{file}\": {ex.Message}");
+                }
+                break;
+            default:
+                System.Console.WriteLine("Usage:");
+                System.Console.WriteLine("  SimpSim.NET.Console [<assembly-file>]");
+                break;
         }
 
-        private static async Task RunProgram(string assemblyCode)
-        {
-            SimpleSimulator simulator = new SimpleSimulator();
+        if (assemblyCode != null)
+            await RunProgram(assemblyCode);
+    }
 
-            Instruction[] instructions = simulator.Assembler.Assemble(assemblyCode);
+    private static async Task RunProgram(string assemblyCode)
+    {
+        SimpleSimulator simulator = new SimpleSimulator();
 
-            simulator.Memory.LoadInstructions(instructions);
+        Instruction[] instructions = simulator.Assembler.Assemble(assemblyCode);
 
-            simulator.Registers.ValueWrittenToOutputRegister += System.Console.Write;
+        simulator.Memory.LoadInstructions(instructions);
 
-            await simulator.Machine.RunAsync();
+        simulator.Registers.ValueWrittenToOutputRegister += System.Console.Write;
 
-            System.Console.ReadLine();
-        }
+        await simulator.Machine.RunAsync();
+
+        System.Console.ReadLine();
     }
 }

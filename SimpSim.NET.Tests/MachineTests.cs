@@ -2,100 +2,99 @@
 using System.Threading.Tasks;
 using Xunit;
 
-namespace SimpSim.NET.Tests
+namespace SimpSim.NET.Tests;
+
+public class MachineTests
 {
-    public class MachineTests
+    private readonly Memory _memory;
+    private readonly Registers _registers;
+    private readonly Machine _machine;
+
+    public MachineTests()
     {
-        private readonly Memory _memory;
-        private readonly Registers _registers;
-        private readonly Machine _machine;
+        _memory = new Memory();
+        _registers = new Registers();
+        _machine = new Machine(_memory, _registers);
+    }
 
-        public MachineTests()
+    [Fact]
+    public void ProgramCounterShouldIncrementAfterStep()
+    {
+        _machine.ProgramCounter = 0x00;
+
+        for (int i = 0; i <= byte.MaxValue; i++)
         {
-            _memory = new Memory();
-            _registers = new Registers();
-            _machine = new Machine(_memory, _registers);
-        }
-
-        [Fact]
-        public void ProgramCounterShouldIncrementAfterStep()
-        {
-            _machine.ProgramCounter = 0x00;
-
-            for (int i = 0; i <= byte.MaxValue; i++)
-            {
-                byte expected = (byte)(_machine.ProgramCounter + 0x02);
-                _machine.Step();
-                Assert.Equal(expected, _machine.ProgramCounter);
-            }
-        }
-
-        [Fact]
-        public void ShouldExecuteInstructionAtProgramCounterAddress()
-        {
-            Instruction instruction1 = new Instruction(0x93, 0x37);
-            Instruction instruction2 = new Instruction(0x42, 0x21);
-            Instruction instruction3 = new Instruction(0xAA, 0x14);
-            Instruction instruction4 = new Instruction(0xBB, 0x08);
-
-            _memory.LoadInstruction(instruction1, 0x00);
-            _memory.LoadInstruction(instruction2, 0x02);
-            _memory.LoadInstruction(instruction3, 0x04);
-            _memory.LoadInstruction(instruction4, 0x06);
-
-            _machine.ProgramCounter = 0x04;
+            byte expected = (byte)(_machine.ProgramCounter + 0x02);
             _machine.Step();
-
-            Assert.Equal(instruction3, _machine.InstructionRegister);
+            Assert.Equal(expected, _machine.ProgramCounter);
         }
+    }
 
-        [Fact]
-        public void StateShouldChangeToRunningWhileRunning()
-        {
-            LaunchNonTerminatingProgram();
+    [Fact]
+    public void ShouldExecuteInstructionAtProgramCounterAddress()
+    {
+        Instruction instruction1 = new Instruction(0x93, 0x37);
+        Instruction instruction2 = new Instruction(0x42, 0x21);
+        Instruction instruction3 = new Instruction(0xAA, 0x14);
+        Instruction instruction4 = new Instruction(0xBB, 0x08);
 
-            Assert.Equal(Machine.MachineState.Running, _machine.State);
-        }
+        _memory.LoadInstruction(instruction1, 0x00);
+        _memory.LoadInstruction(instruction2, 0x02);
+        _memory.LoadInstruction(instruction3, 0x04);
+        _memory.LoadInstruction(instruction4, 0x06);
 
-        [Fact]
-        public async Task ShouldBeAbleToBreakIfRunning()
-        {
-            Task task = LaunchNonTerminatingProgram();
+        _machine.ProgramCounter = 0x04;
+        _machine.Step();
 
-            Assert.Equal(Machine.MachineState.Running, _machine.State);
+        Assert.Equal(instruction3, _machine.InstructionRegister);
+    }
 
-            _machine.Break();
+    [Fact]
+    public void StateShouldChangeToRunningWhileRunning()
+    {
+        LaunchNonTerminatingProgram();
 
-            // Wait for pending machine steps to execute.
-            await task;
+        Assert.Equal(Machine.MachineState.Running, _machine.State);
+    }
 
-            Assert.Equal(Machine.MachineState.Ready, _machine.State);
-        }
+    [Fact]
+    public async Task ShouldBeAbleToBreakIfRunning()
+    {
+        Task task = LaunchNonTerminatingProgram();
 
-        [Fact]
-        public void ShouldNotBeAbleToRunWhileAlreadyRunning()
-        {
-            LaunchNonTerminatingProgram();
+        Assert.Equal(Machine.MachineState.Running, _machine.State);
 
-            Assert.Equal(Machine.MachineState.Running, _machine.State);
+        _machine.Break();
 
-            Assert.ThrowsAsync<InvalidOperationException>(() => _machine.RunAsync());
-        }
+        // Wait for pending machine steps to execute.
+        await task;
 
-        [Fact]
-        public void ShouldNotBeAbleToBreakIfNotRunning()
-        {
-            Assert.Throws<InvalidOperationException>(() => _machine.Break());
-        }
+        Assert.Equal(Machine.MachineState.Ready, _machine.State);
+    }
 
-        private Task LaunchNonTerminatingProgram()
-        {
-            // Load a program that runs forever.
-            _memory.LoadInstructions(SamplePrograms.OutputTestInstructions);
+    [Fact]
+    public void ShouldNotBeAbleToRunWhileAlreadyRunning()
+    {
+        LaunchNonTerminatingProgram();
 
-            Task task = _machine.RunAsync();
+        Assert.Equal(Machine.MachineState.Running, _machine.State);
 
-            return task;
-        }
+        Assert.ThrowsAsync<InvalidOperationException>(() => _machine.RunAsync());
+    }
+
+    [Fact]
+    public void ShouldNotBeAbleToBreakIfNotRunning()
+    {
+        Assert.Throws<InvalidOperationException>(() => _machine.Break());
+    }
+
+    private Task LaunchNonTerminatingProgram()
+    {
+        // Load a program that runs forever.
+        _memory.LoadInstructions(SamplePrograms.OutputTestInstructions);
+
+        Task task = _machine.RunAsync();
+
+        return task;
     }
 }

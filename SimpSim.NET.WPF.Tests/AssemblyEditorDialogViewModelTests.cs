@@ -4,29 +4,28 @@ using System.Threading.Tasks;
 using SimpSim.NET.WPF.ViewModels;
 using Xunit;
 
-namespace SimpSim.NET.WPF.Tests
+namespace SimpSim.NET.WPF.Tests;
+
+public class AssemblyEditorDialogViewModelTests
 {
-    public class AssemblyEditorDialogViewModelTests
+    [Fact]
+    public async Task AssembleCommandShouldAssembleInstructionsToMemory()
     {
-        [Fact]
-        public async Task AssembleCommandShouldAssembleInstructionsToMemory()
-        {
-            SimpleSimulator simulator = new SimpleSimulator();
+        SimpleSimulator simulator = new SimpleSimulator();
 
-            AssemblyEditorDialogViewModel viewModel = new AssemblyEditorDialogViewModel(simulator);
+        AssemblyEditorDialogViewModel viewModel = new AssemblyEditorDialogViewModel(simulator);
 
-            viewModel.AssemblyEditorText = SamplePrograms.HelloWorldCode;
+        viewModel.AssemblyEditorText = SamplePrograms.HelloWorldCode;
 
-            await viewModel.Assemble(simulator);
+        await viewModel.Assemble(simulator);
 
-            var expectedBytes = SamplePrograms.HelloWorldInstructions.SelectMany(instruction => instruction.Bytes).ToList();
+        var expectedBytes = SamplePrograms.HelloWorldInstructions.SelectMany(instruction => instruction.Bytes).ToList();
 
-            var actualBytes = new List<byte>();
+        var actualBytes = new List<byte>();
 
-            for (byte address = 0; address < expectedBytes.Count; address++)
-                actualBytes.Add(simulator.Memory[address]);
+        for (byte address = 0; address < expectedBytes.Count; address++)
+            actualBytes.Add(simulator.Memory[address]);
 
-            Assert.Equal(expectedBytes, actualBytes);
-        }
+        Assert.Equal(expectedBytes, actualBytes);
     }
 }
