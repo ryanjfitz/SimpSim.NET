@@ -15,11 +15,11 @@ public class AssemblyEditorDialogViewModelTests
 
         AssemblyEditorDialogViewModel viewModel = new AssemblyEditorDialogViewModel(simulator);
 
-        viewModel.AssemblyEditorText = SamplePrograms.HelloWorldCode;
+        viewModel.AssemblyEditorText = SamplePrograms.HelloWorld.Code;
 
         await viewModel.Assemble(simulator);
 
-        var expectedBytes = SamplePrograms.HelloWorldInstructions.SelectMany(instruction => instruction.Bytes).ToList();
+        var expectedBytes = SamplePrograms.HelloWorld.Instructions.SelectMany(instruction => instruction.Bytes).ToList();
 
         var actualBytes = new List<byte>();
 

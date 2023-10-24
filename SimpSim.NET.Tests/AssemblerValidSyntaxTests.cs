@@ -325,19 +325,19 @@ public class AssemblerValidSyntaxTests
     [Fact]
     public void ShouldAssembleHelloWorldSampleProgram()
     {
-        Assert.Equal(SamplePrograms.HelloWorldInstructions, _assembler.Assemble(SamplePrograms.HelloWorldCode));
+        Assert.Equal(SamplePrograms.HelloWorld.Instructions, _assembler.Assemble(SamplePrograms.HelloWorld.Code));
     }
 
     [Fact]
     public void ShouldAssembleOutputTestSampleProgram()
     {
-        Assert.Equal(SamplePrograms.OutputTestInstructions, _assembler.Assemble(SamplePrograms.OutputTestCode));
+        Assert.Equal(SamplePrograms.OutputTest.Instructions, _assembler.Assemble(SamplePrograms.OutputTest.Code));
     }
 
     [Fact]
     public void ShouldAssembleTemplateSampleProgram()
     {
-        Assert.Equal(SamplePrograms.TemplateInstructions, _assembler.Assemble(SamplePrograms.TemplateCode));
+        Assert.Equal(SamplePrograms.Template.Instructions, _assembler.Assemble(SamplePrograms.Template.Code));
     }
 
     [Fact]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SimpSim.NET.Console;
@@ -18,42 +19,32 @@ class Program
                 do
                 {
                     System.Console.WriteLine("Choose a sample program to execute:\n");
-                    System.Console.WriteLine("1) Hello World");
-                    System.Console.WriteLine("2) Output Test");
-                    System.Console.WriteLine("3) Template");
+                    foreach (var sampleProgram in SamplePrograms.List.OrderBy(sp => sp.Value))
+                        System.Console.WriteLine($"{sampleProgram.Value}) {sampleProgram.Name}");
 
                     isValidSelection = int.TryParse(System.Console.ReadLine(), out int selection);
 
-                    switch (selection)
-                    {
-                        case 1:
-                            assemblyCode = SamplePrograms.HelloWorldCode;
-                            break;
-                        case 2:
-                            assemblyCode = SamplePrograms.OutputTestCode;
-                            break;
-                        case 3:
-                            assemblyCode = SamplePrograms.TemplateCode;
-                            break;
-                        default:
-                            isValidSelection = false;
-                            break;
-                    }
+                    if (SamplePrograms.TryFromValue(selection, out var result))
+                        assemblyCode = result.Code;
+                    else
+                        isValidSelection = false;
 
                     if (!isValidSelection)
                         System.Console.WriteLine("Invalid selection. Please choose again.\n");
                 } while (!isValidSelection);
+
                 break;
             case 1:
                 string file = args[0];
                 try
                 {
-                    assemblyCode = File.ReadAllText(file);
+                    assemblyCode = await File.ReadAllTextAsync(file);
                 }
                 catch (Exception ex)
                 {
                     System.Console.WriteLine($"Unable to read file \"{file}\": {ex.Message}");
                 }
+
                 break;
             default:
                 System.Console.WriteLine("Usage:");
@@ -76,7 +67,5 @@ class Program
         simulator.Registers.ValueWrittenToOutputRegister += System.Console.Write;
 
         await simulator.Machine.RunAsync();
-
-        System.Console.ReadLine();
     }
 }

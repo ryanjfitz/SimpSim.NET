@@ -91,7 +91,7 @@ public class MachineTests
     private Task LaunchNonTerminatingProgram()
     {
         // Load a program that runs forever.
-        _memory.LoadInstructions(SamplePrograms.OutputTestInstructions);
+        _memory.LoadInstructions(SamplePrograms.OutputTest.Instructions);
 
         Task task = _machine.RunAsync();
 

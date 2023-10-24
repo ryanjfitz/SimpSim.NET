@@ -25,7 +25,7 @@ public class ProgramTests
     [Fact]
     public async Task TestHelloWorldOutput()
     {
-        _memory.LoadInstructions(SamplePrograms.HelloWorldInstructions);
+        _memory.LoadInstructions(SamplePrograms.HelloWorld.Instructions);
 
         await _machine.RunAsync();
 
@@ -35,15 +35,18 @@ public class ProgramTests
     }
 
     [Fact]
-    public async Task TestAsciiOutput()
+    public void TestAsciiOutput()
     {
-        _memory.LoadInstructions(SamplePrograms.OutputTestNonInfiniteInstructions);
+        _memory.LoadInstructions(SamplePrograms.OutputTest.Instructions);
 
-        await _machine.RunAsync();
-
-        string expectedOutput = null;
+        string expectedOutput = string.Empty;
         for (int i = 0; i <= byte.MaxValue; i++)
             expectedOutput += (char)i;
+
+        do
+        {
+            _machine.Step();
+        } while (_actualOutput.Length < expectedOutput.Length);
 
         Assert.Equal(expectedOutput, _actualOutput);
     }
@@ -51,7 +54,7 @@ public class ProgramTests
     [Fact]
     public async Task TestTemplateOutput()
     {
-        _memory.LoadInstructions(SamplePrograms.TemplateInstructions);
+        _memory.LoadInstructions(SamplePrograms.Template.Instructions);
 
         await _machine.RunAsync();
 
