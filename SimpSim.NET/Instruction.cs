@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SimpSim.NET;
+﻿namespace SimpSim.NET;
 
 public class Instruction : IEquatable<Instruction>
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;

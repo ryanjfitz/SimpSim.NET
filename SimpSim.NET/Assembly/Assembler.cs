@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace SimpSim.NET.Assembly;
 
 public class Assembler

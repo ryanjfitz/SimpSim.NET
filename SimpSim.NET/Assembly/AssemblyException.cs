@@ -1,5 +1,3 @@
-using System;
-
 namespace SimpSim.NET.Assembly;
 
 public class AssemblyException : Exception

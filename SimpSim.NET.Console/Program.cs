@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SimpSim.NET.Console;
+﻿namespace SimpSim.NET.Console;
 
 class Program
 {

@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Moq;
+﻿using Moq;
 using SimpSim.NET.WPF.ViewModels;
 using Xunit;
 

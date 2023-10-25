@@ -1,5 +1,3 @@
-using System;
-
 namespace SimpSim.NET;
 
 public class Registers

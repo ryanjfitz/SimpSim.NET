@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace SimpSim.NET.Assembly;
+﻿namespace SimpSim.NET.Assembly;
 
 internal static class StringLiteralSyntax
 {

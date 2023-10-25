@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SimpSim.NET.Assembly;
+﻿namespace SimpSim.NET.Assembly;
 
 public class SymbolTable
 {

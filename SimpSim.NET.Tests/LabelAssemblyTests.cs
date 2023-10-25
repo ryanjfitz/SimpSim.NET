@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using SimpSim.NET.Assembly;
+﻿using SimpSim.NET.Assembly;
 using Xunit;
 
 namespace SimpSim.NET.Tests;
