@@ -1,4 +1,4 @@
-﻿namespace SimpSim.NET;
+﻿namespace SimpSim.NET.Assembly;
 
 internal enum BracketExpectation
 {

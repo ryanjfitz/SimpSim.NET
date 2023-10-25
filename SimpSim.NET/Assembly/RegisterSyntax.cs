@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace SimpSim.NET;
+namespace SimpSim.NET.Assembly;
 
 internal class RegisterSyntax
 {

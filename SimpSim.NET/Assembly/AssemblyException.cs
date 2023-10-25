@@ -1,6 +1,6 @@
 using System;
 
-namespace SimpSim.NET;
+namespace SimpSim.NET.Assembly;
 
 public class AssemblyException : Exception
 {

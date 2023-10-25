@@ -1,4 +1,6 @@
-﻿namespace SimpSim.NET;
+﻿using SimpSim.NET.Assembly;
+
+namespace SimpSim.NET;
 
 public class SimpleSimulator
 {

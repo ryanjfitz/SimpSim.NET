@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Linq;
 
-namespace SimpSim.NET;
+namespace SimpSim.NET.Assembly;
 
 internal static class NumberSyntax
 {

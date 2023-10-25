@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
+using SimpSim.NET.Assembly;
 
 namespace SimpSim.NET.WPF.ViewModels;
 

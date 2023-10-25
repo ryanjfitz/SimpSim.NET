@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace SimpSim.NET;
+namespace SimpSim.NET.Assembly;
 
 internal class InstructionSyntax
 {

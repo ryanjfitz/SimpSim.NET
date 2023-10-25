@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SimpSim.NET;
+namespace SimpSim.NET.Assembly;
 
 internal static class StringLiteralSyntax
 {

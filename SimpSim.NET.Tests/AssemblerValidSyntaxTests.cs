@@ -1,3 +1,4 @@
+using SimpSim.NET.Assembly;
 using Xunit;
 
 namespace SimpSim.NET.Tests;
