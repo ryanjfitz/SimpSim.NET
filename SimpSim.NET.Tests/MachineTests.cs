@@ -71,13 +71,13 @@ public class MachineTests
     }
 
     [Fact]
-    public void ShouldNotBeAbleToRunWhileAlreadyRunning()
+    public async Task ShouldNotBeAbleToRunWhileAlreadyRunning()
     {
         LaunchNonTerminatingProgram();
 
         Assert.Equal(Machine.MachineState.Running, _machine.State);
 
-        Assert.ThrowsAsync<InvalidOperationException>(() => _machine.RunAsync());
+        await Assert.ThrowsAsync<InvalidOperationException>(() => _machine.RunAsync());
     }
 
     [Fact]
