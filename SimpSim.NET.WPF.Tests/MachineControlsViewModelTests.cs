@@ -50,25 +50,19 @@ public class MachineControlsViewModelTests
     {
         FileInfo memorySaveFile = new FileInfo("MemorySaveFile.prg");
 
-        _userInputService.Setup(s => s.GetSaveFileName()).Returns(memorySaveFile).Verifiable();
-
-        _stateSaver.Setup(s => s.SaveMemoryAsync(_simulator.Memory, memorySaveFile)).Verifiable();
+        _userInputService.Setup(s => s.GetSaveFileName()).Returns(memorySaveFile);
 
         _viewModel.SaveCommand.Execute();
 
-        _userInputService.Verify();
-
-        _stateSaver.Verify();
+        _stateSaver.Verify(s => s.SaveMemoryAsync(_simulator.Memory, memorySaveFile));
     }
 
     [Fact]
     public void SaveCommandShouldNotSaveMemoryStateToFileIfFileIsNull()
     {
-        _userInputService.Setup(s => s.GetSaveFileName()).Returns<FileInfo>(null).Verifiable();
+        _userInputService.Setup(s => s.GetSaveFileName()).Returns<FileInfo>(null);
 
         _viewModel.SaveCommand.Execute();
-
-        _userInputService.Verify();
 
         _stateSaver.Verify(s => s.SaveMemoryAsync(It.IsAny<Memory>(), It.IsAny<FileInfo>()), Times.Never);
     }
@@ -86,13 +80,11 @@ public class MachineControlsViewModelTests
     {
         FileInfo memorySaveFile = new FileInfo("MemorySaveFile.prg");
 
-        _userInputService.Setup(s => s.GetOpenFileName()).Returns(memorySaveFile).Verifiable();
+        _userInputService.Setup(s => s.GetOpenFileName()).Returns(memorySaveFile);
 
-        _stateSaver.Setup(s => s.LoadMemoryAsync(memorySaveFile)).Returns(Task.FromResult(new Memory())).Verifiable();
+        _stateSaver.Setup(s => s.LoadMemoryAsync(memorySaveFile)).ReturnsAsync(new Memory()).Verifiable();
 
         _viewModel.OpenCommand.Execute();
-
-        _userInputService.Verify();
 
         _stateSaver.Verify();
     }
@@ -100,29 +92,25 @@ public class MachineControlsViewModelTests
     [Fact]
     public void OpenCommandShouldNotLoadMemoryStateFromMemoryFileIfFileIsNull()
     {
-        _userInputService.Setup(s => s.GetOpenFileName()).Returns<FileInfo>(null).Verifiable();
+        _userInputService.Setup(s => s.GetOpenFileName()).Returns<FileInfo>(null);
 
         _viewModel.OpenCommand.Execute();
-
-        _userInputService.Verify();
 
         _stateSaver.Verify(s => s.LoadMemoryAsync(It.IsAny<FileInfo>()), Times.Never);
     }
 
     [Fact]
-    public void OpenCommandShouldOpenAssemblyEditorWindowWithAssemblyFileContents()
+    public async Task OpenCommandShouldOpenAssemblyEditorWindowWithAssemblyFileContents()
     {
         FileInfo assemblyFile = new FileInfo("AssemblyFile.asm");
 
         try
         {
-            File.WriteAllText(assemblyFile.FullName, "some text");
+            await File.WriteAllTextAsync(assemblyFile.FullName, "some text");
 
-            _userInputService.Setup(s => s.GetOpenFileName()).Returns(assemblyFile).Verifiable();
+            _userInputService.Setup(s => s.GetOpenFileName()).Returns(assemblyFile);
 
             _viewModel.OpenCommand.Execute();
-
-            _userInputService.Verify();
 
             _dialogServiceAdapter.Verify(w => w.ShowAssemblyEditorDialog("some text"));
         }
