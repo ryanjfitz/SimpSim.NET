@@ -73,7 +73,7 @@ public class MachineTests
     [Fact]
     public async Task ShouldNotBeAbleToRunWhileAlreadyRunning()
     {
-        LaunchNonTerminatingProgram();
+        _ = LaunchNonTerminatingProgram();
 
         Assert.Equal(Machine.MachineState.Running, _machine.State);
 
